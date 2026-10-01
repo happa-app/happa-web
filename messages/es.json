@@ -124,13 +124,14 @@
     },
     "detail": {
       "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: lista de la compra, triqui y tareas."
+      "comingSoon": "Muy pronto, aquí: triqui y tareas."
     },
     "invite": {
       "title": "Invitar a alguien",
       "text": "Comparte el enlace o el código con quien viva contigo.",
       "codeLabel": "Código de invitación",
       "share": "Compartir invitación",
+      "copyLink": "Copiar enlace",
       "copyCode": "Copiar código",
       "copiedLink": "Enlace copiado",
       "copiedCode": "Código copiado",
@@ -162,5 +163,41 @@
     "title": "No encontramos esta página",
     "text": "Puede que el enlace esté mal o que ya no tengas acceso.",
     "back": "Ir a mis casas"
+  },
+  "Shopping": {
+    "title": "Lista de la compra",
+    "householdSubtitle": "La ve todo el hogar y se actualiza al momento.",
+    "personalTitle": "Mi lista personal",
+    "personalSubtitle": "Solo la ves tú. Si necesitas algo de casa, pídelo y aparecerá en la lista común.",
+    "personalTeaser": "Tus cosas, y lo que quieras pedir a casa",
+    "pendingCount": "{count, plural, =0 {Nada por comprar} one {# producto por comprar} other {# productos por comprar}}",
+    "previewMore": "+{count} más",
+    "add": {
+      "name": "Producto",
+      "namePlaceholder": "Añadir producto…",
+      "quantity": "Cantidad",
+      "quantityPlaceholder": "Cant.",
+      "submit": "Añadir a la lista"
+    },
+    "pending": "Por comprar",
+    "bought": "{count, plural, one {Comprado (#)} other {Comprados (#)}}",
+    "clearBought": "Borrar comprados",
+    "clearBoughtConfirm": "¿Quitar de la lista los productos comprados?",
+    "empty": "La lista está vacía. Añade lo que haga falta.",
+    "requestedBy": "Pedido por {name}",
+    "you": "ti",
+    "someone": "alguien",
+    "markBought": "Marcar {name} como comprado",
+    "markPending": "Volver a poner {name} por comprar",
+    "remove": "Quitar {name} de la lista",
+    "share": "Pedir en casa",
+    "shareTo": "Pedir en {name}",
+    "shared": "Enviado a {name}",
+    "errors": {
+      "nameRequired": "Escribe qué hace falta",
+      "nameTooLong": "Máximo 80 caracteres",
+      "quantityTooLong": "La cantidad admite 20 caracteres como máximo",
+      "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo"
+    }
   }
 }

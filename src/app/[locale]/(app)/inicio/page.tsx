@@ -1,16 +1,18 @@
 // Página /inicio: "Mis casas". Si aún no estás en ningún hogar, te invita a crear uno o unirte.
 import { getLocale, getTranslations } from "next-intl/server";
+import { ListIcon } from "@/components/brand/Icons";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { HouseholdList } from "@/features/households";
 import { getMyHouseholds } from "@/features/households/server";
-import { redirect } from "@/i18n/navigation";
+import { Link, redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import styles from "../page.module.css";
 
 export default async function HomePage() {
   const t = await getTranslations("Households");
   const tHome = await getTranslations("Home");
+  const tShopping = await getTranslations("Shopping");
   const supabase = await createClient();
 
   // getClaims valida la sesión. El proxy ya protege la ruta; esto es una segunda barrera.
@@ -39,6 +41,19 @@ export default async function HomePage() {
           <p>{t("empty.text")}</p>
         </Card>
       )}
+
+      <Link href="/compra" className={styles.tile}>
+        <span className={styles.tileIcon}>
+          <ListIcon />
+        </span>
+        <span className={styles.tileText}>
+          <span className={styles.tileTitle}>{tShopping("personalTitle")}</span>
+          <span className={styles.muted}>{tShopping("personalTeaser")}</span>
+        </span>
+        <span className={styles.tileChevron} aria-hidden="true">
+          ›
+        </span>
+      </Link>
 
       <div className={styles.actions}>
         <ButtonLink href="/hogar/nuevo" fullWidth>

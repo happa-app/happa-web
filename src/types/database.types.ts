@@ -265,6 +265,74 @@ export type Database = {
         }
         Relationships: []
       }
+      shopping_items: {
+        Row: {
+          checked_at: string | null
+          checked_by: string | null
+          created_at: string
+          household_id: string | null
+          id: string
+          name: string
+          owner_id: string | null
+          quantity: string | null
+          requested_by: string | null
+          updated_at: string
+        }
+        Insert: {
+          checked_at?: string | null
+          checked_by?: string | null
+          created_at?: string
+          household_id?: string | null
+          id?: string
+          name: string
+          owner_id?: string | null
+          quantity?: string | null
+          requested_by?: string | null
+          updated_at?: string
+        }
+        Update: {
+          checked_at?: string | null
+          checked_by?: string | null
+          created_at?: string
+          household_id?: string | null
+          id?: string
+          name?: string
+          owner_id?: string | null
+          quantity?: string | null
+          requested_by?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shopping_items_checked_by_fkey"
+            columns: ["checked_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shopping_items_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shopping_items_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shopping_items_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       subscriptions: {
         Row: {
           cancel_at_period_end: boolean
@@ -341,6 +409,7 @@ export type Database = {
       is_household_admin: { Args: { hid: string }; Returns: boolean }
       is_household_adult: { Args: { hid: string }; Returns: boolean }
       is_household_member: { Args: { hid: string }; Returns: boolean }
+      is_household_resident: { Args: { hid: string }; Returns: boolean }
       is_valid_timezone: { Args: { tz: string }; Returns: boolean }
       join_household: { Args: { p_code: string }; Returns: string }
       leave_household: {
@@ -367,6 +436,10 @@ export type Database = {
           p_role: Database["public"]["Enums"]["household_role"]
           p_user: string
         }
+        Returns: undefined
+      }
+      share_shopping_item: {
+        Args: { p_household: string; p_item: string }
         Returns: undefined
       }
       shares_household_with: { Args: { other: string }; Returns: boolean }

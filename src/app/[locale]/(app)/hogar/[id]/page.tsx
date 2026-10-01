@@ -1,5 +1,6 @@
-// Página /hogar/<id>: el hogar con sus miembros, la invitación y la opción de salir.
-// Aquí irán después la lista de la compra, el triqui y las tareas.
+// Página /hogar/<id>: el hogar con sus secciones (lista de la compra con lo que falta; luego
+// triqui y tareas),
+// los miembros, la invitación y la opción de salir.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Card } from "@/components/ui/Card";
@@ -11,6 +12,8 @@ import {
   regenerateInviteCode,
 } from "@/features/households";
 import { getHousehold } from "@/features/households/server";
+import { ShoppingPreview } from "@/features/shopping";
+import { getHouseholdShoppingItems } from "@/features/shopping/server";
 import { Link, redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import styles from "../../page.module.css";
@@ -36,6 +39,8 @@ export default async function HouseholdPage({ params }: Props) {
   const me = household.members.find((m) => m.userId === userId);
   const isAdult = me?.role === "admin" || me?.role === "member";
   const isAdmin = me?.role === "admin";
+  const isResident = isAdult || me?.role === "minor";
+  const shoppingItems = isResident ? await getHouseholdShoppingItems(household.id) : [];
 
   return (
     <>
@@ -50,9 +55,16 @@ export default async function HouseholdPage({ params }: Props) {
         </p>
       </section>
 
-      <Card>
-        <p className={styles.muted}>{t("detail.comingSoon")}</p>
-      </Card>
+      {isResident ? (
+        <nav className={styles.tiles} aria-label={household.name}>
+          <ShoppingPreview
+            householdId={household.id}
+            initialItems={shoppingItems}
+            href={`/hogar/${household.id}/compra`}
+          />
+          <p className={styles.muted}>{t("detail.comingSoon")}</p>
+        </nav>
+      ) : null}
 
       {isAdult ? (
         <Card title={t("invite.title")}>

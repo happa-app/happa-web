@@ -124,13 +124,14 @@
     },
     "detail": {
       "back": "My homes",
-      "comingSoon": "Coming soon here: shopping list, expenses and chores."
+      "comingSoon": "Coming soon here: expenses and chores."
     },
     "invite": {
       "title": "Invite someone",
       "text": "Share the link or the code with the people you live with.",
       "codeLabel": "Invite code",
       "share": "Share invite",
+      "copyLink": "Copy link",
       "copyCode": "Copy code",
       "copiedLink": "Link copied",
       "copiedCode": "Code copied",
@@ -162,5 +163,41 @@
     "title": "We can't find this page",
     "text": "The link may be wrong, or you may no longer have access.",
     "back": "Go to my homes"
+  },
+  "Shopping": {
+    "title": "Shopping list",
+    "householdSubtitle": "Everyone in the home sees it, and it updates instantly.",
+    "personalTitle": "My personal list",
+    "personalSubtitle": "Only you can see it. If you need something for home, request it and it'll appear on the shared list.",
+    "personalTeaser": "Your things, and what you want to ask home for",
+    "pendingCount": "{count, plural, =0 {Nothing to buy} one {# item to buy} other {# items to buy}}",
+    "previewMore": "+{count} more",
+    "add": {
+      "name": "Item",
+      "namePlaceholder": "Add an item…",
+      "quantity": "Quantity",
+      "quantityPlaceholder": "Qty",
+      "submit": "Add to list"
+    },
+    "pending": "To buy",
+    "bought": "{count, plural, one {Bought (#)} other {Bought (#)}}",
+    "clearBought": "Clear bought",
+    "clearBoughtConfirm": "Remove the bought items from the list?",
+    "empty": "The list is empty. Add whatever is needed.",
+    "requestedBy": "Requested by {name}",
+    "you": "you",
+    "someone": "someone",
+    "markBought": "Mark {name} as bought",
+    "markPending": "Put {name} back on the list",
+    "remove": "Remove {name} from the list",
+    "share": "Request for home",
+    "shareTo": "Request in {name}",
+    "shared": "Sent to {name}",
+    "errors": {
+      "nameRequired": "Write what's needed",
+      "nameTooLong": "80 characters maximum",
+      "quantityTooLong": "Quantity can be 20 characters at most",
+      "generic": "Couldn't save. Check your connection and try again"
+    }
   }
 }
