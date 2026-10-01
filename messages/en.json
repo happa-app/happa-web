@@ -1,0 +1,71 @@
+{
+  "Metadata": {
+    "title": "HAPPA",
+    "description": "Run your home together: shared chores, expenses and shopping."
+  },
+  "Landing": {
+    "tagline": "Your home, organised together",
+    "description": "Share chores, split expenses and keep one shopping list with your flatmates, partner or family.",
+    "signup": "Create account",
+    "login": "I already have an account"
+  },
+  "Auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to see your home",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "noAccount": "Don't have an account yet?",
+      "goToSignup": "Create one"
+    },
+    "signup": {
+      "title": "Create your account",
+      "subtitle": "It only takes a minute",
+      "submit": "Create account",
+      "submitting": "Creating account…",
+      "haveAccount": "Already have an account?",
+      "goToLogin": "Sign in",
+      "checkEmailTitle": "Check your email",
+      "checkEmailText": "If the address is correct, we've sent you a link to activate your account. Open it in this same browser.",
+      "backToLogin": "Back to sign in"
+    },
+    "fields": {
+      "displayName": "Name",
+      "displayNameHint": "This is how your housemates will see you",
+      "email": "Email",
+      "password": "Password",
+      "passwordHint": "At least 8 characters",
+      "acceptLegal": "I have read and accept the <terms>terms of use</terms> and the <privacy>privacy policy</privacy>",
+      "isAdult": "I confirm I am 18 or older"
+    },
+    "errors": {
+      "displayNameRequired": "Enter your name",
+      "displayNameTooLong": "60 characters maximum",
+      "emailInvalid": "Enter a valid email",
+      "passwordTooShort": "Your password must have at least 8 characters",
+      "passwordTooLong": "72 characters maximum",
+      "passwordRequired": "Enter your password",
+      "passwordWeak": "That password is too weak; try a longer one",
+      "mustAcceptLegal": "You need to accept the terms and the privacy policy",
+      "mustBeAdult": "You must be an adult to create an account",
+      "invalidCredentials": "Wrong email or password",
+      "emailNotConfirmed": "You haven't confirmed your email yet. Check your inbox",
+      "rateLimited": "Too many attempts. Wait a few minutes and try again",
+      "userExists": "An account with that email already exists",
+      "generic": "Something went wrong. Please try again"
+    },
+    "signOut": "Sign out",
+    "confirmError": "The link is invalid or has expired. Sign in or sign up again."
+  },
+  "Home": {
+    "greeting": "Hi, {name}",
+    "noHousehold": "You're not in any home yet.",
+    "nextStep": "In the next step you'll be able to create one or join with a code."
+  },
+  "Legal": {
+    "terms": "Terms of use",
+    "privacy": "Privacy policy",
+    "draftNotice": "This document is being prepared and will be published before launch.",
+    "back": "Back"
+  }
+}

@@ -1,0 +1,31 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: 100dvh;
+  padding: var(--space-8) var(--space-4);
+}
+
+.logoLink {
+  text-decoration: none;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+@media (min-width: 480px) {
+  .page {
+    justify-content: center;
+  }
+
+  .card {
+    padding: var(--space-8);
+  }
+}

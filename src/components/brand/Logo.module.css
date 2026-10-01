@@ -1,0 +1,40 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.mark {
+  flex-shrink: 0;
+}
+
+.name {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.md .mark {
+  width: 40px;
+  height: 40px;
+}
+
+.md .name {
+  font-size: var(--text-xl);
+}
+
+.lg {
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.lg .mark {
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  box-shadow: var(--shadow-card);
+}
+
+.lg .name {
+  font-size: var(--text-2xl);
+}

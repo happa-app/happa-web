@@ -1,0 +1,23 @@
+.alert {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
+.title {
+  font-weight: 600;
+  font-size: var(--text-base);
+}
+
+.error {
+  background: var(--color-error-soft);
+  color: var(--color-error);
+}
+
+.success {
+  background: var(--color-success-soft);
+  color: var(--color-text);
+}

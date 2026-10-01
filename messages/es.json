@@ -1,0 +1,71 @@
+{
+  "Metadata": {
+    "title": "HAPPA",
+    "description": "Organiza tu hogar: tareas, gastos y compra compartidos."
+  },
+  "Landing": {
+    "tagline": "Tu hogar, organizado entre todos",
+    "description": "Reparte tareas, divide gastos y comparte la lista de la compra con tu piso, tu pareja o tu familia.",
+    "signup": "Crear cuenta",
+    "login": "Ya tengo cuenta"
+  },
+  "Auth": {
+    "login": {
+      "title": "Hola de nuevo",
+      "subtitle": "Entra para ver tu hogar",
+      "submit": "Iniciar sesión",
+      "submitting": "Entrando…",
+      "noAccount": "¿Aún no tienes cuenta?",
+      "goToSignup": "Crea una"
+    },
+    "signup": {
+      "title": "Crea tu cuenta",
+      "subtitle": "Solo te llevará un minuto",
+      "submit": "Crear cuenta",
+      "submitting": "Creando cuenta…",
+      "haveAccount": "¿Ya tienes cuenta?",
+      "goToLogin": "Inicia sesión",
+      "checkEmailTitle": "Revisa tu correo",
+      "checkEmailText": "Si la dirección es correcta, te hemos enviado un enlace para activar la cuenta. Ábrelo desde este mismo navegador.",
+      "backToLogin": "Volver a iniciar sesión"
+    },
+    "fields": {
+      "displayName": "Nombre",
+      "displayNameHint": "Así te verán tus compañeros",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "passwordHint": "Mínimo 8 caracteres",
+      "acceptLegal": "He leído y acepto los <terms>términos de uso</terms> y la <privacy>política de privacidad</privacy>",
+      "isAdult": "Confirmo que tengo 18 años o más"
+    },
+    "errors": {
+      "displayNameRequired": "Escribe tu nombre",
+      "displayNameTooLong": "Máximo 60 caracteres",
+      "emailInvalid": "Escribe un correo válido",
+      "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+      "passwordTooLong": "Máximo 72 caracteres",
+      "passwordRequired": "Escribe tu contraseña",
+      "passwordWeak": "Esa contraseña es demasiado débil; prueba con otra más larga",
+      "mustAcceptLegal": "Necesitas aceptar los términos y la privacidad",
+      "mustBeAdult": "Para crear una cuenta tienes que ser mayor de edad",
+      "invalidCredentials": "Correo o contraseña incorrectos",
+      "emailNotConfirmed": "Aún no has confirmado tu correo. Revisa tu bandeja de entrada",
+      "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
+      "userExists": "Ya existe una cuenta con ese correo",
+      "generic": "Algo ha fallado. Inténtalo de nuevo"
+    },
+    "signOut": "Cerrar sesión",
+    "confirmError": "El enlace no es válido o ha caducado. Inicia sesión o vuelve a registrarte."
+  },
+  "Home": {
+    "greeting": "Hola, {name}",
+    "noHousehold": "Todavía no estás en ningún hogar.",
+    "nextStep": "En el siguiente paso podrás crear uno o unirte con un código."
+  },
+  "Legal": {
+    "terms": "Términos de uso",
+    "privacy": "Política de privacidad",
+    "draftNotice": "Este documento está en preparación y se publicará antes del lanzamiento.",
+    "back": "Volver"
+  }
+}
