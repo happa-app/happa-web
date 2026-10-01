@@ -134,6 +134,7 @@
       "copyCode": "Copiar código",
       "copiedLink": "Enlace copiado",
       "copiedCode": "Código copiado",
+      "copyManually": "No se ha podido copiar solo. Mantén pulsado el texto para copiarlo:",
       "shareText": "Únete a {name} en HAPPA",
       "regenerate": "Cambiar el código",
       "regenerateConfirm": "El código y el enlace actuales dejarán de funcionar. ¿Seguro?"
