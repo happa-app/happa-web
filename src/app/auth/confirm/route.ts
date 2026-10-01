@@ -5,19 +5,13 @@ import type { EmailOtpType } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import type { NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-
-// Solo se permite volver a rutas internas: evita que alguien use el enlace
-// para mandar a la gente a una web externa.
-function safeNextPath(value: string | null) {
-  if (!value || !value.startsWith("/") || value.startsWith("//") || value.startsWith("/\\")) {
-    return "/inicio";
-  }
-  return value;
-}
+import { safeNextPath } from "@/utils/safe-path";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
-  const next = safeNextPath(searchParams.get("next"));
+  // Solo se permite volver a rutas internas: evita que alguien use el enlace
+  // para mandar a la gente a una web externa.
+  const next = safeNextPath(searchParams.get("next")) ?? "/inicio";
   const code = searchParams.get("code");
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;

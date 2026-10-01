@@ -6,6 +6,11 @@ type Props = {
 };
 
 export default async function LoginPage({ searchParams }: Props) {
-  const { error } = await searchParams;
-  return <LoginForm confirmFailed={error === "confirm"} />;
+  const { error, next } = await searchParams;
+  return (
+    <LoginForm
+      confirmFailed={error === "confirm"}
+      next={typeof next === "string" ? next : undefined}
+    />
+  );
 }

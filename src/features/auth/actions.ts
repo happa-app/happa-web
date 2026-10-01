@@ -2,13 +2,14 @@
 // Acciones de servidor: funciones que el formulario llama directamente al enviarse.
 // Es el equivalente a tus handlers de "submit", pero se ejecutan en el servidor,
 // así que las comprobaciones no se pueden saltar desde el navegador.
-import { hasLocale } from "next-intl";
 import { headers } from "next/headers";
+import { redirect as redirectToPath } from "next/navigation";
 import { z } from "zod";
 import { LEGAL_VERSIONS } from "@/features/legal/versions";
+import { localizePath, parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
-import { routing, type Locale } from "@/i18n/routing";
 import { createClient } from "@/lib/supabase/server";
+import { safeNextPath } from "@/utils/safe-path";
 import { toAuthErrorKey } from "./errors";
 import { loginSchema, signupSchema } from "./schemas";
 import type { AuthFormState } from "./types";
@@ -19,11 +20,6 @@ const LOGIN_PATH = "/login";
 function text(formData: FormData, key: string) {
   const value = formData.get(key);
   return typeof value === "string" ? value : "";
-}
-
-function formLocale(formData: FormData): Locale {
-  const value = text(formData, "locale");
-  return hasLocale(routing.locales, value) ? value : routing.defaultLocale;
 }
 
 // Dirección de la web (localhost en desarrollo, happa.es en producción).
@@ -41,7 +37,8 @@ export async function signIn(
   _prevState: AuthFormState,
   formData: FormData,
 ): Promise<AuthFormState> {
-  const locale = formLocale(formData);
+  const locale = parseLocale(formData.get("locale"));
+  const next = safeNextPath(text(formData, "next"));
   const values = { email: text(formData, "email").trim() };
 
   const parsed = loginSchema.safeParse({
@@ -58,6 +55,8 @@ export async function signIn(
     return { status: "error", formError: toAuthErrorKey(error), values };
   }
 
+  // Si venía de un enlace (por ejemplo, una invitación), vuelve ahí.
+  if (next) redirectToPath(next);
   return redirect({ href: HOME_PATH, locale });
 }
 
@@ -65,7 +64,8 @@ export async function signUp(
   _prevState: AuthFormState,
   formData: FormData,
 ): Promise<AuthFormState> {
-  const locale = formLocale(formData);
+  const locale = parseLocale(formData.get("locale"));
+  const nextPath = safeNextPath(text(formData, "next")) ?? localizePath(HOME_PATH, locale);
   const values = {
     email: text(formData, "email").trim(),
     displayName: text(formData, "displayName"),
@@ -83,7 +83,6 @@ export async function signUp(
   }
 
   const { displayName, email, password } = parsed.data;
-  const nextPath = locale === routing.defaultLocale ? HOME_PATH : `/${locale}${HOME_PATH}`;
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
@@ -100,9 +99,7 @@ export async function signUp(
   }
 
   // Si la confirmación por correo está desactivada, la sesión llega ya iniciada.
-  if (data.session) {
-    redirect({ href: HOME_PATH, locale });
-  }
+  if (data.session) redirectToPath(nextPath);
 
   // Si el correo ya existía, Supabase responde igual a propósito (para no revelar
   // qué correos están registrados). Por eso siempre se muestra "revisa tu correo".
@@ -112,5 +109,5 @@ export async function signUp(
 export async function signOut(formData: FormData) {
   const supabase = await createClient();
   await supabase.auth.signOut();
-  redirect({ href: LOGIN_PATH, locale: formLocale(formData) });
+  redirect({ href: LOGIN_PATH, locale: parseLocale(formData.get("locale")) });
 }

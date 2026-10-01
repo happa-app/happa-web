@@ -11,10 +11,16 @@ import { signUp } from "../actions";
 import { firstFieldError, initialAuthState } from "../types";
 import styles from "./AuthForm.module.css";
 
-export function SignupForm() {
+type Props = {
+  // Adónde volver después de confirmar el correo (por ejemplo, un enlace de invitación)
+  next?: string;
+};
+
+export function SignupForm({ next }: Props) {
   const t = useTranslations("Auth");
   const locale = useLocale();
   const [state, formAction, isPending] = useActionState(signUp, initialAuthState);
+  const loginHref = { pathname: "/login", query: next ? { next } : undefined };
 
   if (state.status === "checkEmail") {
     return (
@@ -22,7 +28,7 @@ export function SignupForm() {
         <Alert tone="success" title={t("signup.checkEmailTitle")}>
           {t("signup.checkEmailText")}
         </Alert>
-        <Link href="/login" className={styles.linkButton}>
+        <Link href={loginHref} className={styles.linkButton}>
           {t("signup.backToLogin")}
         </Link>
       </div>
@@ -57,6 +63,7 @@ export function SignupForm() {
       {state.formError ? <Alert tone="error">{t(`errors.${state.formError}`)}</Alert> : null}
 
       <input type="hidden" name="locale" value={locale} />
+      {next ? <input type="hidden" name="next" value={next} /> : null}
 
       <TextField
         label={t("fields.displayName")}
@@ -97,7 +104,7 @@ export function SignupForm() {
       </Button>
 
       <p className={styles.switch}>
-        {t("signup.haveAccount")} <Link href="/login">{t("signup.goToLogin")}</Link>
+        {t("signup.haveAccount")} <Link href={loginHref}>{t("signup.goToLogin")}</Link>
       </p>
     </form>
   );

@@ -12,9 +12,11 @@ import styles from "./AuthForm.module.css";
 
 type Props = {
   confirmFailed?: boolean;
+  // Adónde volver después de entrar (por ejemplo, un enlace de invitación)
+  next?: string;
 };
 
-export function LoginForm({ confirmFailed = false }: Props) {
+export function LoginForm({ confirmFailed = false, next }: Props) {
   const t = useTranslations("Auth");
   const locale = useLocale();
   const [state, formAction, isPending] = useActionState(signIn, initialAuthState);
@@ -35,6 +37,7 @@ export function LoginForm({ confirmFailed = false }: Props) {
       {state.formError ? <Alert tone="error">{t(`errors.${state.formError}`)}</Alert> : null}
 
       <input type="hidden" name="locale" value={locale} />
+      {next ? <input type="hidden" name="next" value={next} /> : null}
 
       <TextField
         label={t("fields.email")}
@@ -60,7 +63,10 @@ export function LoginForm({ confirmFailed = false }: Props) {
       </Button>
 
       <p className={styles.switch}>
-        {t("login.noAccount")} <Link href="/registro">{t("login.goToSignup")}</Link>
+        {t("login.noAccount")}{" "}
+        <Link href={{ pathname: "/registro", query: next ? { next } : undefined }}>
+          {t("login.goToSignup")}
+        </Link>
       </p>
     </form>
   );

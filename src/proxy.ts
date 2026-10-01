@@ -6,8 +6,10 @@
 import { hasLocale } from "next-intl";
 import createIntlMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
+import { localizePath } from "@/i18n/locale";
 import { routing, type Locale } from "@/i18n/routing";
 import { refreshSession } from "@/lib/supabase/proxy";
+import { safeNextPath } from "@/utils/safe-path";
 
 const handleI18nRouting = createIntlMiddleware(routing);
 
@@ -27,11 +29,6 @@ function splitLocale(pathname: string): { locale: Locale; path: string } {
   return { locale: routing.defaultLocale, path: pathname };
 }
 
-function localizePath(path: string, locale: Locale) {
-  if (locale === routing.defaultLocale) return path;
-  return path === "/" ? `/${locale}` : `/${locale}${path}`;
-}
-
 function isPublic(path: string) {
   return (
     PUBLIC_PATHS.includes(path) ||
@@ -49,15 +46,22 @@ export async function proxy(request: NextRequest) {
 
   const { locale, path } = splitLocale(request.nextUrl.pathname);
 
-  const redirectTo = (target: string) => {
-    const url = request.nextUrl.clone();
-    url.pathname = localizePath(target, locale);
-    url.search = "";
+  // Sin sesión en una ruta privada: al login, recordando adónde iba
+  // (así un enlace de invitación sigue funcionando después de entrar).
+  if (!session.isLoggedIn && !isPublic(path)) {
+    const url = new URL(localizePath(LOGIN_PATH, locale), request.url);
+    if (path !== HOME_PATH) {
+      url.searchParams.set("next", request.nextUrl.pathname + request.nextUrl.search);
+    }
     return session.applyTo(NextResponse.redirect(url));
-  };
+  }
 
-  if (!session.isLoggedIn && !isPublic(path)) return redirectTo(LOGIN_PATH);
-  if (session.isLoggedIn && GUEST_ONLY_PATHS.includes(path)) return redirectTo(HOME_PATH);
+  // Con sesión en login, registro o portada: directo a la app (o adonde iba).
+  if (session.isLoggedIn && GUEST_ONLY_PATHS.includes(path)) {
+    const next = safeNextPath(request.nextUrl.searchParams.get("next"));
+    const target = next ?? localizePath(HOME_PATH, locale);
+    return session.applyTo(NextResponse.redirect(new URL(target, request.url)));
+  }
 
   return session.applyTo(handleI18nRouting(request));
 }

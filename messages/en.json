@@ -58,14 +58,108 @@
     "confirmError": "The link is invalid or has expired. Sign in or sign up again."
   },
   "Home": {
-    "greeting": "Hi, {name}",
-    "noHousehold": "You're not in any home yet.",
-    "nextStep": "In the next step you'll be able to create one or join with a code."
+    "greeting": "Hi, {name}"
   },
   "Legal": {
     "terms": "Terms of use",
     "privacy": "Privacy policy",
     "draftNotice": "This document is being prepared and will be published before launch.",
     "back": "Back"
+  },
+  "Households": {
+    "list": {
+      "title": "My homes"
+    },
+    "empty": {
+      "text": "You're not in any home yet. Create one or join with the code someone in your home sends you."
+    },
+    "actions": {
+      "create": "Create a home",
+      "join": "Join with a code"
+    },
+    "memberCount": "{count, plural, one {# member} other {# members}}",
+    "kinds": {
+      "shared_flat": "Shared flat",
+      "student_flat": "Student flat",
+      "couple": "Couple",
+      "family": "Family"
+    },
+    "kindDescriptions": {
+      "shared_flat": "Flatmates who work, or a bit of everything",
+      "student_flat": "Students sharing a flat",
+      "couple": "Two people living together",
+      "family": "Parents, children and anyone else at home"
+    },
+    "roles": {
+      "admin": "Admin",
+      "member": "Member",
+      "minor": "Minor",
+      "landlord": "Landlord"
+    },
+    "create": {
+      "title": "Create your home",
+      "subtitle": "Then you can invite the others with a code.",
+      "name": "Home name",
+      "namePlaceholder": "E.g.: High Street flat",
+      "kind": "What kind of home is it?",
+      "submit": "Create home",
+      "submitting": "Creating…"
+    },
+    "join": {
+      "title": "Join a home",
+      "subtitle": "Ask someone in your home for the code or the link.",
+      "code": "Invite code or link",
+      "codeHint": "You can paste the full link",
+      "submit": "Join",
+      "submitting": "Joining…"
+    },
+    "preview": {
+      "title": "You've been invited",
+      "intro": "You're about to join",
+      "submit": "Join {name}",
+      "alreadyMember": "You're already in this home.",
+      "goToHousehold": "Go to home",
+      "invalid": "This link is invalid or has expired. Ask for a new one or type the code.",
+      "typeCode": "Type the code"
+    },
+    "detail": {
+      "back": "My homes",
+      "comingSoon": "Coming soon here: shopping list, expenses and chores."
+    },
+    "invite": {
+      "title": "Invite someone",
+      "text": "Share the link or the code with the people you live with.",
+      "codeLabel": "Invite code",
+      "share": "Share invite",
+      "copyCode": "Copy code",
+      "copiedLink": "Link copied",
+      "copiedCode": "Code copied",
+      "shareText": "Join {name} on HAPPA",
+      "regenerate": "Change the code",
+      "regenerateConfirm": "The current code and link will stop working. Are you sure?"
+    },
+    "membersSection": {
+      "title": "Members",
+      "you": "you"
+    },
+    "leave": {
+      "button": "Leave home",
+      "confirm": "Are you sure you want to leave {name}? Your history is kept and you can come back with a code."
+    },
+    "errors": {
+      "nameRequired": "Give your home a name",
+      "nameTooLong": "80 characters maximum",
+      "kindRequired": "Choose the kind of home",
+      "codeInvalid": "That code isn't valid. Check it or ask for a new one",
+      "minorCannotCreate": "Minor accounts can't create homes",
+      "minorCannotJoin": "Minor accounts are added by their guardian",
+      "professionalCannotJoin": "Professional accounts can't join a home",
+      "generic": "Something went wrong. Please try again"
+    }
+  },
+  "NotFound": {
+    "title": "We can't find this page",
+    "text": "The link may be wrong, or you may no longer have access.",
+    "back": "Go to my homes"
   }
 }

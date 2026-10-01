@@ -327,6 +327,16 @@ export type Database = {
         Args: { p_household: string; p_successor?: string; p_user: string }
         Returns: undefined
       }
+      get_invite_preview: {
+        Args: { p_code: string }
+        Returns: {
+          already_member: boolean
+          household_id: string
+          kind: Database["public"]["Enums"]["household_kind"]
+          member_count: number
+          name: string
+        }[]
+      }
       is_guardian_of: { Args: { p_minor: string }; Returns: boolean }
       is_household_admin: { Args: { hid: string }; Returns: boolean }
       is_household_adult: { Args: { hid: string }; Returns: boolean }

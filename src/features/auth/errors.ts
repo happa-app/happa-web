@@ -19,6 +19,8 @@ export function toAuthErrorKey(error: { code?: string; status?: number }): AuthE
     case "over_email_send_rate_limit":
       return "rateLimited";
     default:
+      // Solo se ve en el servidor (terminal de npm run dev o logs de Vercel), nunca en la app.
+      console.error("[auth] error sin traducir:", error);
       return error.status === 429 ? "rateLimited" : "generic";
   }
 }

@@ -58,14 +58,108 @@
     "confirmError": "El enlace no es válido o ha caducado. Inicia sesión o vuelve a registrarte."
   },
   "Home": {
-    "greeting": "Hola, {name}",
-    "noHousehold": "Todavía no estás en ningún hogar.",
-    "nextStep": "En el siguiente paso podrás crear uno o unirte con un código."
+    "greeting": "Hola, {name}"
   },
   "Legal": {
     "terms": "Términos de uso",
     "privacy": "Política de privacidad",
     "draftNotice": "Este documento está en preparación y se publicará antes del lanzamiento.",
     "back": "Volver"
+  },
+  "Households": {
+    "list": {
+      "title": "Mis casas"
+    },
+    "empty": {
+      "text": "Todavía no estás en ningún hogar. Crea uno o únete con el código que te pase alguien de tu casa."
+    },
+    "actions": {
+      "create": "Crear un hogar",
+      "join": "Unirme con un código"
+    },
+    "memberCount": "{count, plural, one {# miembro} other {# miembros}}",
+    "kinds": {
+      "shared_flat": "Piso compartido",
+      "student_flat": "Piso de estudiantes",
+      "couple": "Pareja",
+      "family": "Familia"
+    },
+    "kindDescriptions": {
+      "shared_flat": "Compañeros de piso que trabajan o de todo un poco",
+      "student_flat": "Estudiantes que comparten piso",
+      "couple": "Dos personas que viven juntas",
+      "family": "Padres, hijos y quien viva en casa"
+    },
+    "roles": {
+      "admin": "Admin",
+      "member": "Miembro",
+      "minor": "Menor",
+      "landlord": "Casero"
+    },
+    "create": {
+      "title": "Crea tu hogar",
+      "subtitle": "Después podrás invitar al resto con un código.",
+      "name": "Nombre del hogar",
+      "namePlaceholder": "Ej.: Piso calle Mayor",
+      "kind": "¿Qué tipo de hogar es?",
+      "submit": "Crear hogar",
+      "submitting": "Creando…"
+    },
+    "join": {
+      "title": "Únete a un hogar",
+      "subtitle": "Pide el código o el enlace a alguien de tu casa.",
+      "code": "Código o enlace de invitación",
+      "codeHint": "Puedes pegar el enlace completo",
+      "submit": "Unirme",
+      "submitting": "Uniéndome…"
+    },
+    "preview": {
+      "title": "Te han invitado",
+      "intro": "Vas a unirte a",
+      "submit": "Unirme a {name}",
+      "alreadyMember": "Ya estás en este hogar.",
+      "goToHousehold": "Ir al hogar",
+      "invalid": "Este enlace no es válido o ha caducado. Pide uno nuevo o escribe el código a mano.",
+      "typeCode": "Escribir el código"
+    },
+    "detail": {
+      "back": "Mis casas",
+      "comingSoon": "Muy pronto, aquí: lista de la compra, triqui y tareas."
+    },
+    "invite": {
+      "title": "Invitar a alguien",
+      "text": "Comparte el enlace o el código con quien viva contigo.",
+      "codeLabel": "Código de invitación",
+      "share": "Compartir invitación",
+      "copyCode": "Copiar código",
+      "copiedLink": "Enlace copiado",
+      "copiedCode": "Código copiado",
+      "shareText": "Únete a {name} en HAPPA",
+      "regenerate": "Cambiar el código",
+      "regenerateConfirm": "El código y el enlace actuales dejarán de funcionar. ¿Seguro?"
+    },
+    "membersSection": {
+      "title": "Miembros",
+      "you": "tú"
+    },
+    "leave": {
+      "button": "Salir del hogar",
+      "confirm": "¿Seguro que quieres salir de {name}? Tu historial se conserva y podrás volver con un código."
+    },
+    "errors": {
+      "nameRequired": "Ponle un nombre al hogar",
+      "nameTooLong": "Máximo 80 caracteres",
+      "kindRequired": "Elige el tipo de hogar",
+      "codeInvalid": "Ese código no es válido. Revísalo o pide uno nuevo",
+      "minorCannotCreate": "Las cuentas de menor no pueden crear hogares",
+      "minorCannotJoin": "A las cuentas de menor las añade su tutor",
+      "professionalCannotJoin": "Las cuentas de profesional no pueden unirse a un hogar",
+      "generic": "Algo ha fallado. Inténtalo de nuevo"
+    }
+  },
+  "NotFound": {
+    "title": "No encontramos esta página",
+    "text": "Puede que el enlace esté mal o que ya no tengas acceso.",
+    "back": "Ir a mis casas"
   }
 }
