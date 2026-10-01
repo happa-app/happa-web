@@ -172,11 +172,13 @@
     "personalTeaser": "Your things, and what you want to ask home for",
     "pendingCount": "{count, plural, =0 {Nothing to buy} one {# item to buy} other {# items to buy}}",
     "previewMore": "+{count} more",
+    "previewBought": "{name}: bought",
+    "undo": "Undo",
     "add": {
       "name": "Item",
       "namePlaceholder": "Add an item…",
       "quantity": "Quantity",
-      "quantityPlaceholder": "Qty",
+      "quantityPlaceholder": "1",
       "submit": "Add to list"
     },
     "pending": "To buy",
@@ -196,7 +198,7 @@
     "errors": {
       "nameRequired": "Write what's needed",
       "nameTooLong": "80 characters maximum",
-      "quantityTooLong": "Quantity can be 20 characters at most",
+      "quantityInvalid": "Quantity must be a number from 1 to 99",
       "generic": "Couldn't save. Check your connection and try again"
     }
   }

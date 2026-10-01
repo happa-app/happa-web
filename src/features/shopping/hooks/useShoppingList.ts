@@ -13,7 +13,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { deleteItems, fetchItems, insertItem, setChecked, shareItem } from "../api";
 import { newItemSchema, type NewItemInput } from "../schemas";
-import type { ShoppingErrorKey, ShoppingItem, ShoppingScope } from "../types";
+import { SHOPPING_ERROR_KEYS, type ShoppingErrorKey, type ShoppingItem, type ShoppingScope } from "../types";
 
 const REFRESH_DELAY_MS = 150;
 
@@ -116,8 +116,8 @@ export function useShoppingList(scope: ShoppingScope, initialItems: ShoppingItem
     (input: NewItemInput): boolean => {
       const parsed = newItemSchema.safeParse(input);
       if (!parsed.success) {
-        const key = parsed.error.issues[0]?.message;
-        setError(key === "nameRequired" || key === "nameTooLong" || key === "quantityTooLong" ? key : "generic");
+        const key = SHOPPING_ERROR_KEYS.find((k) => k === parsed.error.issues[0]?.message);
+        setError(key ?? "generic");
         return false;
       }
       tempCounter.current += 1;

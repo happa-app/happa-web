@@ -8,7 +8,8 @@ export type ShoppingScope =
 export type ShoppingItem = {
   id: string;
   name: string;
-  quantity: string | null;
+  // Unidades, del 1 al 99 (1 si no se indica)
+  quantity: number;
   checkedAt: string | null;
   createdAt: string;
   requestedBy: string | null;
@@ -20,5 +21,5 @@ export type ShoppingItem = {
 // Hogar al que se puede pedir un producto desde la lista personal
 export type ShareTarget = { id: string; name: string };
 
-export const SHOPPING_ERROR_KEYS = ["nameRequired", "nameTooLong", "quantityTooLong", "generic"] as const;
+export const SHOPPING_ERROR_KEYS = ["nameRequired", "nameTooLong", "quantityInvalid", "generic"] as const;
 export type ShoppingErrorKey = (typeof SHOPPING_ERROR_KEYS)[number];

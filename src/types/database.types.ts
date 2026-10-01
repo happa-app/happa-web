@@ -274,7 +274,7 @@ export type Database = {
           id: string
           name: string
           owner_id: string | null
-          quantity: string | null
+          quantity: number
           requested_by: string | null
           updated_at: string
         }
@@ -286,7 +286,7 @@ export type Database = {
           id?: string
           name: string
           owner_id?: string | null
-          quantity?: string | null
+          quantity?: number
           requested_by?: string | null
           updated_at?: string
         }
@@ -298,7 +298,7 @@ export type Database = {
           id?: string
           name?: string
           owner_id?: string | null
-          quantity?: string | null
+          quantity?: number
           requested_by?: string | null
           updated_at?: string
         }

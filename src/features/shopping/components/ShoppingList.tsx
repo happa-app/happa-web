@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { useShoppingList } from "../hooks/useShoppingList";
+import { MAX_QUANTITY } from "../schemas";
+import { canEditItem, shownQuantity } from "../rules";
 import type { ShareTarget, ShoppingItem, ShoppingScope } from "../types";
 import styles from "./ShoppingList.module.css";
 
@@ -35,7 +37,7 @@ export function ShoppingList({ scope, initialItems, currentUserId, canManageAll,
     .filter((i) => i.checkedAt)
     .sort((a, b) => (b.checkedAt ?? "").localeCompare(a.checkedAt ?? ""));
 
-  const canEdit = (item: ShoppingItem) => canManageAll || item.requestedBy === currentUserId;
+  const canEdit = (item: ShoppingItem) => canEditItem(item, currentUserId, canManageAll);
   const clearable = boughtItems.filter((i) => canEdit(i) && !i.pending);
 
   function onAdd(event: FormEvent<HTMLFormElement>) {
@@ -62,6 +64,7 @@ export function ShoppingList({ scope, initialItems, currentUserId, canManageAll,
   const renderItem = (item: ShoppingItem) => {
     const checked = Boolean(item.checkedAt);
     const editable = canEdit(item) && !item.pending;
+    const quantity = shownQuantity(item);
     const requester =
       item.requestedBy === currentUserId ? t("you") : (item.requestedByName ?? t("someone"));
 
@@ -78,9 +81,9 @@ export function ShoppingList({ scope, initialItems, currentUserId, canManageAll,
           />
           <div className={styles.text}>
             <span className={checked ? styles.nameDone : styles.name}>{item.name}</span>
-            {item.quantity || (isHousehold && item.requestedBy) ? (
+            {quantity || (isHousehold && item.requestedBy) ? (
               <span className={styles.meta}>
-                {item.quantity ? <span className={styles.quantity}>{item.quantity}</span> : null}
+                {quantity ? <span className={styles.quantity}>{quantity}</span> : null}
                 {isHousehold && item.requestedBy ? <span>{t("requestedBy", { name: requester })}</span> : null}
               </span>
             ) : null}
@@ -149,10 +152,15 @@ export function ShoppingList({ scope, initialItems, currentUserId, canManageAll,
           id="shopping-quantity"
           className={styles.quantityInput}
           value={quantity}
-          maxLength={20}
+          // Solo cifras, como mucho 2 (también al pegar); el teclado del móvil sale numérico.
+          // Sin maxLength: el navegador cortaría lo pegado antes de quitar las letras.
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder={t("add.quantityPlaceholder")}
           autoComplete="off"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setQuantity(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setQuantity(e.target.value.replace(/\D/g, "").slice(0, String(MAX_QUANTITY).length))
+          }
         />
         <button type="submit" className={styles.addButton} aria-label={t("add.submit")}>
           +

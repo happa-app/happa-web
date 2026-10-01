@@ -102,6 +102,43 @@
   overflow-wrap: anywhere;
 }
 
+/* Producto que puedes marcar: queda por encima del enlace de la tarjeta */
+.chipButton {
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  padding: 0.45rem 0.8rem;
+  border: 0;
+  font: inherit;
+  font-size: var(--text-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.chipButton:hover {
+  background: #d3e8da;
+}
+
+.chipButton:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Circulito de "por comprar": al pasar el ratón se rellena para indicar que se marca */
+.circle {
+  flex-shrink: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2px solid var(--color-brand-strong);
+  border-radius: 50%;
+  transition: background-color 0.15s ease;
+}
+
+.chipButton:hover .circle {
+  background: var(--color-brand-strong);
+}
+
 .quantity {
   color: var(--color-brand-strong);
   font-weight: 600;
@@ -111,4 +148,55 @@
 .more {
   color: var(--color-text-muted);
   font-weight: 600;
+}
+
+/* "Leche: comprado · Deshacer" y avisos */
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-brand-strong);
+  font-weight: 600;
+}
+
+.status:empty {
+  display: none;
+}
+
+.undo {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-brand-strong);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.undo:hover {
+  border-color: var(--color-brand-strong);
+}
+
+.undo:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.undo:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.error {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-error);
 }

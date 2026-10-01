@@ -172,11 +172,13 @@
     "personalTeaser": "Tus cosas, y lo que quieras pedir a casa",
     "pendingCount": "{count, plural, =0 {Nada por comprar} one {# producto por comprar} other {# productos por comprar}}",
     "previewMore": "+{count} más",
+    "previewBought": "{name}: comprado",
+    "undo": "Deshacer",
     "add": {
       "name": "Producto",
       "namePlaceholder": "Añadir producto…",
       "quantity": "Cantidad",
-      "quantityPlaceholder": "Cant.",
+      "quantityPlaceholder": "1",
       "submit": "Añadir a la lista"
     },
     "pending": "Por comprar",
@@ -196,7 +198,7 @@
     "errors": {
       "nameRequired": "Escribe qué hace falta",
       "nameTooLong": "Máximo 80 caracteres",
-      "quantityTooLong": "La cantidad admite 20 caracteres como máximo",
+      "quantityInvalid": "La cantidad tiene que ser un número del 1 al 99",
       "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo"
     }
   }

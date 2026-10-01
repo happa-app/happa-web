@@ -33,8 +33,9 @@
 }
 
 .quantityInput {
-  width: 5.5rem;
+  width: 4rem;
   flex-shrink: 0;
+  text-align: center;
 }
 
 .nameInput:focus,

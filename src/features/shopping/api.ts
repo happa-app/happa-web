@@ -10,7 +10,7 @@ const ITEM_FIELDS =
 type ItemRow = {
   id: string;
   name: string;
-  quantity: string | null;
+  quantity: number;
   checked_at: string | null;
   created_at: string;
   requested_by: string | null;
@@ -41,7 +41,7 @@ export async function fetchItems(supabase: AppSupabaseClient, scope: ShoppingSco
 export async function insertItem(
   supabase: AppSupabaseClient,
   scope: ShoppingScope,
-  item: { name: string; quantity: string | null },
+  item: { name: string; quantity: number },
 ) {
   const target =
     scope.type === "household" ? { household_id: scope.householdId } : { owner_id: scope.userId };

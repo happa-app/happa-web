@@ -60,6 +60,8 @@ export default async function HouseholdPage({ params }: Props) {
           <ShoppingPreview
             householdId={household.id}
             initialItems={shoppingItems}
+            currentUserId={userId}
+            canManageAll={isAdult}
             href={`/hogar/${household.id}/compra`}
           />
           <p className={styles.muted}>{t("detail.comingSoon")}</p>
