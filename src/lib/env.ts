@@ -3,7 +3,9 @@
 import { z } from "zod";
 
 const schema = z.object({
-  NEXT_PUBLIC_SUPABASE_URL: z.url(),
+  NEXT_PUBLIC_SUPABASE_URL: z
+    .url()
+    .refine((u) => new URL(u).pathname === "/", "Usa solo https://hqltvqmiexaxyuawtxrq.supabase.co, sin /rest/v1"),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(20),
 });
 
