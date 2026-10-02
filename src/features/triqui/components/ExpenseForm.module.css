@@ -1,0 +1,212 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.twoColumns {
+  display: grid;
+  /* minmax(0, …): sin esto, el selector de fecha del navegador ensancha la columna y se sale de la pantalla */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.twoColumns input {
+  width: 100%;
+  min-width: 0;
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.legend {
+  padding: 0 var(--space-2);
+  font-weight: 700;
+}
+
+.select {
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.select:focus,
+.smallInput:focus,
+.tinyInput:focus {
+  outline: none;
+  border-color: var(--color-brand-strong);
+  box-shadow: var(--focus-ring);
+}
+
+.linkButton {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-brand-strong);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.linkButton:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Reparto: tres opciones como pestañas */
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+
+.segment,
+.segmentActive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.segment {
+  color: var(--color-text-muted);
+}
+
+.segmentActive {
+  background: var(--color-surface);
+  color: var(--color-brand-strong);
+  box-shadow: 0 1px 2px rgb(31 59 77 / 12%);
+}
+
+.segment:focus-within,
+.segmentActive:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
+.people {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.person,
+.personOff {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 52px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.person:last-child,
+.personOff:last-child {
+  border-bottom: 0;
+}
+
+.personOff .personName {
+  color: var(--color-text-muted);
+}
+
+.check {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  cursor: pointer;
+}
+
+.check input {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  accent-color: var(--color-brand-strong);
+}
+
+.personName {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.money {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.smallInput,
+.tinyInput {
+  min-height: 40px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  text-align: right;
+}
+
+.smallInput {
+  width: 5.5rem;
+}
+
+.tinyInput {
+  width: 3rem;
+  text-align: center;
+}
+
+.share {
+  min-width: 4.5rem;
+  color: var(--color-brand-strong);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-align: right;
+}
+
+.left {
+  margin: 0;
+  color: var(--color-owe);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
+.note {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}

@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: triqui y tareas."
+      "comingSoon": "Muy pronto, aquí: tareas y horarios."
     },
     "invite": {
       "title": "Invitar a alguien",
@@ -200,6 +200,158 @@
       "nameTooLong": "Máximo 80 caracteres",
       "quantityInvalid": "La cantidad tiene que ser un número del 1 al 99",
       "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo"
+    }
+  },
+  "Triqui": {
+    "title": "Triqui",
+    "subtitle": "Los gastos del hogar y quién debe a quién.",
+    "addExpense": "Añadir gasto",
+    "you": "tú",
+    "youCap": "Tú",
+    "youObject": "ti",
+    "someone": "alguien",
+    "cancel": "Cancelar",
+    "balance": {
+      "title": "Tu saldo",
+      "owed": "Te deben",
+      "owe": "Debes",
+      "even": "Estás en paz"
+    },
+    "tile": {
+      "owed": "Te deben {amount}",
+      "owe": "Debes {amount}",
+      "even": "Estás en paz",
+      "toConfirm": "{count, plural, one {# por confirmar} other {# por confirmar}}"
+    },
+    "pending": {
+      "title": "Te toca a ti",
+      "expense": "{name} ha añadido «{description}»",
+      "expenseMeta": "Total {amount} · a ti te tocan {share}",
+      "confirm": "Confirmar",
+      "review": "Revisar",
+      "paymentToMe": "{name} dice que te ha pagado {amount}",
+      "confirmPayment": "Me ha llegado",
+      "rejectPayment": "No me ha llegado",
+      "rejectPaymentConfirm": "¿Seguro que {name} no te ha pagado? El pago quedará como no recibido.",
+      "myPayment": "Has marcado que has pagado {amount} a {name}",
+      "myPaymentMeta": "Falta que {name} lo confirme. Hasta entonces no cuenta.",
+      "cancelPayment": "Retirar",
+      "cancelPaymentConfirm": "¿Retirar este pago?"
+    },
+    "settle": {
+      "title": "Para quedar en paz",
+      "allEven": "Nadie debe nada a nadie.",
+      "iPaid": "He pagado",
+      "theyPaid": "Me ha pagado",
+      "howMuchPaid": "¿Cuánto le has pagado a {name}?",
+      "howMuchReceived": "¿Cuánto te ha pagado {name}?",
+      "paidHint": "{name} tendrá que confirmar que le ha llegado.",
+      "save": "Apuntar pago",
+      "waiting": "Hay un pago esperando confirmación."
+    },
+    "balances": {
+      "title": "Saldos",
+      "left": "Ya no vive aquí"
+    },
+    "expenses": {
+      "title": "Gastos",
+      "empty": "Aún no hay gastos. Añade el primero.",
+      "paidBy": "Pagó {name}",
+      "paidByMany": "Pagaron {count}",
+      "notInvolved": "No participas",
+      "youLent": "te deben {amount}",
+      "youOwe": "debes {amount}",
+      "youEven": "estás en paz",
+      "paidByYou": "Pagaste tú",
+      "notYet": "aún no cuenta",
+      "notCounted": "no cuenta"
+    },
+    "payments": {
+      "title": "Pagos",
+      "line": "{from} → {to}"
+    },
+    "status": {
+      "pending": "Pendiente · {done}/{total}",
+      "pendingPayment": "Sin confirmar",
+      "rejected": "Rechazado",
+      "rejectedPayment": "No recibido"
+    },
+    "methods": {
+      "equal": "A partes iguales",
+      "shares": "Por partes",
+      "exact": "Importes exactos"
+    },
+    "detail": {
+      "createdBy": "añadido por {name}",
+      "pendingBanner": "Falta por confirmar: {names}. Hasta entonces no cuenta en los saldos.",
+      "rejectedBanner": "Rechazado por {name}. Quien lo añadió puede corregirlo o borrarlo.",
+      "confirmedBanner": "Confirmado por todos. Ya cuenta en los saldos.",
+      "confirm": "Confirmar gasto",
+      "reject": "Rechazar",
+      "rejectReason": "¿Qué está mal? (opcional)",
+      "rejectPlaceholder": "Por ejemplo: yo no fui a esa cena",
+      "rejectSubmit": "Rechazar gasto",
+      "paidOne": "Pagó",
+      "paidMany": "Pagaron",
+      "split": "Reparto",
+      "parts": "{count, plural, one {# parte} other {# partes}}",
+      "confirmations": "Confirmaciones",
+      "confirmedBy": "Confirmado",
+      "waiting": "Pendiente",
+      "confirmedByAdmin": "Un admin lo dio por bueno sin esperar a todos.",
+      "edit": "Editar gasto",
+      "delete": "Borrar gasto",
+      "deleteConfirm": "¿Borrar «{description}»? Dejará de contar en los saldos.",
+      "forceConfirm": "Darlo por bueno",
+      "forceConfirmText": "Aún no ha confirmado: {names}. ¿Darlo por bueno igualmente? Contará en los saldos desde ahora.",
+      "adminOnly": "Ya está confirmado: solo un admin puede editarlo o borrarlo."
+    },
+    "form": {
+      "newTitle": "Nuevo gasto",
+      "editTitle": "Editar gasto",
+      "editPendingHint": "Al guardar se volverá a pedir confirmación a todos.",
+      "editConfirmedHint": "Estás editando un gasto confirmado como admin: seguirá confirmado.",
+      "description": "Concepto",
+      "descriptionPlaceholder": "Compra del súper",
+      "amount": "Importe (€)",
+      "date": "Fecha",
+      "paidBy": "¿Quién pagó?",
+      "manyPayers": "Pagaron varios",
+      "onePayer": "Pagó una sola persona",
+      "paidAmountOf": "Cuánto pagó {name}",
+      "split": "¿Cómo se reparte?",
+      "partsOf": "Partes de {name}",
+      "amountOf": "Importe de {name}",
+      "left": "Faltan {amount} por repartir",
+      "over": "Sobran {amount}",
+      "willConfirm": "Se pedirá confirmación a: {names}.",
+      "onlyYou": "Solo participas tú: quedará confirmado al guardar.",
+      "save": "Guardar gasto",
+      "saveChanges": "Guardar cambios",
+      "saving": "Guardando…"
+    },
+    "errors": {
+      "descriptionRequired": "Escribe en qué se ha gastado",
+      "descriptionTooLong": "Máximo 80 caracteres",
+      "amountInvalid": "Escribe un importe válido, por ejemplo 12,50",
+      "amountTooBig": "El máximo es 100.000 €",
+      "dateInvalid": "Elige una fecha que no sea futura",
+      "payersRequired": "Indica quién pagó",
+      "payersMismatch": "Lo que pagó cada uno tiene que sumar el total",
+      "participantsRequired": "Elige al menos a una persona para repartir",
+      "weightInvalid": "Las partes tienen que ser un número del 1 al 99",
+      "sharesMismatch": "Los importes tienen que sumar el total",
+      "participantGone": "Alguien del gasto ya no está en el hogar. Recarga la página y revísalo",
+      "notAllowed": "No puedes hacer esto con este gasto",
+      "notPending": "Esto ya no está esperando confirmación. Recarga la página",
+      "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo",
+      "expenseChanged": "Alguien ha cambiado este gasto mientras lo mirabas. Recarga la página y revísalo"
+    },
+    "leftBanner": "Ya no vives en este hogar. Puedes ver tu saldo, confirmar y apuntar pagos hasta quedar en paz.",
+    "leftDebts": {
+      "title": "Cuentas pendientes en hogares que dejaste",
+      "owe": "Debes {amount}",
+      "owed": "Te deben {amount}"
     }
   }
 }

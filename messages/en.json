@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "My homes",
-      "comingSoon": "Coming soon here: expenses and chores."
+      "comingSoon": "Coming soon here: chores and schedules."
     },
     "invite": {
       "title": "Invite someone",
@@ -200,6 +200,158 @@
       "nameTooLong": "80 characters maximum",
       "quantityInvalid": "Quantity must be a number from 1 to 99",
       "generic": "Couldn't save. Check your connection and try again"
+    }
+  },
+  "Triqui": {
+    "title": "Triqui",
+    "subtitle": "Household expenses and who owes whom.",
+    "addExpense": "Add expense",
+    "you": "you",
+    "youCap": "You",
+    "youObject": "you",
+    "someone": "someone",
+    "cancel": "Cancel",
+    "balance": {
+      "title": "Your balance",
+      "owed": "You are owed",
+      "owe": "You owe",
+      "even": "You're all square"
+    },
+    "tile": {
+      "owed": "You are owed {amount}",
+      "owe": "You owe {amount}",
+      "even": "You're all square",
+      "toConfirm": "{count, plural, one {# to confirm} other {# to confirm}}"
+    },
+    "pending": {
+      "title": "Waiting for you",
+      "expense": "{name} added “{description}”",
+      "expenseMeta": "Total {amount} · your share {share}",
+      "confirm": "Confirm",
+      "review": "Review",
+      "paymentToMe": "{name} says they paid you {amount}",
+      "confirmPayment": "I got it",
+      "rejectPayment": "I didn't get it",
+      "rejectPaymentConfirm": "Are you sure {name} hasn't paid you? The payment will be marked as not received.",
+      "myPayment": "You marked that you paid {amount} to {name}",
+      "myPaymentMeta": "{name} still has to confirm it. It doesn't count until then.",
+      "cancelPayment": "Withdraw",
+      "cancelPaymentConfirm": "Withdraw this payment?"
+    },
+    "settle": {
+      "title": "To settle up",
+      "allEven": "Nobody owes anybody anything.",
+      "iPaid": "I paid",
+      "theyPaid": "They paid me",
+      "howMuchPaid": "How much did you pay {name}?",
+      "howMuchReceived": "How much did {name} pay you?",
+      "paidHint": "{name} will have to confirm they got it.",
+      "save": "Record payment",
+      "waiting": "A payment is waiting to be confirmed."
+    },
+    "balances": {
+      "title": "Balances",
+      "left": "No longer lives here"
+    },
+    "expenses": {
+      "title": "Expenses",
+      "empty": "No expenses yet. Add the first one.",
+      "paidBy": "Paid by {name}",
+      "paidByMany": "Paid by {count}",
+      "notInvolved": "Not involved",
+      "youLent": "you're owed {amount}",
+      "youOwe": "you owe {amount}",
+      "youEven": "you're square",
+      "paidByYou": "You paid",
+      "notYet": "doesn't count yet",
+      "notCounted": "doesn't count"
+    },
+    "payments": {
+      "title": "Payments",
+      "line": "{from} → {to}"
+    },
+    "status": {
+      "pending": "Pending · {done}/{total}",
+      "pendingPayment": "Not confirmed",
+      "rejected": "Rejected",
+      "rejectedPayment": "Not received"
+    },
+    "methods": {
+      "equal": "Equally",
+      "shares": "By shares",
+      "exact": "Exact amounts"
+    },
+    "detail": {
+      "createdBy": "added by {name}",
+      "pendingBanner": "Waiting for confirmation from: {names}. It doesn't count in the balances until then.",
+      "rejectedBanner": "Rejected by {name}. Whoever added it can fix it or delete it.",
+      "confirmedBanner": "Confirmed by everyone. It counts in the balances.",
+      "confirm": "Confirm expense",
+      "reject": "Reject",
+      "rejectReason": "What's wrong? (optional)",
+      "rejectPlaceholder": "For example: I didn't go to that dinner",
+      "rejectSubmit": "Reject expense",
+      "paidOne": "Paid by",
+      "paidMany": "Paid by",
+      "split": "Split",
+      "parts": "{count, plural, one {# share} other {# shares}}",
+      "confirmations": "Confirmations",
+      "confirmedBy": "Confirmed",
+      "waiting": "Pending",
+      "confirmedByAdmin": "An admin approved it without waiting for everyone.",
+      "edit": "Edit expense",
+      "delete": "Delete expense",
+      "deleteConfirm": "Delete “{description}”? It will stop counting in the balances.",
+      "forceConfirm": "Approve it",
+      "forceConfirmText": "Still waiting for: {names}. Approve it anyway? It will count in the balances from now on.",
+      "adminOnly": "It's confirmed: only an admin can edit or delete it."
+    },
+    "form": {
+      "newTitle": "New expense",
+      "editTitle": "Edit expense",
+      "editPendingHint": "When you save, everyone will be asked to confirm again.",
+      "editConfirmedHint": "You're editing a confirmed expense as an admin: it will stay confirmed.",
+      "description": "Description",
+      "descriptionPlaceholder": "Groceries",
+      "amount": "Amount (€)",
+      "date": "Date",
+      "paidBy": "Who paid?",
+      "manyPayers": "Several people paid",
+      "onePayer": "One person paid",
+      "paidAmountOf": "How much {name} paid",
+      "split": "How is it split?",
+      "partsOf": "Shares for {name}",
+      "amountOf": "Amount for {name}",
+      "left": "{amount} left to split",
+      "over": "{amount} too much",
+      "willConfirm": "These people will be asked to confirm: {names}.",
+      "onlyYou": "Only you are involved: it will be confirmed when you save.",
+      "save": "Save expense",
+      "saveChanges": "Save changes",
+      "saving": "Saving…"
+    },
+    "errors": {
+      "descriptionRequired": "Say what the money was spent on",
+      "descriptionTooLong": "80 characters maximum",
+      "amountInvalid": "Enter a valid amount, for example 12.50",
+      "amountTooBig": "The maximum is €100,000",
+      "dateInvalid": "Choose a date that isn't in the future",
+      "payersRequired": "Say who paid",
+      "payersMismatch": "What each person paid has to add up to the total",
+      "participantsRequired": "Choose at least one person to split with",
+      "weightInvalid": "Shares must be a number from 1 to 99",
+      "sharesMismatch": "The amounts have to add up to the total",
+      "participantGone": "Someone in this expense no longer lives here. Reload the page and check it",
+      "notAllowed": "You can't do this with this expense",
+      "notPending": "This is no longer waiting for confirmation. Reload the page",
+      "generic": "Couldn't save. Check your connection and try again",
+      "expenseChanged": "Someone changed this expense while you were looking at it. Reload the page and check it"
+    },
+    "leftBanner": "You no longer live in this household. You can see your balance, confirm and record payments until you're square.",
+    "leftDebts": {
+      "title": "Pending balances in households you left",
+      "owe": "You owe {amount}",
+      "owed": "You are owed {amount}"
     }
   }
 }

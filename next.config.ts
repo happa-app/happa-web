@@ -5,7 +5,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-     allowedDevOrigins: ["192.168.*.*"],
+  allowedDevOrigins: ["192.168.*.*", "172.17.103.58"],
 };
 
 export default withNextIntl(nextConfig);

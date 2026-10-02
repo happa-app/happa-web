@@ -65,6 +65,189 @@ export type Database = {
           },
         ]
       }
+      expense_confirmations: {
+        Row: {
+          confirmed_at: string
+          expense_id: string
+          user_id: string
+        }
+        Insert: {
+          confirmed_at?: string
+          expense_id: string
+          user_id: string
+        }
+        Update: {
+          confirmed_at?: string
+          expense_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expense_confirmations_expense_id_fkey"
+            columns: ["expense_id"]
+            isOneToOne: false
+            referencedRelation: "expenses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expense_confirmations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      expense_payers: {
+        Row: {
+          amount_cents: number
+          expense_id: string
+          user_id: string
+        }
+        Insert: {
+          amount_cents: number
+          expense_id: string
+          user_id: string
+        }
+        Update: {
+          amount_cents?: number
+          expense_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expense_payers_expense_id_fkey"
+            columns: ["expense_id"]
+            isOneToOne: false
+            referencedRelation: "expenses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expense_payers_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      expense_shares: {
+        Row: {
+          amount_cents: number
+          expense_id: string
+          user_id: string
+          weight: number | null
+        }
+        Insert: {
+          amount_cents: number
+          expense_id: string
+          user_id: string
+          weight?: number | null
+        }
+        Update: {
+          amount_cents?: number
+          expense_id?: string
+          user_id?: string
+          weight?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expense_shares_expense_id_fkey"
+            columns: ["expense_id"]
+            isOneToOne: false
+            referencedRelation: "expenses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expense_shares_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      expenses: {
+        Row: {
+          amount_cents: number
+          confirmed_at: string | null
+          created_at: string
+          created_by: string | null
+          currency: string
+          deleted_at: string | null
+          deleted_by: string | null
+          description: string
+          household_id: string
+          id: string
+          rejected_by: string | null
+          rejected_reason: string | null
+          source: Database["public"]["Enums"]["expense_source"]
+          spent_on: string
+          split_method: Database["public"]["Enums"]["expense_split_method"]
+          status: Database["public"]["Enums"]["triqui_status"]
+          updated_at: string
+          updated_by: string | null
+          version: number
+        }
+        Insert: {
+          amount_cents: number
+          confirmed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          deleted_at?: string | null
+          deleted_by?: string | null
+          description: string
+          household_id: string
+          id?: string
+          rejected_by?: string | null
+          rejected_reason?: string | null
+          source?: Database["public"]["Enums"]["expense_source"]
+          spent_on?: string
+          split_method: Database["public"]["Enums"]["expense_split_method"]
+          status?: Database["public"]["Enums"]["triqui_status"]
+          updated_at?: string
+          updated_by?: string | null
+          version?: number
+        }
+        Update: {
+          amount_cents?: number
+          confirmed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          deleted_at?: string | null
+          deleted_by?: string | null
+          description?: string
+          household_id?: string
+          id?: string
+          rejected_by?: string | null
+          rejected_reason?: string | null
+          source?: Database["public"]["Enums"]["expense_source"]
+          spent_on?: string
+          split_method?: Database["public"]["Enums"]["expense_split_method"]
+          status?: Database["public"]["Enums"]["triqui_status"]
+          updated_at?: string
+          updated_by?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       guardianships: {
         Row: {
           created_at: string
@@ -265,6 +448,64 @@ export type Database = {
         }
         Relationships: []
       }
+      settlements: {
+        Row: {
+          amount_cents: number
+          confirmed_at: string | null
+          created_at: string
+          from_user: string
+          household_id: string
+          id: string
+          settled_on: string
+          status: Database["public"]["Enums"]["triqui_status"]
+          to_user: string
+        }
+        Insert: {
+          amount_cents: number
+          confirmed_at?: string | null
+          created_at?: string
+          from_user: string
+          household_id: string
+          id?: string
+          settled_on?: string
+          status?: Database["public"]["Enums"]["triqui_status"]
+          to_user: string
+        }
+        Update: {
+          amount_cents?: number
+          confirmed_at?: string | null
+          created_at?: string
+          from_user?: string
+          household_id?: string
+          id?: string
+          settled_on?: string
+          status?: Database["public"]["Enums"]["triqui_status"]
+          to_user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlements_from_user_fkey"
+            columns: ["from_user"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlements_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "settlements_to_user_fkey"
+            columns: ["to_user"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       shopping_items: {
         Row: {
           checked_at: string | null
@@ -383,7 +624,26 @@ export type Database = {
         Args: { p_document: string; p_version: string }
         Returns: undefined
       }
+      can_access_triqui: { Args: { hid: string }; Returns: boolean }
       can_see_profile: { Args: { other: string }; Returns: boolean }
+      cancel_payment: { Args: { p_settlement: string }; Returns: undefined }
+      confirm_expense: {
+        Args: { p_expense: string; p_version: number }
+        Returns: undefined
+      }
+      confirm_payment: { Args: { p_settlement: string }; Returns: undefined }
+      create_expense: {
+        Args: {
+          p_amount_cents: number
+          p_description: string
+          p_household: string
+          p_payers: Json
+          p_shares: Json
+          p_spent_on: string
+          p_split_method: Database["public"]["Enums"]["expense_split_method"]
+        }
+        Returns: string
+      }
       create_household: {
         Args: {
           p_kind?: Database["public"]["Enums"]["household_kind"]
@@ -391,8 +651,16 @@ export type Database = {
         }
         Returns: string
       }
+      delete_expense: {
+        Args: { p_expense: string; p_version: number }
+        Returns: undefined
+      }
       depart_member: {
         Args: { p_household: string; p_successor?: string; p_user: string }
+        Returns: undefined
+      }
+      force_confirm_expense: {
+        Args: { p_expense: string; p_version: number }
         Returns: undefined
       }
       get_invite_preview: {
@@ -403,6 +671,24 @@ export type Database = {
           kind: Database["public"]["Enums"]["household_kind"]
           member_count: number
           name: string
+        }[]
+      }
+      get_triqui_balances: {
+        Args: { p_household: string }
+        Returns: {
+          display_name: string
+          is_current: boolean
+          net_cents: number
+          user_id: string
+        }[]
+      }
+      get_triqui_context: {
+        Args: { p_household: string }
+        Returns: {
+          is_admin: boolean
+          is_current: boolean
+          name: string
+          timezone: string
         }[]
       }
       is_guardian_of: { Args: { p_minor: string }; Returns: boolean }
@@ -424,7 +710,30 @@ export type Database = {
           name: string
         }[]
       }
+      my_triqui_debts: {
+        Args: never
+        Returns: {
+          household_id: string
+          name: string
+          net_cents: number
+        }[]
+      }
+      record_payment: {
+        Args: {
+          p_amount_cents: number
+          p_from: string
+          p_household: string
+          p_settled_on?: string
+          p_to: string
+        }
+        Returns: string
+      }
       regenerate_invite_code: { Args: { p_household: string }; Returns: string }
+      reject_expense: {
+        Args: { p_expense: string; p_reason?: string; p_version: number }
+        Returns: undefined
+      }
+      reject_payment: { Args: { p_settlement: string }; Returns: undefined }
       remove_member: {
         Args: { p_household: string; p_user: string }
         Returns: undefined
@@ -443,11 +752,65 @@ export type Database = {
         Returns: undefined
       }
       shares_household_with: { Args: { other: string }; Returns: boolean }
+      triqui_can_answer_payment: {
+        Args: { st: Database["public"]["Tables"]["settlements"]["Row"] }
+        Returns: boolean
+      }
+      triqui_check_date: { Args: { p_date: string }; Returns: undefined }
+      triqui_is_participant: {
+        Args: { p_expense: string; p_user: string }
+        Returns: boolean
+      }
+      triqui_net_cents: {
+        Args: { p_household: string; p_user: string }
+        Returns: number
+      }
+      triqui_refresh_status: { Args: { p_expense: string }; Returns: undefined }
+      triqui_save_parts: {
+        Args: {
+          p_expense: string
+          p_household: string
+          p_method: Database["public"]["Enums"]["expense_split_method"]
+          p_payers: Json
+          p_previous: string[]
+          p_shares: Json
+          p_total: number
+        }
+        Returns: undefined
+      }
+      triqui_split: {
+        Args: {
+          p_method: Database["public"]["Enums"]["expense_split_method"]
+          p_shares: Json
+          p_total: number
+        }
+        Returns: {
+          amount_cents: number
+          user_id: string
+          weight: number
+        }[]
+      }
+      update_expense: {
+        Args: {
+          p_amount_cents: number
+          p_description: string
+          p_expense: string
+          p_payers: Json
+          p_shares: Json
+          p_spent_on: string
+          p_split_method: Database["public"]["Enums"]["expense_split_method"]
+          p_version: number
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       account_type: "resident" | "professional"
+      expense_source: "manual" | "shopping" | "recurring" | "landlord"
+      expense_split_method: "equal" | "shares" | "exact"
       household_kind: "shared_flat" | "student_flat" | "couple" | "family"
       household_role: "admin" | "member" | "minor" | "landlord"
+      triqui_status: "pending" | "confirmed" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -579,8 +942,11 @@ export const Constants = {
   public: {
     Enums: {
       account_type: ["resident", "professional"],
+      expense_source: ["manual", "shopping", "recurring", "landlord"],
+      expense_split_method: ["equal", "shares", "exact"],
       household_kind: ["shared_flat", "student_flat", "couple", "family"],
       household_role: ["admin", "member", "minor", "landlord"],
+      triqui_status: ["pending", "confirmed", "rejected"],
     },
   },
 } as const

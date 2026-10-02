@@ -4,6 +4,8 @@ import { ListIcon } from "@/components/brand/Icons";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
 import { HouseholdList } from "@/features/households";
+import { LeftDebts } from "@/features/triqui";
+import { getMyLeftDebts } from "@/features/triqui/server";
 import { getMyHouseholds } from "@/features/households/server";
 import { Link, redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
@@ -22,9 +24,11 @@ export default async function HomePage() {
     return redirect({ href: "/login", locale: await getLocale() });
   }
 
-  const [{ data: profile }, households] = await Promise.all([
+  const [{ data: profile }, households, leftDebts] = await Promise.all([
     supabase.from("profiles").select("display_name").eq("id", userId).single(),
     getMyHouseholds(userId),
+    // Hogares que dejaste con saldo pendiente en el triqui
+    getMyLeftDebts(),
   ]);
 
   return (
@@ -41,6 +45,8 @@ export default async function HomePage() {
           <p>{t("empty.text")}</p>
         </Card>
       )}
+
+      <LeftDebts debts={leftDebts} />
 
       <Link href="/compra" className={styles.tile}>
         <span className={styles.tileIcon}>
