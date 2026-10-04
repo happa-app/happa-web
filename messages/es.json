@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: tareas y horarios."
+      "comingSoon": "Muy pronto, aquí: las tareas."
     },
     "invite": {
       "title": "Invitar a alguien",
@@ -430,6 +430,133 @@
         "editConfirmedHint": "Lo editas como admin: sigue confirmado y los cargos ya apuntados no cambian. Si añades a alguien, se para hasta que lo confirme; cuando vuelve a funcionar, sigue desde hoy (lo de mientras estaba parado no se cobra).",
         "save": "Guardar gasto fijo"
       }
+    }
+  },
+  "Schedules": {
+    "title": "Horarios",
+    "subtitle": "Quién está en casa y quién no, según lo que apunta cada uno.",
+    "you": "tú",
+    "youCap": "Tú",
+    "someone": "Alguien",
+    "kinds": {
+      "class": "Clase",
+      "work": "Trabajo",
+      "away": "Fuera"
+    },
+    "weekdays": {
+      "1": "Lunes",
+      "2": "Martes",
+      "3": "Miércoles",
+      "4": "Jueves",
+      "5": "Viernes",
+      "6": "Sábado",
+      "7": "Domingo"
+    },
+    "weekdaysShort": {
+      "1": "L",
+      "2": "M",
+      "3": "X",
+      "4": "J",
+      "5": "V",
+      "6": "S",
+      "7": "D"
+    },
+    "now": {
+      "title": "Ahora ({time})",
+      "home": "{count, plural, =0 {En casa} other {En casa (#)}}",
+      "out": "{count, plural, =0 {Fuera} other {Fuera (#)}}",
+      "nobodyHome": "Ahora no hay nadie en casa.",
+      "nobodyOut": "Nadie tiene nada apuntado ahora.",
+      "leaves": "sale a las {time} ({what})",
+      "until": "{what} hasta las {time}",
+      "awayUntil": "Fuera hasta el {date}",
+      "note": "Según los horarios y ausencias que ha apuntado cada uno."
+    },
+    "day": {
+      "title": "Cada día",
+      "today": "hoy",
+      "nothing": "Nada apuntado",
+      "away": "Fuera todo el día",
+      "awayLegend": "Fuera todo el día"
+    },
+    "absences": {
+      "title": "Ausencias",
+      "empty": "Nadie ha avisado de que vaya a estar fuera.",
+      "range": "Del {from} al {to}",
+      "oneDay": "El {date}",
+      "edit": "Editar",
+      "delete": "Borrar",
+      "deleteConfirm": "¿Borrar esta ausencia?"
+    },
+    "actions": {
+      "editMine": "Editar mi horario",
+      "addAbsence": "Avisar de una ausencia",
+      "editMinor": "Horario de {name}"
+    },
+    "editor": {
+      "titleMine": "Mi horario",
+      "titleOf": "Horario de {name}",
+      "subtitle": "Apunta cuándo no estás en casa cada semana: clases, trabajo… Lo ve todo el hogar.",
+      "list": "Lo apuntado",
+      "empty": "Aún no hay nada apuntado.",
+      "addTitle": "Añadir una franja",
+      "edit": "Editar",
+      "delete": "Borrar",
+      "deleteConfirm": "¿Borrar «{what}» del {day} ({hours})?",
+      "copyTitle": "Copiar de otro hogar",
+      "copyHint": "Si ya tienes tu horario en otro hogar, cópialo aquí. Sustituye lo que tengas apuntado en este.",
+      "copyFrom": "Copiar de",
+      "copyOption": "{name} ({count, plural, one {# franja} other {# franjas}})",
+      "copy": "Copiar horario",
+      "copyConfirm": "Se sustituirá tu horario de este hogar por el de «{name}». ¿Seguir?"
+    },
+    "form": {
+      "days": "¿Qué días?",
+      "day": "Día",
+      "weekdaysQuick": "De lunes a viernes",
+      "allDays": "Todos los días",
+      "startsAt": "Desde",
+      "endsAt": "Hasta",
+      "midnightHint": "Si pasa de medianoche, apúntalo en dos franjas (hasta las 23:59 y desde las 0:00).",
+      "kind": "¿Qué es?",
+      "label": "Etiqueta (opcional)",
+      "labelPlaceholder": "Uni, gimnasio, turno de tarde…",
+      "add": "{count, plural, one {Añadir} other {Añadir a # días}}",
+      "save": "Guardar cambios",
+      "saving": "Guardando…",
+      "editTitle": "Editar franja"
+    },
+    "absenceForm": {
+      "newTitle": "Avisar de una ausencia",
+      "newTitleOf": "Ausencia de {name}",
+      "editTitle": "Editar ausencia",
+      "subtitle": "Días en los que no vas a estar en casa: un viaje, el finde en el pueblo…",
+      "startsOn": "Desde el",
+      "endsOn": "Hasta el (incluido)",
+      "note": "Nota (opcional)",
+      "notePlaceholder": "De viaje, en el pueblo…",
+      "save": "Guardar ausencia"
+    },
+    "tile": {
+      "home": "Ahora en casa: {home} de {total}",
+      "empty": "Apunta cuándo estás fuera de casa"
+    },
+    "errors": {
+      "daysRequired": "Elige al menos un día",
+      "timeInvalid": "Escribe una hora, por ejemplo 9:00",
+      "endBeforeStart": "Tiene que acabar después de empezar (y el mismo día)",
+      "overlap": "Se pisa con otra franja tuya de ese día",
+      "labelTooLong": "Como mucho 40 letras",
+      "tooMany": "Has llegado al máximo (50 franjas o 100 ausencias)",
+      "dateInvalid": "Elige una fecha",
+      "absenceEndBeforeStart": "La vuelta no puede ser antes de la ida",
+      "absencePast": "Esa ausencia ya ha pasado",
+      "absenceTooLong": "Una ausencia puede ser de hasta un año, y empezar como mucho dentro de un año",
+      "absenceOverlap": "Ya tienes una ausencia en esas fechas",
+      "noteTooLong": "Como mucho 80 letras",
+      "nothingToCopy": "En ese hogar no tienes nada apuntado",
+      "notAllowed": "No puedes cambiar este horario",
+      "generic": "Algo ha ido mal. Inténtalo de nuevo"
     }
   }
 }

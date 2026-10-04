@@ -1,5 +1,5 @@
-// Página /hogar/<id>: el hogar con sus secciones (lista de la compra con lo que falta, gastos;
-// luego tareas), los miembros, la invitación y la opción de salir.
+// Página /hogar/<id>: el hogar con sus secciones (lista de la compra con lo que falta, gastos,
+// horarios; luego tareas), los miembros, la invitación y la opción de salir.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Card } from "@/components/ui/Card";
@@ -15,6 +15,8 @@ import { ShoppingPreview } from "@/features/shopping";
 import { getHouseholdShoppingItems } from "@/features/shopping/server";
 import { ExpensesTile } from "@/features/expenses";
 import { getMyExpensesSummary } from "@/features/expenses/server";
+import { nowIn, presenceAt, SchedulesTile } from "@/features/schedules";
+import { getScheduleOverview } from "@/features/schedules/server";
 import { Link, redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import styles from "../../page.module.css";
@@ -42,10 +44,17 @@ export default async function HouseholdPage({ params }: Props) {
   const isAdmin = me?.role === "admin";
   const isResident = isAdult || me?.role === "minor";
   // Los gastos solo son para adultos (ni menores ni casero)
-  const [shoppingItems, expenses] = await Promise.all([
+  const [shoppingItems, expenses, schedules] = await Promise.all([
     isResident ? getHouseholdShoppingItems(household.id) : [],
     isAdult ? getMyExpensesSummary(household.id, userId) : null,
+    // Los horarios, para quienes viven aquí (adultos y menores)
+    isResident ? getScheduleOverview(household.id, userId) : null,
   ]);
+  const now = schedules ? nowIn(schedules.timezone) : null;
+  const homeNow =
+    schedules && now
+      ? schedules.people.filter((p) => presenceAt(p.userId, schedules.blocks, schedules.absences, now).state === "home").length
+      : 0;
 
   return (
     <>
@@ -71,6 +80,14 @@ export default async function HouseholdPage({ params }: Props) {
           />
           {expenses ? (
             <ExpensesTile href={`/hogar/${household.id}/gastos`} netCents={expenses.netCents} toConfirm={expenses.toConfirm} />
+          ) : null}
+          {schedules ? (
+            <SchedulesTile
+              href={`/hogar/${household.id}/horarios`}
+              home={homeNow}
+              total={schedules.people.length}
+              hasAnything={schedules.blocks.length > 0 || schedules.absences.length > 0}
+            />
           ) : null}
           <p className={styles.muted}>{t("detail.comingSoon")}</p>
         </nav>

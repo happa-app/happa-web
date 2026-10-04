@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "My homes",
-      "comingSoon": "Coming soon here: chores and schedules."
+      "comingSoon": "Coming soon here: chores."
     },
     "invite": {
       "title": "Invite someone",
@@ -430,6 +430,133 @@
         "editConfirmedHint": "You're editing it as an admin: it stays confirmed and charges already added don't change. If you add someone, it pauses until they confirm; when it starts again it carries on from today (nothing is charged for the time it was stopped).",
         "save": "Save recurring expense"
       }
+    }
+  },
+  "Schedules": {
+    "title": "Schedules",
+    "subtitle": "Who's home and who isn't, based on what everyone has added.",
+    "you": "you",
+    "youCap": "You",
+    "someone": "Someone",
+    "kinds": {
+      "class": "Class",
+      "work": "Work",
+      "away": "Out"
+    },
+    "weekdays": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
+    "weekdaysShort": {
+      "1": "M",
+      "2": "T",
+      "3": "W",
+      "4": "T",
+      "5": "F",
+      "6": "S",
+      "7": "S"
+    },
+    "now": {
+      "title": "Now ({time})",
+      "home": "{count, plural, =0 {Home} other {Home (#)}}",
+      "out": "{count, plural, =0 {Out} other {Out (#)}}",
+      "nobodyHome": "Nobody is home right now.",
+      "nobodyOut": "Nobody has anything on right now.",
+      "leaves": "leaves at {time} ({what})",
+      "until": "{what} until {time}",
+      "awayUntil": "Away until {date}",
+      "note": "Based on the schedules and absences everyone has added."
+    },
+    "day": {
+      "title": "Each day",
+      "today": "today",
+      "nothing": "Nothing added",
+      "away": "Away all day",
+      "awayLegend": "Away all day"
+    },
+    "absences": {
+      "title": "Absences",
+      "empty": "Nobody has said they'll be away.",
+      "range": "{from} to {to}",
+      "oneDay": "On {date}",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this absence?"
+    },
+    "actions": {
+      "editMine": "Edit my schedule",
+      "addAbsence": "Let others know you'll be away",
+      "editMinor": "{name}'s schedule"
+    },
+    "editor": {
+      "titleMine": "My schedule",
+      "titleOf": "{name}'s schedule",
+      "subtitle": "Add when you're not home each week: classes, work… Everyone in the household can see it.",
+      "list": "What's added",
+      "empty": "Nothing added yet.",
+      "addTitle": "Add a time slot",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete “{what}” on {day} ({hours})?",
+      "copyTitle": "Copy from another household",
+      "copyHint": "If you already have your schedule in another household, copy it here. It replaces what you have in this one.",
+      "copyFrom": "Copy from",
+      "copyOption": "{name} ({count, plural, one {# slot} other {# slots}})",
+      "copy": "Copy schedule",
+      "copyConfirm": "Your schedule in this household will be replaced with the one from “{name}”. Continue?"
+    },
+    "form": {
+      "days": "Which days?",
+      "day": "Day",
+      "weekdaysQuick": "Monday to Friday",
+      "allDays": "Every day",
+      "startsAt": "From",
+      "endsAt": "To",
+      "midnightHint": "If it goes past midnight, add it as two slots (until 23:59 and from 0:00).",
+      "kind": "What is it?",
+      "label": "Label (optional)",
+      "labelPlaceholder": "Uni, gym, evening shift…",
+      "add": "{count, plural, one {Add} other {Add to # days}}",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "editTitle": "Edit time slot"
+    },
+    "absenceForm": {
+      "newTitle": "Let others know you'll be away",
+      "newTitleOf": "{name}'s absence",
+      "editTitle": "Edit absence",
+      "subtitle": "Days you won't be home: a trip, a weekend away…",
+      "startsOn": "From",
+      "endsOn": "Until (included)",
+      "note": "Note (optional)",
+      "notePlaceholder": "On a trip, visiting family…",
+      "save": "Save absence"
+    },
+    "tile": {
+      "home": "Home now: {home} of {total}",
+      "empty": "Add when you're away from home"
+    },
+    "errors": {
+      "daysRequired": "Choose at least one day",
+      "timeInvalid": "Enter a time, for example 9:00",
+      "endBeforeStart": "It has to end after it starts (on the same day)",
+      "overlap": "It overlaps another slot of yours that day",
+      "labelTooLong": "40 characters at most",
+      "tooMany": "You've reached the limit (50 slots or 100 absences)",
+      "dateInvalid": "Choose a date",
+      "absenceEndBeforeStart": "The end can't be before the start",
+      "absencePast": "That absence is already over",
+      "absenceTooLong": "An absence can last up to a year and start at most a year from now",
+      "absenceOverlap": "You already have an absence on those dates",
+      "noteTooLong": "80 characters at most",
+      "nothingToCopy": "You have nothing added in that household",
+      "notAllowed": "You can't change this schedule",
+      "generic": "Something went wrong. Please try again"
     }
   }
 }
