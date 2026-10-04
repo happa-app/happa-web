@@ -4,6 +4,7 @@
 import { revalidatePath } from "next/cache";
 import { parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
+import { schedulePushDispatch } from "@/lib/push/schedule";
 import { createClient } from "@/lib/supabase/server";
 import { todayIn } from "./dates";
 import { toChoreErrorKey } from "./errors";
@@ -92,6 +93,8 @@ export async function saveChore(_prev: ChoreFormState, formData: FormData): Prom
 // Lo que se hace con un día (hecha, no está hecha, visto bueno, me la quedo, cambiar de persona)
 // o con una tarea (borrarla).
 export async function choreAction(_prev: ChoreActionState, formData: FormData): Promise<ChoreActionState> {
+  // Los avisos que cree esta acción salen al móvil al terminar
+  schedulePushDispatch();
   const locale = parseLocale(formData.get("locale"));
   const householdId = id(formData, "householdId");
   const intent = text(formData, "intent");

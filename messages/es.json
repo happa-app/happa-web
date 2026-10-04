@@ -812,5 +812,60 @@
       "notAllowed": "Ya no estás en este chat",
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
     }
+  },
+  "Notifications": {
+    "title": "Avisos",
+    "subtitle": "Lo que ha pasado en tus hogares y te toca a ti.",
+    "back": "Mis casas",
+    "bell": "{count, plural, =0 {Avisos} one {Avisos: # sin leer} other {Avisos: # sin leer}}",
+    "someone": "Alguien",
+    "markAll": "Marcar todo como leído",
+    "settingsLink": "Ajustes de avisos",
+    "empty": "No tienes avisos. Cuando pase algo que te toque, aparecerá aquí.",
+    "unreadPrefix": "Sin leer:",
+    "types": {
+      "expense_to_confirm": "{edited, select, true {{actor} ha cambiado «{description}» ({amount}). Vuelve a confirmarlo.} other {{actor} ha apuntado «{description}» ({amount}). Confírmalo.}}",
+      "expense_rejected": "{hasReason, select, true {{actor} ha rechazado «{description}»: «{reason}».} other {{actor} ha rechazado «{description}».}}",
+      "payment_to_confirm": "{actor} dice que te ha pagado {amount}. Confírmalo.",
+      "recurring_to_confirm": "{actor} ha apuntado el gasto fijo «{description}» ({amount}). Confírmalo.",
+      "shopping_added": "{count, plural, one {{actor} ha añadido «{first}» a la lista.} other {{actor} ha añadido # cosas a la lista: {names}}}",
+      "chore_reassigned": "{actor} te ha pasado «{title}» del {date}.",
+      "chore_reopened": "{actor} dice que «{title}» del {date} no está hecha.",
+      "chore_to_approve": "{actor} ha hecho «{title}». Dale el visto bueno.",
+      "chore_approved": "{actor} ha dado el visto bueno a «{title}».",
+      "message": "{actor}: {body}"
+    },
+    "categories": {
+      "expenses": "Gastos y pagos",
+      "shopping": "Lista de la compra",
+      "chores": "Tareas",
+      "chat": "Mensajes del chat"
+    },
+    "settings": {
+      "title": "Ajustes de avisos",
+      "subtitle": "Elige qué te llega al móvil. En la app siempre verás todos los avisos.",
+      "categoriesTitle": "Qué te llega al móvil",
+      "categoriesHint": "Vale para todos los dispositivos donde tengas los avisos activados.",
+      "save": "Guardar",
+      "saving": "Guardando…",
+      "saved": "Guardado"
+    },
+    "device": {
+      "title": "Este dispositivo",
+      "loading": "Comprobando…",
+      "notConfigured": "Los avisos al móvil aún no están configurados en este servidor.",
+      "unsupported": "Este navegador no puede recibir avisos. Prueba con Chrome, Firefox, Edge o Safari actualizados.",
+      "ios": "En iPhone y iPad, primero añade HAPPA a la pantalla de inicio (Compartir → Añadir a pantalla de inicio) y ábrela desde ahí.",
+      "blocked": "El navegador tiene bloqueados los avisos de HAPPA. Permítelos en los ajustes del navegador para este sitio.",
+      "off": "Los avisos están desactivados en este dispositivo.",
+      "on": "Los avisos están activados en este dispositivo.",
+      "enable": "Activar avisos en este dispositivo",
+      "disable": "Desactivar en este dispositivo",
+      "working": "Un momento…",
+      "error": "No se ha podido cambiar. Inténtalo de nuevo."
+    },
+    "errors": {
+      "generic": "Algo ha ido mal. Inténtalo de nuevo"
+    }
   }
 }

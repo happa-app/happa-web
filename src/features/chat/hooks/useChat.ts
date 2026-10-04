@@ -9,6 +9,7 @@
 //  4. Al volver a la app (otra pestaña, móvil bloqueado) se piden los mensajes que hayan llegado mientras.
 //  5. Lo que llega de otros mientras miras el chat se marca como leído.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { requestPushDispatch } from "@/lib/push/request";
 import { createClient } from "@/lib/supabase/client";
 import {
   editMessage,
@@ -167,6 +168,8 @@ export function useChat({ conversationId, me, initialMessages, initialHasMore, o
       sendMessage(supabase, conversationId, body)
         .then((saved) => {
           setMessages((list) => upsertMessage(list.filter((m) => m.id !== temp.id), saved));
+          // Que les llegue al móvil a los demás
+          requestPushDispatch();
           sentRef.current?.();
         })
         .catch((e) => {

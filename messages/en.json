@@ -812,5 +812,60 @@
       "notAllowed": "You're no longer in this chat",
       "generic": "Something went wrong. Please try again"
     }
+  },
+  "Notifications": {
+    "title": "Notifications",
+    "subtitle": "What has happened in your households that needs you.",
+    "back": "My homes",
+    "bell": "{count, plural, =0 {Notifications} one {Notifications: # unread} other {Notifications: # unread}}",
+    "someone": "Someone",
+    "markAll": "Mark all as read",
+    "settingsLink": "Notification settings",
+    "empty": "No notifications. When something needs you, it will show up here.",
+    "unreadPrefix": "Unread:",
+    "types": {
+      "expense_to_confirm": "{edited, select, true {{actor} changed “{description}” ({amount}). Please confirm it again.} other {{actor} added “{description}” ({amount}). Please confirm it.}}",
+      "expense_rejected": "{hasReason, select, true {{actor} rejected “{description}”: “{reason}”.} other {{actor} rejected “{description}”.}}",
+      "payment_to_confirm": "{actor} says they paid you {amount}. Please confirm it.",
+      "recurring_to_confirm": "{actor} added the recurring expense “{description}” ({amount}). Please confirm it.",
+      "shopping_added": "{count, plural, one {{actor} added “{first}” to the list.} other {{actor} added # things to the list: {names}}}",
+      "chore_reassigned": "{actor} gave you “{title}” on {date}.",
+      "chore_reopened": "{actor} says “{title}” on {date} isn't done.",
+      "chore_to_approve": "{actor} did “{title}”. Please approve it.",
+      "chore_approved": "{actor} approved “{title}”.",
+      "message": "{actor}: {body}"
+    },
+    "categories": {
+      "expenses": "Expenses and payments",
+      "shopping": "Shopping list",
+      "chores": "Chores",
+      "chat": "Chat messages"
+    },
+    "settings": {
+      "title": "Notification settings",
+      "subtitle": "Choose what reaches your phone. In the app you'll always see every notification.",
+      "categoriesTitle": "What reaches your phone",
+      "categoriesHint": "Applies to every device where you've turned notifications on.",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved"
+    },
+    "device": {
+      "title": "This device",
+      "loading": "Checking…",
+      "notConfigured": "Phone notifications aren't set up on this server yet.",
+      "unsupported": "This browser can't receive notifications. Try an up-to-date Chrome, Firefox, Edge or Safari.",
+      "ios": "On iPhone and iPad, first add HAPPA to your home screen (Share → Add to Home Screen) and open it from there.",
+      "blocked": "Your browser is blocking HAPPA notifications. Allow them for this site in your browser settings.",
+      "off": "Notifications are off on this device.",
+      "on": "Notifications are on on this device.",
+      "enable": "Turn on notifications on this device",
+      "disable": "Turn off on this device",
+      "working": "One moment…",
+      "error": "Couldn't change it. Please try again."
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again"
+    }
   }
 }
