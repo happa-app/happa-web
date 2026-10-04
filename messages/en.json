@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "My homes",
-      "comingSoon": "Coming soon here: chores."
+      "comingSoon": "Coming soon here: household chat."
     },
     "invite": {
       "title": "Invite someone",
@@ -556,6 +556,208 @@
       "noteTooLong": "80 characters at most",
       "nothingToCopy": "You have nothing added in that household",
       "notAllowed": "You can't change this schedule",
+      "generic": "Something went wrong. Please try again"
+    }
+  },
+  "Chores": {
+    "title": "Chores",
+    "subtitle": "Who does what at home. Turns are shared out automatically, even when someone is away.",
+    "youCap": "You",
+    "someone": "Someone",
+    "free": "Up for grabs",
+    "minor": "minor",
+    "today": "today",
+    "todayCap": "Today",
+    "tomorrow": "Tomorrow",
+    "emptyAdult": "No chores yet. Add the household ones (dishes, bins, bathroom…) and choose whether they rotate, always go to the same person or are up for grabs.",
+    "emptyMinor": "No chores yet. When an adult in the household adds them, you'll see yours here.",
+    "createFirst": "Add the first chore",
+    "effortLabel": "Effort: {effort}",
+    "efforts": {
+      "1": "Light",
+      "2": "Medium",
+      "3": "Heavy"
+    },
+    "frequencies": {
+      "once": "Once",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "assignments": {
+      "fixed": "One person",
+      "rotation": "Take turns",
+      "free": "Up for grabs"
+    },
+    "intervals": {
+      "daily": "{count, plural, one {Every day} other {Every # days}}",
+      "weekly": "{count, plural, one {Every week} other {Every # weeks}}",
+      "monthly": "{count, plural, one {Every month} other {Every # months}}"
+    },
+    "weekdays": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
+    "weekdaysShort": {
+      "1": "M",
+      "2": "T",
+      "3": "W",
+      "4": "T",
+      "5": "F",
+      "6": "S",
+      "7": "S"
+    },
+    "statuses": {
+      "pending": "To do",
+      "review": "Waiting for approval",
+      "done": "Done",
+      "overdue": "Overdue"
+    },
+    "schedule": {
+      "once": "Once: {date}",
+      "daily": "{interval, plural, one {Every day} other {Every # days}}",
+      "everyDay": "Every day",
+      "weekly": "{interval, plural, one {Every week} other {Every # weeks}}: {days}",
+      "monthly": "{interval, plural, one {Every month} other {Every # months}}, on day {day}",
+      "monthlyLate": "{interval, plural, one {Every month} other {Every # months}}, on day {day} (or the last day in shorter months)"
+    },
+    "who": {
+      "fixed": "Always: {name}",
+      "rotation": "Taking turns: {names}",
+      "free": "Up for grabs: whoever takes it"
+    },
+    "summary": {
+      "today": "{count, plural, =0 {Nothing for you today} one {# chore for you today} other {# chores for you today}}",
+      "overdue": "{count, plural, one {# overdue} other {# overdue}}",
+      "toApprove": "{count, plural, one {# to approve} other {# to approve}}",
+      "allGood": "Nothing overdue. Nice!"
+    },
+    "sections": {
+      "overdue": "Overdue",
+      "toApprove": "To approve",
+      "waiting": "Waiting for approval",
+      "today": "Today, {date}",
+      "todayEmpty": "Nothing to do today."
+    },
+    "upcoming": {
+      "title": "Next few days",
+      "all": "All",
+      "mine": "Mine",
+      "empty": "Nothing in the next few days.",
+      "emptyMine": "Nothing for you in the next few days."
+    },
+    "share": {
+      "title": "This week's split",
+      "numbers": "{count, plural, one {# chore} other {# chores}} · {points, plural, one {# point} other {# points}} · {done, plural, =0 {none done} other {# done}}",
+      "hint": "Points by effort: light 1, medium 2, heavy 3. Monday to Sunday."
+    },
+    "row": {
+      "complete": "Mark “{title}” as done",
+      "overdue": "Overdue",
+      "review": "Waiting for approval",
+      "done": "Done",
+      "doneBy": "Done by {name}",
+      "reopenedBy": "{name} says it isn't done",
+      "take": "I'll take it",
+      "approve": "Approve",
+      "reopen": "Not done",
+      "reopenConfirm": "Are you sure “{title}” isn't done? It will go back to to-do."
+    },
+    "actions": {
+      "new": "New chore",
+      "all": "All chores"
+    },
+    "manage": {
+      "title": "All chores",
+      "subtitle": "The household chores, how often they happen and whose turn it is.",
+      "subtitleAdult": "The household chores, how often they happen and whose turn it is. Tap “Edit” to change one.",
+      "empty": "No chores yet.",
+      "emptyAdult": "No chores yet. Add the first one with the button above.",
+      "next": "Next: {date} ({name})",
+      "noNext": "No upcoming days",
+      "approval": "Needs approval",
+      "edit": "Edit"
+    },
+    "tile": {
+      "empty": "Share out the household chores"
+    },
+    "form": {
+      "newTitle": "New chore",
+      "newSubtitle": "What needs doing, how often and whose turn it is.",
+      "editTitle": "Edit chore",
+      "editSubtitle": "Upcoming days are redone with your changes. Anything already done or changed by hand stays as it is.",
+      "title": "What needs doing?",
+      "titlePlaceholder": "Dishes, take out the bins, clean the bathroom…",
+      "when": "How often?",
+      "every": "Repeats",
+      "days": "Which days?",
+      "weekdaysQuick": "Monday to Friday",
+      "allDays": "Every day",
+      "onDay": "Which day?",
+      "startsOn": "Starts on",
+      "preview": "Next times: {dates}",
+      "previewNone": "With these dates it never happens. Check the days or the start date.",
+      "who": "Whose turn is it?",
+      "rotationOrder": "Turn order",
+      "moveUp": "Move {name} up",
+      "moveDown": "Move {name} down",
+      "remove": "Remove {name} from the turns",
+      "add": "Add",
+      "rotationHint": "Everyone takes a turn in order. If someone is away that day, they're skipped and get the next turn when they're back.",
+      "freeHint": "Nobody is assigned: anyone can take it from the chores list.",
+      "effort": "Effort",
+      "effortHint": "Helps you see whether the split is fair.",
+      "notes": "Note (optional)",
+      "notesPlaceholder": "What's included, where things are…",
+      "approval": "Ask an adult to approve it",
+      "approvalHint": "When a minor marks it done, it waits until an adult says it's fine.",
+      "saving": "Saving…",
+      "save": "Save changes",
+      "create": "Add chore",
+      "delete": "Delete chore",
+      "deleteConfirm": "Delete “{title}”? Days still to do are removed; anything already done stays in the history."
+    },
+    "day": {
+      "who": "Whose turn",
+      "when": "Day",
+      "status": "Status",
+      "repeats": "Repeats",
+      "split": "Split",
+      "notes": "Note",
+      "historyDone": "Marked as done by {name}",
+      "historyApproved": "Approved by {name}",
+      "historyReopened": "{name} said it wasn't done",
+      "manual": "This day was changed by hand: it stays put even if the turns are redone.",
+      "approvalNote": "If a minor marks it done, an adult needs to approve it.",
+      "complete": "Mark as done",
+      "completeFor": "I did it (it was {name}'s turn)",
+      "reassign": "Give it to",
+      "leaveFree": "Nobody (up for grabs)",
+      "reassignButton": "Change",
+      "reassignHint": "Only changes this day. The turns stay the same.",
+      "editChore": "Edit the chore"
+    },
+    "errors": {
+      "titleRequired": "Write what needs doing",
+      "titleTooLong": "60 characters at most",
+      "notesTooLong": "200 characters at most",
+      "daysRequired": "Choose at least one day",
+      "startInvalid": "Choose a day from today up to a year from now",
+      "personRequired": "Choose whose chore it is",
+      "rotationRequired": "Choose who takes turns",
+      "personGone": "Someone in the list no longer lives in the household. Reload the page",
+      "alreadyDone": "It was already done",
+      "notDone": "It was already to do",
+      "notWaiting": "It's no longer waiting for approval",
+      "onlyOwn": "You can only mark your own",
+      "taken": "Someone took it first",
+      "notFound": "This chore no longer exists",
+      "notAllowed": "You can't do this",
       "generic": "Something went wrong. Please try again"
     }
   }

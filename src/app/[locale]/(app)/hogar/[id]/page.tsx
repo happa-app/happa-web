@@ -1,5 +1,5 @@
 // Página /hogar/<id>: el hogar con sus secciones (lista de la compra con lo que falta, gastos,
-// horarios; luego tareas), los miembros, la invitación y la opción de salir.
+// horarios y tareas), los miembros, la invitación y la opción de salir.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Card } from "@/components/ui/Card";
@@ -17,6 +17,8 @@ import { ExpensesTile } from "@/features/expenses";
 import { getMyExpensesSummary } from "@/features/expenses/server";
 import { nowIn, presenceAt, SchedulesTile } from "@/features/schedules";
 import { getScheduleOverview } from "@/features/schedules/server";
+import { ChoresTile } from "@/features/chores";
+import { getChoresSummary } from "@/features/chores/server";
 import { Link, redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import styles from "../../page.module.css";
@@ -44,11 +46,13 @@ export default async function HouseholdPage({ params }: Props) {
   const isAdmin = me?.role === "admin";
   const isResident = isAdult || me?.role === "minor";
   // Los gastos solo son para adultos (ni menores ni casero)
-  const [shoppingItems, expenses, schedules] = await Promise.all([
+  const [shoppingItems, expenses, schedules, chores] = await Promise.all([
     isResident ? getHouseholdShoppingItems(household.id) : [],
     isAdult ? getMyExpensesSummary(household.id, userId) : null,
     // Los horarios, para quienes viven aquí (adultos y menores)
     isResident ? getScheduleOverview(household.id, userId) : null,
+    // Las tareas, también para quienes viven aquí
+    isResident ? getChoresSummary(household.id, userId, isAdult) : null,
   ]);
   const now = schedules ? nowIn(schedules.timezone) : null;
   const homeNow =
@@ -89,6 +93,7 @@ export default async function HouseholdPage({ params }: Props) {
               hasAnything={schedules.blocks.length > 0 || schedules.absences.length > 0}
             />
           ) : null}
+          {chores ? <ChoresTile href={`/hogar/${household.id}/tareas`} summary={chores} /> : null}
           <p className={styles.muted}>{t("detail.comingSoon")}</p>
         </nav>
       ) : null}

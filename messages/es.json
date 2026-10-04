@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: las tareas."
+      "comingSoon": "Muy pronto, aquí: el chat del hogar."
     },
     "invite": {
       "title": "Invitar a alguien",
@@ -556,6 +556,208 @@
       "noteTooLong": "Como mucho 80 letras",
       "nothingToCopy": "En ese hogar no tienes nada apuntado",
       "notAllowed": "No puedes cambiar este horario",
+      "generic": "Algo ha ido mal. Inténtalo de nuevo"
+    }
+  },
+  "Chores": {
+    "title": "Tareas",
+    "subtitle": "Quién hace qué en casa. Los turnos se reparten solos, también cuando alguien está fuera.",
+    "youCap": "Tú",
+    "someone": "Alguien",
+    "free": "Libre",
+    "minor": "menor",
+    "today": "hoy",
+    "todayCap": "Hoy",
+    "tomorrow": "Mañana",
+    "emptyAdult": "Aún no hay tareas. Crea las de casa (fregar, la basura, el baño…) y decide si van por turnos, siempre para la misma persona o libres.",
+    "emptyMinor": "Aún no hay tareas. Cuando un adulto del hogar las cree, aquí verás las tuyas.",
+    "createFirst": "Crear la primera tarea",
+    "effortLabel": "Esfuerzo: {effort}",
+    "efforts": {
+      "1": "Ligera",
+      "2": "Normal",
+      "3": "Pesada"
+    },
+    "frequencies": {
+      "once": "Una vez",
+      "daily": "Diaria",
+      "weekly": "Semanal",
+      "monthly": "Mensual"
+    },
+    "assignments": {
+      "fixed": "Una persona",
+      "rotation": "Por turnos",
+      "free": "Libre"
+    },
+    "intervals": {
+      "daily": "{count, plural, one {Cada día} other {Cada # días}}",
+      "weekly": "{count, plural, one {Cada semana} other {Cada # semanas}}",
+      "monthly": "{count, plural, one {Cada mes} other {Cada # meses}}"
+    },
+    "weekdays": {
+      "1": "Lunes",
+      "2": "Martes",
+      "3": "Miércoles",
+      "4": "Jueves",
+      "5": "Viernes",
+      "6": "Sábado",
+      "7": "Domingo"
+    },
+    "weekdaysShort": {
+      "1": "L",
+      "2": "M",
+      "3": "X",
+      "4": "J",
+      "5": "V",
+      "6": "S",
+      "7": "D"
+    },
+    "statuses": {
+      "pending": "Pendiente",
+      "review": "Esperando el visto bueno",
+      "done": "Hecha",
+      "overdue": "Atrasada"
+    },
+    "schedule": {
+      "once": "Una vez: el {date}",
+      "daily": "{interval, plural, one {Cada día} other {Cada # días}}",
+      "everyDay": "Todos los días",
+      "weekly": "{interval, plural, one {Cada semana} other {Cada # semanas}}: {days}",
+      "monthly": "{interval, plural, one {Cada mes} other {Cada # meses}}, el día {day}",
+      "monthlyLate": "{interval, plural, one {Cada mes} other {Cada # meses}}, el día {day} (o el último, si el mes es más corto)"
+    },
+    "who": {
+      "fixed": "Siempre: {name}",
+      "rotation": "Por turnos: {names}",
+      "free": "Libre: quien la coja"
+    },
+    "summary": {
+      "today": "{count, plural, =0 {Hoy no te toca nada} one {Hoy te toca # tarea} other {Hoy te tocan # tareas}}",
+      "overdue": "{count, plural, one {# atrasada} other {# atrasadas}}",
+      "toApprove": "{count, plural, one {# por dar el visto bueno} other {# por dar el visto bueno}}",
+      "allGood": "Nada atrasado. ¡Bien!"
+    },
+    "sections": {
+      "overdue": "Atrasadas",
+      "toApprove": "Por dar el visto bueno",
+      "waiting": "Esperando el visto bueno",
+      "today": "Hoy, {date}",
+      "todayEmpty": "Hoy no hay nada que hacer."
+    },
+    "upcoming": {
+      "title": "Próximos días",
+      "all": "Todas",
+      "mine": "Las mías",
+      "empty": "No hay nada en los próximos días.",
+      "emptyMine": "No te toca nada en los próximos días."
+    },
+    "share": {
+      "title": "Reparto de esta semana",
+      "numbers": "{count, plural, one {# tarea} other {# tareas}} · {points, plural, one {# punto} other {# puntos}} · {done, plural, =0 {ninguna hecha} one {# hecha} other {# hechas}}",
+      "hint": "Puntos según el esfuerzo: ligera 1, normal 2, pesada 3. De lunes a domingo."
+    },
+    "row": {
+      "complete": "Marcar «{title}» como hecha",
+      "overdue": "Atrasada",
+      "review": "Esperando el visto bueno",
+      "done": "Hecha",
+      "doneBy": "La hizo {name}",
+      "reopenedBy": "{name} dice que no está hecha",
+      "take": "Me la quedo",
+      "approve": "Dar el visto bueno",
+      "reopen": "No está hecha",
+      "reopenConfirm": "¿Seguro que «{title}» no está hecha? Volverá a estar pendiente."
+    },
+    "actions": {
+      "new": "Nueva tarea",
+      "all": "Todas las tareas"
+    },
+    "manage": {
+      "title": "Todas las tareas",
+      "subtitle": "Las tareas de casa, cada cuánto se hacen y a quién le tocan.",
+      "subtitleAdult": "Las tareas de casa, cada cuánto se hacen y a quién le tocan. Toca «Editar» para cambiar una.",
+      "empty": "Aún no hay tareas.",
+      "emptyAdult": "Aún no hay tareas. Crea la primera con el botón de arriba.",
+      "next": "Próxima: {date} ({name})",
+      "noNext": "Sin días próximos",
+      "approval": "Con visto bueno",
+      "edit": "Editar"
+    },
+    "tile": {
+      "empty": "Reparte las tareas de casa"
+    },
+    "form": {
+      "newTitle": "Nueva tarea",
+      "newSubtitle": "Qué hay que hacer, cada cuánto y a quién le toca.",
+      "editTitle": "Editar tarea",
+      "editSubtitle": "Los días que vienen se rehacen con los cambios. Lo ya hecho y lo que se cambió a mano se queda como está.",
+      "title": "¿Qué hay que hacer?",
+      "titlePlaceholder": "Fregar, sacar la basura, limpiar el baño…",
+      "when": "¿Cada cuánto?",
+      "every": "Se repite",
+      "days": "¿Qué días?",
+      "weekdaysQuick": "De lunes a viernes",
+      "allDays": "Todos los días",
+      "onDay": "¿Qué día?",
+      "startsOn": "Empieza el",
+      "preview": "Próximas veces: {dates}",
+      "previewNone": "Con estas fechas no toca nunca. Revisa los días o el primer día.",
+      "who": "¿A quién le toca?",
+      "rotationOrder": "Orden de los turnos",
+      "moveUp": "Subir a {name}",
+      "moveDown": "Bajar a {name}",
+      "remove": "Quitar a {name} de los turnos",
+      "add": "Añadir",
+      "rotationHint": "Le toca a cada uno por orden. Si alguien está de ausencia ese día, se salta y le toca al volver.",
+      "freeHint": "Nadie la tiene asignada: cualquiera puede quedársela desde la lista de tareas.",
+      "effort": "Esfuerzo",
+      "effortHint": "Sirve para ver si el reparto es justo.",
+      "notes": "Nota (opcional)",
+      "notesPlaceholder": "Qué incluye, dónde están las cosas…",
+      "approval": "Pedir el visto bueno de un adulto",
+      "approvalHint": "Cuando la marque un menor, quedará pendiente hasta que un adulto diga que está bien.",
+      "saving": "Guardando…",
+      "save": "Guardar cambios",
+      "create": "Crear tarea",
+      "delete": "Borrar tarea",
+      "deleteConfirm": "¿Borrar «{title}»? Se quitan los días pendientes; lo ya hecho se queda en el historial."
+    },
+    "day": {
+      "who": "Le toca",
+      "when": "Día",
+      "status": "Cómo va",
+      "repeats": "Se repite",
+      "split": "Reparto",
+      "notes": "Nota",
+      "historyDone": "Marcada como hecha por {name}",
+      "historyApproved": "Visto bueno de {name}",
+      "historyReopened": "{name} dijo que no estaba hecha",
+      "manual": "Este día se cambió a mano: no cambia aunque se rehagan los turnos.",
+      "approvalNote": "Si la marca un menor, necesita el visto bueno de un adulto.",
+      "complete": "Marcar como hecha",
+      "completeFor": "La he hecho yo (le tocaba a {name})",
+      "reassign": "Pasársela a",
+      "leaveFree": "Nadie (libre)",
+      "reassignButton": "Cambiar",
+      "reassignHint": "Solo cambia este día. Los turnos siguen igual.",
+      "editChore": "Editar la tarea"
+    },
+    "errors": {
+      "titleRequired": "Escribe qué hay que hacer",
+      "titleTooLong": "Como mucho 60 letras",
+      "notesTooLong": "Como mucho 200 letras",
+      "daysRequired": "Elige al menos un día",
+      "startInvalid": "Elige un día de hoy a dentro de un año",
+      "personRequired": "Elige a quién le toca",
+      "rotationRequired": "Elige quién entra en los turnos",
+      "personGone": "Alguien de la lista ya no vive en el hogar. Recarga la página",
+      "alreadyDone": "Ya estaba hecha",
+      "notDone": "Ya estaba pendiente",
+      "notWaiting": "Ya no espera el visto bueno",
+      "onlyOwn": "Solo puedes marcar las tuyas",
+      "taken": "Alguien se la ha quedado antes",
+      "notFound": "Esta tarea ya no existe",
+      "notAllowed": "No puedes hacer esto",
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
     }
   }
