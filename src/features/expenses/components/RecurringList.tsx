@@ -72,7 +72,7 @@ export function RecurringList({
               <strong>{formatMoney(r.amountCents, locale)}</strong>
             </p>
             <p className={styles.rowMeta}>
-              {t(`recurring.frequency.${r.frequency}`)} ·{" "}
+              {t("recurring.schedule", { frequency: r.frequency, interval: r.interval })} ·{" "}
               {r.paidBy === currentUserId ? t("recurring.paidByYou") : t("recurring.paidBy", { name: realName(r.paidBy) })}
             </p>
             <p className={styles.rowMeta}>

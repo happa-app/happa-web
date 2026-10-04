@@ -382,16 +382,9 @@
       "empty": "No recurring expenses yet. Add the subscriptions and bills that repeat and they'll be added automatically.",
       "tileEmpty": "Subscriptions and bills that add themselves",
       "tileActive": "{count, plural, =0 {None active} one {# active} other {# active}}",
-      "frequency": {
-        "weekly": "Weekly",
-        "monthly": "Monthly",
-        "yearly": "Yearly"
-      },
-      "every": {
-        "weekly": "every week",
-        "monthly": "every month",
-        "yearly": "every year"
-      },
+      "schedule": "{frequency, select, weekly {{interval, plural, one {Weekly} other {Every # weeks}}} monthly {{interval, plural, one {Monthly} =3 {Quarterly} =6 {Every 6 months} other {Every # months}}} yearly {{interval, plural, one {Yearly} other {Every # years}}} other {}}",
+      "scheduleOption": "{frequency, select, weekly {{interval, plural, one {Every week} other {Every # weeks}}} monthly {{interval, plural, one {Every month} =3 {Every 3 months (quarterly)} =6 {Every 6 months} other {Every # months}}} yearly {{interval, plural, one {Every year} other {Every # years}}} other {}}",
+      "everyText": "{frequency, select, weekly {{interval, plural, one {every week} other {every # weeks}}} monthly {{interval, plural, one {every month} other {every # months}}} yearly {{interval, plural, one {every year} other {every # years}}} other {}}",
       "paidBy": "Paid by {name}",
       "paidByYou": "You pay it",
       "among": "Split between {names}",

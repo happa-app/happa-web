@@ -24,7 +24,7 @@ const EXPENSE_FIELDS =
   "expense_items(position, name, quantity)";
 
 const RECURRING_FIELDS =
-  "id, description, amount_cents, frequency, starts_on, next_charge_on, paid_by, split_method, status, version, active, charges_made, first_confirmed_at, created_by, rejected_by, rejected_reason, " +
+  "id, description, amount_cents, frequency, interval_count, starts_on, next_charge_on, paid_by, split_method, status, version, active, charges_made, first_confirmed_at, created_by, rejected_by, rejected_reason, " +
   "recurring_expense_shares(user_id, weight), recurring_expense_confirmations(user_id), charges:expenses(count)";
 
 const PAYMENT_FIELDS = "id, from_user, to_user, amount_cents, settled_on, status, created_at";
@@ -55,6 +55,7 @@ type RecurringRow = {
   description: string;
   amount_cents: number;
   frequency: Frequency;
+  interval_count: number;
   starts_on: string;
   next_charge_on: string;
   paid_by: string;
@@ -114,6 +115,7 @@ function toRecurring(row: RecurringRow): RecurringExpense {
     description: row.description,
     amountCents: row.amount_cents,
     frequency: row.frequency,
+    interval: row.interval_count,
     startsOn: row.starts_on,
     nextChargeOn: row.next_charge_on,
     paidBy: row.paid_by,

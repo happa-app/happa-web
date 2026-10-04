@@ -63,7 +63,7 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
             <p className={styles.rowMeta}>
               {t("recurring.pendingForMeMeta", {
                 amount: formatMoney(r.amountCents, locale),
-                every: t(`recurring.every.${r.frequency}`),
+                every: t("recurring.everyText", { frequency: r.frequency, interval: r.interval }),
                 share: formatMoney(recurringShareOf(r, currentUserId), locale),
               })}
             </p>

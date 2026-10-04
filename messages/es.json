@@ -382,16 +382,9 @@
       "empty": "Aún no hay gastos fijos. Apunta las suscripciones y facturas que se repiten y se añadirán solas.",
       "tileEmpty": "Suscripciones y facturas que se apuntan solas",
       "tileActive": "{count, plural, =0 {Ninguno activo} one {# activo} other {# activos}}",
-      "frequency": {
-        "weekly": "Semanal",
-        "monthly": "Mensual",
-        "yearly": "Anual"
-      },
-      "every": {
-        "weekly": "cada semana",
-        "monthly": "cada mes",
-        "yearly": "cada año"
-      },
+      "schedule": "{frequency, select, weekly {{interval, plural, one {Semanal} other {Cada # semanas}}} monthly {{interval, plural, one {Mensual} =3 {Trimestral} =6 {Semestral} other {Cada # meses}}} yearly {{interval, plural, one {Anual} other {Cada # años}}} other {}}",
+      "scheduleOption": "{frequency, select, weekly {{interval, plural, one {Cada semana} other {Cada # semanas}}} monthly {{interval, plural, one {Cada mes} =3 {Cada 3 meses (trimestral)} =6 {Cada 6 meses (semestral)} other {Cada # meses}}} yearly {{interval, plural, one {Cada año} other {Cada # años}}} other {}}",
+      "everyText": "{frequency, select, weekly {{interval, plural, one {cada semana} other {cada # semanas}}} monthly {{interval, plural, one {cada mes} other {cada # meses}}} yearly {{interval, plural, one {cada año} other {cada # años}}} other {}}",
       "paidBy": "Lo paga {name}",
       "paidByYou": "Lo pagas tú",
       "among": "Entre {names}",

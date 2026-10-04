@@ -5,6 +5,7 @@ import { addDays, isoToday, isValidDate, RECURRING_START_MAX_DAYS, RECURRING_STA
 import { MAX_AMOUNT_CENTS, parseAmount } from "./money";
 import {
   FREQUENCIES,
+  MAX_RECURRING_INTERVAL,
   RECURRING_SPLIT_METHODS,
   SPLIT_METHODS,
   type ExpensesErrorKey,
@@ -130,6 +131,7 @@ const recurringFormShape = z.object({
   description: z.string(),
   amount: z.string(),
   frequency: z.string(),
+  interval: z.string(),
   startsOn: z.string(),
   paidBy: z.string(),
   splitMethod: z.string(),
@@ -142,6 +144,7 @@ export type RecurringPayload = {
   description: string;
   amountCents: number;
   frequency: Frequency;
+  interval: number;
   startsOn: string;
   paidBy: string;
   splitMethod: RecurringSplitMethod;
@@ -171,7 +174,11 @@ export function buildRecurring(input: unknown, today: string = isoToday(), keepS
 
   const frequency = FREQUENCIES.find((f) => f === v.frequency);
   const splitMethod = RECURRING_SPLIT_METHODS.find((m) => m === v.splitMethod);
-  if (!frequency || !splitMethod) return { ok: false, fieldErrors, formError: "generic" };
+  // Cada cuántos: un número entero del 1 al 12 (lo elige un desplegable, así que si no vale es un error raro)
+  const interval = /^\d{1,2}$/.test(v.interval) ? Number(v.interval) : 0;
+  if (!frequency || !splitMethod || interval < 1 || interval > MAX_RECURRING_INTERVAL) {
+    return { ok: false, fieldErrors, formError: "generic" };
+  }
 
   if (
     v.startsOn !== keepStart &&
@@ -205,7 +212,7 @@ export function buildRecurring(input: unknown, today: string = isoToday(), keepS
   if (Object.keys(fieldErrors).length > 0 || amountCents === null) return { ok: false, fieldErrors };
   return {
     ok: true,
-    value: { description, amountCents, frequency, startsOn: v.startsOn, paidBy: v.paidBy, splitMethod, shares },
+    value: { description, amountCents, frequency, interval, startsOn: v.startsOn, paidBy: v.paidBy, splitMethod, shares },
   };
 }
 

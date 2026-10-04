@@ -12,7 +12,7 @@ import { centsToInput, formatMoney, parseAmount } from "../money";
 import { addDays, RECURRING_START_MAX_DAYS, RECURRING_START_MIN_DAYS } from "../dates";
 import { splitAmount } from "../split";
 import {
-  FREQUENCIES,
+  RECURRING_SCHEDULES,
   RECURRING_SPLIT_METHODS,
   type Frequency,
   type RecurringExpense,
@@ -61,6 +61,14 @@ export function RecurringForm({ householdId, currentUserId, people, today, recur
   const [description, setDescription] = useState(recurring?.description ?? "");
   const [amount, setAmount] = useState(recurring ? centsToInput(recurring.amountCents, locale) : "");
   const [frequency, setFrequency] = useState<Frequency>(recurring?.frequency ?? "monthly");
+  // Cada cuántas semanas, meses o años
+  const [intervalCount, setIntervalCount] = useState(recurring?.interval ?? 1);
+  // Opciones del desplegable. Si el gasto fijo tiene otra combinación (la base de datos admite más), se añade.
+  const schedules = RECURRING_SCHEDULES.some((s) => s.frequency === frequency && s.interval === intervalCount)
+    ? RECURRING_SCHEDULES
+    : [...RECURRING_SCHEDULES, { frequency, interval: intervalCount }];
+  const scheduleKey = (s: { frequency: Frequency; interval: number }) => `${s.frequency}:${s.interval}`;
+  const every = t("recurring.everyText", { frequency, interval: intervalCount });
   const [startsOn, setStartsOn] = useState(recurring?.startsOn ?? today);
   // Si quien pagaba ya no vive aquí, hay que elegir a otra persona
   const [paidBy, setPaidBy] = useState(
@@ -108,6 +116,7 @@ export function RecurringForm({ householdId, currentUserId, people, today, recur
       {/* Al editar, si el primer cargo no cambia no se vuelve a comprobar (puede ser de hace tiempo) */}
       {recurring ? <input type="hidden" name="keepStart" value={recurring.startsOn} /> : null}
       <input type="hidden" name="frequency" value={frequency} />
+      <input type="hidden" name="interval" value={intervalCount} />
       <input type="hidden" name="splitMethod" value={method} />
       <input type="hidden" name="paidBy" value={paidBy} />
       <input type="hidden" name="participants" value={JSON.stringify(participants)} />
@@ -161,21 +170,23 @@ export function RecurringForm({ householdId, currentUserId, people, today, recur
       {/* ¿Cada cuánto? */}
       <fieldset className={styles.fieldset} disabled={scheduleLocked}>
         <legend className={styles.legend}>{t("recurring.form.frequency")}</legend>
-        <div className={styles.segmented} role="radiogroup" aria-label={t("recurring.form.frequency")}>
-          {FREQUENCIES.map((f) => (
-            <label key={f} className={frequency === f ? styles.segmentActive : styles.segment}>
-              <input
-                type="radio"
-                name="frequencyChoice"
-                value={f}
-                checked={frequency === f}
-                onChange={() => setFrequency(f)}
-                className="visually-hidden"
-              />
-              {t(`recurring.frequency.${f}`)}
-            </label>
+        <select
+          className={styles.select}
+          value={scheduleKey({ frequency, interval: intervalCount })}
+          aria-label={t("recurring.form.frequency")}
+          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+            const chosen = schedules.find((s) => scheduleKey(s) === e.target.value);
+            if (!chosen) return;
+            setFrequency(chosen.frequency);
+            setIntervalCount(chosen.interval);
+          }}
+        >
+          {schedules.map((s) => (
+            <option key={scheduleKey(s)} value={scheduleKey(s)}>
+              {t("recurring.scheduleOption", { frequency: s.frequency, interval: s.interval })}
+            </option>
           ))}
-        </div>
+        </select>
         <p className={styles.note}>
           {scheduleLocked ? t("recurring.form.scheduleLocked") : t("recurring.form.startsOnHint")}
         </p>
@@ -267,9 +278,9 @@ export function RecurringForm({ householdId, currentUserId, people, today, recur
           : others.length > 0
             ? t("recurring.form.willConfirm", {
                 names: others.map(inSentence).join(", "),
-                every: t(`recurring.every.${frequency}`),
+                every,
               })
-            : t("recurring.form.onlyYou", { every: t(`recurring.every.${frequency}`) })}
+            : t("recurring.form.onlyYou", { every })}
       </p>
 
       <Button type="submit" fullWidth disabled={isPending}>

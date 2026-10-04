@@ -75,11 +75,26 @@ export type Frequency = (typeof FREQUENCIES)[number];
 export const RECURRING_SPLIT_METHODS = ["equal", "shares"] as const;
 export type RecurringSplitMethod = (typeof RECURRING_SPLIT_METHODS)[number];
 
+// Cada cuánto se puede elegir en la app: cada N semanas, meses o años.
+// (La base de datos admite de 1 a 12; aquí se ofrecen las opciones habituales.)
+export const MAX_RECURRING_INTERVAL = 12;
+export const RECURRING_SCHEDULES: readonly { frequency: Frequency; interval: number }[] = [
+  { frequency: "weekly", interval: 1 },
+  { frequency: "weekly", interval: 2 },
+  { frequency: "monthly", interval: 1 },
+  { frequency: "monthly", interval: 2 },
+  { frequency: "monthly", interval: 3 },
+  { frequency: "monthly", interval: 6 },
+  { frequency: "yearly", interval: 1 },
+];
+
 export type RecurringExpense = {
   id: string;
   description: string;
   amountCents: number;
   frequency: Frequency;
+  // Cada cuántas semanas, meses o años (1 = cada semana, cada mes...)
+  interval: number;
   startsOn: string; // primer cargo, AAAA-MM-DD
   nextChargeOn: string;
   paidBy: string;
