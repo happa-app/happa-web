@@ -895,6 +895,105 @@ export type Database = {
           },
         ]
       }
+      notification_preferences: {
+        Row: {
+          category: Database["public"]["Enums"]["notification_category"]
+          push: boolean
+          user_id: string
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["notification_category"]
+          push?: boolean
+          user_id: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["notification_category"]
+          push?: boolean
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          data: Json
+          dedupe_key: string | null
+          household_id: string | null
+          id: string
+          in_app: boolean
+          push_state: Database["public"]["Enums"]["push_state"]
+          read_at: string | null
+          ref_id: string | null
+          type: Database["public"]["Enums"]["notification_type"]
+          updated_at: string
+          url: string
+          user_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          data?: Json
+          dedupe_key?: string | null
+          household_id?: string | null
+          id?: string
+          in_app?: boolean
+          push_state?: Database["public"]["Enums"]["push_state"]
+          read_at?: string | null
+          ref_id?: string | null
+          type: Database["public"]["Enums"]["notification_type"]
+          updated_at?: string
+          url: string
+          user_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          data?: Json
+          dedupe_key?: string | null
+          household_id?: string | null
+          id?: string
+          in_app?: boolean
+          push_state?: Database["public"]["Enums"]["push_state"]
+          read_at?: string | null
+          ref_id?: string | null
+          type?: Database["public"]["Enums"]["notification_type"]
+          updated_at?: string
+          url?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           account_type: Database["public"]["Enums"]["account_type"]
@@ -933,6 +1032,47 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      push_subscriptions: {
+        Row: {
+          auth: string
+          created_at: string
+          endpoint: string
+          id: string
+          last_seen_at: string
+          locale: string
+          p256dh: string
+          user_id: string
+        }
+        Insert: {
+          auth: string
+          created_at?: string
+          endpoint: string
+          id?: string
+          last_seen_at?: string
+          locale?: string
+          p256dh: string
+          user_id: string
+        }
+        Update: {
+          auth?: string
+          created_at?: string
+          endpoint?: string
+          id?: string
+          last_seen_at?: string
+          locale?: string
+          p256dh?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "push_subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       recurring_expense_confirmations: {
         Row: {
@@ -1523,6 +1663,10 @@ export type Database = {
         Args: { p_expense: string; p_version: number }
         Returns: undefined
       }
+      delete_push_subscription: {
+        Args: { p_endpoint: string }
+        Returns: undefined
+      }
       delete_recurring_expense: {
         Args: { p_recurring: string; p_version: number }
         Returns: undefined
@@ -1607,6 +1751,10 @@ export type Database = {
         Returns: undefined
       }
       mark_chat_read: { Args: { p_conversation: string }; Returns: undefined }
+      mark_notifications_read: {
+        Args: { p_ids?: string[] }
+        Returns: undefined
+      }
       my_archived_households: {
         Args: never
         Returns: {
@@ -1623,6 +1771,52 @@ export type Database = {
           net_cents: number
         }[]
       }
+      notification_category_of: {
+        Args: { p_type: Database["public"]["Enums"]["notification_type"] }
+        Returns: Database["public"]["Enums"]["notification_category"]
+      }
+      notifications_resolve: {
+        Args: {
+          p_ref: string
+          p_type: Database["public"]["Enums"]["notification_type"]
+          p_user?: string
+        }
+        Returns: undefined
+      }
+      notify: {
+        Args: {
+          p_actor: string
+          p_data: Json
+          p_dedupe?: string
+          p_household: string
+          p_in_app?: boolean
+          p_ref: string
+          p_type: Database["public"]["Enums"]["notification_type"]
+          p_url: string
+          p_user: string
+        }
+        Returns: string
+      }
+      push_claim: {
+        Args: { p_limit?: number; p_secret: string }
+        Returns: {
+          auth: string
+          data: Json
+          endpoint: string
+          locale: string
+          notification_id: string
+          p256dh: string
+          ref_id: string
+          type: Database["public"]["Enums"]["notification_type"]
+          url: string
+        }[]
+      }
+      push_endpoint_allowed: { Args: { p_endpoint: string }; Returns: boolean }
+      push_forget: {
+        Args: { p_endpoints: string[]; p_secret: string }
+        Returns: undefined
+      }
+      push_secret_ok: { Args: { p_secret: string }; Returns: boolean }
       reassign_chore: {
         Args: { p_occurrence: string; p_user?: string }
         Returns: undefined
@@ -1709,6 +1903,15 @@ export type Database = {
         }
         Returns: string
       }
+      save_push_subscription: {
+        Args: {
+          p_auth: string
+          p_endpoint: string
+          p_locale?: string
+          p_p256dh: string
+        }
+        Returns: undefined
+      }
       schedule_can_edit: {
         Args: { p_household: string; p_user: string }
         Returns: boolean
@@ -1750,6 +1953,13 @@ export type Database = {
           p_household: string
           p_role: Database["public"]["Enums"]["household_role"]
           p_user: string
+        }
+        Returns: undefined
+      }
+      set_notification_preference: {
+        Args: {
+          p_category: Database["public"]["Enums"]["notification_category"]
+          p_push: boolean
         }
         Returns: undefined
       }
@@ -1878,6 +2088,19 @@ export type Database = {
       expense_split_method: "equal" | "shares" | "exact"
       household_kind: "shared_flat" | "student_flat" | "couple" | "family"
       household_role: "admin" | "member" | "minor" | "landlord"
+      notification_category: "expenses" | "shopping" | "chores" | "chat"
+      notification_type:
+        | "expense_to_confirm"
+        | "expense_rejected"
+        | "payment_to_confirm"
+        | "recurring_to_confirm"
+        | "shopping_added"
+        | "chore_reassigned"
+        | "chore_reopened"
+        | "chore_to_approve"
+        | "chore_approved"
+        | "message"
+      push_state: "none" | "pending" | "sent" | "failed"
       recurring_frequency: "weekly" | "monthly" | "yearly"
       schedule_kind: "class" | "work" | "away"
       triqui_status: "pending" | "confirmed" | "rejected"
@@ -2020,6 +2243,20 @@ export const Constants = {
       expense_split_method: ["equal", "shares", "exact"],
       household_kind: ["shared_flat", "student_flat", "couple", "family"],
       household_role: ["admin", "member", "minor", "landlord"],
+      notification_category: ["expenses", "shopping", "chores", "chat"],
+      notification_type: [
+        "expense_to_confirm",
+        "expense_rejected",
+        "payment_to_confirm",
+        "recurring_to_confirm",
+        "shopping_added",
+        "chore_reassigned",
+        "chore_reopened",
+        "chore_to_approve",
+        "chore_approved",
+        "message",
+      ],
+      push_state: ["none", "pending", "sent", "failed"],
       recurring_frequency: ["weekly", "monthly", "yearly"],
       schedule_kind: ["class", "work", "away"],
       triqui_status: ["pending", "confirmed", "rejected"],

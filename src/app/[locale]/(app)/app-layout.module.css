@@ -21,3 +21,9 @@
   flex-direction: column;
   gap: var(--space-5);
 }
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}

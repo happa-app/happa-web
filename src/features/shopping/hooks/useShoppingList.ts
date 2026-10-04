@@ -10,6 +10,7 @@
 //  5. Mientras haya guardados en curso no se aplica ninguna lectura (traería datos de antes del
 //     cambio y la casilla "parpadearía"). Al terminar el último guardado, se relee.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { requestPushDispatch } from "@/lib/push/request";
 import { createClient } from "@/lib/supabase/client";
 import { deleteItems, fetchItems, insertItem, setChecked, shareItem } from "../api";
 import { newItemSchema, type NewItemInput } from "../schemas";
@@ -134,7 +135,8 @@ export function useShoppingList(scope: ShoppingScope, initialItems: ShoppingItem
       };
       setItems((current) => [temp, ...current]);
       void save(
-        () => insertItem(supabase, currentScope(), parsed.data),
+        // En la lista del hogar, los demás reciben un aviso
+        () => insertItem(supabase, currentScope(), parsed.data).then(requestPushDispatch),
         () => setItems((current) => current.filter((i) => i.id !== temp.id)),
       );
       return true;
@@ -186,7 +188,7 @@ export function useShoppingList(scope: ShoppingScope, initialItems: ShoppingItem
     async (item: ShoppingItem, householdId: string) => {
       setItems((current) => current.filter((i) => i.id !== item.id));
       await save(
-        () => shareItem(supabase, item.id, householdId),
+        () => shareItem(supabase, item.id, householdId).then(requestPushDispatch),
         () => setItems((current) => restore(current, [item])),
       );
     },

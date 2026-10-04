@@ -3,6 +3,7 @@
 // comprueban permisos, reparten y confirman: aquí solo se validan los datos del formulario.
 import { parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
+import { schedulePushDispatch } from "@/lib/push/schedule";
 import { createClient } from "@/lib/supabase/server";
 import { toExpensesErrorKey } from "./errors";
 import { buildExpense, buildRecurring, parseItemIds, parsePaymentAmount, uuidSchema } from "./schemas";
@@ -35,6 +36,8 @@ function id(formData: FormData, key: string): string | null {
 // Crear o editar un gasto (si llega expenseId, se edita). Si llegan productos (items), es un gasto
 // nuevo que viene de la lista de la compra: esos productos salen de la lista al guardarlo.
 export async function saveExpense(_prevState: ExpenseFormState, formData: FormData): Promise<ExpenseFormState> {
+  // Los avisos que cree esta acción salen al móvil al terminar
+  schedulePushDispatch();
   const locale = parseLocale(formData.get("locale"));
   const householdId = id(formData, "householdId");
   const expenseId = text(formData, "expenseId") ? id(formData, "expenseId") : null;
@@ -86,6 +89,8 @@ export async function saveExpense(_prevState: ExpenseFormState, formData: FormDa
 
 // Confirmar, rechazar, dar por bueno o borrar un gasto
 export async function expenseAction(_prevState: ExpensesActionState, formData: FormData): Promise<ExpensesActionState> {
+  // Los avisos que cree esta acción salen al móvil al terminar
+  schedulePushDispatch();
   const locale = parseLocale(formData.get("locale"));
   const householdId = id(formData, "householdId");
   const expenseId = id(formData, "expenseId");
@@ -116,6 +121,8 @@ export async function expenseAction(_prevState: ExpensesActionState, formData: F
 // Pagos: "He pagado" (lo apunta quien paga), "Me ha pagado" (quien recibe), y confirmar,
 // rechazar o retirar uno pendiente.
 export async function paymentAction(_prevState: ExpensesActionState, formData: FormData): Promise<ExpensesActionState> {
+  // Los avisos que cree esta acción salen al móvil al terminar
+  schedulePushDispatch();
   const locale = parseLocale(formData.get("locale"));
   const householdId = id(formData, "householdId");
   const intent = text(formData, "intent");
@@ -160,6 +167,8 @@ export async function paymentAction(_prevState: ExpensesActionState, formData: F
 
 // Crear o editar un gasto fijo (si llega recurringId, se edita)
 export async function saveRecurring(_prevState: RecurringFormState, formData: FormData): Promise<RecurringFormState> {
+  // Los avisos que cree esta acción salen al móvil al terminar
+  schedulePushDispatch();
   const locale = parseLocale(formData.get("locale"));
   const householdId = id(formData, "householdId");
   const recurringId = text(formData, "recurringId") ? id(formData, "recurringId") : null;
@@ -212,6 +221,8 @@ export async function saveRecurring(_prevState: RecurringFormState, formData: Fo
 
 // Confirmar, rechazar, pausar, reanudar o borrar un gasto fijo
 export async function recurringAction(_prevState: ExpensesActionState, formData: FormData): Promise<ExpensesActionState> {
+  // Los avisos que cree esta acción salen al móvil al terminar
+  schedulePushDispatch();
   const locale = parseLocale(formData.get("locale"));
   const householdId = id(formData, "householdId");
   const recurringId = id(formData, "recurringId");
