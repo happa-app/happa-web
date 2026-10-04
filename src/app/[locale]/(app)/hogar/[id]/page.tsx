@@ -1,5 +1,5 @@
 // Página /hogar/<id>: el hogar con sus secciones (lista de la compra con lo que falta, gastos,
-// horarios y tareas), los miembros, la invitación y la opción de salir.
+// horarios, tareas y chat), los miembros, la invitación y la opción de salir.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Card } from "@/components/ui/Card";
@@ -19,6 +19,8 @@ import { nowIn, presenceAt, SchedulesTile } from "@/features/schedules";
 import { getScheduleOverview } from "@/features/schedules/server";
 import { ChoresTile } from "@/features/chores";
 import { getChoresSummary } from "@/features/chores/server";
+import { ChatTile } from "@/features/chat";
+import { getChatSummary } from "@/features/chat/server";
 import { Link, redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import styles from "../../page.module.css";
@@ -46,13 +48,15 @@ export default async function HouseholdPage({ params }: Props) {
   const isAdmin = me?.role === "admin";
   const isResident = isAdult || me?.role === "minor";
   // Los gastos solo son para adultos (ni menores ni casero)
-  const [shoppingItems, expenses, schedules, chores] = await Promise.all([
+  const [shoppingItems, expenses, schedules, chores, chat] = await Promise.all([
     isResident ? getHouseholdShoppingItems(household.id) : [],
     isAdult ? getMyExpensesSummary(household.id, userId) : null,
     // Los horarios, para quienes viven aquí (adultos y menores)
     isResident ? getScheduleOverview(household.id, userId) : null,
     // Las tareas, también para quienes viven aquí
     isResident ? getChoresSummary(household.id, userId, isAdult) : null,
+    // El chat de inquilinos (también para menores)
+    isResident ? getChatSummary(household.id) : null,
   ]);
   const now = schedules ? nowIn(schedules.timezone) : null;
   const homeNow =
@@ -82,6 +86,9 @@ export default async function HouseholdPage({ params }: Props) {
             canManageAll={isAdult}
             href={`/hogar/${household.id}/compra`}
           />
+          {chat ? (
+            <ChatTile href={`/hogar/${household.id}/chat`} summary={chat.summary} lastSenderName={chat.lastSenderName} me={userId} />
+          ) : null}
           {expenses ? (
             <ExpensesTile href={`/hogar/${household.id}/gastos`} netCents={expenses.netCents} toConfirm={expenses.toConfirm} />
           ) : null}

@@ -340,6 +340,68 @@ export type Database = {
           },
         ]
       }
+      conversation_reads: {
+        Row: {
+          conversation_id: string
+          last_read_at: string
+          user_id: string
+        }
+        Insert: {
+          conversation_id: string
+          last_read_at?: string
+          user_id: string
+        }
+        Update: {
+          conversation_id?: string
+          last_read_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_reads_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversation_reads_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversations: {
+        Row: {
+          created_at: string
+          household_id: string | null
+          id: string
+          kind: Database["public"]["Enums"]["conversation_kind"]
+        }
+        Insert: {
+          created_at?: string
+          household_id?: string | null
+          id?: string
+          kind: Database["public"]["Enums"]["conversation_kind"]
+        }
+        Update: {
+          created_at?: string
+          household_id?: string | null
+          id?: string
+          kind?: Database["public"]["Enums"]["conversation_kind"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       expense_confirmations: {
         Row: {
           confirmed_at: string
@@ -720,6 +782,113 @@ export type Database = {
           {
             foreignKeyName: "legal_consents_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      message_edits: {
+        Row: {
+          body: string
+          id: string
+          message_id: string
+          replaced_at: string
+          written_at: string
+        }
+        Insert: {
+          body: string
+          id?: string
+          message_id: string
+          replaced_at?: string
+          written_at: string
+        }
+        Update: {
+          body?: string
+          id?: string
+          message_id?: string
+          replaced_at?: string
+          written_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "message_edits_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      message_hidden: {
+        Row: {
+          hidden_at: string
+          message_id: string
+          user_id: string
+        }
+        Insert: {
+          hidden_at?: string
+          message_id: string
+          user_id: string
+        }
+        Update: {
+          hidden_at?: string
+          message_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "message_hidden_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "message_hidden_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          body: string
+          conversation_id: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          sender_id: string | null
+        }
+        Insert: {
+          body: string
+          conversation_id: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          sender_id?: string | null
+        }
+        Update: {
+          body?: string
+          conversation_id?: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          sender_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_sender_id_fkey"
+            columns: ["sender_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -1184,6 +1353,29 @@ export type Database = {
       can_access_triqui: { Args: { hid: string }; Returns: boolean }
       can_see_profile: { Args: { other: string }; Returns: boolean }
       cancel_payment: { Args: { p_settlement: string }; Returns: undefined }
+      chat_can_access: { Args: { p_conversation: string }; Returns: boolean }
+      chat_member: {
+        Args: { p_conversation: string; p_user: string }
+        Returns: boolean
+      }
+      chat_people: {
+        Args: { p_conversation: string }
+        Returns: {
+          display_name: string
+          is_member: boolean
+          user_id: string
+        }[]
+      }
+      chat_summary: {
+        Args: { p_household: string }
+        Returns: {
+          conversation_id: string
+          last_at: string
+          last_body: string
+          last_sender: string
+          unread: number
+        }[]
+      }
       chore_check: {
         Args: {
           p_assignment: Database["public"]["Enums"]["chore_assignment"]
@@ -1340,9 +1532,35 @@ export type Database = {
         Args: { p_household: string; p_successor?: string; p_user: string }
         Returns: undefined
       }
+      edit_message: {
+        Args: { p_body: string; p_message: string }
+        Returns: {
+          body: string
+          conversation_id: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          sender_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "messages"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       force_confirm_expense: {
         Args: { p_expense: string; p_version: number }
         Returns: undefined
+      }
+      get_chat: {
+        Args: { p_household: string }
+        Returns: {
+          conversation_id: string
+          household_name: string
+          is_resident: boolean
+          timezone: string
+        }[]
       }
       get_invite_preview: {
         Args: { p_code: string }
@@ -1372,6 +1590,7 @@ export type Database = {
           timezone: string
         }[]
       }
+      hide_message: { Args: { p_message: string }; Returns: undefined }
       household_has_resident: {
         Args: { p_household: string; p_user: string }
         Returns: boolean
@@ -1387,6 +1606,7 @@ export type Database = {
         Args: { p_household: string; p_successor?: string }
         Returns: undefined
       }
+      mark_chat_read: { Args: { p_conversation: string }; Returns: undefined }
       my_archived_households: {
         Args: never
         Returns: {
@@ -1508,6 +1728,23 @@ export type Database = {
         Args: { p_household: string; p_user: string }
         Returns: undefined
       }
+      send_message: {
+        Args: { p_body: string; p_conversation: string }
+        Returns: {
+          body: string
+          conversation_id: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          sender_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "messages"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       set_member_role: {
         Args: {
           p_household: string
@@ -1574,6 +1811,7 @@ export type Database = {
           weight: number
         }[]
       }
+      unhide_message: { Args: { p_message: string }; Returns: undefined }
       update_chore: {
         Args: {
           p_assignment: Database["public"]["Enums"]["chore_assignment"]
@@ -1635,6 +1873,7 @@ export type Database = {
       chore_assignment: "fixed" | "rotation" | "free"
       chore_frequency: "once" | "daily" | "weekly" | "monthly"
       chore_status: "pending" | "review" | "done"
+      conversation_kind: "tenants" | "landlord" | "listing"
       expense_source: "manual" | "shopping" | "recurring" | "landlord"
       expense_split_method: "equal" | "shares" | "exact"
       household_kind: "shared_flat" | "student_flat" | "couple" | "family"
@@ -1776,6 +2015,7 @@ export const Constants = {
       chore_assignment: ["fixed", "rotation", "free"],
       chore_frequency: ["once", "daily", "weekly", "monthly"],
       chore_status: ["pending", "review", "done"],
+      conversation_kind: ["tenants", "landlord", "listing"],
       expense_source: ["manual", "shopping", "recurring", "landlord"],
       expense_split_method: ["equal", "shares", "exact"],
       household_kind: ["shared_flat", "student_flat", "couple", "family"],
