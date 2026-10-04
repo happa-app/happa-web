@@ -39,6 +39,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      absences: {
+        Row: {
+          created_at: string
+          ends_on: string
+          household_id: string
+          id: string
+          note: string | null
+          starts_on: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          ends_on: string
+          household_id: string
+          id?: string
+          note?: string | null
+          starts_on: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          ends_on?: string
+          household_id?: string
+          id?: string
+          note?: string | null
+          starts_on?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "absences_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "absences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       billing_customers: {
         Row: {
           created_at: string
@@ -61,6 +109,233 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: true
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chore_occurrences: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          assignee_id: string | null
+          chore_id: string
+          created_at: string
+          done_at: string | null
+          done_by: string | null
+          due_on: string
+          household_id: string
+          id: string
+          manual: boolean
+          pointer_before: number | null
+          reopened_at: string | null
+          reopened_by: string | null
+          repaid_user: string | null
+          skipped_users: string[]
+          status: Database["public"]["Enums"]["chore_status"]
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          assignee_id?: string | null
+          chore_id: string
+          created_at?: string
+          done_at?: string | null
+          done_by?: string | null
+          due_on: string
+          household_id: string
+          id?: string
+          manual?: boolean
+          pointer_before?: number | null
+          reopened_at?: string | null
+          reopened_by?: string | null
+          repaid_user?: string | null
+          skipped_users?: string[]
+          status?: Database["public"]["Enums"]["chore_status"]
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          assignee_id?: string | null
+          chore_id?: string
+          created_at?: string
+          done_at?: string | null
+          done_by?: string | null
+          due_on?: string
+          household_id?: string
+          id?: string
+          manual?: boolean
+          pointer_before?: number | null
+          reopened_at?: string | null
+          reopened_by?: string | null
+          repaid_user?: string | null
+          skipped_users?: string[]
+          status?: Database["public"]["Enums"]["chore_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chore_occurrences_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chore_occurrences_assignee_id_fkey"
+            columns: ["assignee_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chore_occurrences_chore_id_fkey"
+            columns: ["chore_id"]
+            isOneToOne: false
+            referencedRelation: "chores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chore_occurrences_done_by_fkey"
+            columns: ["done_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chore_occurrences_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chore_occurrences_reopened_by_fkey"
+            columns: ["reopened_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chore_rotation: {
+        Row: {
+          chore_id: string
+          owed: boolean
+          position: number
+          user_id: string
+        }
+        Insert: {
+          chore_id: string
+          owed?: boolean
+          position: number
+          user_id: string
+        }
+        Update: {
+          chore_id?: string
+          owed?: boolean
+          position?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chore_rotation_chore_id_fkey"
+            columns: ["chore_id"]
+            isOneToOne: false
+            referencedRelation: "chores"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chore_rotation_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chores: {
+        Row: {
+          active: boolean
+          assignee_id: string | null
+          assignment: Database["public"]["Enums"]["chore_assignment"]
+          created_at: string
+          created_by: string | null
+          effort: number
+          frequency: Database["public"]["Enums"]["chore_frequency"]
+          generated_until: string | null
+          household_id: string
+          id: string
+          interval_count: number
+          notes: string | null
+          requires_approval: boolean
+          rotation_next: number
+          starts_on: string
+          title: string
+          updated_at: string
+          weekdays: number[] | null
+        }
+        Insert: {
+          active?: boolean
+          assignee_id?: string | null
+          assignment: Database["public"]["Enums"]["chore_assignment"]
+          created_at?: string
+          created_by?: string | null
+          effort?: number
+          frequency: Database["public"]["Enums"]["chore_frequency"]
+          generated_until?: string | null
+          household_id: string
+          id?: string
+          interval_count?: number
+          notes?: string | null
+          requires_approval?: boolean
+          rotation_next?: number
+          starts_on: string
+          title: string
+          updated_at?: string
+          weekdays?: number[] | null
+        }
+        Update: {
+          active?: boolean
+          assignee_id?: string | null
+          assignment?: Database["public"]["Enums"]["chore_assignment"]
+          created_at?: string
+          created_by?: string | null
+          effort?: number
+          frequency?: Database["public"]["Enums"]["chore_frequency"]
+          generated_until?: string | null
+          household_id?: string
+          id?: string
+          interval_count?: number
+          notes?: string | null
+          requires_approval?: boolean
+          rotation_next?: number
+          starts_on?: string
+          title?: string
+          updated_at?: string
+          weekdays?: number[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chores_assignee_id_fkey"
+            columns: ["assignee_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chores_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chores_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
             referencedColumns: ["id"]
           },
         ]
@@ -94,6 +369,35 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      expense_items: {
+        Row: {
+          expense_id: string
+          name: string
+          position: number
+          quantity: number
+        }
+        Insert: {
+          expense_id: string
+          name: string
+          position: number
+          quantity?: number
+        }
+        Update: {
+          expense_id?: string
+          name?: string
+          position?: number
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expense_items_expense_id_fkey"
+            columns: ["expense_id"]
+            isOneToOne: false
+            referencedRelation: "expenses"
             referencedColumns: ["id"]
           },
         ]
@@ -179,6 +483,8 @@ export type Database = {
           description: string
           household_id: string
           id: string
+          recurring_charge: number | null
+          recurring_id: string | null
           rejected_by: string | null
           rejected_reason: string | null
           source: Database["public"]["Enums"]["expense_source"]
@@ -200,6 +506,8 @@ export type Database = {
           description: string
           household_id: string
           id?: string
+          recurring_charge?: number | null
+          recurring_id?: string | null
           rejected_by?: string | null
           rejected_reason?: string | null
           source?: Database["public"]["Enums"]["expense_source"]
@@ -221,6 +529,8 @@ export type Database = {
           description?: string
           household_id?: string
           id?: string
+          recurring_charge?: number | null
+          recurring_id?: string | null
           rejected_by?: string | null
           rejected_reason?: string | null
           source?: Database["public"]["Enums"]["expense_source"]
@@ -244,6 +554,13 @@ export type Database = {
             columns: ["household_id"]
             isOneToOne: false
             referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_recurring_id_fkey"
+            columns: ["recurring_id"]
+            isOneToOne: false
+            referencedRelation: "recurring_expenses"
             referencedColumns: ["id"]
           },
         ]
@@ -448,6 +765,223 @@ export type Database = {
         }
         Relationships: []
       }
+      recurring_expense_confirmations: {
+        Row: {
+          confirmed_at: string
+          recurring_id: string
+          user_id: string
+        }
+        Insert: {
+          confirmed_at?: string
+          recurring_id: string
+          user_id: string
+        }
+        Update: {
+          confirmed_at?: string
+          recurring_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recurring_expense_confirmations_recurring_id_fkey"
+            columns: ["recurring_id"]
+            isOneToOne: false
+            referencedRelation: "recurring_expenses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recurring_expense_confirmations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recurring_expense_shares: {
+        Row: {
+          recurring_id: string
+          user_id: string
+          weight: number | null
+        }
+        Insert: {
+          recurring_id: string
+          user_id: string
+          weight?: number | null
+        }
+        Update: {
+          recurring_id?: string
+          user_id?: string
+          weight?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recurring_expense_shares_recurring_id_fkey"
+            columns: ["recurring_id"]
+            isOneToOne: false
+            referencedRelation: "recurring_expenses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recurring_expense_shares_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recurring_expenses: {
+        Row: {
+          active: boolean
+          amount_cents: number
+          charges_made: number
+          confirmed_at: string | null
+          created_at: string
+          created_by: string | null
+          description: string
+          first_confirmed_at: string | null
+          frequency: Database["public"]["Enums"]["recurring_frequency"]
+          household_id: string
+          id: string
+          interval_count: number
+          next_charge_on: string
+          paid_by: string
+          rejected_by: string | null
+          rejected_reason: string | null
+          split_method: Database["public"]["Enums"]["expense_split_method"]
+          starts_on: string
+          status: Database["public"]["Enums"]["triqui_status"]
+          updated_at: string
+          updated_by: string | null
+          version: number
+        }
+        Insert: {
+          active?: boolean
+          amount_cents: number
+          charges_made?: number
+          confirmed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          description: string
+          first_confirmed_at?: string | null
+          frequency: Database["public"]["Enums"]["recurring_frequency"]
+          household_id: string
+          id?: string
+          interval_count?: number
+          next_charge_on: string
+          paid_by: string
+          rejected_by?: string | null
+          rejected_reason?: string | null
+          split_method: Database["public"]["Enums"]["expense_split_method"]
+          starts_on: string
+          status?: Database["public"]["Enums"]["triqui_status"]
+          updated_at?: string
+          updated_by?: string | null
+          version?: number
+        }
+        Update: {
+          active?: boolean
+          amount_cents?: number
+          charges_made?: number
+          confirmed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          first_confirmed_at?: string | null
+          frequency?: Database["public"]["Enums"]["recurring_frequency"]
+          household_id?: string
+          id?: string
+          interval_count?: number
+          next_charge_on?: string
+          paid_by?: string
+          rejected_by?: string | null
+          rejected_reason?: string | null
+          split_method?: Database["public"]["Enums"]["expense_split_method"]
+          starts_on?: string
+          status?: Database["public"]["Enums"]["triqui_status"]
+          updated_at?: string
+          updated_by?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recurring_expenses_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recurring_expenses_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recurring_expenses_paid_by_fkey"
+            columns: ["paid_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      schedule_blocks: {
+        Row: {
+          created_at: string
+          ends_at: string
+          household_id: string
+          id: string
+          kind: Database["public"]["Enums"]["schedule_kind"]
+          label: string | null
+          starts_at: string
+          updated_at: string
+          user_id: string
+          weekday: number
+        }
+        Insert: {
+          created_at?: string
+          ends_at: string
+          household_id: string
+          id?: string
+          kind?: Database["public"]["Enums"]["schedule_kind"]
+          label?: string | null
+          starts_at: string
+          updated_at?: string
+          user_id: string
+          weekday: number
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string
+          household_id?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["schedule_kind"]
+          label?: string | null
+          starts_at?: string
+          updated_at?: string
+          user_id?: string
+          weekday?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedule_blocks_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "schedule_blocks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       settlements: {
         Row: {
           amount_cents: number
@@ -620,23 +1154,149 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      absence_check: {
+        Args: {
+          p_ends: string
+          p_except: string
+          p_household: string
+          p_starts: string
+          p_user: string
+        }
+        Returns: undefined
+      }
       accept_legal_document: {
         Args: { p_document: string; p_version: string }
         Returns: undefined
       }
+      add_schedule_blocks: {
+        Args: {
+          p_ends_at: string
+          p_household: string
+          p_kind: Database["public"]["Enums"]["schedule_kind"]
+          p_label?: string
+          p_starts_at: string
+          p_user?: string
+          p_weekdays: number[]
+        }
+        Returns: number
+      }
+      approve_chore: { Args: { p_occurrence: string }; Returns: undefined }
       can_access_triqui: { Args: { hid: string }; Returns: boolean }
       can_see_profile: { Args: { other: string }; Returns: boolean }
       cancel_payment: { Args: { p_settlement: string }; Returns: undefined }
+      chore_check: {
+        Args: {
+          p_assignment: Database["public"]["Enums"]["chore_assignment"]
+          p_check_start: boolean
+          p_frequency: Database["public"]["Enums"]["chore_frequency"]
+          p_household: string
+          p_people: string[]
+          p_starts_on: string
+          p_weekdays: number[]
+        }
+        Returns: number[]
+      }
+      chore_is_absent: {
+        Args: { p_day: string; p_household: string; p_user: string }
+        Returns: boolean
+      }
+      chore_occurrence_for_update: {
+        Args: { p_occurrence: string }
+        Returns: {
+          approved_at: string | null
+          approved_by: string | null
+          assignee_id: string | null
+          chore_id: string
+          created_at: string
+          done_at: string | null
+          done_by: string | null
+          due_on: string
+          household_id: string
+          id: string
+          manual: boolean
+          pointer_before: number | null
+          reopened_at: string | null
+          reopened_by: string | null
+          repaid_user: string | null
+          skipped_users: string[]
+          status: Database["public"]["Enums"]["chore_status"]
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "chore_occurrences"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      chore_occurs_on: {
+        Args: {
+          p_day: string
+          p_frequency: Database["public"]["Enums"]["chore_frequency"]
+          p_interval: number
+          p_starts: string
+          p_weekdays: number[]
+        }
+        Returns: boolean
+      }
+      chore_pick_rotation: {
+        Args: { p_chore: string; p_day: string; p_household: string }
+        Returns: Record<string, unknown>
+      }
+      chore_reset_from: {
+        Args: { p_chore: string; p_from: string }
+        Returns: undefined
+      }
+      chores_generate: { Args: { p_household: string }; Returns: number }
+      chores_redo_rotations: {
+        Args: { p_from: string; p_household: string }
+        Returns: undefined
+      }
+      complete_chore: { Args: { p_occurrence: string }; Returns: undefined }
       confirm_expense: {
         Args: { p_expense: string; p_version: number }
         Returns: undefined
       }
       confirm_payment: { Args: { p_settlement: string }; Returns: undefined }
+      confirm_recurring_expense: {
+        Args: { p_recurring: string; p_version: number }
+        Returns: undefined
+      }
+      copy_schedule: { Args: { p_from: string; p_to: string }; Returns: number }
+      create_chore: {
+        Args: {
+          p_assignment: Database["public"]["Enums"]["chore_assignment"]
+          p_effort: number
+          p_frequency: Database["public"]["Enums"]["chore_frequency"]
+          p_household: string
+          p_interval: number
+          p_notes?: string
+          p_people: string[]
+          p_requires_approval?: boolean
+          p_starts_on: string
+          p_title: string
+          p_weekdays: number[]
+        }
+        Returns: string
+      }
       create_expense: {
         Args: {
           p_amount_cents: number
           p_description: string
           p_household: string
+          p_payers: Json
+          p_shares: Json
+          p_spent_on: string
+          p_split_method: Database["public"]["Enums"]["expense_split_method"]
+        }
+        Returns: string
+      }
+      create_expense_from_shopping: {
+        Args: {
+          p_amount_cents: number
+          p_description: string
+          p_household: string
+          p_items: string[]
           p_payers: Json
           p_shares: Json
           p_spent_on: string
@@ -651,10 +1311,31 @@ export type Database = {
         }
         Returns: string
       }
+      create_recurring_expense: {
+        Args: {
+          p_amount_cents: number
+          p_description: string
+          p_frequency: Database["public"]["Enums"]["recurring_frequency"]
+          p_household: string
+          p_interval?: number
+          p_paid_by: string
+          p_shares: Json
+          p_split_method: Database["public"]["Enums"]["expense_split_method"]
+          p_starts_on: string
+        }
+        Returns: string
+      }
+      delete_absence: { Args: { p_absence: string }; Returns: undefined }
+      delete_chore: { Args: { p_chore: string }; Returns: undefined }
       delete_expense: {
         Args: { p_expense: string; p_version: number }
         Returns: undefined
       }
+      delete_recurring_expense: {
+        Args: { p_recurring: string; p_version: number }
+        Returns: undefined
+      }
+      delete_schedule_block: { Args: { p_block: string }; Returns: undefined }
       depart_member: {
         Args: { p_household: string; p_successor?: string; p_user: string }
         Returns: undefined
@@ -691,6 +1372,10 @@ export type Database = {
           timezone: string
         }[]
       }
+      household_has_resident: {
+        Args: { p_household: string; p_user: string }
+        Returns: boolean
+      }
       is_guardian_of: { Args: { p_minor: string }; Returns: boolean }
       is_household_admin: { Args: { hid: string }; Returns: boolean }
       is_household_adult: { Args: { hid: string }; Returns: boolean }
@@ -718,6 +1403,10 @@ export type Database = {
           net_cents: number
         }[]
       }
+      reassign_chore: {
+        Args: { p_occurrence: string; p_user?: string }
+        Returns: undefined
+      }
       record_payment: {
         Args: {
           p_amount_cents: number
@@ -728,17 +1417,97 @@ export type Database = {
         }
         Returns: string
       }
+      recurring_charge_date: {
+        Args: {
+          p_frequency: Database["public"]["Enums"]["recurring_frequency"]
+          p_interval?: number
+          p_n: number
+          p_start: string
+        }
+        Returns: string
+      }
+      recurring_check_start: {
+        Args: { p_start: string; p_today: string }
+        Returns: undefined
+      }
+      recurring_first_from: {
+        Args: {
+          p_frequency: Database["public"]["Enums"]["recurring_frequency"]
+          p_from: string
+          p_interval?: number
+          p_n: number
+          p_start: string
+        }
+        Returns: number
+      }
+      recurring_generate: { Args: { p_household: string }; Returns: number }
+      recurring_generate_all: { Args: never; Returns: number }
+      recurring_has_charges: { Args: { p_recurring: string }; Returns: boolean }
+      recurring_is_participant: {
+        Args: { p_recurring: string; p_user: string }
+        Returns: boolean
+      }
+      recurring_refresh_status: {
+        Args: { p_recurring: string }
+        Returns: undefined
+      }
+      recurring_save_parts: {
+        Args: {
+          p_amount: number
+          p_household: string
+          p_method: Database["public"]["Enums"]["expense_split_method"]
+          p_paid_by: string
+          p_recurring: string
+          p_shares: Json
+        }
+        Returns: undefined
+      }
       regenerate_invite_code: { Args: { p_household: string }; Returns: string }
       reject_expense: {
         Args: { p_expense: string; p_reason?: string; p_version: number }
         Returns: undefined
       }
       reject_payment: { Args: { p_settlement: string }; Returns: undefined }
+      reject_recurring_expense: {
+        Args: { p_reason?: string; p_recurring: string; p_version: number }
+        Returns: undefined
+      }
       remove_member: {
         Args: { p_household: string; p_user: string }
         Returns: undefined
       }
+      reopen_chore: { Args: { p_occurrence: string }; Returns: undefined }
       restore_household: { Args: { p_household: string }; Returns: undefined }
+      save_absence: {
+        Args: {
+          p_absence?: string
+          p_ends_on: string
+          p_household: string
+          p_note?: string
+          p_starts_on: string
+          p_user?: string
+        }
+        Returns: string
+      }
+      schedule_can_edit: {
+        Args: { p_household: string; p_user: string }
+        Returns: boolean
+      }
+      schedule_check_block: {
+        Args: {
+          p_ends: string
+          p_except: string
+          p_household: string
+          p_starts: string
+          p_user: string
+          p_weekday: number
+        }
+        Returns: undefined
+      }
+      schedule_lock_person: {
+        Args: { p_household: string; p_user: string }
+        Returns: undefined
+      }
       set_member_role: {
         Args: {
           p_household: string
@@ -747,16 +1516,31 @@ export type Database = {
         }
         Returns: undefined
       }
+      set_recurring_expense_active: {
+        Args: { p_active: boolean; p_recurring: string }
+        Returns: undefined
+      }
       share_shopping_item: {
         Args: { p_household: string; p_item: string }
         Returns: undefined
       }
       shares_household_with: { Args: { other: string }; Returns: boolean }
+      sync_chores: { Args: { p_household: string }; Returns: number }
+      sync_recurring_expenses: {
+        Args: { p_household: string }
+        Returns: number
+      }
+      take_chore: { Args: { p_occurrence: string }; Returns: undefined }
       triqui_can_answer_payment: {
         Args: { st: Database["public"]["Tables"]["settlements"]["Row"] }
         Returns: boolean
       }
       triqui_check_date: { Args: { p_date: string }; Returns: undefined }
+      triqui_household_today: { Args: { p_household: string }; Returns: string }
+      triqui_is_current_adult: {
+        Args: { p_household: string; p_user: string }
+        Returns: boolean
+      }
       triqui_is_participant: {
         Args: { p_expense: string; p_user: string }
         Returns: boolean
@@ -790,6 +1574,22 @@ export type Database = {
           weight: number
         }[]
       }
+      update_chore: {
+        Args: {
+          p_assignment: Database["public"]["Enums"]["chore_assignment"]
+          p_chore: string
+          p_effort: number
+          p_frequency: Database["public"]["Enums"]["chore_frequency"]
+          p_interval: number
+          p_notes?: string
+          p_people: string[]
+          p_requires_approval?: boolean
+          p_starts_on: string
+          p_title: string
+          p_weekdays: number[]
+        }
+        Returns: undefined
+      }
       update_expense: {
         Args: {
           p_amount_cents: number
@@ -803,13 +1603,44 @@ export type Database = {
         }
         Returns: undefined
       }
+      update_recurring_expense: {
+        Args: {
+          p_amount_cents: number
+          p_description: string
+          p_frequency: Database["public"]["Enums"]["recurring_frequency"]
+          p_interval?: number
+          p_paid_by: string
+          p_recurring: string
+          p_shares: Json
+          p_split_method: Database["public"]["Enums"]["expense_split_method"]
+          p_starts_on: string
+          p_version: number
+        }
+        Returns: undefined
+      }
+      update_schedule_block: {
+        Args: {
+          p_block: string
+          p_ends_at: string
+          p_kind: Database["public"]["Enums"]["schedule_kind"]
+          p_label?: string
+          p_starts_at: string
+          p_weekday: number
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       account_type: "resident" | "professional"
+      chore_assignment: "fixed" | "rotation" | "free"
+      chore_frequency: "once" | "daily" | "weekly" | "monthly"
+      chore_status: "pending" | "review" | "done"
       expense_source: "manual" | "shopping" | "recurring" | "landlord"
       expense_split_method: "equal" | "shares" | "exact"
       household_kind: "shared_flat" | "student_flat" | "couple" | "family"
       household_role: "admin" | "member" | "minor" | "landlord"
+      recurring_frequency: "weekly" | "monthly" | "yearly"
+      schedule_kind: "class" | "work" | "away"
       triqui_status: "pending" | "confirmed" | "rejected"
     }
     CompositeTypes: {
@@ -942,10 +1773,15 @@ export const Constants = {
   public: {
     Enums: {
       account_type: ["resident", "professional"],
+      chore_assignment: ["fixed", "rotation", "free"],
+      chore_frequency: ["once", "daily", "weekly", "monthly"],
+      chore_status: ["pending", "review", "done"],
       expense_source: ["manual", "shopping", "recurring", "landlord"],
       expense_split_method: ["equal", "shares", "exact"],
       household_kind: ["shared_flat", "student_flat", "couple", "family"],
       household_role: ["admin", "member", "minor", "landlord"],
+      recurring_frequency: ["weekly", "monthly", "yearly"],
+      schedule_kind: ["class", "work", "away"],
       triqui_status: ["pending", "confirmed", "rejected"],
     },
   },

@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "My homes",
-      "comingSoon": "Coming soon here: chores and schedules."
+      "comingSoon": "Coming soon here: household chat."
     },
     "invite": {
       "title": "Invite someone",
@@ -200,11 +200,12 @@
       "nameTooLong": "80 characters maximum",
       "quantityInvalid": "Quantity must be a number from 1 to 99",
       "generic": "Couldn't save. Check your connection and try again"
-    }
+    },
+    "toExpenses": "Turn into expense"
   },
-  "Triqui": {
-    "title": "Triqui",
-    "subtitle": "Household expenses and who owes whom.",
+  "Expenses": {
+    "title": "Expenses",
+    "subtitle": "Who paid what and who owes whom.",
     "addExpense": "Add expense",
     "you": "you",
     "youCap": "You",
@@ -254,7 +255,7 @@
       "left": "No longer lives here"
     },
     "expenses": {
-      "title": "Expenses",
+      "title": "History",
       "empty": "No expenses yet. Add the first one.",
       "paidBy": "Paid by {name}",
       "paidByMany": "Paid by {count}",
@@ -264,7 +265,9 @@
       "youEven": "you're square",
       "paidByYou": "You paid",
       "notYet": "doesn't count yet",
-      "notCounted": "doesn't count"
+      "notCounted": "doesn't count",
+      "sourceShopping": "Shopping",
+      "sourceRecurring": "Recurring"
     },
     "payments": {
       "title": "Payments",
@@ -304,7 +307,12 @@
       "deleteConfirm": "Delete “{description}”? It will stop counting in the balances.",
       "forceConfirm": "Approve it",
       "forceConfirmText": "Still waiting for: {names}. Approve it anyway? It will count in the balances from now on.",
-      "adminOnly": "It's confirmed: only an admin can edit or delete it."
+      "adminOnly": "It's confirmed: only an admin can edit or delete it.",
+      "recurringCharge": "recurring expense, added automatically",
+      "fromShopping": "from the shopping list, added by {name}",
+      "items": "{count, plural, one {Item} other {Items (#)}}",
+      "recurringHint": "This is a charge from a recurring expense: everyone confirmed it once when it was set up.",
+      "recurringLink": "See recurring expenses"
     },
     "form": {
       "newTitle": "New expense",
@@ -345,13 +353,412 @@
       "notAllowed": "You can't do this with this expense",
       "notPending": "This is no longer waiting for confirmation. Reload the page",
       "generic": "Couldn't save. Check your connection and try again",
-      "expenseChanged": "Someone changed this expense while you were looking at it. Reload the page and check it"
+      "expenseChanged": "Someone changed this expense while you were looking at it. Reload the page and check it",
+      "itemsRequired": "Choose at least one item",
+      "itemsGone": "The shopping list changed in the meantime. Reload the page and check it",
+      "startInvalid": "The first charge can be up to 3 months ago and at most a year from now",
+      "scheduleLocked": "Charges have already been added: the schedule can't change"
     },
     "leftBanner": "You no longer live in this household. You can see your balance, confirm and record payments until you're square.",
     "leftDebts": {
       "title": "Pending balances in households you left",
       "owe": "You owe {amount}",
       "owed": "You are owed {amount}"
+    },
+    "fromShopping": {
+      "title": "Turn shopping into an expense",
+      "subtitle": "Choose what's included, enter what it cost and it's split like any other expense.",
+      "defaultDescription": "Groceries",
+      "items": "What's included in this expense?",
+      "itemsHint": "When you save, these items leave the shopping list.",
+      "empty": "Nothing on the list is marked as bought. Tick things off as you buy them and come back here.",
+      "toList": "Go to the shopping list",
+      "link": "{count, plural, one {Was it the shopping? Turn the bought item into an expense} other {Was it the shopping? Turn the # bought items into an expense}}"
+    },
+    "recurring": {
+      "title": "Recurring expenses",
+      "subtitle": "Subscriptions, internet, electricity… Confirmed once, then added automatically whenever they're due.",
+      "add": "New recurring expense",
+      "empty": "No recurring expenses yet. Add the subscriptions and bills that repeat and they'll be added automatically.",
+      "tileEmpty": "Subscriptions and bills that add themselves",
+      "tileActive": "{count, plural, =0 {None active} one {# active} other {# active}}",
+      "schedule": "{frequency, select, weekly {{interval, plural, one {Weekly} other {Every # weeks}}} monthly {{interval, plural, one {Monthly} =3 {Quarterly} =6 {Every 6 months} other {Every # months}}} yearly {{interval, plural, one {Yearly} other {Every # years}}} other {}}",
+      "scheduleOption": "{frequency, select, weekly {{interval, plural, one {Every week} other {Every # weeks}}} monthly {{interval, plural, one {Every month} =3 {Every 3 months (quarterly)} =6 {Every 6 months} other {Every # months}}} yearly {{interval, plural, one {Every year} other {Every # years}}} other {}}",
+      "everyText": "{frequency, select, weekly {{interval, plural, one {every week} other {every # weeks}}} monthly {{interval, plural, one {every month} other {every # months}}} yearly {{interval, plural, one {every year} other {every # years}}} other {}}",
+      "paidBy": "Paid by {name}",
+      "paidByYou": "You pay it",
+      "among": "Split between {names}",
+      "yourShare": "your share {amount}",
+      "waitingFor": "Waiting for: {names}",
+      "rejectedBy": "Rejected by {name}. Whoever created it can fix it or delete it.",
+      "paused": "Paused",
+      "payerGone": "Stopped: {name} no longer lives here. An admin has to change who pays it.",
+      "next": "Next charge: {date}",
+      "firstCharge": "First charge: {date}.",
+      "firstChargePast": "First charge: {date}. It's already passed: the charges that were due are added once it's confirmed.",
+      "goneMembers": "No longer live here and are left out of the next charges: {names}.",
+      "confirm": "Confirm",
+      "rejectSubmit": "Reject recurring expense",
+      "rejectPlaceholder": "For example: I don't use that subscription",
+      "edit": "Edit",
+      "pause": "Pause",
+      "resume": "Resume",
+      "delete": "Delete",
+      "pauseConfirm": "Pause “{description}”? Nothing will be added until you resume it, and resuming doesn't charge what was due in between.",
+      "deleteConfirm": "Delete the recurring expense “{description}”? Charges already added stay in the history.",
+      "adminOnly": "It's confirmed: only an admin can edit or delete it.",
+      "pendingForMe": "{name} wants to add a recurring expense: “{description}”",
+      "pendingForMeMeta": "{amount} {every} · your share {share}",
+      "form": {
+        "newTitle": "New recurring expense",
+        "newHint": "Everyone involved is asked to confirm it once. After that it's added automatically.",
+        "editTitle": "Edit recurring expense",
+        "descriptionPlaceholder": "Netflix, internet, electricity…",
+        "amount": "Amount (€)",
+        "startsOn": "First charge",
+        "frequency": "How often?",
+        "startsOnHint": "The first charge can be up to 3 months ago: the charges already due will be added.",
+        "scheduleLocked": "Charges have already been added, so the schedule can't change. If you need to, delete this recurring expense and create a new one.",
+        "paidBy": "Who pays it?",
+        "split": "Who is it split between?",
+        "perCharge": "Each person's share of every charge.",
+        "willConfirm": "These people will be asked to confirm once: {names}. After that it will be added {every}.",
+        "onlyYou": "Only you are involved: it will be confirmed when you save and added {every}.",
+        "newcomersConfirm": "Newcomers will be asked to confirm: {names}. Nothing is added until they do.",
+        "staysConfirmed": "It stays confirmed: nobody has to confirm it again. Changes apply to the next charges.",
+        "editPendingHint": "When you save, everyone will be asked to confirm again.",
+        "editConfirmedHint": "You're editing it as an admin: it stays confirmed and charges already added don't change. If you add someone, it pauses until they confirm; when it starts again it carries on from today (nothing is charged for the time it was stopped).",
+        "save": "Save recurring expense"
+      }
+    }
+  },
+  "Schedules": {
+    "title": "Schedules",
+    "subtitle": "Who's home and who isn't, based on what everyone has added.",
+    "you": "you",
+    "youCap": "You",
+    "someone": "Someone",
+    "kinds": {
+      "class": "Class",
+      "work": "Work",
+      "away": "Out"
+    },
+    "weekdays": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
+    "weekdaysShort": {
+      "1": "M",
+      "2": "T",
+      "3": "W",
+      "4": "T",
+      "5": "F",
+      "6": "S",
+      "7": "S"
+    },
+    "now": {
+      "title": "Now ({time})",
+      "home": "{count, plural, =0 {Home} other {Home (#)}}",
+      "out": "{count, plural, =0 {Out} other {Out (#)}}",
+      "nobodyHome": "Nobody is home right now.",
+      "nobodyOut": "Nobody has anything on right now.",
+      "leaves": "leaves at {time} ({what})",
+      "until": "{what} until {time}",
+      "awayUntil": "Away until {date}",
+      "note": "Based on the schedules and absences everyone has added."
+    },
+    "day": {
+      "title": "Each day",
+      "today": "today",
+      "nothing": "Nothing added",
+      "away": "Away all day",
+      "awayLegend": "Away all day"
+    },
+    "absences": {
+      "title": "Absences",
+      "empty": "Nobody has said they'll be away.",
+      "range": "{from} to {to}",
+      "oneDay": "On {date}",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this absence?"
+    },
+    "actions": {
+      "editMine": "Edit my schedule",
+      "addAbsence": "Let others know you'll be away",
+      "editMinor": "{name}'s schedule"
+    },
+    "editor": {
+      "titleMine": "My schedule",
+      "titleOf": "{name}'s schedule",
+      "subtitle": "Add when you're not home each week: classes, work… Everyone in the household can see it.",
+      "list": "What's added",
+      "empty": "Nothing added yet.",
+      "addTitle": "Add a time slot",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete “{what}” on {day} ({hours})?",
+      "copyTitle": "Copy from another household",
+      "copyHint": "If you already have your schedule in another household, copy it here. It replaces what you have in this one.",
+      "copyFrom": "Copy from",
+      "copyOption": "{name} ({count, plural, one {# slot} other {# slots}})",
+      "copy": "Copy schedule",
+      "copyConfirm": "Your schedule in this household will be replaced with the one from “{name}”. Continue?"
+    },
+    "form": {
+      "days": "Which days?",
+      "day": "Day",
+      "weekdaysQuick": "Monday to Friday",
+      "allDays": "Every day",
+      "startsAt": "From",
+      "endsAt": "To",
+      "midnightHint": "If it goes past midnight, add it as two slots (until 23:59 and from 0:00).",
+      "kind": "What is it?",
+      "label": "Label (optional)",
+      "labelPlaceholder": "Uni, gym, evening shift…",
+      "add": "{count, plural, one {Add} other {Add to # days}}",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "editTitle": "Edit time slot"
+    },
+    "absenceForm": {
+      "newTitle": "Let others know you'll be away",
+      "newTitleOf": "{name}'s absence",
+      "editTitle": "Edit absence",
+      "subtitle": "Days you won't be home: a trip, a weekend away…",
+      "startsOn": "From",
+      "endsOn": "Until (included)",
+      "note": "Note (optional)",
+      "notePlaceholder": "On a trip, visiting family…",
+      "save": "Save absence"
+    },
+    "tile": {
+      "home": "Home now: {home} of {total}",
+      "empty": "Add when you're away from home"
+    },
+    "errors": {
+      "daysRequired": "Choose at least one day",
+      "timeInvalid": "Enter a time, for example 9:00",
+      "endBeforeStart": "It has to end after it starts (on the same day)",
+      "overlap": "It overlaps another slot of yours that day",
+      "labelTooLong": "40 characters at most",
+      "tooMany": "You've reached the limit (50 slots or 100 absences)",
+      "dateInvalid": "Choose a date",
+      "absenceEndBeforeStart": "The end can't be before the start",
+      "absencePast": "That absence is already over",
+      "absenceTooLong": "An absence can last up to a year and start at most a year from now",
+      "absenceOverlap": "You already have an absence on those dates",
+      "noteTooLong": "80 characters at most",
+      "nothingToCopy": "You have nothing added in that household",
+      "notAllowed": "You can't change this schedule",
+      "generic": "Something went wrong. Please try again"
+    }
+  },
+  "Chores": {
+    "title": "Chores",
+    "subtitle": "Who does what at home. Turns are shared out automatically, even when someone is away.",
+    "youCap": "You",
+    "someone": "Someone",
+    "free": "Up for grabs",
+    "minor": "minor",
+    "today": "today",
+    "todayCap": "Today",
+    "tomorrow": "Tomorrow",
+    "emptyAdult": "No chores yet. Add the household ones (dishes, bins, bathroom…) and choose whether they rotate, always go to the same person or are up for grabs.",
+    "emptyMinor": "No chores yet. When an adult in the household adds them, you'll see yours here.",
+    "createFirst": "Add the first chore",
+    "effortLabel": "Effort: {effort}",
+    "efforts": {
+      "1": "Light",
+      "2": "Medium",
+      "3": "Heavy"
+    },
+    "frequencies": {
+      "once": "Once",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "assignments": {
+      "fixed": "One person",
+      "rotation": "Take turns",
+      "free": "Up for grabs"
+    },
+    "intervals": {
+      "daily": "{count, plural, one {Every day} other {Every # days}}",
+      "weekly": "{count, plural, one {Every week} other {Every # weeks}}",
+      "monthly": "{count, plural, one {Every month} other {Every # months}}"
+    },
+    "weekdays": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
+    "weekdaysShort": {
+      "1": "M",
+      "2": "T",
+      "3": "W",
+      "4": "T",
+      "5": "F",
+      "6": "S",
+      "7": "S"
+    },
+    "statuses": {
+      "pending": "To do",
+      "review": "Waiting for approval",
+      "done": "Done",
+      "overdue": "Overdue"
+    },
+    "schedule": {
+      "once": "Once: {date}",
+      "daily": "{interval, plural, one {Every day} other {Every # days}}",
+      "everyDay": "Every day",
+      "weekly": "{interval, plural, one {Every week} other {Every # weeks}}: {days}",
+      "monthly": "{interval, plural, one {Every month} other {Every # months}}, on day {day}",
+      "monthlyLate": "{interval, plural, one {Every month} other {Every # months}}, on day {day} (or the last day in shorter months)"
+    },
+    "who": {
+      "fixed": "Always: {name}",
+      "rotation": "Taking turns: {names}",
+      "free": "Up for grabs: whoever takes it"
+    },
+    "summary": {
+      "today": "{count, plural, =0 {Nothing for you today} one {# chore for you today} other {# chores for you today}}",
+      "overdue": "{count, plural, one {# overdue} other {# overdue}}",
+      "toApprove": "{count, plural, one {# to approve} other {# to approve}}",
+      "allGood": "Nothing overdue. Nice!"
+    },
+    "sections": {
+      "overdue": "Overdue",
+      "toApprove": "To approve",
+      "waiting": "Waiting for approval",
+      "today": "Today, {date}",
+      "todayEmpty": "Nothing to do today."
+    },
+    "upcoming": {
+      "title": "Next few days",
+      "all": "All",
+      "mine": "Mine",
+      "empty": "Nothing in the next few days.",
+      "emptyMine": "Nothing for you in the next few days."
+    },
+    "share": {
+      "title": "This week's split",
+      "numbers": "{count, plural, one {# chore} other {# chores}} · {points, plural, one {# point} other {# points}} · {done, plural, =0 {none done} other {# done}}",
+      "hint": "Points by effort: light 1, medium 2, heavy 3. Monday to Sunday."
+    },
+    "row": {
+      "complete": "Mark “{title}” as done",
+      "overdue": "Overdue",
+      "review": "Waiting for approval",
+      "done": "Done",
+      "doneBy": "Done by {name}",
+      "reopenedBy": "{name} says it isn't done",
+      "take": "I'll take it",
+      "approve": "Approve",
+      "reopen": "Not done",
+      "reopenConfirm": "Are you sure “{title}” isn't done? It will go back to to-do."
+    },
+    "actions": {
+      "new": "New chore",
+      "all": "All chores"
+    },
+    "manage": {
+      "title": "All chores",
+      "subtitle": "The household chores, how often they happen and whose turn it is.",
+      "subtitleAdult": "The household chores, how often they happen and whose turn it is. Tap “Edit” to change one.",
+      "empty": "No chores yet.",
+      "emptyAdult": "No chores yet. Add the first one with the button above.",
+      "next": "Next: {date} ({name})",
+      "noNext": "No upcoming days",
+      "approval": "Needs approval",
+      "edit": "Edit"
+    },
+    "tile": {
+      "empty": "Share out the household chores"
+    },
+    "form": {
+      "newTitle": "New chore",
+      "newSubtitle": "What needs doing, how often and whose turn it is.",
+      "editTitle": "Edit chore",
+      "editSubtitle": "Upcoming days are redone with your changes. Anything already done or changed by hand stays as it is.",
+      "title": "What needs doing?",
+      "titlePlaceholder": "Dishes, take out the bins, clean the bathroom…",
+      "when": "How often?",
+      "every": "Repeats",
+      "days": "Which days?",
+      "weekdaysQuick": "Monday to Friday",
+      "allDays": "Every day",
+      "onDay": "Which day?",
+      "startsOn": "Starts on",
+      "preview": "Next times: {dates}",
+      "previewNone": "With these dates it never happens. Check the days or the start date.",
+      "who": "Whose turn is it?",
+      "rotationOrder": "Turn order",
+      "moveUp": "Move {name} up",
+      "moveDown": "Move {name} down",
+      "remove": "Remove {name} from the turns",
+      "add": "Add",
+      "rotationHint": "Everyone takes a turn in order. If someone is away that day, they're skipped and get the next turn when they're back.",
+      "freeHint": "Nobody is assigned: anyone can take it from the chores list.",
+      "effort": "Effort",
+      "effortHint": "Helps you see whether the split is fair.",
+      "notes": "Note (optional)",
+      "notesPlaceholder": "What's included, where things are…",
+      "approval": "Ask an adult to approve it",
+      "approvalHint": "When a minor marks it done, it waits until an adult says it's fine.",
+      "saving": "Saving…",
+      "save": "Save changes",
+      "create": "Add chore",
+      "delete": "Delete chore",
+      "deleteConfirm": "Delete “{title}”? Days still to do are removed; anything already done stays in the history."
+    },
+    "day": {
+      "who": "Whose turn",
+      "when": "Day",
+      "status": "Status",
+      "repeats": "Repeats",
+      "split": "Split",
+      "notes": "Note",
+      "historyDone": "Marked as done by {name}",
+      "historyApproved": "Approved by {name}",
+      "historyReopened": "{name} said it wasn't done",
+      "manual": "This day was changed by hand: it stays put even if the turns are redone.",
+      "approvalNote": "If a minor marks it done, an adult needs to approve it.",
+      "complete": "Mark as done",
+      "completeFor": "I did it (it was {name}'s turn)",
+      "reassign": "Give it to",
+      "leaveFree": "Nobody (up for grabs)",
+      "reassignButton": "Change",
+      "reassignHint": "Only changes this day. The turns stay the same.",
+      "editChore": "Edit the chore"
+    },
+    "errors": {
+      "titleRequired": "Write what needs doing",
+      "titleTooLong": "60 characters at most",
+      "notesTooLong": "200 characters at most",
+      "daysRequired": "Choose at least one day",
+      "startInvalid": "Choose a day from today up to a year from now",
+      "personRequired": "Choose whose chore it is",
+      "rotationRequired": "Choose who takes turns",
+      "personGone": "Someone in the list no longer lives in the household. Reload the page",
+      "alreadyDone": "It was already done",
+      "notDone": "It was already to do",
+      "notWaiting": "It's no longer waiting for approval",
+      "onlyOwn": "You can only mark your own",
+      "taken": "Someone took it first",
+      "notFound": "This chore no longer exists",
+      "notAllowed": "You can't do this",
+      "generic": "Something went wrong. Please try again"
     }
   }
 }

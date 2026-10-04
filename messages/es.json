@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: tareas y horarios."
+      "comingSoon": "Muy pronto, aquí: el chat del hogar."
     },
     "invite": {
       "title": "Invitar a alguien",
@@ -200,11 +200,12 @@
       "nameTooLong": "Máximo 80 caracteres",
       "quantityInvalid": "La cantidad tiene que ser un número del 1 al 99",
       "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo"
-    }
+    },
+    "toExpenses": "Pasar a gastos"
   },
-  "Triqui": {
-    "title": "Triqui",
-    "subtitle": "Los gastos del hogar y quién debe a quién.",
+  "Expenses": {
+    "title": "Gastos",
+    "subtitle": "Quién ha pagado qué y quién debe a quién.",
     "addExpense": "Añadir gasto",
     "you": "tú",
     "youCap": "Tú",
@@ -254,7 +255,7 @@
       "left": "Ya no vive aquí"
     },
     "expenses": {
-      "title": "Gastos",
+      "title": "Historial",
       "empty": "Aún no hay gastos. Añade el primero.",
       "paidBy": "Pagó {name}",
       "paidByMany": "Pagaron {count}",
@@ -264,7 +265,9 @@
       "youEven": "estás en paz",
       "paidByYou": "Pagaste tú",
       "notYet": "aún no cuenta",
-      "notCounted": "no cuenta"
+      "notCounted": "no cuenta",
+      "sourceShopping": "Compra",
+      "sourceRecurring": "Fijo"
     },
     "payments": {
       "title": "Pagos",
@@ -304,7 +307,12 @@
       "deleteConfirm": "¿Borrar «{description}»? Dejará de contar en los saldos.",
       "forceConfirm": "Darlo por bueno",
       "forceConfirmText": "Aún no ha confirmado: {names}. ¿Darlo por bueno igualmente? Contará en los saldos desde ahora.",
-      "adminOnly": "Ya está confirmado: solo un admin puede editarlo o borrarlo."
+      "adminOnly": "Ya está confirmado: solo un admin puede editarlo o borrarlo.",
+      "recurringCharge": "gasto fijo, se apunta solo",
+      "fromShopping": "de la compra, añadido por {name}",
+      "items": "{count, plural, one {Producto} other {Productos (#)}}",
+      "recurringHint": "Es un cargo de un gasto fijo: lo confirmasteis una vez al crearlo.",
+      "recurringLink": "Ver gastos fijos"
     },
     "form": {
       "newTitle": "Nuevo gasto",
@@ -345,13 +353,412 @@
       "notAllowed": "No puedes hacer esto con este gasto",
       "notPending": "Esto ya no está esperando confirmación. Recarga la página",
       "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo",
-      "expenseChanged": "Alguien ha cambiado este gasto mientras lo mirabas. Recarga la página y revísalo"
+      "expenseChanged": "Alguien ha cambiado este gasto mientras lo mirabas. Recarga la página y revísalo",
+      "itemsRequired": "Elige al menos un producto",
+      "itemsGone": "La lista de la compra ha cambiado mientras tanto. Recarga la página y revísalo",
+      "startInvalid": "El primer cargo puede ser de hasta 3 meses atrás y, como mucho, dentro de un año",
+      "scheduleLocked": "Ya hay cargos apuntados: no se puede cambiar cuándo se cobra"
     },
     "leftBanner": "Ya no vives en este hogar. Puedes ver tu saldo, confirmar y apuntar pagos hasta quedar en paz.",
     "leftDebts": {
       "title": "Cuentas pendientes en hogares que dejaste",
       "owe": "Debes {amount}",
       "owed": "Te deben {amount}"
+    },
+    "fromShopping": {
+      "title": "Pasar la compra a gastos",
+      "subtitle": "Elige qué entra, apunta lo que costó y se reparte como cualquier gasto.",
+      "defaultDescription": "Compra",
+      "items": "¿Qué entra en este gasto?",
+      "itemsHint": "Al guardar, estos productos salen de la lista de la compra.",
+      "empty": "No hay nada marcado como comprado en la lista. Márcalo al comprar y vuelve aquí.",
+      "toList": "Ir a la lista de la compra",
+      "link": "{count, plural, one {¿Es la compra? Pasa a gastos el producto comprado} other {¿Es la compra? Pasa a gastos los # productos comprados}}"
+    },
+    "recurring": {
+      "title": "Gastos fijos",
+      "subtitle": "Suscripciones, internet, luz… Se confirman una vez y después se apuntan solos cada vez que toca.",
+      "add": "Nuevo gasto fijo",
+      "empty": "Aún no hay gastos fijos. Apunta las suscripciones y facturas que se repiten y se añadirán solas.",
+      "tileEmpty": "Suscripciones y facturas que se apuntan solas",
+      "tileActive": "{count, plural, =0 {Ninguno activo} one {# activo} other {# activos}}",
+      "schedule": "{frequency, select, weekly {{interval, plural, one {Semanal} other {Cada # semanas}}} monthly {{interval, plural, one {Mensual} =3 {Trimestral} =6 {Semestral} other {Cada # meses}}} yearly {{interval, plural, one {Anual} other {Cada # años}}} other {}}",
+      "scheduleOption": "{frequency, select, weekly {{interval, plural, one {Cada semana} other {Cada # semanas}}} monthly {{interval, plural, one {Cada mes} =3 {Cada 3 meses (trimestral)} =6 {Cada 6 meses (semestral)} other {Cada # meses}}} yearly {{interval, plural, one {Cada año} other {Cada # años}}} other {}}",
+      "everyText": "{frequency, select, weekly {{interval, plural, one {cada semana} other {cada # semanas}}} monthly {{interval, plural, one {cada mes} other {cada # meses}}} yearly {{interval, plural, one {cada año} other {cada # años}}} other {}}",
+      "paidBy": "Lo paga {name}",
+      "paidByYou": "Lo pagas tú",
+      "among": "Entre {names}",
+      "yourShare": "a ti te tocan {amount}",
+      "waitingFor": "Falta que confirme: {names}",
+      "rejectedBy": "Rechazado por {name}. Quien lo creó puede corregirlo o borrarlo.",
+      "paused": "En pausa",
+      "payerGone": "Parado: {name} ya no vive aquí. Un admin tiene que cambiar quién lo paga.",
+      "next": "Próximo cargo: {date}",
+      "firstCharge": "Primer cargo: {date}.",
+      "firstChargePast": "Primer cargo: {date}. Ya ha pasado: al confirmarlo se apuntan los cargos que tocaban.",
+      "goneMembers": "Ya no viven aquí y no entran en los próximos cargos: {names}.",
+      "confirm": "Confirmar",
+      "rejectSubmit": "Rechazar gasto fijo",
+      "rejectPlaceholder": "Por ejemplo: yo no uso esa suscripción",
+      "edit": "Editar",
+      "pause": "Pausar",
+      "resume": "Reanudar",
+      "delete": "Borrar",
+      "pauseConfirm": "¿Pausar «{description}»? No se apuntará nada hasta que lo reanudes, y al reanudarlo no se cobra lo que tocó mientras tanto.",
+      "deleteConfirm": "¿Borrar el gasto fijo «{description}»? Los cargos ya apuntados se quedan en el historial.",
+      "adminOnly": "Ya está confirmado: solo un admin puede editarlo o borrarlo.",
+      "pendingForMe": "{name} quiere añadir un gasto fijo: «{description}»",
+      "pendingForMeMeta": "{amount} {every} · a ti te tocan {share}",
+      "form": {
+        "newTitle": "Nuevo gasto fijo",
+        "newHint": "Se pide confirmación una vez a quienes participan. Después se apunta solo.",
+        "editTitle": "Editar gasto fijo",
+        "descriptionPlaceholder": "Netflix, internet, luz…",
+        "amount": "Importe (€)",
+        "startsOn": "Primer cargo",
+        "frequency": "¿Cada cuánto?",
+        "startsOnHint": "El primer cargo puede ser de hasta 3 meses atrás: se apuntarán los cargos que ya tocaban.",
+        "scheduleLocked": "Ya se han apuntado cargos, así que no se puede cambiar cuándo se cobra. Si hace falta, borra este gasto fijo y crea otro.",
+        "paidBy": "¿Quién lo paga?",
+        "split": "¿Entre quiénes se reparte?",
+        "perCharge": "Lo que le toca a cada uno en cada cargo.",
+        "willConfirm": "Se pedirá confirmación una vez a: {names}. Después se apuntará solo {every}.",
+        "onlyYou": "Solo participas tú: quedará confirmado al guardar y se apuntará solo {every}.",
+        "newcomersConfirm": "Se pedirá confirmación a quien entra nuevo: {names}. Hasta entonces no se apunta nada.",
+        "staysConfirmed": "Sigue confirmado: nadie tiene que volver a confirmarlo. Los cambios valen para los próximos cargos.",
+        "editPendingHint": "Al guardar se volverá a pedir confirmación a todos.",
+        "editConfirmedHint": "Lo editas como admin: sigue confirmado y los cargos ya apuntados no cambian. Si añades a alguien, se para hasta que lo confirme; cuando vuelve a funcionar, sigue desde hoy (lo de mientras estaba parado no se cobra).",
+        "save": "Guardar gasto fijo"
+      }
+    }
+  },
+  "Schedules": {
+    "title": "Horarios",
+    "subtitle": "Quién está en casa y quién no, según lo que apunta cada uno.",
+    "you": "tú",
+    "youCap": "Tú",
+    "someone": "Alguien",
+    "kinds": {
+      "class": "Clase",
+      "work": "Trabajo",
+      "away": "Fuera"
+    },
+    "weekdays": {
+      "1": "Lunes",
+      "2": "Martes",
+      "3": "Miércoles",
+      "4": "Jueves",
+      "5": "Viernes",
+      "6": "Sábado",
+      "7": "Domingo"
+    },
+    "weekdaysShort": {
+      "1": "L",
+      "2": "M",
+      "3": "X",
+      "4": "J",
+      "5": "V",
+      "6": "S",
+      "7": "D"
+    },
+    "now": {
+      "title": "Ahora ({time})",
+      "home": "{count, plural, =0 {En casa} other {En casa (#)}}",
+      "out": "{count, plural, =0 {Fuera} other {Fuera (#)}}",
+      "nobodyHome": "Ahora no hay nadie en casa.",
+      "nobodyOut": "Nadie tiene nada apuntado ahora.",
+      "leaves": "sale a las {time} ({what})",
+      "until": "{what} hasta las {time}",
+      "awayUntil": "Fuera hasta el {date}",
+      "note": "Según los horarios y ausencias que ha apuntado cada uno."
+    },
+    "day": {
+      "title": "Cada día",
+      "today": "hoy",
+      "nothing": "Nada apuntado",
+      "away": "Fuera todo el día",
+      "awayLegend": "Fuera todo el día"
+    },
+    "absences": {
+      "title": "Ausencias",
+      "empty": "Nadie ha avisado de que vaya a estar fuera.",
+      "range": "Del {from} al {to}",
+      "oneDay": "El {date}",
+      "edit": "Editar",
+      "delete": "Borrar",
+      "deleteConfirm": "¿Borrar esta ausencia?"
+    },
+    "actions": {
+      "editMine": "Editar mi horario",
+      "addAbsence": "Avisar de una ausencia",
+      "editMinor": "Horario de {name}"
+    },
+    "editor": {
+      "titleMine": "Mi horario",
+      "titleOf": "Horario de {name}",
+      "subtitle": "Apunta cuándo no estás en casa cada semana: clases, trabajo… Lo ve todo el hogar.",
+      "list": "Lo apuntado",
+      "empty": "Aún no hay nada apuntado.",
+      "addTitle": "Añadir una franja",
+      "edit": "Editar",
+      "delete": "Borrar",
+      "deleteConfirm": "¿Borrar «{what}» del {day} ({hours})?",
+      "copyTitle": "Copiar de otro hogar",
+      "copyHint": "Si ya tienes tu horario en otro hogar, cópialo aquí. Sustituye lo que tengas apuntado en este.",
+      "copyFrom": "Copiar de",
+      "copyOption": "{name} ({count, plural, one {# franja} other {# franjas}})",
+      "copy": "Copiar horario",
+      "copyConfirm": "Se sustituirá tu horario de este hogar por el de «{name}». ¿Seguir?"
+    },
+    "form": {
+      "days": "¿Qué días?",
+      "day": "Día",
+      "weekdaysQuick": "De lunes a viernes",
+      "allDays": "Todos los días",
+      "startsAt": "Desde",
+      "endsAt": "Hasta",
+      "midnightHint": "Si pasa de medianoche, apúntalo en dos franjas (hasta las 23:59 y desde las 0:00).",
+      "kind": "¿Qué es?",
+      "label": "Etiqueta (opcional)",
+      "labelPlaceholder": "Uni, gimnasio, turno de tarde…",
+      "add": "{count, plural, one {Añadir} other {Añadir a # días}}",
+      "save": "Guardar cambios",
+      "saving": "Guardando…",
+      "editTitle": "Editar franja"
+    },
+    "absenceForm": {
+      "newTitle": "Avisar de una ausencia",
+      "newTitleOf": "Ausencia de {name}",
+      "editTitle": "Editar ausencia",
+      "subtitle": "Días en los que no vas a estar en casa: un viaje, el finde en el pueblo…",
+      "startsOn": "Desde el",
+      "endsOn": "Hasta el (incluido)",
+      "note": "Nota (opcional)",
+      "notePlaceholder": "De viaje, en el pueblo…",
+      "save": "Guardar ausencia"
+    },
+    "tile": {
+      "home": "Ahora en casa: {home} de {total}",
+      "empty": "Apunta cuándo estás fuera de casa"
+    },
+    "errors": {
+      "daysRequired": "Elige al menos un día",
+      "timeInvalid": "Escribe una hora, por ejemplo 9:00",
+      "endBeforeStart": "Tiene que acabar después de empezar (y el mismo día)",
+      "overlap": "Se pisa con otra franja tuya de ese día",
+      "labelTooLong": "Como mucho 40 letras",
+      "tooMany": "Has llegado al máximo (50 franjas o 100 ausencias)",
+      "dateInvalid": "Elige una fecha",
+      "absenceEndBeforeStart": "La vuelta no puede ser antes de la ida",
+      "absencePast": "Esa ausencia ya ha pasado",
+      "absenceTooLong": "Una ausencia puede ser de hasta un año, y empezar como mucho dentro de un año",
+      "absenceOverlap": "Ya tienes una ausencia en esas fechas",
+      "noteTooLong": "Como mucho 80 letras",
+      "nothingToCopy": "En ese hogar no tienes nada apuntado",
+      "notAllowed": "No puedes cambiar este horario",
+      "generic": "Algo ha ido mal. Inténtalo de nuevo"
+    }
+  },
+  "Chores": {
+    "title": "Tareas",
+    "subtitle": "Quién hace qué en casa. Los turnos se reparten solos, también cuando alguien está fuera.",
+    "youCap": "Tú",
+    "someone": "Alguien",
+    "free": "Libre",
+    "minor": "menor",
+    "today": "hoy",
+    "todayCap": "Hoy",
+    "tomorrow": "Mañana",
+    "emptyAdult": "Aún no hay tareas. Crea las de casa (fregar, la basura, el baño…) y decide si van por turnos, siempre para la misma persona o libres.",
+    "emptyMinor": "Aún no hay tareas. Cuando un adulto del hogar las cree, aquí verás las tuyas.",
+    "createFirst": "Crear la primera tarea",
+    "effortLabel": "Esfuerzo: {effort}",
+    "efforts": {
+      "1": "Ligera",
+      "2": "Normal",
+      "3": "Pesada"
+    },
+    "frequencies": {
+      "once": "Una vez",
+      "daily": "Diaria",
+      "weekly": "Semanal",
+      "monthly": "Mensual"
+    },
+    "assignments": {
+      "fixed": "Una persona",
+      "rotation": "Por turnos",
+      "free": "Libre"
+    },
+    "intervals": {
+      "daily": "{count, plural, one {Cada día} other {Cada # días}}",
+      "weekly": "{count, plural, one {Cada semana} other {Cada # semanas}}",
+      "monthly": "{count, plural, one {Cada mes} other {Cada # meses}}"
+    },
+    "weekdays": {
+      "1": "Lunes",
+      "2": "Martes",
+      "3": "Miércoles",
+      "4": "Jueves",
+      "5": "Viernes",
+      "6": "Sábado",
+      "7": "Domingo"
+    },
+    "weekdaysShort": {
+      "1": "L",
+      "2": "M",
+      "3": "X",
+      "4": "J",
+      "5": "V",
+      "6": "S",
+      "7": "D"
+    },
+    "statuses": {
+      "pending": "Pendiente",
+      "review": "Esperando el visto bueno",
+      "done": "Hecha",
+      "overdue": "Atrasada"
+    },
+    "schedule": {
+      "once": "Una vez: el {date}",
+      "daily": "{interval, plural, one {Cada día} other {Cada # días}}",
+      "everyDay": "Todos los días",
+      "weekly": "{interval, plural, one {Cada semana} other {Cada # semanas}}: {days}",
+      "monthly": "{interval, plural, one {Cada mes} other {Cada # meses}}, el día {day}",
+      "monthlyLate": "{interval, plural, one {Cada mes} other {Cada # meses}}, el día {day} (o el último, si el mes es más corto)"
+    },
+    "who": {
+      "fixed": "Siempre: {name}",
+      "rotation": "Por turnos: {names}",
+      "free": "Libre: quien la coja"
+    },
+    "summary": {
+      "today": "{count, plural, =0 {Hoy no te toca nada} one {Hoy te toca # tarea} other {Hoy te tocan # tareas}}",
+      "overdue": "{count, plural, one {# atrasada} other {# atrasadas}}",
+      "toApprove": "{count, plural, one {# por dar el visto bueno} other {# por dar el visto bueno}}",
+      "allGood": "Nada atrasado. ¡Bien!"
+    },
+    "sections": {
+      "overdue": "Atrasadas",
+      "toApprove": "Por dar el visto bueno",
+      "waiting": "Esperando el visto bueno",
+      "today": "Hoy, {date}",
+      "todayEmpty": "Hoy no hay nada que hacer."
+    },
+    "upcoming": {
+      "title": "Próximos días",
+      "all": "Todas",
+      "mine": "Las mías",
+      "empty": "No hay nada en los próximos días.",
+      "emptyMine": "No te toca nada en los próximos días."
+    },
+    "share": {
+      "title": "Reparto de esta semana",
+      "numbers": "{count, plural, one {# tarea} other {# tareas}} · {points, plural, one {# punto} other {# puntos}} · {done, plural, =0 {ninguna hecha} one {# hecha} other {# hechas}}",
+      "hint": "Puntos según el esfuerzo: ligera 1, normal 2, pesada 3. De lunes a domingo."
+    },
+    "row": {
+      "complete": "Marcar «{title}» como hecha",
+      "overdue": "Atrasada",
+      "review": "Esperando el visto bueno",
+      "done": "Hecha",
+      "doneBy": "La hizo {name}",
+      "reopenedBy": "{name} dice que no está hecha",
+      "take": "Me la quedo",
+      "approve": "Dar el visto bueno",
+      "reopen": "No está hecha",
+      "reopenConfirm": "¿Seguro que «{title}» no está hecha? Volverá a estar pendiente."
+    },
+    "actions": {
+      "new": "Nueva tarea",
+      "all": "Todas las tareas"
+    },
+    "manage": {
+      "title": "Todas las tareas",
+      "subtitle": "Las tareas de casa, cada cuánto se hacen y a quién le tocan.",
+      "subtitleAdult": "Las tareas de casa, cada cuánto se hacen y a quién le tocan. Toca «Editar» para cambiar una.",
+      "empty": "Aún no hay tareas.",
+      "emptyAdult": "Aún no hay tareas. Crea la primera con el botón de arriba.",
+      "next": "Próxima: {date} ({name})",
+      "noNext": "Sin días próximos",
+      "approval": "Con visto bueno",
+      "edit": "Editar"
+    },
+    "tile": {
+      "empty": "Reparte las tareas de casa"
+    },
+    "form": {
+      "newTitle": "Nueva tarea",
+      "newSubtitle": "Qué hay que hacer, cada cuánto y a quién le toca.",
+      "editTitle": "Editar tarea",
+      "editSubtitle": "Los días que vienen se rehacen con los cambios. Lo ya hecho y lo que se cambió a mano se queda como está.",
+      "title": "¿Qué hay que hacer?",
+      "titlePlaceholder": "Fregar, sacar la basura, limpiar el baño…",
+      "when": "¿Cada cuánto?",
+      "every": "Se repite",
+      "days": "¿Qué días?",
+      "weekdaysQuick": "De lunes a viernes",
+      "allDays": "Todos los días",
+      "onDay": "¿Qué día?",
+      "startsOn": "Empieza el",
+      "preview": "Próximas veces: {dates}",
+      "previewNone": "Con estas fechas no toca nunca. Revisa los días o el primer día.",
+      "who": "¿A quién le toca?",
+      "rotationOrder": "Orden de los turnos",
+      "moveUp": "Subir a {name}",
+      "moveDown": "Bajar a {name}",
+      "remove": "Quitar a {name} de los turnos",
+      "add": "Añadir",
+      "rotationHint": "Le toca a cada uno por orden. Si alguien está de ausencia ese día, se salta y le toca al volver.",
+      "freeHint": "Nadie la tiene asignada: cualquiera puede quedársela desde la lista de tareas.",
+      "effort": "Esfuerzo",
+      "effortHint": "Sirve para ver si el reparto es justo.",
+      "notes": "Nota (opcional)",
+      "notesPlaceholder": "Qué incluye, dónde están las cosas…",
+      "approval": "Pedir el visto bueno de un adulto",
+      "approvalHint": "Cuando la marque un menor, quedará pendiente hasta que un adulto diga que está bien.",
+      "saving": "Guardando…",
+      "save": "Guardar cambios",
+      "create": "Crear tarea",
+      "delete": "Borrar tarea",
+      "deleteConfirm": "¿Borrar «{title}»? Se quitan los días pendientes; lo ya hecho se queda en el historial."
+    },
+    "day": {
+      "who": "Le toca",
+      "when": "Día",
+      "status": "Cómo va",
+      "repeats": "Se repite",
+      "split": "Reparto",
+      "notes": "Nota",
+      "historyDone": "Marcada como hecha por {name}",
+      "historyApproved": "Visto bueno de {name}",
+      "historyReopened": "{name} dijo que no estaba hecha",
+      "manual": "Este día se cambió a mano: no cambia aunque se rehagan los turnos.",
+      "approvalNote": "Si la marca un menor, necesita el visto bueno de un adulto.",
+      "complete": "Marcar como hecha",
+      "completeFor": "La he hecho yo (le tocaba a {name})",
+      "reassign": "Pasársela a",
+      "leaveFree": "Nadie (libre)",
+      "reassignButton": "Cambiar",
+      "reassignHint": "Solo cambia este día. Los turnos siguen igual.",
+      "editChore": "Editar la tarea"
+    },
+    "errors": {
+      "titleRequired": "Escribe qué hay que hacer",
+      "titleTooLong": "Como mucho 60 letras",
+      "notesTooLong": "Como mucho 200 letras",
+      "daysRequired": "Elige al menos un día",
+      "startInvalid": "Elige un día de hoy a dentro de un año",
+      "personRequired": "Elige a quién le toca",
+      "rotationRequired": "Elige quién entra en los turnos",
+      "personGone": "Alguien de la lista ya no vive en el hogar. Recarga la página",
+      "alreadyDone": "Ya estaba hecha",
+      "notDone": "Ya estaba pendiente",
+      "notWaiting": "Ya no espera el visto bueno",
+      "onlyOwn": "Solo puedes marcar las tuyas",
+      "taken": "Alguien se la ha quedado antes",
+      "notFound": "Esta tarea ya no existe",
+      "notAllowed": "No puedes hacer esto",
+      "generic": "Algo ha ido mal. Inténtalo de nuevo"
     }
   }
 }

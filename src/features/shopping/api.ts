@@ -5,13 +5,14 @@ import type { AppSupabaseClient } from "@/lib/supabase/types";
 import type { ShoppingItem, ShoppingScope } from "./types";
 
 const ITEM_FIELDS =
-  "id, name, quantity, checked_at, created_at, requested_by, requester:profiles!shopping_items_requested_by_fkey(display_name)";
+  "id, name, quantity, checked_at, checked_by, created_at, requested_by, requester:profiles!shopping_items_requested_by_fkey(display_name)";
 
 type ItemRow = {
   id: string;
   name: string;
   quantity: number;
   checked_at: string | null;
+  checked_by: string | null;
   created_at: string;
   requested_by: string | null;
   requester: { display_name: string } | null;
@@ -23,6 +24,7 @@ function toItem(row: ItemRow): ShoppingItem {
     name: row.name,
     quantity: row.quantity,
     checkedAt: row.checked_at,
+    checkedBy: row.checked_by,
     createdAt: row.created_at,
     requestedBy: row.requested_by,
     requestedByName: row.requester?.display_name ?? null,

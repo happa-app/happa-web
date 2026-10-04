@@ -15,6 +15,12 @@
   color: var(--color-text-muted);
 }
 
+/* Título de una parte de la página (más pequeño que el de la página) */
+.sectionTitle {
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
 .actions {
   display: grid;
   gap: var(--space-3);
@@ -37,12 +43,20 @@
   text-decoration: underline;
 }
 
+/* Enlace suelto bajo un botón ("¿Es la compra? Pasa los productos comprados") */
+.inlineLink {
+  align-self: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: center;
+}
+
 .muted {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
 }
 
-/* Accesos a las secciones (lista de la compra, triqui...) */
+/* Accesos a las secciones (lista de la compra, gastos...) */
 .tiles {
   display: flex;
   flex-direction: column;

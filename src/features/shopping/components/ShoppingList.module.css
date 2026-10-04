@@ -255,3 +255,29 @@
 .chip:hover {
   background: var(--color-brand-soft);
 }
+
+/* Botones junto a "Comprados": pasar a gastos y borrar. Si no caben al lado del título,
+   bajan a la línea siguiente (a la derecha) en vez de aplastarlo. */
+.sectionHeader:has(.headerActions) {
+  flex-wrap: wrap;
+}
+
+.sectionHeader:has(.headerActions) .sectionTitle {
+  white-space: nowrap;
+}
+
+.headerActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  margin-left: auto;
+}
+
+a.textButton {
+  text-decoration: none;
+}
+
+a.textButton:hover {
+  text-decoration: underline;
+}

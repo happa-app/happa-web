@@ -16,9 +16,12 @@
   --color-error: #b3261e;
   --color-error-soft: #fbe9e7;
   --color-success-soft: #e6f2ea;
-  --color-owed: #3e7d55;           /* triqui: te deben */
-  --color-owe: #a8530b;            /* triqui: debes (ámbar; contraste AA sobre blanco) */
+  --color-owed: #3e7d55;           /* gastos: te deben */
+  --color-owe: #a8530b;            /* gastos: debes (ámbar; contraste AA sobre blanco) */
   --color-owe-soft: #fdf1e3;
+  --color-schedule-class: #7fbfba;  /* horarios: clase (turquesa de los diseños, algo más intenso) */
+  --color-schedule-work: #e3a75f;   /* horarios: trabajo */
+  --color-schedule-away: #a9b4bb;   /* horarios: fuera, y los días de ausencia */
 
   /* Tipografía */
   /* Geist la carga el layout; si fallara, se usa la fuente del sistema */
