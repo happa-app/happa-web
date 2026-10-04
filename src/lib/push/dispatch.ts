@@ -8,7 +8,7 @@
 //  3. Si el servicio dice que ese móvil ya no existe (404 o 410), se olvida (push_forget).
 // Usa la clave pública (anon) de Supabase: no hace falta la service_role.
 import { createClient } from "@supabase/supabase-js";
-import { createTranslator, type AbstractIntlMessages } from "next-intl";
+import { createTranslator, type Messages } from "next-intl";
 import { localizedUrl, notificationPhrase } from "@/features/notifications/text";
 import type { NotificationData, NotificationType } from "@/features/notifications/types";
 import { env } from "@/lib/env";
@@ -37,7 +37,9 @@ const MAX_ROUNDS = 4;
 // El aviso tal y como se ve en el móvil
 export function buildPushPayload(row: Pick<ClaimRow, "notification_id" | "type" | "data" | "url" | "ref_id">, locale: string): PushPayload {
   const lang = locale === "en" ? "en" : "es";
-  const messages = (lang === "en" ? en : es) as unknown as AbstractIntlMessages;
+  // Con el tipo "Messages" de next-intl los textos se comprueban igual que con useTranslations
+  // (así se le pueden pasar valores a una clave que se elige al momento, como "types.message")
+  const messages: Messages = lang === "en" ? en : es;
   const t = createTranslator({ locale: lang, messages, namespace: "Notifications" });
   const phrase = notificationPhrase(row, lang, t("someone"));
   return {
