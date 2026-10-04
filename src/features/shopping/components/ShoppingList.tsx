@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
+import { Link } from "@/i18n/navigation";
 import { useShoppingList } from "../hooks/useShoppingList";
 import { MAX_QUANTITY } from "../schemas";
 import { canEditItem, shownQuantity } from "../rules";
@@ -17,9 +18,18 @@ type Props = {
   canManageAll: boolean;
   // Solo en la lista personal: hogares a los que puedes pedir un producto
   shareTargets?: ShareTarget[];
+  // Solo en la lista común, para adultos: página para pasar lo comprado a gastos
+  toExpensesHref?: string;
 };
 
-export function ShoppingList({ scope, initialItems, currentUserId, canManageAll, shareTargets = [] }: Props) {
+export function ShoppingList({
+  scope,
+  initialItems,
+  currentUserId,
+  canManageAll,
+  shareTargets = [],
+  toExpensesHref,
+}: Props) {
   const t = useTranslations("Shopping");
   const { items, error, dismissError, add, toggle, remove, clearChecked, share } = useShoppingList(
     scope,
@@ -184,11 +194,18 @@ export function ShoppingList({ scope, initialItems, currentUserId, canManageAll,
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>{t("bought", { count: boughtItems.length })}</h2>
-            {clearable.length > 0 ? (
-              <button type="button" className={styles.textButton} onClick={onClearBought}>
-                {t("clearBought")}
-              </button>
-            ) : null}
+            <div className={styles.headerActions}>
+              {toExpensesHref && boughtItems.some((i) => !i.pending) ? (
+                <Link href={toExpensesHref} className={styles.textButton}>
+                  {t("toExpenses")}
+                </Link>
+              ) : null}
+              {clearable.length > 0 ? (
+                <button type="button" className={styles.textButton} onClick={onClearBought}>
+                  {t("clearBought")}
+                </button>
+              ) : null}
+            </div>
           </div>
           <ul className={styles.list}>{boughtItems.map(renderItem)}</ul>
         </section>

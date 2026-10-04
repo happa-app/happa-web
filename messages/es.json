@@ -200,11 +200,12 @@
       "nameTooLong": "Máximo 80 caracteres",
       "quantityInvalid": "La cantidad tiene que ser un número del 1 al 99",
       "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo"
-    }
+    },
+    "toExpenses": "Pasar a gastos"
   },
-  "Triqui": {
-    "title": "Triqui",
-    "subtitle": "Los gastos del hogar y quién debe a quién.",
+  "Expenses": {
+    "title": "Gastos",
+    "subtitle": "Quién ha pagado qué y quién debe a quién.",
     "addExpense": "Añadir gasto",
     "you": "tú",
     "youCap": "Tú",
@@ -254,7 +255,7 @@
       "left": "Ya no vive aquí"
     },
     "expenses": {
-      "title": "Gastos",
+      "title": "Historial",
       "empty": "Aún no hay gastos. Añade el primero.",
       "paidBy": "Pagó {name}",
       "paidByMany": "Pagaron {count}",
@@ -264,7 +265,9 @@
       "youEven": "estás en paz",
       "paidByYou": "Pagaste tú",
       "notYet": "aún no cuenta",
-      "notCounted": "no cuenta"
+      "notCounted": "no cuenta",
+      "sourceShopping": "Compra",
+      "sourceRecurring": "Fijo"
     },
     "payments": {
       "title": "Pagos",
@@ -304,7 +307,12 @@
       "deleteConfirm": "¿Borrar «{description}»? Dejará de contar en los saldos.",
       "forceConfirm": "Darlo por bueno",
       "forceConfirmText": "Aún no ha confirmado: {names}. ¿Darlo por bueno igualmente? Contará en los saldos desde ahora.",
-      "adminOnly": "Ya está confirmado: solo un admin puede editarlo o borrarlo."
+      "adminOnly": "Ya está confirmado: solo un admin puede editarlo o borrarlo.",
+      "recurringCharge": "gasto fijo, se apunta solo",
+      "fromShopping": "de la compra, añadido por {name}",
+      "items": "{count, plural, one {Producto} other {Productos (#)}}",
+      "recurringHint": "Es un cargo de un gasto fijo: lo confirmasteis una vez al crearlo.",
+      "recurringLink": "Ver gastos fijos"
     },
     "form": {
       "newTitle": "Nuevo gasto",
@@ -345,13 +353,90 @@
       "notAllowed": "No puedes hacer esto con este gasto",
       "notPending": "Esto ya no está esperando confirmación. Recarga la página",
       "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo",
-      "expenseChanged": "Alguien ha cambiado este gasto mientras lo mirabas. Recarga la página y revísalo"
+      "expenseChanged": "Alguien ha cambiado este gasto mientras lo mirabas. Recarga la página y revísalo",
+      "itemsRequired": "Elige al menos un producto",
+      "itemsGone": "La lista de la compra ha cambiado mientras tanto. Recarga la página y revísalo",
+      "startInvalid": "El primer cargo puede ser de hasta 3 meses atrás y, como mucho, dentro de un año",
+      "scheduleLocked": "Ya hay cargos apuntados: no se puede cambiar cuándo se cobra"
     },
     "leftBanner": "Ya no vives en este hogar. Puedes ver tu saldo, confirmar y apuntar pagos hasta quedar en paz.",
     "leftDebts": {
       "title": "Cuentas pendientes en hogares que dejaste",
       "owe": "Debes {amount}",
       "owed": "Te deben {amount}"
+    },
+    "fromShopping": {
+      "title": "Pasar la compra a gastos",
+      "subtitle": "Elige qué entra, apunta lo que costó y se reparte como cualquier gasto.",
+      "defaultDescription": "Compra",
+      "items": "¿Qué entra en este gasto?",
+      "itemsHint": "Al guardar, estos productos salen de la lista de la compra.",
+      "empty": "No hay nada marcado como comprado en la lista. Márcalo al comprar y vuelve aquí.",
+      "toList": "Ir a la lista de la compra",
+      "link": "{count, plural, one {¿Es la compra? Pasa a gastos el producto comprado} other {¿Es la compra? Pasa a gastos los # productos comprados}}"
+    },
+    "recurring": {
+      "title": "Gastos fijos",
+      "subtitle": "Suscripciones, internet, luz… Se confirman una vez y después se apuntan solos cada vez que toca.",
+      "add": "Nuevo gasto fijo",
+      "empty": "Aún no hay gastos fijos. Apunta las suscripciones y facturas que se repiten y se añadirán solas.",
+      "tileEmpty": "Suscripciones y facturas que se apuntan solas",
+      "tileActive": "{count, plural, =0 {Ninguno activo} one {# activo} other {# activos}}",
+      "frequency": {
+        "weekly": "Semanal",
+        "monthly": "Mensual",
+        "yearly": "Anual"
+      },
+      "every": {
+        "weekly": "cada semana",
+        "monthly": "cada mes",
+        "yearly": "cada año"
+      },
+      "paidBy": "Lo paga {name}",
+      "paidByYou": "Lo pagas tú",
+      "among": "Entre {names}",
+      "yourShare": "a ti te tocan {amount}",
+      "waitingFor": "Falta que confirme: {names}",
+      "rejectedBy": "Rechazado por {name}. Quien lo creó puede corregirlo o borrarlo.",
+      "paused": "En pausa",
+      "payerGone": "Parado: {name} ya no vive aquí. Un admin tiene que cambiar quién lo paga.",
+      "next": "Próximo cargo: {date}",
+      "firstCharge": "Primer cargo: {date}.",
+      "firstChargePast": "Primer cargo: {date}. Ya ha pasado: al confirmarlo se apuntan los cargos que tocaban.",
+      "goneMembers": "Ya no viven aquí y no entran en los próximos cargos: {names}.",
+      "confirm": "Confirmar",
+      "rejectSubmit": "Rechazar gasto fijo",
+      "rejectPlaceholder": "Por ejemplo: yo no uso esa suscripción",
+      "edit": "Editar",
+      "pause": "Pausar",
+      "resume": "Reanudar",
+      "delete": "Borrar",
+      "pauseConfirm": "¿Pausar «{description}»? No se apuntará nada hasta que lo reanudes, y al reanudarlo no se cobra lo que tocó mientras tanto.",
+      "deleteConfirm": "¿Borrar el gasto fijo «{description}»? Los cargos ya apuntados se quedan en el historial.",
+      "adminOnly": "Ya está confirmado: solo un admin puede editarlo o borrarlo.",
+      "pendingForMe": "{name} quiere añadir un gasto fijo: «{description}»",
+      "pendingForMeMeta": "{amount} {every} · a ti te tocan {share}",
+      "form": {
+        "newTitle": "Nuevo gasto fijo",
+        "newHint": "Se pide confirmación una vez a quienes participan. Después se apunta solo.",
+        "editTitle": "Editar gasto fijo",
+        "descriptionPlaceholder": "Netflix, internet, luz…",
+        "amount": "Importe (€)",
+        "startsOn": "Primer cargo",
+        "frequency": "¿Cada cuánto?",
+        "startsOnHint": "El primer cargo puede ser de hasta 3 meses atrás: se apuntarán los cargos que ya tocaban.",
+        "scheduleLocked": "Ya se han apuntado cargos, así que no se puede cambiar cuándo se cobra. Si hace falta, borra este gasto fijo y crea otro.",
+        "paidBy": "¿Quién lo paga?",
+        "split": "¿Entre quiénes se reparte?",
+        "perCharge": "Lo que le toca a cada uno en cada cargo.",
+        "willConfirm": "Se pedirá confirmación una vez a: {names}. Después se apuntará solo {every}.",
+        "onlyYou": "Solo participas tú: quedará confirmado al guardar y se apuntará solo {every}.",
+        "newcomersConfirm": "Se pedirá confirmación a quien entra nuevo: {names}. Hasta entonces no se apunta nada.",
+        "staysConfirmed": "Sigue confirmado: nadie tiene que volver a confirmarlo. Los cambios valen para los próximos cargos.",
+        "editPendingHint": "Al guardar se volverá a pedir confirmación a todos.",
+        "editConfirmedHint": "Lo editas como admin: sigue confirmado y los cargos ya apuntados no cambian. Si añades a alguien, se para hasta que lo confirme; cuando vuelve a funcionar, sigue desde hoy (lo de mientras estaba parado no se cobra).",
+        "save": "Guardar gasto fijo"
+      }
     }
   }
 }

@@ -11,6 +11,8 @@ export type ShoppingItem = {
   // Unidades, del 1 al 99 (1 si no se indica)
   quantity: number;
   checkedAt: string | null;
+  // Quién lo marcó como comprado
+  checkedBy: string | null;
   createdAt: string;
   requestedBy: string | null;
   requestedByName: string | null;

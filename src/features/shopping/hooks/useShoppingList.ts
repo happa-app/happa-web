@@ -126,6 +126,7 @@ export function useShoppingList(scope: ShoppingScope, initialItems: ShoppingItem
         name: parsed.data.name,
         quantity: parsed.data.quantity,
         checkedAt: null,
+        checkedBy: null,
         createdAt: new Date().toISOString(),
         requestedBy: null,
         requestedByName: null,

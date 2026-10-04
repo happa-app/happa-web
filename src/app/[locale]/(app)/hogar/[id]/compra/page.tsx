@@ -30,6 +30,7 @@ export default async function HouseholdShoppingPage({ params }: Props) {
   // El casero no usa la lista de la compra del hogar
   if (!me || me.role === "landlord") notFound();
 
+  const isAdult = me.role === "admin" || me.role === "member";
   const items = await getHouseholdShoppingItems(household.id);
 
   return (
@@ -45,7 +46,9 @@ export default async function HouseholdShoppingPage({ params }: Props) {
         scope={{ type: "household", householdId: household.id }}
         initialItems={items}
         currentUserId={userId}
-        canManageAll={me.role === "admin" || me.role === "member"}
+        canManageAll={isAdult}
+        // Pasar lo comprado a gastos: solo adultos (los gastos son cosa suya)
+        toExpensesHref={isAdult ? `/hogar/${household.id}/gastos/compra` : undefined}
       />
     </>
   );

@@ -200,11 +200,12 @@
       "nameTooLong": "80 characters maximum",
       "quantityInvalid": "Quantity must be a number from 1 to 99",
       "generic": "Couldn't save. Check your connection and try again"
-    }
+    },
+    "toExpenses": "Turn into expense"
   },
-  "Triqui": {
-    "title": "Triqui",
-    "subtitle": "Household expenses and who owes whom.",
+  "Expenses": {
+    "title": "Expenses",
+    "subtitle": "Who paid what and who owes whom.",
     "addExpense": "Add expense",
     "you": "you",
     "youCap": "You",
@@ -254,7 +255,7 @@
       "left": "No longer lives here"
     },
     "expenses": {
-      "title": "Expenses",
+      "title": "History",
       "empty": "No expenses yet. Add the first one.",
       "paidBy": "Paid by {name}",
       "paidByMany": "Paid by {count}",
@@ -264,7 +265,9 @@
       "youEven": "you're square",
       "paidByYou": "You paid",
       "notYet": "doesn't count yet",
-      "notCounted": "doesn't count"
+      "notCounted": "doesn't count",
+      "sourceShopping": "Shopping",
+      "sourceRecurring": "Recurring"
     },
     "payments": {
       "title": "Payments",
@@ -304,7 +307,12 @@
       "deleteConfirm": "Delete “{description}”? It will stop counting in the balances.",
       "forceConfirm": "Approve it",
       "forceConfirmText": "Still waiting for: {names}. Approve it anyway? It will count in the balances from now on.",
-      "adminOnly": "It's confirmed: only an admin can edit or delete it."
+      "adminOnly": "It's confirmed: only an admin can edit or delete it.",
+      "recurringCharge": "recurring expense, added automatically",
+      "fromShopping": "from the shopping list, added by {name}",
+      "items": "{count, plural, one {Item} other {Items (#)}}",
+      "recurringHint": "This is a charge from a recurring expense: everyone confirmed it once when it was set up.",
+      "recurringLink": "See recurring expenses"
     },
     "form": {
       "newTitle": "New expense",
@@ -345,13 +353,90 @@
       "notAllowed": "You can't do this with this expense",
       "notPending": "This is no longer waiting for confirmation. Reload the page",
       "generic": "Couldn't save. Check your connection and try again",
-      "expenseChanged": "Someone changed this expense while you were looking at it. Reload the page and check it"
+      "expenseChanged": "Someone changed this expense while you were looking at it. Reload the page and check it",
+      "itemsRequired": "Choose at least one item",
+      "itemsGone": "The shopping list changed in the meantime. Reload the page and check it",
+      "startInvalid": "The first charge can be up to 3 months ago and at most a year from now",
+      "scheduleLocked": "Charges have already been added: the schedule can't change"
     },
     "leftBanner": "You no longer live in this household. You can see your balance, confirm and record payments until you're square.",
     "leftDebts": {
       "title": "Pending balances in households you left",
       "owe": "You owe {amount}",
       "owed": "You are owed {amount}"
+    },
+    "fromShopping": {
+      "title": "Turn shopping into an expense",
+      "subtitle": "Choose what's included, enter what it cost and it's split like any other expense.",
+      "defaultDescription": "Groceries",
+      "items": "What's included in this expense?",
+      "itemsHint": "When you save, these items leave the shopping list.",
+      "empty": "Nothing on the list is marked as bought. Tick things off as you buy them and come back here.",
+      "toList": "Go to the shopping list",
+      "link": "{count, plural, one {Was it the shopping? Turn the bought item into an expense} other {Was it the shopping? Turn the # bought items into an expense}}"
+    },
+    "recurring": {
+      "title": "Recurring expenses",
+      "subtitle": "Subscriptions, internet, electricity… Confirmed once, then added automatically whenever they're due.",
+      "add": "New recurring expense",
+      "empty": "No recurring expenses yet. Add the subscriptions and bills that repeat and they'll be added automatically.",
+      "tileEmpty": "Subscriptions and bills that add themselves",
+      "tileActive": "{count, plural, =0 {None active} one {# active} other {# active}}",
+      "frequency": {
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+      },
+      "every": {
+        "weekly": "every week",
+        "monthly": "every month",
+        "yearly": "every year"
+      },
+      "paidBy": "Paid by {name}",
+      "paidByYou": "You pay it",
+      "among": "Split between {names}",
+      "yourShare": "your share {amount}",
+      "waitingFor": "Waiting for: {names}",
+      "rejectedBy": "Rejected by {name}. Whoever created it can fix it or delete it.",
+      "paused": "Paused",
+      "payerGone": "Stopped: {name} no longer lives here. An admin has to change who pays it.",
+      "next": "Next charge: {date}",
+      "firstCharge": "First charge: {date}.",
+      "firstChargePast": "First charge: {date}. It's already passed: the charges that were due are added once it's confirmed.",
+      "goneMembers": "No longer live here and are left out of the next charges: {names}.",
+      "confirm": "Confirm",
+      "rejectSubmit": "Reject recurring expense",
+      "rejectPlaceholder": "For example: I don't use that subscription",
+      "edit": "Edit",
+      "pause": "Pause",
+      "resume": "Resume",
+      "delete": "Delete",
+      "pauseConfirm": "Pause “{description}”? Nothing will be added until you resume it, and resuming doesn't charge what was due in between.",
+      "deleteConfirm": "Delete the recurring expense “{description}”? Charges already added stay in the history.",
+      "adminOnly": "It's confirmed: only an admin can edit or delete it.",
+      "pendingForMe": "{name} wants to add a recurring expense: “{description}”",
+      "pendingForMeMeta": "{amount} {every} · your share {share}",
+      "form": {
+        "newTitle": "New recurring expense",
+        "newHint": "Everyone involved is asked to confirm it once. After that it's added automatically.",
+        "editTitle": "Edit recurring expense",
+        "descriptionPlaceholder": "Netflix, internet, electricity…",
+        "amount": "Amount (€)",
+        "startsOn": "First charge",
+        "frequency": "How often?",
+        "startsOnHint": "The first charge can be up to 3 months ago: the charges already due will be added.",
+        "scheduleLocked": "Charges have already been added, so the schedule can't change. If you need to, delete this recurring expense and create a new one.",
+        "paidBy": "Who pays it?",
+        "split": "Who is it split between?",
+        "perCharge": "Each person's share of every charge.",
+        "willConfirm": "These people will be asked to confirm once: {names}. After that it will be added {every}.",
+        "onlyYou": "Only you are involved: it will be confirmed when you save and added {every}.",
+        "newcomersConfirm": "Newcomers will be asked to confirm: {names}. Nothing is added until they do.",
+        "staysConfirmed": "It stays confirmed: nobody has to confirm it again. Changes apply to the next charges.",
+        "editPendingHint": "When you save, everyone will be asked to confirm again.",
+        "editConfirmedHint": "You're editing it as an admin: it stays confirmed and charges already added don't change. If you add someone, it pauses until they confirm; when it starts again it carries on from today (nothing is charged for the time it was stopped).",
+        "save": "Save recurring expense"
+      }
     }
   }
 }
