@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "My homes",
-      "comingSoon": "Coming soon here: household chat."
+      "comingSoon": "Coming soon here: the chore roulette, events and polls."
     },
     "invite": {
       "title": "Invite someone",
@@ -430,7 +430,8 @@
         "editConfirmedHint": "You're editing it as an admin: it stays confirmed and charges already added don't change. If you add someone, it pauses until they confirm; when it starts again it carries on from today (nothing is charged for the time it was stopped).",
         "save": "Save recurring expense"
       }
-    }
+    },
+    "leftChat": "Message the household in the chat"
   },
   "Schedules": {
     "title": "Schedules",
@@ -758,6 +759,57 @@
       "taken": "Someone took it first",
       "notFound": "This chore no longer exists",
       "notAllowed": "You can't do this",
+      "generic": "Something went wrong. Please try again"
+    }
+  },
+  "Chat": {
+    "title": "Chat",
+    "subtitle": "Talk to everyone who lives in {name}.",
+    "messages": "Messages",
+    "someone": "Someone",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "older": "Show earlier messages",
+    "loading": "Loading…",
+    "start": "This is the start of the chat.",
+    "empty": "No messages yet. Say hi!",
+    "edited": "edited",
+    "sending": "sending…",
+    "options": "Message options",
+    "failed": "Not sent.",
+    "retry": "Try again",
+    "discard": "Discard",
+    "edit": "Edit",
+    "showHistory": "See what it said",
+    "hideHistory": "Hide changes",
+    "hide": "Delete for me",
+    "historyTitle": "What it said before",
+    "historyVersion": "Written at {written} · changed at {replaced}",
+    "historyNow": "Now (since {time})",
+    "newBelow": "{count, plural, one {# new message} other {# new messages}}",
+    "hidden": "Message deleted for you. Everyone else can still see it.",
+    "undo": "Undo",
+    "close": "Close",
+    "editing": "Editing your message",
+    "cancel": "Cancel",
+    "message": "Message",
+    "placeholder": "Write a message",
+    "send": "Send",
+    "save": "Save the change",
+    "leftNotice": "You no longer live in this household. You stay in the chat until you settle what you owe.",
+    "tile": {
+      "empty": "No messages yet",
+      "mine": "You: {body}",
+      "last": "{name}: {body}",
+      "unread": "{count, plural, one {# unread message} other {# unread messages}}"
+    },
+    "errors": {
+      "empty": "Write something before sending it",
+      "tooLong": "2,000 characters at most",
+      "tooMany": "You're going too fast. Wait a moment",
+      "tooLate": "Messages can only be edited for 15 minutes",
+      "notFound": "That message is no longer here",
+      "notAllowed": "You're no longer in this chat",
       "generic": "Something went wrong. Please try again"
     }
   }

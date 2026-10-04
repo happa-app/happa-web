@@ -64,6 +64,11 @@ export default async function ExpensesPage({ params }: Props) {
       </section>
 
       {!context.isCurrent ? <Alert tone="success">{t("leftBanner")}</Alert> : null}
+      {!context.isCurrent ? (
+        <Link href={`/hogar/${id}/chat`} className={styles.inlineLink}>
+          {t("leftChat")}
+        </Link>
+      ) : null}
 
       <MyBalance netCents={myNet} />
       {context.isCurrent ? (

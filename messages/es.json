@@ -124,7 +124,7 @@
     },
     "detail": {
       "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: el chat del hogar."
+      "comingSoon": "Muy pronto, aquí: la ruleta del marrón, eventos y votaciones."
     },
     "invite": {
       "title": "Invitar a alguien",
@@ -430,7 +430,8 @@
         "editConfirmedHint": "Lo editas como admin: sigue confirmado y los cargos ya apuntados no cambian. Si añades a alguien, se para hasta que lo confirme; cuando vuelve a funcionar, sigue desde hoy (lo de mientras estaba parado no se cobra).",
         "save": "Guardar gasto fijo"
       }
-    }
+    },
+    "leftChat": "Escribir al hogar en el chat"
   },
   "Schedules": {
     "title": "Horarios",
@@ -758,6 +759,57 @@
       "taken": "Alguien se la ha quedado antes",
       "notFound": "Esta tarea ya no existe",
       "notAllowed": "No puedes hacer esto",
+      "generic": "Algo ha ido mal. Inténtalo de nuevo"
+    }
+  },
+  "Chat": {
+    "title": "Chat",
+    "subtitle": "Para hablar con quienes viven en {name}.",
+    "messages": "Mensajes",
+    "someone": "Alguien",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "older": "Ver mensajes anteriores",
+    "loading": "Cargando…",
+    "start": "Aquí empieza el chat.",
+    "empty": "Aún no hay mensajes. ¡Saluda!",
+    "edited": "editado",
+    "sending": "enviando…",
+    "options": "Opciones del mensaje",
+    "failed": "No se ha enviado.",
+    "retry": "Reintentar",
+    "discard": "Descartar",
+    "edit": "Editar",
+    "showHistory": "Ver lo que ponía",
+    "hideHistory": "Ocultar cambios",
+    "hide": "Borrar para mí",
+    "historyTitle": "Lo que ponía antes",
+    "historyVersion": "Escrito a las {written} · cambiado a las {replaced}",
+    "historyNow": "Ahora (desde las {time})",
+    "newBelow": "{count, plural, one {# mensaje nuevo} other {# mensajes nuevos}}",
+    "hidden": "Mensaje borrado para ti. Los demás lo siguen viendo.",
+    "undo": "Deshacer",
+    "close": "Cerrar",
+    "editing": "Editando tu mensaje",
+    "cancel": "Cancelar",
+    "message": "Mensaje",
+    "placeholder": "Escribe un mensaje",
+    "send": "Enviar",
+    "save": "Guardar el cambio",
+    "leftNotice": "Ya no vives en este hogar. Sigues en el chat hasta que saldes tus gastos pendientes.",
+    "tile": {
+      "empty": "Aún no hay mensajes",
+      "mine": "Tú: {body}",
+      "last": "{name}: {body}",
+      "unread": "{count, plural, one {# mensaje sin leer} other {# mensajes sin leer}}"
+    },
+    "errors": {
+      "empty": "Escribe algo antes de mandarlo",
+      "tooLong": "Como mucho 2.000 letras",
+      "tooMany": "Vas muy rápido. Espera un momento",
+      "tooLate": "Solo se puede editar durante 15 minutos",
+      "notFound": "Ese mensaje ya no está",
+      "notAllowed": "Ya no estás en este chat",
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
     }
   }
