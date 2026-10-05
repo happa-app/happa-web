@@ -1,0 +1,270 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* ───── La rueda ───── */
+.stage {
+  /* Al girar se pone arriba de la pantalla, sin quedar debajo de la cabecera */
+  scroll-margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.wheelBox {
+  width: min(100%, 300px);
+  aspect-ratio: 1;
+}
+
+.wheel {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rotor,
+.rotorSpinning {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+
+/* Sale rápido y frena poco a poco (lo mismo que SPIN_MS en useRoulette) */
+.rotorSpinning {
+  transition: transform 4.2s cubic-bezier(0.12, 0.72, 0.1, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotorSpinning {
+    transition: none;
+  }
+}
+
+.live {
+  width: 100%;
+  min-height: 5.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.idleText {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.spinningText {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-align: center;
+}
+
+.result,
+.resultMine {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-brand-soft);
+  text-align: center;
+}
+
+.resultMine {
+  background: var(--color-owe-soft);
+}
+
+.resultTitle {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.resultMine .resultTitle {
+  color: var(--color-owe);
+}
+
+.resultMeta {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ───── Formulario ───── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.label {
+  padding: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.person,
+.personOn {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--space-1) var(--space-4);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.personOn {
+  border-color: var(--color-brand-strong);
+  background: var(--color-brand-soft);
+}
+
+.person:has(input:focus-visible),
+.personOn:has(input:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+
+.person:has(input:disabled) {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.personName {
+  font-weight: 600;
+}
+
+.personOn .personName::before {
+  content: "✓ ";
+  color: var(--color-brand-strong);
+}
+
+.personAway {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.minorNote {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ───── Historial ───── */
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.historyTitle {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.empty {
+  margin: 0;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  list-style: none;
+  overflow: hidden;
+}
+
+.list > li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+}
+
+.rowMain {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.rowTitle {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.rowMeta {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.chosen,
+.chosenMine {
+  flex-shrink: 0;
+  max-width: 45%;
+  padding: 2px var(--space-3);
+  border-radius: 999px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chosenMine {
+  background: var(--color-owe-soft);
+  color: var(--color-owe);
+}

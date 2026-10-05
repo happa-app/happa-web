@@ -1,8 +1,10 @@
-// Página /hogar/<id>/mas (pestaña "Más" de la barra de abajo): la configuración del hogar y lo tuyo
-// (tu lista personal). Lo que está en Inicio no se repite y los avisos están en la campana de arriba.
+// Página /hogar/<id>/mas (pestaña "Más" de la barra de abajo): la configuración del hogar, lo tuyo
+// (tu lista personal) y cerrar sesión. Lo que está en Inicio no se repite y los avisos están en la
+// campana de arriba.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { getHousehold } from "@/features/households/server";
+import { SignOutButton } from "@/features/auth";
 import { MoreMenu } from "@/features/navigation";
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
@@ -32,6 +34,7 @@ export default async function HouseholdMorePage({ params }: Props) {
         <h1 className={styles.title}>{t("title")}</h1>
       </section>
       <MoreMenu household={{ id: household.id, name: household.name }} />
+      <SignOutButton fullWidth />
     </>
   );
 }

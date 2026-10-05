@@ -12,7 +12,7 @@
 }
 
 .header {
-  /* Tres columnas: campana | logo | salir (el logo queda centrado aunque los lados midan distinto) */
+  /* Tres columnas: campana | nombre | perfil (el nombre queda centrado aunque los lados midan distinto) */
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -28,8 +28,12 @@
   margin-left: calc(-1 * var(--space-2));
 }
 
-.logoLink {
-  text-decoration: none;
+/* El nombre de la app, en medio (sin enlace) */
+.brand {
+  color: var(--color-text);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .main {
@@ -43,4 +47,6 @@
   align-items: center;
   justify-self: end;
   gap: var(--space-2);
+  /* Igual que la campana: el círculo de 44 px pegado al borde */
+  margin-right: calc(-1 * var(--space-1));
 }

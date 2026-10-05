@@ -11,6 +11,7 @@ export const NOTIFICATION_TYPES = [
   "chore_to_approve",
   "chore_approved",
   "message",
+  "roulette_chosen",
 ] as const;
 export type NotificationType = (typeof NOTIFICATION_TYPES)[number];
 
