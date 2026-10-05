@@ -54,6 +54,8 @@ export function notificationPhrase(
       return { key, values: { actor, title: d.title ?? "" } };
     case "message":
       return { key, values: { actor, body: d.body ?? "" } };
+    case "roulette_chosen":
+      return { key, values: { actor, title: d.title ?? "" } };
   }
 }
 

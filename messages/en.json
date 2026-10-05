@@ -204,8 +204,52 @@
   },
   "Roulette": {
     "title": "Chore roulette",
-    "soonTitle": "Coming soon",
-    "soonText": "When nobody wants to do something, spin the wheel and let luck decide."
+    "subtitle": "When nobody in {name} wants to do something, let luck decide.",
+    "someone": "Someone",
+    "youCap": "You",
+    "today": "today",
+    "wheelLabel": "Wheel with {names}",
+    "spinning": "Spinning…",
+    "spinningBy": "{name} is spinning the wheel: “{title}”",
+    "result": {
+      "you": "It's you!",
+      "other": "It's {name}",
+      "by": "Spun by {name} · {count, plural, one {# person in} other {# people in}}",
+      "byYou": "You spun it · {count, plural, one {# person in} other {# people in}}"
+    },
+    "form": {
+      "title": "What's the chore?",
+      "placeholder": "E.g. Take out the trash",
+      "people": "{count, plural, =0 {Who's in?} one {Who's in? (# person)} other {Who's in? (# people)}}",
+      "awayUntil": "away until {date}",
+      "minor": "minor",
+      "spin": "Spin the wheel",
+      "spinning": "Spinning…"
+    },
+    "ideas": {
+      "trash": "Take out the trash",
+      "dishes": "Do the dishes",
+      "bathroom": "Clean the bathroom",
+      "shopping": "Do the shopping",
+      "laundry": "Do the laundry"
+    },
+    "minorNote": "Only an adult can spin the wheel. If they include you, you'll see here whether it's you.",
+    "history": {
+      "title": "Latest spins",
+      "empty": "Nobody has spun the wheel yet.",
+      "meta": "{mine, select, true {Spun by you} other {Spun by {who}}} · {when} · {count, plural, one {# person} other {# people}}"
+    },
+    "errors": {
+      "titleRequired": "Write what the chore is",
+      "titleTooLong": "80 characters max",
+      "needTwo": "Pick at least 2 people",
+      "tooManyPeople": "20 people at most",
+      "notResident": "Someone on the list no longer lives here. Reload the page",
+      "onlyAdults": "Only an adult can spin the wheel",
+      "tooManySpins": "Too many spins in a row. Wait a minute",
+      "generic": "Something went wrong. Please try again"
+    },
+    "idle": "The wheel picks at random among those who are in: everyone has the same chance."
   },
   "Profile": {
     "title": "Your profile",
@@ -900,7 +944,8 @@
       "chore_reopened": "{actor} says “{title}” on {date} isn't done.",
       "chore_to_approve": "{actor} did “{title}”. Please approve it.",
       "chore_approved": "{actor} approved “{title}”.",
-      "message": "{actor}: {body}"
+      "message": "{actor}: {body}",
+      "roulette_chosen": "{actor} spun the wheel: you got “{title}”."
     },
     "categories": {
       "expenses": "Expenses and payments",

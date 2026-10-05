@@ -1240,6 +1240,85 @@ export type Database = {
           },
         ]
       }
+      roulette_participants: {
+        Row: {
+          spin_id: string
+          user_id: string
+        }
+        Insert: {
+          spin_id: string
+          user_id: string
+        }
+        Update: {
+          spin_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "roulette_participants_spin_id_fkey"
+            columns: ["spin_id"]
+            isOneToOne: false
+            referencedRelation: "roulette_spins"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "roulette_participants_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      roulette_spins: {
+        Row: {
+          chosen_id: string | null
+          created_at: string
+          household_id: string
+          id: string
+          spun_by: string | null
+          title: string
+        }
+        Insert: {
+          chosen_id?: string | null
+          created_at?: string
+          household_id: string
+          id?: string
+          spun_by?: string | null
+          title: string
+        }
+        Update: {
+          chosen_id?: string | null
+          created_at?: string
+          household_id?: string
+          id?: string
+          spun_by?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "roulette_spins_chosen_id_fkey"
+            columns: ["chosen_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "roulette_spins_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "roulette_spins_spun_by_fkey"
+            columns: ["spun_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       schedule_blocks: {
         Row: {
           created_at: string
@@ -1989,6 +2068,23 @@ export type Database = {
         Returns: undefined
       }
       shares_household_with: { Args: { other: string }; Returns: boolean }
+      spin_roulette: {
+        Args: { p_household: string; p_participants: string[]; p_title: string }
+        Returns: {
+          chosen_id: string | null
+          created_at: string
+          household_id: string
+          id: string
+          spun_by: string | null
+          title: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "roulette_spins"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       sync_chores: { Args: { p_household: string }; Returns: number }
       sync_recurring_expenses: {
         Args: { p_household: string }
@@ -2117,6 +2213,7 @@ export type Database = {
         | "chore_to_approve"
         | "chore_approved"
         | "message"
+        | "roulette_chosen"
       push_state: "none" | "pending" | "sent" | "failed"
       recurring_frequency: "weekly" | "monthly" | "yearly"
       schedule_kind: "class" | "work" | "away"
@@ -2272,6 +2369,7 @@ export const Constants = {
         "chore_to_approve",
         "chore_approved",
         "message",
+        "roulette_chosen",
       ],
       push_state: ["none", "pending", "sent", "failed"],
       recurring_frequency: ["weekly", "monthly", "yearly"],
