@@ -4,7 +4,7 @@
 import { getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
-import { JoinHouseholdForm, normalizeInviteCode } from "@/features/households";
+import { isFull, JoinHouseholdForm, normalizeInviteCode } from "@/features/households";
 import { getInvitePreview } from "@/features/households/server";
 import styles from "../../page.module.css";
 
@@ -34,7 +34,7 @@ export default async function InvitePage({ params }: Props) {
         <p className={styles.subtitle}>{t("preview.intro")}</p>
         <p className={styles.title}>{preview.name}</p>
         <p className={styles.muted}>
-          {t(`kinds.${preview.kind}`)} · {t("memberCount", { count: preview.memberCount })}
+          {t(`kinds.${preview.kind}`)} · {t("occupancy", { count: preview.memberCount, max: preview.maxMembers })}
         </p>
       </section>
       {preview.alreadyMember ? (
@@ -44,6 +44,9 @@ export default async function InvitePage({ params }: Props) {
             {t("preview.goToHousehold")}
           </ButtonLink>
         </>
+      ) : isFull(preview.memberCount, preview.maxMembers) ? (
+        // Lleno: no se ofrece unirse (la base de datos tampoco lo dejaría)
+        <p className={styles.notice}>{t("preview.full")}</p>
       ) : (
         <JoinHouseholdForm code={code} householdName={preview.name} />
       )}

@@ -140,3 +140,47 @@
   border-radius: var(--radius-sm);
   box-shadow: var(--focus-ring);
 }
+
+/* Enlace discreto dentro de un texto gris ("3 de 4 personas") */
+.subtleLink {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+}
+
+.subtleLink:hover {
+  color: var(--color-brand-strong);
+  text-decoration-color: currentColor;
+}
+
+/* Aviso tranquilo dentro de una tarjeta (no es un error): "El hogar está lleno" */
+.notice {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-owe-soft);
+  font-size: var(--text-sm);
+}
+
+/* "Muy pronto" (pantallas que aún no están hechas, como la ruleta) */
+.soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) 0;
+  text-align: center;
+}
+
+.soonIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: var(--space-2);
+  border-radius: 50%;
+  background: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+}

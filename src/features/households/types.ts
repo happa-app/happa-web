@@ -12,7 +12,9 @@ export type HouseholdSummary = {
   name: string;
   kind: HouseholdKind;
   role: HouseholdRole;
+  // Personas que viven en el hogar (sin el casero) y cuántas caben
   memberCount: number;
+  maxMembers: number;
 };
 
 export type HouseholdMember = {
@@ -27,6 +29,8 @@ export type HouseholdDetail = {
   name: string;
   kind: HouseholdKind;
   inviteCode: string;
+  // Cuántas personas caben (migración 15)
+  maxMembers: number;
   members: HouseholdMember[];
 };
 
@@ -35,6 +39,7 @@ export type InvitePreview = {
   name: string;
   kind: HouseholdKind;
   memberCount: number;
+  maxMembers: number;
   alreadyMember: boolean;
 };
 
@@ -47,6 +52,10 @@ export const HOUSEHOLD_ERROR_KEYS = [
   "minorCannotCreate",
   "minorCannotJoin",
   "professionalCannotJoin",
+  "householdFull",
+  "placesInvalid",
+  "placesTooFew",
+  "notAdmin",
   "generic",
 ] as const;
 
@@ -56,10 +65,18 @@ export type HouseholdFormState = {
   status: "idle" | "error";
   fieldErrors?: Partial<Record<string, string[]>>;
   formError?: HouseholdErrorKey;
-  values?: { name?: string; kind?: string; code?: string };
+  values?: { name?: string; kind?: string; code?: string; places?: string };
 };
 
 export const initialHouseholdState: HouseholdFormState = { status: "idle" };
+
+// Cambiar las plazas desde Configuración
+export type PlacesFormState = {
+  status: "idle" | "done" | "error";
+  error?: HouseholdErrorKey;
+};
+
+export const initialPlacesState: PlacesFormState = { status: "idle" };
 
 export function firstFieldError(
   state: HouseholdFormState,

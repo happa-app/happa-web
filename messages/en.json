@@ -77,7 +77,7 @@
       "create": "Create a home",
       "join": "Join with a code"
     },
-    "memberCount": "{count, plural, one {# member} other {# members}}",
+    "occupancy": "{count} of {max} {max, plural, one {person} other {people}}",
     "kinds": {
       "shared_flat": "Shared flat",
       "student_flat": "Student flat",
@@ -113,6 +113,19 @@
       "submit": "Join",
       "submitting": "Joining…"
     },
+    "places": {
+      "title": "Places",
+      "label": "How many people can live here?",
+      "createHint": "Including you. When every place is taken, the invite code won't let anyone else in. You can change it later.",
+      "settingsHint": "{count, plural, one {# person lives here now: you can't set fewer.} other {# people live here now: you can't set fewer.}}",
+      "text": "When every place is taken, the invite code won't let anyone else in.",
+      "readonly": "{count, plural, one {Room for # person.} other {Room for # people.}} Only the admin can change it.",
+      "less": "One place fewer",
+      "more": "One more place",
+      "save": "Save places",
+      "saving": "Saving…",
+      "saved": "Saved"
+    },
     "preview": {
       "title": "You've been invited",
       "intro": "You're about to join",
@@ -120,11 +133,16 @@
       "alreadyMember": "You're already in this home.",
       "goToHousehold": "Go to home",
       "invalid": "This link is invalid or has expired. Ask for a new one or type the code.",
-      "typeCode": "Type the code"
+      "typeCode": "Type the code",
+      "full": "This home is full. Ask someone who lives there to add a place, then open the link again."
     },
     "detail": {
       "back": "My homes",
-      "comingSoon": "Coming soon here: the chore roulette, events and polls."
+      "comingSoon": "Coming soon here: events and polls."
+    },
+    "settings": {
+      "title": "Settings",
+      "back": "More"
     },
     "invite": {
       "title": "Invite someone",
@@ -138,7 +156,9 @@
       "copyManually": "It couldn't be copied automatically. Press and hold the text to copy it:",
       "shareText": "Join {name} on HAPPA",
       "regenerate": "Change the code",
-      "regenerateConfirm": "The current code and link will stop working. Are you sure?"
+      "regenerateConfirm": "The current code and link will stop working. Are you sure?",
+      "full": "The home is full: nobody else can join with the code. Ask the admin to add a place.",
+      "fullAdmin": "The home is full: nobody else can join with the code. If someone new is moving in, add a place below."
     },
     "membersSection": {
       "title": "Members",
@@ -156,8 +176,46 @@
       "minorCannotCreate": "Minor accounts can't create homes",
       "minorCannotJoin": "Minor accounts are added by their guardian",
       "professionalCannotJoin": "Professional accounts can't join a home",
+      "householdFull": "This home is full. Ask someone who lives there to add a place",
+      "placesInvalid": "Choose between 1 and 20 people",
+      "placesTooFew": "More people already live here: you can't set fewer places",
+      "notAdmin": "Only the admin can change this",
       "generic": "Something went wrong. Please try again"
     }
+  },
+  "Nav": {
+    "label": "Main navigation",
+    "more": "More",
+    "home": "Home",
+    "households": "Homes",
+    "roulette": "Roulette",
+    "chat": "Chat"
+  },
+  "More": {
+    "title": "More",
+    "you": "You",
+    "settings": "Settings",
+    "settingsHint": "People, invite and places",
+    "shopping": "Shopping list",
+    "shoppingHint": "What the home needs",
+    "expenses": "Expenses",
+    "expensesHint": "Balances, payments and recurring expenses",
+    "schedules": "Schedules",
+    "schedulesHint": "Who's home and when",
+    "chores": "Chores",
+    "choresHint": "Turns and what's due today",
+    "personalList": "My personal list",
+    "personalListHint": "Your things, and what you want to ask home for",
+    "notifications": "Notifications",
+    "notificationsHint": "What's happened in your homes",
+    "notificationSettings": "Notification settings",
+    "notificationSettingsHint": "What reaches your phone",
+    "noHousehold": "Once you're in a home, its settings and the rest of its sections will be here."
+  },
+  "Roulette": {
+    "title": "Chore roulette",
+    "soonTitle": "Coming soon",
+    "soonText": "When nobody wants to do something, spin the wheel and let luck decide."
   },
   "NotFound": {
     "title": "We can't find this page",

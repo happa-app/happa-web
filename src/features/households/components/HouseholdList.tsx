@@ -21,7 +21,7 @@ export function HouseholdList({ households }: Props) {
             <span className={styles.text}>
               <span className={styles.name}>{h.name}</span>
               <span className={styles.meta}>
-                {t(`kinds.${h.kind}`)} · {t("memberCount", { count: h.memberCount })}
+                {t(`kinds.${h.kind}`)} · {t("occupancy", { count: h.memberCount, max: h.maxMembers })}
               </span>
             </span>
             {h.role === "admin" ? <span className={styles.badge}>{t("roles.admin")}</span> : null}

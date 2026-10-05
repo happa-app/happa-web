@@ -1,15 +1,9 @@
-// Página /hogar/<id>: el hogar con sus secciones (lista de la compra con lo que falta, gastos,
-// horarios, tareas y chat), los miembros, la invitación y la opción de salir.
+// Página /hogar/<id> (pestaña "Inicio" de la barra de abajo): el hogar con sus secciones (lista de la
+// compra con lo que falta, chat, gastos, horarios y tareas). Las personas, la invitación, las plazas y
+// salir del hogar están en Más → Configuración.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Card } from "@/components/ui/Card";
-import {
-  ConfirmSubmitButton,
-  InvitePanel,
-  leaveHousehold,
-  MemberList,
-  regenerateInviteCode,
-} from "@/features/households";
+import { residentCount } from "@/features/households";
 import { getHousehold } from "@/features/households/server";
 import { ShoppingPreview } from "@/features/shopping";
 import { getHouseholdShoppingItems } from "@/features/shopping/server";
@@ -45,7 +39,6 @@ export default async function HouseholdPage({ params }: Props) {
 
   const me = household.members.find((m) => m.userId === userId);
   const isAdult = me?.role === "admin" || me?.role === "member";
-  const isAdmin = me?.role === "admin";
   const isResident = isAdult || me?.role === "minor";
   // Los gastos solo son para adultos (ni menores ni casero)
   const [shoppingItems, expenses, schedules, chores, chat] = await Promise.all([
@@ -66,14 +59,13 @@ export default async function HouseholdPage({ params }: Props) {
 
   return (
     <>
-      <Link href="/inicio" className={styles.back}>
-        ← {t("detail.back")}
-      </Link>
-
       <section className={styles.intro}>
         <h1 className={styles.title}>{household.name}</h1>
         <p className={styles.subtitle}>
-          {t(`kinds.${household.kind}`)} · {t("memberCount", { count: household.members.length })}
+          {t(`kinds.${household.kind}`)} ·{" "}
+          <Link href={`/hogar/${household.id}/configuracion`} className={styles.subtleLink}>
+            {t("occupancy", { count: residentCount(household.members), max: household.maxMembers })}
+          </Link>
         </p>
       </section>
 
@@ -104,32 +96,6 @@ export default async function HouseholdPage({ params }: Props) {
           <p className={styles.muted}>{t("detail.comingSoon")}</p>
         </nav>
       ) : null}
-
-      {isAdult ? (
-        <Card title={t("invite.title")}>
-          <p className={styles.subtitle}>{t("invite.text")}</p>
-          <InvitePanel code={household.inviteCode} householdName={household.name} />
-          {isAdmin ? (
-            <ConfirmSubmitButton
-              action={regenerateInviteCode}
-              householdId={household.id}
-              label={t("invite.regenerate")}
-              confirmText={t("invite.regenerateConfirm")}
-            />
-          ) : null}
-        </Card>
-      ) : null}
-
-      <Card title={t("membersSection.title")}>
-        <MemberList members={household.members} currentUserId={userId} />
-      </Card>
-
-      <ConfirmSubmitButton
-        action={leaveHousehold}
-        householdId={household.id}
-        label={t("leave.button")}
-        confirmText={t("leave.confirm", { name: household.name })}
-      />
     </>
   );
 }

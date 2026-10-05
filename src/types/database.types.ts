@@ -708,6 +708,7 @@ export type Database = {
           id: string
           invite_code: string
           kind: Database["public"]["Enums"]["household_kind"]
+          max_members: number
           name: string
           timezone: string
           updated_at: string
@@ -720,6 +721,7 @@ export type Database = {
           id?: string
           invite_code?: string
           kind?: Database["public"]["Enums"]["household_kind"]
+          max_members?: number
           name: string
           timezone?: string
           updated_at?: string
@@ -732,6 +734,7 @@ export type Database = {
           id?: string
           invite_code?: string
           kind?: Database["public"]["Enums"]["household_kind"]
+          max_members?: number
           name?: string
           timezone?: string
           updated_at?: string
@@ -1639,6 +1642,7 @@ export type Database = {
       create_household: {
         Args: {
           p_kind?: Database["public"]["Enums"]["household_kind"]
+          p_max_members?: number
           p_name: string
         }
         Returns: string
@@ -1712,6 +1716,7 @@ export type Database = {
           already_member: boolean
           household_id: string
           kind: Database["public"]["Enums"]["household_kind"]
+          max_members: number
           member_count: number
           name: string
         }[]
@@ -1735,9 +1740,17 @@ export type Database = {
         }[]
       }
       hide_message: { Args: { p_message: string }; Returns: undefined }
+      household_default_places: {
+        Args: { p_kind: Database["public"]["Enums"]["household_kind"] }
+        Returns: number
+      }
       household_has_resident: {
         Args: { p_household: string; p_user: string }
         Returns: boolean
+      }
+      household_resident_count: {
+        Args: { p_household: string }
+        Returns: number
       }
       is_guardian_of: { Args: { p_minor: string }; Returns: boolean }
       is_household_admin: { Args: { hid: string }; Returns: boolean }
@@ -1947,6 +1960,10 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      set_household_max_members: {
+        Args: { p_household: string; p_max_members: number }
+        Returns: undefined
       }
       set_member_role: {
         Args: {
