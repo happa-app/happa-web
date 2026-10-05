@@ -1,7 +1,14 @@
 .shell {
+  /* Alto de la barra de abajo y lo que ocupa con la zona segura del iPhone. Lo que va pegado
+     abajo (la caja del chat) se pone encima de la barra con --bottom-nav-offset. */
+  --bottom-nav-height: 64px;
+  --bottom-nav-offset: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+  /* La zona segura ya la deja la barra */
+  --bottom-safe-area: 0px;
+
   max-width: 640px;
   margin: 0 auto;
-  padding: var(--space-5) var(--space-4) var(--space-10);
+  padding: var(--space-5) var(--space-4) calc(var(--space-10) + var(--bottom-nav-offset));
 }
 
 .header {

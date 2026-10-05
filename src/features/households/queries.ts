@@ -4,13 +4,13 @@ import { createClient } from "@/lib/supabase/server";
 import { householdIdSchema } from "./schemas";
 import type { HouseholdDetail, HouseholdSummary, InvitePreview } from "./types";
 
-// Hogares activos de la persona, con su rol y cuántos miembros tiene cada uno.
+// Hogares activos de la persona, con su rol, cuántas personas viven en cada uno y cuántas caben.
 export async function getMyHouseholds(userId: string): Promise<HouseholdSummary[]> {
   const supabase = await createClient();
 
   const { data: memberships, error } = await supabase
     .from("household_members")
-    .select("role, households(id, name, kind)")
+    .select("role, households(id, name, kind, max_members)")
     .eq("user_id", userId)
     .is("left_at", null)
     .order("joined_at");
@@ -43,6 +43,7 @@ export async function getMyHouseholds(userId: string): Promise<HouseholdSummary[
     kind: r.kind,
     role: r.role,
     memberCount: counts.get(r.id) ?? 0,
+    maxMembers: r.max_members,
   }));
 }
 
@@ -53,7 +54,7 @@ export async function getHousehold(id: string): Promise<HouseholdDetail | null> 
 
   const { data: household, error } = await supabase
     .from("households")
-    .select("id, name, kind, invite_code")
+    .select("id, name, kind, invite_code, max_members")
     .eq("id", id)
     .maybeSingle();
   if (error) throw error;
@@ -72,6 +73,7 @@ export async function getHousehold(id: string): Promise<HouseholdDetail | null> 
     name: household.name,
     kind: household.kind,
     inviteCode: household.invite_code,
+    maxMembers: household.max_members,
     members: (members ?? []).map((m) => ({
       userId: m.user_id,
       displayName: m.profiles?.display_name ?? "",
@@ -81,7 +83,7 @@ export async function getHousehold(id: string): Promise<HouseholdDetail | null> 
   };
 }
 
-// Lo que se ve de un hogar al abrir su enlace de invitación (migración 5).
+// Lo que se ve de un hogar al abrir su enlace de invitación (migraciones 5 y 15).
 export async function getInvitePreview(code: string): Promise<InvitePreview | null> {
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("get_invite_preview", { p_code: code });
@@ -94,6 +96,7 @@ export async function getInvitePreview(code: string): Promise<InvitePreview | nu
     name: row.name,
     kind: row.kind,
     memberCount: row.member_count,
+    maxMembers: row.max_members,
     alreadyMember: row.already_member,
   };
 }

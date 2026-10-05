@@ -8,5 +8,8 @@ export { HouseholdList } from "./components/HouseholdList";
 export { InvitePanel } from "./components/InvitePanel";
 export { JoinHouseholdForm } from "./components/JoinHouseholdForm";
 export { MemberList } from "./components/MemberList";
+export { Occupancy } from "./components/Occupancy";
+export { PlacesForm } from "./components/PlacesForm";
 export { normalizeInviteCode } from "./invite-code";
+export { defaultPlaces, isFull, MAX_PLACES, residentCount } from "./places";
 export type { HouseholdDetail, HouseholdSummary, InvitePreview } from "./types";

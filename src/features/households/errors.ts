@@ -8,6 +8,11 @@ export function toHouseholdErrorKey(error: { message?: string; code?: string }):
   if (message.includes("Minor accounts cannot create")) return "minorCannotCreate";
   if (message.includes("Minor accounts are added")) return "minorCannotJoin";
   if (message.includes("Professional accounts")) return "professionalCannotJoin";
+  // Migración 15: plazas
+  if (message.includes("Household is full")) return "householdFull";
+  if (message.includes("Places must be between")) return "placesInvalid";
+  if (message.includes("Fewer places than people")) return "placesTooFew";
+  if (message.includes("Only an admin")) return "notAdmin";
   // Solo se ve en el servidor (terminal de npm run dev o logs de Vercel), nunca en la app.
   console.error("[households] error sin traducir:", error);
   return "generic";

@@ -77,7 +77,7 @@
       "create": "Crear un hogar",
       "join": "Unirme con un código"
     },
-    "memberCount": "{count, plural, one {# miembro} other {# miembros}}",
+    "occupancy": "{count} de {max} {max, plural, one {persona} other {personas}}",
     "kinds": {
       "shared_flat": "Piso compartido",
       "student_flat": "Piso de estudiantes",
@@ -113,6 +113,19 @@
       "submit": "Unirme",
       "submitting": "Uniéndome…"
     },
+    "places": {
+      "title": "Plazas",
+      "label": "¿Cuántas personas caben?",
+      "createHint": "Contándote a ti. Con todas las plazas ocupadas, el código no deja entrar a nadie más. Lo podrás cambiar después.",
+      "settingsHint": "{count, plural, one {Ahora vive # persona: no puedes poner menos.} other {Ahora viven # personas: no puedes poner menos.}}",
+      "text": "Con todas las plazas ocupadas, el código de invitación no deja entrar a nadie más.",
+      "readonly": "{count, plural, one {Cabe # persona.} other {Caben # personas.}} Solo el admin puede cambiarlo.",
+      "less": "Una plaza menos",
+      "more": "Una plaza más",
+      "save": "Guardar plazas",
+      "saving": "Guardando…",
+      "saved": "Guardado"
+    },
     "preview": {
       "title": "Te han invitado",
       "intro": "Vas a unirte a",
@@ -120,11 +133,16 @@
       "alreadyMember": "Ya estás en este hogar.",
       "goToHousehold": "Ir al hogar",
       "invalid": "Este enlace no es válido o ha caducado. Pide uno nuevo o escribe el código a mano.",
-      "typeCode": "Escribir el código"
+      "typeCode": "Escribir el código",
+      "full": "Este hogar está lleno. Pide a alguien de la casa que añada una plaza y vuelve a abrir el enlace."
     },
     "detail": {
       "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: la ruleta del marrón, eventos y votaciones."
+      "comingSoon": "Muy pronto, aquí: eventos y votaciones."
+    },
+    "settings": {
+      "title": "Configuración",
+      "back": "Más"
     },
     "invite": {
       "title": "Invitar a alguien",
@@ -138,7 +156,9 @@
       "copyManually": "No se ha podido copiar solo. Mantén pulsado el texto para copiarlo:",
       "shareText": "Únete a {name} en HAPPA",
       "regenerate": "Cambiar el código",
-      "regenerateConfirm": "El código y el enlace actuales dejarán de funcionar. ¿Seguro?"
+      "regenerateConfirm": "El código y el enlace actuales dejarán de funcionar. ¿Seguro?",
+      "full": "El hogar está lleno: con el código no puede entrar nadie más. Pide al admin que añada una plaza.",
+      "fullAdmin": "El hogar está lleno: con el código no puede entrar nadie más. Si viene alguien nuevo, añade una plaza aquí abajo."
     },
     "membersSection": {
       "title": "Miembros",
@@ -156,8 +176,46 @@
       "minorCannotCreate": "Las cuentas de menor no pueden crear hogares",
       "minorCannotJoin": "A las cuentas de menor las añade su tutor",
       "professionalCannotJoin": "Las cuentas de profesional no pueden unirse a un hogar",
+      "householdFull": "Este hogar está lleno. Pide a alguien de la casa que añada una plaza",
+      "placesInvalid": "Elige entre 1 y 20 personas",
+      "placesTooFew": "Ya vive más gente: no puedes poner menos plazas",
+      "notAdmin": "Solo el admin puede cambiar esto",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
     }
+  },
+  "Nav": {
+    "label": "Navegación principal",
+    "more": "Más",
+    "home": "Inicio",
+    "households": "Casas",
+    "roulette": "Ruleta",
+    "chat": "Chat"
+  },
+  "More": {
+    "title": "Más",
+    "you": "Tú",
+    "settings": "Configuración",
+    "settingsHint": "Personas, invitación y plazas",
+    "shopping": "Lista de la compra",
+    "shoppingHint": "Lo que falta en casa",
+    "expenses": "Gastos",
+    "expensesHint": "Saldos, pagos y gastos fijos",
+    "schedules": "Horarios",
+    "schedulesHint": "Quién está en casa y cuándo",
+    "chores": "Tareas",
+    "choresHint": "Turnos y lo que toca hoy",
+    "personalList": "Mi lista personal",
+    "personalListHint": "Tus cosas, y lo que quieras pedir a casa",
+    "notifications": "Avisos",
+    "notificationsHint": "Lo que ha pasado en tus hogares",
+    "notificationSettings": "Ajustes de avisos",
+    "notificationSettingsHint": "Qué te llega al móvil",
+    "noHousehold": "Cuando estés en un hogar, aquí tendrás su configuración y el resto de sus secciones."
+  },
+  "Roulette": {
+    "title": "Ruleta del marrón",
+    "soonTitle": "Muy pronto",
+    "soonText": "Cuando nadie quiera hacer algo, giráis la ruleta y decide la suerte."
   },
   "NotFound": {
     "title": "No encontramos esta página",
