@@ -207,6 +207,22 @@
     "soonTitle": "Coming soon",
     "soonText": "When nobody wants to do something, spin the wheel and let luck decide."
   },
+  "Profile": {
+    "title": "Your profile",
+    "open": "Your profile",
+    "nameTitle": "How others see you",
+    "name": "Your name",
+    "nameHint": "It's the name people in your homes will see.",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "soon": "Coming soon here: your photo and your reviews.",
+    "errors": {
+      "nameRequired": "Enter your name",
+      "nameTooLong": "60 characters max",
+      "generic": "Something went wrong. Please try again"
+    }
+  },
   "NotFound": {
     "title": "We can't find this page",
     "text": "The link may be wrong, or you may no longer have access.",

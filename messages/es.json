@@ -207,6 +207,22 @@
     "soonTitle": "Muy pronto",
     "soonText": "Cuando nadie quiera hacer algo, giráis la ruleta y decide la suerte."
   },
+  "Profile": {
+    "title": "Tu perfil",
+    "open": "Tu perfil",
+    "nameTitle": "Cómo te ven los demás",
+    "name": "Tu nombre",
+    "nameHint": "Es el nombre que verán en tus hogares.",
+    "save": "Guardar",
+    "saving": "Guardando…",
+    "saved": "Guardado",
+    "soon": "Muy pronto, aquí: tu foto y tus opiniones.",
+    "errors": {
+      "nameRequired": "Escribe tu nombre",
+      "nameTooLong": "Máximo 60 caracteres",
+      "generic": "Algo ha fallado. Inténtalo de nuevo"
+    }
+  },
   "NotFound": {
     "title": "No encontramos esta página",
     "text": "Puede que el enlace esté mal o que ya no tengas acceso.",

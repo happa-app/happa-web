@@ -1,6 +1,7 @@
 // Página /mas: la pestaña "Más" cuando aún no estás en ningún hogar (solo lo tuyo).
 // Si ya estás en uno, lleva a la de ese hogar.
 import { getLocale, getTranslations } from "next-intl/server";
+import { SignOutButton } from "@/features/auth";
 import { MoreMenu } from "@/features/navigation";
 import { getNavHouseholds } from "@/features/navigation/server";
 import { redirect } from "@/i18n/navigation";
@@ -20,6 +21,7 @@ export default async function MorePage() {
         <p className={styles.subtitle}>{t("noHousehold")}</p>
       </section>
       <MoreMenu household={null} />
+      <SignOutButton fullWidth />
     </>
   );
 }
