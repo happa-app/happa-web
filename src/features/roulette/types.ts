@@ -1,14 +1,9 @@
-// Tipos de la ruleta del marrón (migración 16)
+// Tipos de la ruleta del marrón (migraciones 16 y 17)
 
-export const MAX_TITLE = 80;
 export const MIN_PEOPLE = 2;
 export const MAX_PEOPLE = 20;
 // Giros que se enseñan en el historial
 export const HISTORY_SIZE = 10;
-
-// Ideas para el marrón (se pulsan y se escriben solas)
-export const TITLE_IDEAS = ["trash", "dishes", "bathroom", "shopping", "laundry"] as const;
-export type TitleIdea = (typeof TITLE_IDEAS)[number];
 
 export type RoulettePerson = {
   userId: string;
@@ -20,7 +15,6 @@ export type RoulettePerson = {
 
 export type RouletteSpin = {
   id: string;
-  title: string;
   spunBy: string | null;
   chosenId: string | null;
   createdAt: string;
@@ -38,8 +32,6 @@ export type RoulettePage = {
 
 // Errores que pueden ver los usuarios (claves de messages/*.json → Roulette.errors)
 export const ROULETTE_ERROR_KEYS = [
-  "titleRequired",
-  "titleTooLong",
   "needTwo",
   "tooManyPeople",
   "notResident",

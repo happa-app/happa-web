@@ -210,7 +210,7 @@
     "today": "today",
     "wheelLabel": "Wheel with {names}",
     "spinning": "Spinning…",
-    "spinningBy": "{name} is spinning the wheel: “{title}”",
+    "spinningBy": "{name} is spinning the wheel…",
     "result": {
       "you": "It's you!",
       "other": "It's {name}",
@@ -218,30 +218,20 @@
       "byYou": "You spun it · {count, plural, one {# person in} other {# people in}}"
     },
     "form": {
-      "title": "What's the chore?",
-      "placeholder": "E.g. Take out the trash",
       "people": "{count, plural, =0 {Who's in?} one {Who's in? (# person)} other {Who's in? (# people)}}",
       "awayUntil": "away until {date}",
       "minor": "minor",
       "spin": "Spin the wheel",
       "spinning": "Spinning…"
     },
-    "ideas": {
-      "trash": "Take out the trash",
-      "dishes": "Do the dishes",
-      "bathroom": "Clean the bathroom",
-      "shopping": "Do the shopping",
-      "laundry": "Do the laundry"
-    },
     "minorNote": "Only an adult can spin the wheel. If they include you, you'll see here whether it's you.",
     "history": {
       "title": "Latest spins",
       "empty": "Nobody has spun the wheel yet.",
-      "meta": "{mine, select, true {Spun by you} other {Spun by {who}}} · {when} · {count, plural, one {# person} other {# people}}"
+      "who": "{mine, select, true {Spun by you} other {Spun by {who}}}",
+      "meta": "{when} · {count, plural, one {# person in} other {# people in}}"
     },
     "errors": {
-      "titleRequired": "Write what the chore is",
-      "titleTooLong": "80 characters max",
       "needTwo": "Pick at least 2 people",
       "tooManyPeople": "20 people at most",
       "notResident": "Someone on the list no longer lives here. Reload the page",
@@ -945,7 +935,7 @@
       "chore_to_approve": "{actor} did “{title}”. Please approve it.",
       "chore_approved": "{actor} approved “{title}”.",
       "message": "{actor}: {body}",
-      "roulette_chosen": "{actor} spun the wheel: you got “{title}”."
+      "roulette_chosen": "{actor} spun the wheel and it landed on you."
     },
     "categories": {
       "expenses": "Expenses and payments",

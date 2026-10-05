@@ -1277,7 +1277,6 @@ export type Database = {
           household_id: string
           id: string
           spun_by: string | null
-          title: string
         }
         Insert: {
           chosen_id?: string | null
@@ -1285,7 +1284,6 @@ export type Database = {
           household_id: string
           id?: string
           spun_by?: string | null
-          title: string
         }
         Update: {
           chosen_id?: string | null
@@ -1293,7 +1291,6 @@ export type Database = {
           household_id?: string
           id?: string
           spun_by?: string | null
-          title?: string
         }
         Relationships: [
           {
@@ -2069,14 +2066,13 @@ export type Database = {
       }
       shares_household_with: { Args: { other: string }; Returns: boolean }
       spin_roulette: {
-        Args: { p_household: string; p_participants: string[]; p_title: string }
+        Args: { p_household: string; p_participants: string[] }
         Returns: {
           chosen_id: string | null
           created_at: string
           household_id: string
           id: string
           spun_by: string | null
-          title: string
         }
         SetofOptions: {
           from: "*"

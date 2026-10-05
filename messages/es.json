@@ -210,7 +210,7 @@
     "today": "hoy",
     "wheelLabel": "Ruleta con {names}",
     "spinning": "Girando…",
-    "spinningBy": "{name} está girando la ruleta: «{title}»",
+    "spinningBy": "{name} está girando la ruleta…",
     "result": {
       "you": "¡Te toca a ti!",
       "other": "Le toca a {name}",
@@ -218,30 +218,20 @@
       "byYou": "Giraste tú · {count, plural, one {entraba # persona} other {entraban # personas}}"
     },
     "form": {
-      "title": "¿Qué marrón toca?",
-      "placeholder": "Ej.: Bajar la basura",
       "people": "{count, plural, =0 {¿Quién entra?} one {¿Quién entra? (# persona)} other {¿Quién entra? (# personas)}}",
       "awayUntil": "fuera hasta el {date}",
       "minor": "menor",
       "spin": "Girar la ruleta",
       "spinning": "Girando…"
     },
-    "ideas": {
-      "trash": "Bajar la basura",
-      "dishes": "Fregar",
-      "bathroom": "Limpiar el baño",
-      "shopping": "Hacer la compra",
-      "laundry": "Poner la lavadora"
-    },
     "minorNote": "Solo un adulto puede girar la ruleta. Si te incluye, aquí verás si te ha tocado.",
     "history": {
       "title": "Últimos giros",
       "empty": "Aún nadie ha girado la ruleta.",
-      "meta": "{mine, select, true {Giraste tú} other {Giró {who}}} · {when} · entre {count}"
+      "who": "{mine, select, true {Giraste tú} other {Giró {who}}}",
+      "meta": "{when} · {count, plural, one {entraba # persona} other {entraban # personas}}"
     },
     "errors": {
-      "titleRequired": "Escribe qué marrón toca",
-      "titleTooLong": "Máximo 80 caracteres",
       "needTwo": "Elige al menos a 2 personas",
       "tooManyPeople": "Como mucho 20 personas",
       "notResident": "Alguien de la lista ya no vive aquí. Recarga la página",
@@ -945,7 +935,7 @@
       "chore_to_approve": "{actor} ha hecho «{title}». Dale el visto bueno.",
       "chore_approved": "{actor} ha dado el visto bueno a «{title}».",
       "message": "{actor}: {body}",
-      "roulette_chosen": "{actor} ha girado la ruleta: te toca «{title}»."
+      "roulette_chosen": "{actor} ha girado la ruleta y te ha tocado a ti."
     },
     "categories": {
       "expenses": "Gastos y pagos",

@@ -1,13 +1,12 @@
 // Acceso a la ruleta. Recibe el cliente de Supabase, así vale en el servidor (primera carga) y en el
-// navegador (girar y en vivo). Quién puede qué lo decide la base de datos (migración 16).
+// navegador (girar y en vivo). Quién puede qué lo decide la base de datos (migraciones 16 y 17).
 import type { AppSupabaseClient } from "@/lib/supabase/types";
 import { HISTORY_SIZE, type RouletteSpin } from "./types";
 
-const SPIN_FIELDS = "id, title, spun_by, chosen_id, created_at, roulette_participants(user_id)";
+const SPIN_FIELDS = "id, spun_by, chosen_id, created_at, roulette_participants(user_id)";
 
 export type SpinRow = {
   id: string;
-  title: string;
   spun_by: string | null;
   chosen_id: string | null;
   created_at: string;
@@ -17,7 +16,6 @@ export type SpinRow = {
 export function toSpin(row: SpinRow, participants?: string[]): RouletteSpin {
   return {
     id: row.id,
-    title: row.title,
     spunBy: row.spun_by,
     chosenId: row.chosen_id,
     createdAt: row.created_at,
@@ -48,12 +46,10 @@ export async function fetchSpin(supabase: AppSupabaseClient, spinId: string): Pr
 export async function spinRoulette(
   supabase: AppSupabaseClient,
   householdId: string,
-  title: string,
   participants: string[],
 ): Promise<{ spin: RouletteSpin | null; error: { message?: string } | null }> {
   const { data, error } = await supabase.rpc("spin_roulette", {
     p_household: householdId,
-    p_title: title,
     p_participants: participants,
   });
   if (error || !data) return { spin: null, error: error ?? { message: "No spin" } };

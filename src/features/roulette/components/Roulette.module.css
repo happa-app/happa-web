@@ -93,12 +93,6 @@
   color: var(--color-owe);
 }
 
-.resultWhat {
-  margin: var(--space-1) 0 0;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-
 .resultMeta {
   margin: var(--space-1) 0 0;
   color: var(--color-text-muted);
@@ -116,71 +110,16 @@
   box-shadow: var(--shadow-card);
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
 .label {
   padding: 0;
   font-size: var(--text-sm);
   font-weight: 600;
 }
 
-.input {
-  min-height: 48px;
-  padding: 0 var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font: inherit;
-  font-size: var(--text-base);
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--color-brand-strong);
-  box-shadow: var(--focus-ring);
-}
-
-.input[aria-invalid="true"] {
-  border-color: var(--color-error);
-}
-
 .error {
   margin: 0;
   color: var(--color-error);
   font-size: var(--text-sm);
-}
-
-.ideas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.idea {
-  min-height: 36px;
-  padding: 0 var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font: inherit;
-  font-size: var(--text-sm);
-  cursor: pointer;
-}
-
-.idea:hover {
-  border-color: var(--color-brand);
-  background: var(--color-brand-soft);
-}
-
-.idea:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
 }
 
 .fieldset {

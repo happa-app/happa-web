@@ -1,12 +1,12 @@
 "use client";
-// La ruleta del marrón: qué toca, quién entra, la rueda y a quién le ha tocado. Debajo, los últimos giros.
+// La ruleta del marrón: quién entra, la rueda y a quién le ha tocado. Debajo, los últimos giros.
 // Los adultos giran; los menores lo ven (y entran si un adulto los incluye).
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { useRoulette } from "../hooks/useRoulette";
-import { MAX_PEOPLE, MAX_TITLE, MIN_PEOPLE, TITLE_IDEAS, type RoulettePerson, type RouletteSpin } from "../types";
+import { MAX_PEOPLE, MIN_PEOPLE, type RoulettePerson, type RouletteSpin } from "../types";
 import { orderParticipants } from "../wheel";
 import { RouletteWheel } from "./RouletteWheel";
 import styles from "./Roulette.module.css";
@@ -38,10 +38,9 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
   const shortDate = (iso: string) =>
     new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
-  const [title, setTitle] = useState("");
   // De partida entran todos menos quien está de ausencia hoy
   const [selected, setSelected] = useState(() => people.filter((p) => !p.awayUntil).map((p) => p.userId));
-  const [formError, setFormError] = useState<"titleRequired" | "needTwo" | null>(null);
+  const [formError, setFormError] = useState<"needTwo" | null>(null);
   const { spins, shown, rotation, phase, error, spin, showSelection, clearError } = useRoulette({
     householdId,
     initialSpins,
@@ -63,14 +62,12 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const clean = title.trim();
-    if (!clean) return setFormError("titleRequired");
     if (selected.length < MIN_PEOPLE) return setFormError("needTwo");
     setFormError(null);
     const smooth = !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     // Después de pintar el botón "Girando…" (si no, el navegador corta el desplazamiento suave)
     setTimeout(() => stageRef.current?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" }), 50);
-    await spin(clean, orderParticipants(selected, order));
+    await spin(orderParticipants(selected, order));
   }
 
   // Lo que se dice al acabar (también para lectores de pantalla)
@@ -80,7 +77,6 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
         <p className={styles.resultTitle}>
           {shown.chosenId === me ? t("result.you") : t("result.other", { name: nameOf(shown.chosenId) })}
         </p>
-        <p className={styles.resultWhat}>«{shown.title}»</p>
         <p className={styles.resultMeta}>
           {shown.spunBy === me ? t("result.byYou", { count: shown.participants.length }) : t("result.by", { name: nameOf(shown.spunBy), count: shown.participants.length })}
         </p>
@@ -99,7 +95,7 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
         <div aria-live="polite" className={styles.live}>
           {phase === "spinning" && shown ? (
             <p className={styles.spinningText}>
-              {shown.spunBy === me ? t("spinning") : t("spinningBy", { name: nameOf(shown.spunBy), title: shown.title })}
+              {shown.spunBy === me ? t("spinning") : t("spinningBy", { name: nameOf(shown.spunBy) })}
             </p>
           ) : (
             (result ?? <p className={styles.idleText}>{t("idle")}</p>)
@@ -110,48 +106,6 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
       {isAdult ? (
         <form className={styles.card} onSubmit={onSubmit} noValidate>
           {error ? <Alert tone="error">{t(`errors.${error}`)}</Alert> : null}
-          <div className={styles.field}>
-            <label htmlFor="roulette-title" className={styles.label}>
-              {t("form.title")}
-            </label>
-            <input
-              id="roulette-title"
-              className={styles.input}
-              value={title}
-              maxLength={MAX_TITLE}
-              placeholder={t("form.placeholder")}
-              autoComplete="off"
-              aria-invalid={formError === "titleRequired" ? true : undefined}
-              aria-describedby={formError === "titleRequired" ? "roulette-title-error" : undefined}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setFormError(null);
-                clearError();
-                setTitle(e.target.value);
-              }}
-            />
-            {formError === "titleRequired" ? (
-              <p id="roulette-title-error" className={styles.error}>
-                {t("errors.titleRequired")}
-              </p>
-            ) : null}
-            <div className={styles.ideas}>
-              {TITLE_IDEAS.map((idea) => (
-                <button
-                  key={idea}
-                  type="button"
-                  className={styles.idea}
-                  onClick={() => {
-                    setFormError(null);
-                    clearError();
-                    setTitle(t(`ideas.${idea}`));
-                  }}
-                >
-                  {t(`ideas.${idea}`)}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <fieldset className={styles.fieldset} aria-describedby={formError === "needTwo" ? "roulette-people-error" : undefined}>
             <legend className={styles.label}>{t("form.people", { count: selected.length })}</legend>
             <div className={styles.people}>
@@ -200,11 +154,11 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
             {spins.map((s) => (
               <li key={s.id} className={styles.row}>
                 <span className={styles.rowMain}>
-                  <span className={styles.rowTitle}>«{s.title}»</span>
+                  <span className={styles.rowTitle}>
+                    {t("history.who", { mine: s.spunBy === me ? "true" : "false", who: nameOf(s.spunBy) })}
+                  </span>
                   <span className={styles.rowMeta}>
                     {t("history.meta", {
-                      mine: s.spunBy === me ? "true" : "false",
-                      who: nameOf(s.spunBy),
                       when: when(s.createdAt, timezone, locale, t("today")),
                       count: s.participants.length,
                     })}
