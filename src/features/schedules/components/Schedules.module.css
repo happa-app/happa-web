@@ -571,3 +571,15 @@
   font-size: var(--text-xl);
   color: var(--color-text-muted);
 }
+
+/* ───── Inicio ───── */
+.homePerson {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.homePerson > span:first-child {
+  flex-shrink: 0;
+}

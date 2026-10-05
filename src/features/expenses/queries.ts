@@ -8,6 +8,7 @@ import type {
   Expense,
   ExpenseSource,
   ExpensesContext,
+  ExpensesHome,
   ExpensesOverview,
   ExpenseStatus,
   Frequency,
@@ -274,11 +275,11 @@ export async function getExpense(
   return { expense: toExpense(data as unknown as ExpenseRow), people };
 }
 
-// Para la tarjeta del hogar: tu saldo y cuántas cosas esperan que las confirmes.
+// Para la tarjeta del hogar: tu saldo y cuántas cosas esperan que las confirmes (y los saldos de todos).
 export async function getMyExpensesSummary(
   householdId: string,
   userId: string,
-): Promise<{ netCents: number; toConfirm: number }> {
+): Promise<{ netCents: number; toConfirm: number; people: BalancePerson[] }> {
   const supabase = await createClient();
   await syncRecurringExpenses(householdId);
   const [people, pendingExpenses, pendingPayments, pendingRecurring] = await Promise.all([
@@ -325,5 +326,32 @@ export async function getMyExpensesSummary(
   return {
     netCents: people.find((p) => p.userId === userId)?.netCents ?? 0,
     toConfirm: expensesToConfirm + (pendingPayments.count ?? 0) + recurringToConfirm,
+    people,
+  };
+}
+
+const HOME_RECENT = 3;
+
+// Para Inicio: tu saldo, cuántas cosas esperan que las confirmes, los saldos de todos (para "quedar en
+// paz" y los nombres) y los últimos gastos.
+export async function getExpensesHome(householdId: string, userId: string): Promise<ExpensesHome> {
+  const supabase = await createClient();
+  const [summary, recent] = await Promise.all([
+    // (Ya pone al día los gastos fijos antes de leer los saldos)
+    getMyExpensesSummary(householdId, userId),
+    supabase
+      .from("expenses")
+      .select(EXPENSE_FIELDS)
+      .eq("household_id", householdId)
+      .order("spent_on", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(HOME_RECENT),
+  ]);
+  if (recent.error) throw recent.error;
+  return {
+    netCents: summary.netCents,
+    toConfirm: summary.toConfirm,
+    people: summary.people,
+    recent: ((recent.data ?? []) as unknown as ExpenseRow[]).map(toExpense),
   };
 }

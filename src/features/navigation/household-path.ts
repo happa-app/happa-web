@@ -36,9 +36,8 @@ export function activeTab(pathname: string): NavTab | null {
   if (pathname === "/inicio" || pathname === "/hogar/nuevo" || pathname === "/unirse" || pathname.startsWith("/unirse/")) {
     return "households";
   }
-  if (pathname === "/mas" || pathname === "/compra" || pathname === "/avisos" || pathname.startsWith("/avisos/")) {
-    return "more";
-  }
+  // Los avisos van con la campana de arriba: no se marca ninguna pestaña
+  if (pathname === "/mas" || pathname === "/compra") return "more";
   return null;
 }
 

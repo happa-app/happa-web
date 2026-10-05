@@ -60,6 +60,14 @@ export type LeftDebt = { householdId: string; name: string; netCents: number };
 // Una transferencia sugerida para quedar en paz
 export type Transfer = { from: string; to: string; amountCents: number };
 
+// Para Inicio
+export type ExpensesHome = {
+  netCents: number;
+  toConfirm: number;
+  people: BalancePerson[];
+  recent: Expense[];
+};
+
 export type ExpensesOverview = {
   people: BalancePerson[];
   expenses: Expense[];

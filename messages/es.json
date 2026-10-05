@@ -58,7 +58,9 @@
     "confirmError": "El enlace no es válido o ha caducado. Inicia sesión o vuelve a registrarte."
   },
   "Home": {
-    "greeting": "Hola, {name}"
+    "greeting": "Hola, {name}",
+    "seeAll": "Ver todo",
+    "seeAllOf": "Ver todo de {section}"
   },
   "Legal": {
     "terms": "Términos de uso",
@@ -196,20 +198,8 @@
     "you": "Tú",
     "settings": "Configuración",
     "settingsHint": "Personas, invitación y plazas",
-    "shopping": "Lista de la compra",
-    "shoppingHint": "Lo que falta en casa",
-    "expenses": "Gastos",
-    "expensesHint": "Saldos, pagos y gastos fijos",
-    "schedules": "Horarios",
-    "schedulesHint": "Quién está en casa y cuándo",
-    "chores": "Tareas",
-    "choresHint": "Turnos y lo que toca hoy",
     "personalList": "Mi lista personal",
     "personalListHint": "Tus cosas, y lo que quieras pedir a casa",
-    "notifications": "Avisos",
-    "notificationsHint": "Lo que ha pasado en tus hogares",
-    "notificationSettings": "Ajustes de avisos",
-    "notificationSettingsHint": "Qué te llega al móvil",
     "noHousehold": "Cuando estés en un hogar, aquí tendrás su configuración y el resto de sus secciones."
   },
   "Roulette": {
@@ -489,7 +479,15 @@
         "save": "Guardar gasto fijo"
       }
     },
-    "leftChat": "Escribir al hogar en el chat"
+    "leftChat": "Escribir al hogar en el chat",
+    "home": {
+      "recent": "Últimos gastos",
+      "noExpenses": "Aún no hay gastos apuntados.",
+      "paidBy": "Pagado por {names} · {date}",
+      "youPay": "Le pagas a {name}",
+      "paysYou": "{name} te paga",
+      "pending": "por confirmar"
+    }
   },
   "Schedules": {
     "title": "Horarios",
@@ -596,10 +594,6 @@
       "notePlaceholder": "De viaje, en el pueblo…",
       "save": "Guardar ausencia"
     },
-    "tile": {
-      "home": "Ahora en casa: {home} de {total}",
-      "empty": "Apunta cuándo estás fuera de casa"
-    },
     "errors": {
       "daysRequired": "Elige al menos un día",
       "timeInvalid": "Escribe una hora, por ejemplo 9:00",
@@ -616,6 +610,11 @@
       "nothingToCopy": "En ese hogar no tienes nada apuntado",
       "notAllowed": "No puedes cambiar este horario",
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
+    },
+    "home": {
+      "atHome": "En casa",
+      "empty": "Aún no hay horarios. Apunta cuándo estás fuera para que los demás sepan quién hay en casa.",
+      "count": "{home} de {total} en casa"
     }
   },
   "Chores": {
@@ -742,9 +741,6 @@
       "approval": "Con visto bueno",
       "edit": "Editar"
     },
-    "tile": {
-      "empty": "Reparte las tareas de casa"
-    },
     "form": {
       "newTitle": "Nueva tarea",
       "newSubtitle": "Qué hay que hacer, cada cuánto y a quién le toca.",
@@ -818,6 +814,9 @@
       "notFound": "Esta tarea ya no existe",
       "notAllowed": "No puedes hacer esto",
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
+    },
+    "home": {
+      "more": "{count, plural, one {Ver # tarea más de hoy} other {Ver # tareas más de hoy}}"
     }
   },
   "Chat": {
@@ -855,12 +854,6 @@
     "send": "Enviar",
     "save": "Guardar el cambio",
     "leftNotice": "Ya no vives en este hogar. Sigues en el chat hasta que saldes tus gastos pendientes.",
-    "tile": {
-      "empty": "Aún no hay mensajes",
-      "mine": "Tú: {body}",
-      "last": "{name}: {body}",
-      "unread": "{count, plural, one {# mensaje sin leer} other {# mensajes sin leer}}"
-    },
     "errors": {
       "empty": "Escribe algo antes de mandarlo",
       "tooLong": "Como mucho 2.000 letras",

@@ -4,6 +4,7 @@ export {
   getExpense,
   getMyLeftDebts,
   getMyExpensesSummary,
+  getExpensesHome,
   getExpensesContext,
   getExpensesOverview,
   getBalances,

@@ -7,7 +7,7 @@ export { BlockList } from "./components/BlockList";
 export { CopySchedule } from "./components/CopySchedule";
 export { DayView } from "./components/DayView";
 export { NowCard } from "./components/NowCard";
-export { SchedulesTile } from "./components/SchedulesTile";
+export { SchedulesHome } from "./components/SchedulesHome";
 export { uuidSchema } from "./schemas";
 export { nowIn, presenceAt } from "./time";
 export type { Absence, OtherSchedule, ScheduleBlock, ScheduleOverview, SchedulePerson } from "./types";

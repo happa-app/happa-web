@@ -58,7 +58,9 @@
     "confirmError": "The link is invalid or has expired. Sign in or sign up again."
   },
   "Home": {
-    "greeting": "Hi, {name}"
+    "greeting": "Hi, {name}",
+    "seeAll": "See all",
+    "seeAllOf": "See all of {section}"
   },
   "Legal": {
     "terms": "Terms of use",
@@ -196,20 +198,8 @@
     "you": "You",
     "settings": "Settings",
     "settingsHint": "People, invite and places",
-    "shopping": "Shopping list",
-    "shoppingHint": "What the home needs",
-    "expenses": "Expenses",
-    "expensesHint": "Balances, payments and recurring expenses",
-    "schedules": "Schedules",
-    "schedulesHint": "Who's home and when",
-    "chores": "Chores",
-    "choresHint": "Turns and what's due today",
     "personalList": "My personal list",
     "personalListHint": "Your things, and what you want to ask home for",
-    "notifications": "Notifications",
-    "notificationsHint": "What's happened in your homes",
-    "notificationSettings": "Notification settings",
-    "notificationSettingsHint": "What reaches your phone",
     "noHousehold": "Once you're in a home, its settings and the rest of its sections will be here."
   },
   "Roulette": {
@@ -489,7 +479,15 @@
         "save": "Save recurring expense"
       }
     },
-    "leftChat": "Message the household in the chat"
+    "leftChat": "Message the household in the chat",
+    "home": {
+      "recent": "Latest expenses",
+      "noExpenses": "No expenses yet.",
+      "paidBy": "Paid by {names} · {date}",
+      "youPay": "You pay {name}",
+      "paysYou": "{name} pays you",
+      "pending": "to confirm"
+    }
   },
   "Schedules": {
     "title": "Schedules",
@@ -596,10 +594,6 @@
       "notePlaceholder": "On a trip, visiting family…",
       "save": "Save absence"
     },
-    "tile": {
-      "home": "Home now: {home} of {total}",
-      "empty": "Add when you're away from home"
-    },
     "errors": {
       "daysRequired": "Choose at least one day",
       "timeInvalid": "Enter a time, for example 9:00",
@@ -616,6 +610,11 @@
       "nothingToCopy": "You have nothing added in that household",
       "notAllowed": "You can't change this schedule",
       "generic": "Something went wrong. Please try again"
+    },
+    "home": {
+      "atHome": "At home",
+      "empty": "No schedules yet. Add when you're out so everyone knows who's home.",
+      "count": "{home} of {total} at home"
     }
   },
   "Chores": {
@@ -742,9 +741,6 @@
       "approval": "Needs approval",
       "edit": "Edit"
     },
-    "tile": {
-      "empty": "Share out the household chores"
-    },
     "form": {
       "newTitle": "New chore",
       "newSubtitle": "What needs doing, how often and whose turn it is.",
@@ -818,6 +814,9 @@
       "notFound": "This chore no longer exists",
       "notAllowed": "You can't do this",
       "generic": "Something went wrong. Please try again"
+    },
+    "home": {
+      "more": "{count, plural, one {See # more chore today} other {See # more chores today}}"
     }
   },
   "Chat": {
@@ -855,12 +854,6 @@
     "send": "Send",
     "save": "Save the change",
     "leftNotice": "You no longer live in this household. You stay in the chat until you settle what you owe.",
-    "tile": {
-      "empty": "No messages yet",
-      "mine": "You: {body}",
-      "last": "{name}: {body}",
-      "unread": "{count, plural, one {# unread message} other {# unread messages}}"
-    },
     "errors": {
       "empty": "Write something before sending it",
       "tooLong": "2,000 characters at most",

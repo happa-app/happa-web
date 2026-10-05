@@ -5,7 +5,7 @@ export { ChoreDayDetail } from "./components/ChoreDayDetail";
 export { ChoreDaySection } from "./components/ChoreDaySection";
 export { ChoreForm } from "./components/ChoreForm";
 export { ChoreList } from "./components/ChoreList";
-export { ChoresTile } from "./components/ChoresTile";
+export { ChoresHome } from "./components/ChoresHome";
 export { TodaySummary } from "./components/TodaySummary";
 export { UpcomingDays } from "./components/UpcomingDays";
 export { WeekShare } from "./components/WeekShare";

@@ -1,5 +1,5 @@
-// Página /hogar/<id>/mas (pestaña "Más" de la barra de abajo): la configuración del hogar, el resto de
-// sus secciones y lo tuyo (lista personal y avisos).
+// Página /hogar/<id>/mas (pestaña "Más" de la barra de abajo): la configuración del hogar y lo tuyo
+// (tu lista personal). Lo que está en Inicio no se repite y los avisos están en la campana de arriba.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { getHousehold } from "@/features/households/server";
@@ -26,16 +26,12 @@ export default async function HouseholdMorePage({ params }: Props) {
   const household = await getHousehold(id);
   if (!household) notFound();
 
-  const me = household.members.find((m) => m.userId === userId);
-  const isAdult = me?.role === "admin" || me?.role === "member";
-  const isResident = isAdult || me?.role === "minor";
-
   return (
     <>
       <section className={styles.intro}>
         <h1 className={styles.title}>{t("title")}</h1>
       </section>
-      <MoreMenu household={{ id: household.id, name: household.name, isResident, isAdult }} />
+      <MoreMenu household={{ id: household.id, name: household.name }} />
     </>
   );
 }

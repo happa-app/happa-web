@@ -1,4 +1,4 @@
-// Marco de la zona privada: cabecera con el logo, la campana de avisos y "Cerrar sesión", el contenido
+// Marco de la zona privada: cabecera con la campana de avisos, el logo y "Cerrar sesión", el contenido
 // y la barra de abajo (Más · Inicio · Casas · Ruleta · Chat).
 // Todas las páginas dentro de (app) lo comparten; el proxy ya exige sesión para entrar.
 import type { ReactNode } from "react";
@@ -16,12 +16,15 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className={styles.shell}>
+      {/* Arriba: la campana de avisos a la izquierda (en todas las páginas), el logo en medio y salir */}
       <header className={styles.header}>
+        <div className={styles.headerLeft}>
+          <NotificationBell />
+        </div>
         <Link href="/inicio" className={styles.logoLink}>
           <Logo />
         </Link>
         <div className={styles.headerRight}>
-          <NotificationBell />
           <SignOutButton />
         </div>
       </header>

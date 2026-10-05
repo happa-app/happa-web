@@ -10,7 +10,7 @@ export { RecurringForm } from "./components/RecurringForm";
 export { RecurringList } from "./components/RecurringList";
 export { RecurringTile } from "./components/RecurringTile";
 export { SettleUp } from "./components/SettleUp";
-export { ExpensesTile } from "./components/ExpensesTile";
+export { ExpensesHome } from "./components/ExpensesHome";
 export { nameMap, todayIn } from "./format";
 export { uuidSchema } from "./schemas";
 export type {
@@ -18,6 +18,7 @@ export type {
   BoughtItem,
   Expense,
   ExpensesContext,
+  ExpensesHome as ExpensesHomeData,
   ExpensesOverview,
   LeftDebt,
   RecurringExpense,

@@ -3,7 +3,6 @@
 // Antes de leer se crean los días que falten (sync_chores): así no hace falta ningún proceso aparte.
 import { createClient } from "@/lib/supabase/server";
 import { addDays, todayIn } from "./dates";
-import { summarize } from "./logic";
 import type {
   Chore,
   ChoreAssignment,
@@ -12,7 +11,6 @@ import type {
   ChoreFrequency,
   ChorePerson,
   ChoresOverview,
-  ChoresSummary,
   ChoreStatus,
   Weekday,
 } from "./types";
@@ -168,33 +166,4 @@ export async function getChoresOverview(householdId: string, userId: string): Pr
     chores: choreList,
     days,
   };
-}
-
-// Para la tarjeta de la página del hogar: cuántas te tocan hoy, atrasadas y por dar el visto bueno.
-// Solo para quien vive en el hogar (la página ya lo comprueba).
-export async function getChoresSummary(householdId: string, userId: string, isAdult: boolean): Promise<ChoresSummary> {
-  const supabase = await createClient();
-  const { data: household, error } = await supabase.from("households").select("timezone").eq("id", householdId).maybeSingle();
-  if (error) throw error;
-  if (!household) return { choreCount: 0, myToday: 0, myOverdue: 0, toApprove: 0 };
-
-  await syncChores(supabase, householdId);
-  const today = todayIn(household.timezone);
-  const [chores, days] = await Promise.all([
-    supabase.from("chores").select("id").eq("household_id", householdId).eq("active", true),
-    supabase
-      .from("chore_occurrences")
-      .select("chore_id, due_on, status, assignee_id")
-      .eq("household_id", householdId)
-      .lte("due_on", today)
-      .neq("status", "done")
-      .limit(500),
-  ]);
-  for (const r of [chores, days]) if (r.error) throw r.error;
-
-  const active = new Set(((chores.data ?? []) as { id: string }[]).map((c) => c.id));
-  const rows = ((days.data ?? []) as { chore_id: string; due_on: string; status: ChoreStatus; assignee_id: string | null }[])
-    .filter((d) => active.has(d.chore_id))
-    .map((d) => ({ dueOn: d.due_on, status: d.status, assigneeId: d.assignee_id }));
-  return summarize(rows, userId, today, isAdult, active.size);
 }

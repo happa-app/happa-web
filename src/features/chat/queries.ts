@@ -3,7 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { fetchMessages } from "./api";
 import { dayIn } from "./timeline";
-import type { ChatInfo, ChatMessage, ChatPerson, ChatSummary } from "./types";
+import type { ChatInfo, ChatMessage, ChatPerson } from "./types";
 
 export type ChatPage = {
   info: ChatInfo;
@@ -46,29 +46,5 @@ export async function getChatPage(householdId: string): Promise<ChatPage | null>
     messages: page.messages,
     hasMore: page.hasMore,
     today: dayIn(new Date().toISOString(), row.timezone),
-  };
-}
-
-// Para la tarjeta del hogar: sin leer, el último mensaje y quién lo mandó. null si no estás en el chat.
-export async function getChatSummary(householdId: string): Promise<{ summary: ChatSummary; lastSenderName: string | null } | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase.rpc("chat_summary", { p_household: householdId });
-  if (error) throw error;
-  const row = ((data ?? []) as {
-    unread: number;
-    last_body: string | null;
-    last_sender: string | null;
-    last_at: string | null;
-  }[])[0];
-  if (!row) return null;
-
-  let lastSenderName: string | null = null;
-  if (row.last_sender) {
-    const { data: profile } = await supabase.from("profiles").select("display_name").eq("id", row.last_sender).maybeSingle();
-    lastSenderName = profile?.display_name ?? null;
-  }
-  return {
-    summary: { unread: row.unread, lastBody: row.last_body, lastSenderId: row.last_sender, lastAt: row.last_at },
-    lastSenderName,
   };
 }

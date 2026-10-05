@@ -859,3 +859,20 @@ button.check:hover:not(:disabled) .checkCircle {
 .groupList > li + li {
   border-top: 1px solid var(--color-border);
 }
+
+/* ───── Inicio ───── */
+.homeSummary {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.homeAlert {
+  color: var(--color-owe);
+  font-weight: 600;
+}
+
+.homeMore {
+  align-self: flex-start;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
