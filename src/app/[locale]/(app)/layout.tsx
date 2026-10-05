@@ -11,7 +11,14 @@ import styles from "./app-layout.module.css";
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   // El hogar al que llevan "Inicio", "Ruleta" y "Chat" al abrir la app, en cuáles vives, y tu perfil
-  const [{ householdId, householdIds }, profile] = await Promise.all([getNavHouseholds(), getMyProfile()]);
+  // (Si fallara leer el perfil, la página se enseña igual, sin el círculo de arriba)
+  const [{ householdId, householdIds }, profile] = await Promise.all([
+    getNavHouseholds(),
+    getMyProfile().catch((e) => {
+      console.error("[perfil] no se pudo leer:", e);
+      return null;
+    }),
+  ]);
 
   return (
     <div className={styles.shell}>
