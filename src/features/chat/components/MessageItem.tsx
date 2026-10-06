@@ -3,6 +3,7 @@
 // y el botón ⋯ con lo que se puede hacer (editar si es tuyo y reciente, borrar para mí).
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { Avatar } from "@/components/ui/Avatar";
 import { canEdit, formatTime } from "../timeline";
 import type { ChatMessage, MessageVersion } from "../types";
 import styles from "./Chat.module.css";
@@ -13,6 +14,7 @@ type Props = {
   me: string;
   // Nombre de quien lo mandó (solo en el primero de un grupo de mensajes ajenos)
   senderName: string | null;
+  senderAvatarUrl: string | null;
   senderGone: boolean;
   lastInGroup: boolean;
   timezone: string;
@@ -26,7 +28,7 @@ type Props = {
 };
 
 export function MessageItem(props: Props) {
-  const { message, mine, me, senderName, senderGone, lastInGroup, timezone, menuOpen } = props;
+  const { message, mine, me, senderName, senderAvatarUrl, senderGone, lastInGroup, timezone, menuOpen } = props;
   const t = useTranslations("Chat");
   const locale = useLocale();
   const [versions, setVersions] = useState<MessageVersion[] | null>(null);
@@ -59,7 +61,12 @@ export function MessageItem(props: Props) {
 
   return (
     <li className={`${mine ? styles.rowMine : styles.row} ${lastInGroup ? styles.groupEnd : ""}`}>
-      {senderName ? <p className={senderGone ? `${styles.sender} ${styles.senderGone}` : styles.sender}>{senderName}</p> : null}
+      {senderName ? (
+        <p className={senderGone ? `${styles.sender} ${styles.senderGone}` : styles.sender}>
+          <Avatar name={senderName} imageUrl={senderAvatarUrl} size="xs" />
+          {senderName}
+        </p>
+      ) : null}
       <div className={styles.bubbleLine}>
         <div className={bubbleClass}>
           <p className={styles.body}>{message.body}</p>

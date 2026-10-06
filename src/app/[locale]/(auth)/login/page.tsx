@@ -6,10 +6,11 @@ type Props = {
 };
 
 export default async function LoginPage({ searchParams }: Props) {
-  const { error, next } = await searchParams;
+  const { error, next, cuenta } = await searchParams;
   return (
     <LoginForm
       confirmFailed={error === "confirm"}
+      accountDeleted={cuenta === "borrada"}
       next={typeof next === "string" ? next : undefined}
     />
   );

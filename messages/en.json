@@ -55,7 +55,8 @@
       "generic": "Something went wrong. Please try again"
     },
     "signOut": "Sign out",
-    "confirmError": "The link is invalid or has expired. Sign in or sign up again."
+    "confirmError": "The link is invalid or has expired. Sign in or sign up again.",
+    "accountDeleted": "Your account has been deleted. Thanks for using HAPPA."
   },
   "Home": {
     "greeting": "Hi, {name}",
@@ -198,6 +199,8 @@
     "you": "You",
     "settings": "Settings",
     "settingsHint": "People, invite and places",
+    "profile": "Your profile",
+    "profileHint": "Your photo, account and language",
     "personalList": "My personal list",
     "personalListHint": "Your things, and what you want to ask home for",
     "noHousehold": "Once you're in a home, its settings and the rest of its sections will be here."
@@ -244,16 +247,125 @@
   "Profile": {
     "title": "Your profile",
     "open": "Your profile",
+    "edit": "Edit profile",
+    "since": "On HAPPA since {date}",
     "nameTitle": "How others see you",
     "name": "Your name",
-    "nameHint": "It's the name people in your homes will see.",
+    "nameHint": "This is the name people in your households will see.",
     "save": "Save",
     "saving": "Saving…",
     "saved": "Saved",
-    "soon": "Coming soon here: your photo and your reviews.",
+    "sending": "Sending…",
+    "soon": "Coming soon here: your reviews.",
+    "stats": {
+      "title": "Your numbers",
+      "chores": "Chores done",
+      "paid": "Paid in expenses",
+      "roulette": "Picked by the wheel",
+      "times": "{count, plural, one {# time} other {# times}}",
+      "messages": "Chat messages"
+    },
+    "households": {
+      "title": "Your households",
+      "empty": "You're not in any household yet. <link>Create one or join with a code</link>."
+    },
+    "settings": {
+      "title": "Settings",
+      "account": "Account",
+      "accountHint": "Your email and password",
+      "language": "Language",
+      "notifications": "Notifications",
+      "notificationsHint": "What we notify you about and on which phones"
+    },
+    "photo": {
+      "title": "Your photo",
+      "add": "Add photo",
+      "change": "Change photo",
+      "remove": "Remove photo",
+      "removing": "Removing…",
+      "hint": "People in your households will see it.",
+      "cropHint": "Drag the photo to frame it in the circle and zoom in with the slider (or two fingers).",
+      "cropLabel": "Photo framing: move it with the arrow keys and zoom with + and −",
+      "zoom": "Zoom",
+      "cancel": "Cancel",
+      "save": "Save photo",
+      "saving": "Saving…",
+      "saved": "Photo saved",
+      "removed": "Photo removed",
+      "minor": "Minor accounts don't have a photo.",
+      "errors": {
+        "notImage": "That's not a photo. Pick an image (JPG, PNG…)",
+        "tooBig": "The photo is too big (20 MB max)",
+        "cantOpen": "That photo can't be opened. Try another one (JPG or PNG)",
+        "uploadFailed": "The photo couldn't be uploaded. Check your connection and try again",
+        "generic": "Something went wrong. Please try again"
+      }
+    },
+    "language": {
+      "title": "Language",
+      "subtitle": "For the app and for phone notifications.",
+      "error": "The language couldn't be changed. Please try again"
+    },
+    "account": {
+      "title": "Your account",
+      "subtitle": "Your email and password.",
+      "emailTitle": "Email",
+      "currentEmail": "You currently sign in with <strong>{email}</strong>.",
+      "newEmail": "New email",
+      "changeEmail": "Change email",
+      "emailSent": "We've sent a link to {email}. Open it to confirm the change (you may also get one at your current email).",
+      "emailPending": "One more step to change your email to {email}: also open the link we sent to your other email.",
+      "emailChanged": "Done: you now sign in with {email}.",
+      "passwordTitle": "Password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "newPasswordHint": "At least 8 characters.",
+      "repeatPassword": "Repeat the new password",
+      "changePassword": "Change password",
+      "passwordChanged": "Password changed. We've signed you out on your other devices."
+    },
+    "delete": {
+      "link": "Delete my account",
+      "title": "Delete your account",
+      "whatTitle": "What happens if you delete it",
+      "what": {
+        "leave": "You leave all your households.",
+        "gone": "Your email, photo, notifications and personal list are deleted.",
+        "stays": "Your messages and expenses stay, under the name «Usuario eliminado», so everyone else's balances still add up.",
+        "final": "It can't be undone."
+      },
+      "oweTitle": "First, pay what you owe",
+      "oweText": "You can't delete your account while you owe money. Pay it and record it in Expenses:",
+      "pendingTitle": "First, settle what's pending",
+      "pendingText": "You have expenses or payments waiting for confirmation. Confirm or reject them in Expenses (or ask others to):",
+      "pendingCount": "{count, plural, one {# pending} other {# pending}}",
+      "owedTitle": "People owe you money",
+      "owedText": "If you delete your account, you won't be able to receive it:",
+      "formTitle": "Confirm it's you",
+      "password": "Your password",
+      "confirm": "I understand my account will be deleted forever",
+      "submit": "Delete my account forever",
+      "deleting": "Deleting…",
+      "minor": "Minor accounts aren't deleted from here: ask for it by writing to <email>privacidad@happa.es</email> (ideally from the email of the adult who manages you)."
+    },
     "errors": {
-      "nameRequired": "Enter your name",
+      "nameRequired": "Write your name",
       "nameTooLong": "60 characters max",
+      "emailInvalid": "Enter a valid email",
+      "sameEmail": "That's already your email",
+      "emailTaken": "There's already an account with that email",
+      "passwordRequired": "Enter your password",
+      "wrongPassword": "That password isn't right",
+      "passwordTooShort": "The password must be at least 8 characters",
+      "passwordTooLong": "72 characters max",
+      "passwordMismatch": "The two passwords don't match",
+      "samePassword": "The new one must be different from the current one",
+      "passwordWeak": "That password is too weak; try a longer one",
+      "confirmRequired": "Tick the box to confirm",
+      "owesMoney": "You owe money in a household: pay it before deleting your account",
+      "pendingMoney": "You have expenses or payments waiting for confirmation: confirm them before deleting your account",
+      "minor": "Minor accounts can't be deleted from here",
+      "rateLimited": "Too many attempts. Wait a few minutes and try again",
       "generic": "Something went wrong. Please try again"
     }
   },

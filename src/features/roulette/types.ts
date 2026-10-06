@@ -8,6 +8,7 @@ export const HISTORY_SIZE = 10;
 export type RoulettePerson = {
   userId: string;
   name: string;
+  avatarUrl: string | null;
   role: "admin" | "member" | "minor";
   // Si hoy está de ausencia: hasta qué día (AAAA-MM-DD). Por defecto no entra.
   awayUntil: string | null;

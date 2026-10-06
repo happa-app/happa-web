@@ -1,5 +1,6 @@
 // Lecturas de hogares para las páginas (se ejecutan en el servidor).
 // Las políticas RLS ya filtran: cada consulta solo devuelve lo que la persona puede ver.
+import { avatarUrl } from "@/features/profile/avatar";
 import { createClient } from "@/lib/supabase/server";
 import { householdIdSchema } from "./schemas";
 import type { HouseholdDetail, HouseholdSummary, InvitePreview } from "./types";
@@ -62,7 +63,7 @@ export async function getHousehold(id: string): Promise<HouseholdDetail | null> 
 
   const { data: members, error: membersError } = await supabase
     .from("household_members")
-    .select("user_id, role, profiles(display_name, avatar_url)")
+    .select("user_id, role, profiles(display_name, avatar_path)")
     .eq("household_id", id)
     .is("left_at", null)
     .order("joined_at");
@@ -77,7 +78,7 @@ export async function getHousehold(id: string): Promise<HouseholdDetail | null> 
     members: (members ?? []).map((m) => ({
       userId: m.user_id,
       displayName: m.profiles?.display_name ?? "",
-      avatarUrl: m.profiles?.avatar_url ?? null,
+      avatarUrl: avatarUrl(m.profiles?.avatar_path),
       role: m.role,
     })),
   };

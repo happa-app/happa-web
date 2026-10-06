@@ -1,9 +1,11 @@
 // Botón base de la app. Úsalo en lugar de <button> para que todos se vean igual.
-import type { ButtonHTMLAttributes } from "react";
+import type { ComponentProps } from "react";
 import styles from "./Button.module.css";
 
-type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary";
+// (ComponentProps incluye "ref": en React 19 se pasa como una prop más)
+type Props = ComponentProps<"button"> & {
+  // danger: para lo que no se puede deshacer (borrar la cuenta)
+  variant?: "primary" | "secondary" | "danger";
   fullWidth?: boolean;
 };
 

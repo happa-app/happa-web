@@ -2,7 +2,7 @@
 // horarios, tareas) no se repite aquí, y los avisos están en la campana de arriba.
 // Aquí irá lo que no tiene sitio en la barra (eventos, votaciones, la caja de herramientas...).
 import { useTranslations } from "next-intl";
-import { GearIcon, ListIcon } from "@/components/brand/Icons";
+import { GearIcon, ListIcon, UserIcon } from "@/components/brand/Icons";
 import { MenuList, type MenuItem } from "./MenuList";
 
 type Props = {
@@ -17,6 +17,7 @@ export function MoreMenu({ household }: Props) {
     ? [{ href: `/hogar/${household.id}/configuracion`, icon: <GearIcon />, title: t("settings"), description: t("settingsHint") }]
     : [];
   const yourItems: MenuItem[] = [
+    { href: "/perfil", icon: <UserIcon />, title: t("profile"), description: t("profileHint") },
     { href: "/compra", icon: <ListIcon />, title: t("personalList"), description: t("personalListHint") },
   ];
 

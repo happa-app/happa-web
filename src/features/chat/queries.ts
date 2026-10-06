@@ -1,5 +1,6 @@
 // Lecturas del chat para las páginas (se ejecutan en el servidor).
 // Los permisos los pone la base de datos (migración 13): solo quien está en el chat lo ve.
+import { avatarUrl } from "@/features/profile/avatar";
 import { createClient } from "@/lib/supabase/server";
 import { fetchMessages } from "./api";
 import { dayIn } from "./timeline";
@@ -38,11 +39,14 @@ export async function getChatPage(householdId: string): Promise<ChatPage | null>
       timezone: row.timezone,
       isResident: row.is_resident,
     },
-    people: ((people.data ?? []) as { user_id: string; display_name: string; is_member: boolean }[]).map((p) => ({
-      userId: p.user_id,
-      name: p.display_name,
-      isMember: p.is_member,
-    })),
+    people: ((people.data ?? []) as { user_id: string; display_name: string; is_member: boolean; avatar_path: string | null }[]).map(
+      (p) => ({
+        userId: p.user_id,
+        name: p.display_name,
+        isMember: p.is_member,
+        avatarUrl: avatarUrl(p.avatar_path),
+      }),
+    ),
     messages: page.messages,
     hasMore: page.hasMore,
     today: dayIn(new Date().toISOString(), row.timezone),

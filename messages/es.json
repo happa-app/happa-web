@@ -55,7 +55,8 @@
       "generic": "Algo ha fallado. Inténtalo de nuevo"
     },
     "signOut": "Cerrar sesión",
-    "confirmError": "El enlace no es válido o ha caducado. Inicia sesión o vuelve a registrarte."
+    "confirmError": "El enlace no es válido o ha caducado. Inicia sesión o vuelve a registrarte.",
+    "accountDeleted": "Tu cuenta se ha borrado. Gracias por haber usado HAPPA."
   },
   "Home": {
     "greeting": "Hola, {name}",
@@ -198,6 +199,8 @@
     "you": "Tú",
     "settings": "Configuración",
     "settingsHint": "Personas, invitación y plazas",
+    "profile": "Tu perfil",
+    "profileHint": "Tu foto, tu cuenta y el idioma",
     "personalList": "Mi lista personal",
     "personalListHint": "Tus cosas, y lo que quieras pedir a casa",
     "noHousehold": "Cuando estés en un hogar, aquí tendrás su configuración y el resto de sus secciones."
@@ -244,16 +247,125 @@
   "Profile": {
     "title": "Tu perfil",
     "open": "Tu perfil",
+    "edit": "Editar perfil",
+    "since": "En HAPPA desde {date}",
     "nameTitle": "Cómo te ven los demás",
     "name": "Tu nombre",
     "nameHint": "Es el nombre que verán en tus hogares.",
     "save": "Guardar",
     "saving": "Guardando…",
     "saved": "Guardado",
-    "soon": "Muy pronto, aquí: tu foto y tus opiniones.",
+    "sending": "Enviando…",
+    "soon": "Muy pronto, aquí: tus opiniones.",
+    "stats": {
+      "title": "Tus números",
+      "chores": "Tareas hechas",
+      "paid": "Pagado en gastos",
+      "roulette": "Te tocó la ruleta",
+      "times": "{count, plural, one {# vez} other {# veces}}",
+      "messages": "Mensajes en el chat"
+    },
+    "households": {
+      "title": "Tus hogares",
+      "empty": "Aún no estás en ningún hogar. <link>Crea uno o únete con un código</link>."
+    },
+    "settings": {
+      "title": "Ajustes",
+      "account": "Cuenta",
+      "accountHint": "Tu correo y tu contraseña",
+      "language": "Idioma",
+      "notifications": "Avisos",
+      "notificationsHint": "De qué te avisamos y en qué móviles"
+    },
+    "photo": {
+      "title": "Tu foto",
+      "add": "Poner foto",
+      "change": "Cambiar foto",
+      "remove": "Quitar foto",
+      "removing": "Quitando…",
+      "hint": "La verán las personas de tus hogares.",
+      "cropHint": "Arrastra la foto para encuadrarla en el círculo y acércala con el zoom (o con dos dedos).",
+      "cropLabel": "Encuadre de la foto: se mueve con las flechas y se acerca con + y −",
+      "zoom": "Zoom",
+      "cancel": "Cancelar",
+      "save": "Guardar foto",
+      "saving": "Guardando…",
+      "saved": "Foto guardada",
+      "removed": "Foto quitada",
+      "minor": "Las cuentas de menores no tienen foto.",
+      "errors": {
+        "notImage": "Eso no es una foto. Elige una imagen (JPG, PNG…)",
+        "tooBig": "La foto es demasiado grande (máximo 20 MB)",
+        "cantOpen": "No se puede abrir esa foto. Prueba con otra (JPG o PNG)",
+        "uploadFailed": "No se pudo subir la foto. Revisa tu conexión y vuelve a probar",
+        "generic": "Algo ha fallado. Inténtalo de nuevo"
+      }
+    },
+    "language": {
+      "title": "Idioma",
+      "subtitle": "El de la app y el de los avisos al móvil.",
+      "error": "No se pudo cambiar el idioma. Inténtalo de nuevo"
+    },
+    "account": {
+      "title": "Tu cuenta",
+      "subtitle": "Tu correo y tu contraseña.",
+      "emailTitle": "Correo",
+      "currentEmail": "Ahora entras con <strong>{email}</strong>.",
+      "newEmail": "Correo nuevo",
+      "changeEmail": "Cambiar el correo",
+      "emailSent": "Te hemos mandado un enlace a {email}. Ábrelo para confirmar el cambio (puede que también te llegue otro a tu correo de ahora).",
+      "emailPending": "Falta un paso para cambiar tu correo a {email}: abre también el enlace que te hemos mandado al otro correo.",
+      "emailChanged": "Listo: ahora entras con {email}.",
+      "passwordTitle": "Contraseña",
+      "currentPassword": "Contraseña actual",
+      "newPassword": "Contraseña nueva",
+      "newPasswordHint": "Al menos 8 caracteres.",
+      "repeatPassword": "Repite la contraseña nueva",
+      "changePassword": "Cambiar la contraseña",
+      "passwordChanged": "Contraseña cambiada. Hemos cerrado tu sesión en los demás dispositivos."
+    },
+    "delete": {
+      "link": "Borrar mi cuenta",
+      "title": "Borrar tu cuenta",
+      "whatTitle": "Qué pasa si la borras",
+      "what": {
+        "leave": "Sales de todos tus hogares.",
+        "gone": "Se borran tu correo, tu foto, tus avisos y tu lista personal.",
+        "stays": "Tus mensajes y tus gastos se quedan, con el nombre «Usuario eliminado», para que a los demás les sigan cuadrando las cuentas.",
+        "final": "No se puede deshacer."
+      },
+      "oweTitle": "Antes, paga lo que debes",
+      "oweText": "No puedes borrar tu cuenta mientras debas dinero. Págalo y apúntalo en Gastos:",
+      "pendingTitle": "Antes, confirma lo que tienes a medias",
+      "pendingText": "Tienes gastos o pagos sin confirmar. Confírmalos o recházalos en Gastos (o pide que lo hagan):",
+      "pendingCount": "{count, plural, one {# sin confirmar} other {# sin confirmar}}",
+      "owedTitle": "Te deben dinero",
+      "owedText": "Si borras la cuenta, ya no podrás recibirlo:",
+      "formTitle": "Confirma que eres tú",
+      "password": "Tu contraseña",
+      "confirm": "Entiendo que mi cuenta se borra para siempre",
+      "submit": "Borrar mi cuenta para siempre",
+      "deleting": "Borrando…",
+      "minor": "Las cuentas de menores no se borran desde aquí: pídelo escribiendo a <email>privacidad@happa.es</email> (mejor desde el correo del adulto que te gestiona)."
+    },
     "errors": {
       "nameRequired": "Escribe tu nombre",
       "nameTooLong": "Máximo 60 caracteres",
+      "emailInvalid": "Escribe un correo válido",
+      "sameEmail": "Ese ya es tu correo",
+      "emailTaken": "Ya hay una cuenta con ese correo",
+      "passwordRequired": "Escribe tu contraseña",
+      "wrongPassword": "La contraseña no es correcta",
+      "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+      "passwordTooLong": "Máximo 72 caracteres",
+      "passwordMismatch": "Las dos contraseñas no coinciden",
+      "samePassword": "La nueva tiene que ser distinta de la actual",
+      "passwordWeak": "Esa contraseña es demasiado débil; prueba con otra más larga",
+      "confirmRequired": "Marca la casilla para confirmar",
+      "owesMoney": "Debes dinero en algún hogar: págalo antes de borrar tu cuenta",
+      "pendingMoney": "Tienes gastos o pagos sin confirmar: confírmalos antes de borrar tu cuenta",
+      "minor": "Las cuentas de menores no se pueden borrar desde aquí",
+      "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
     }
   },

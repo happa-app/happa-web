@@ -1000,7 +1000,7 @@ export type Database = {
       profiles: {
         Row: {
           account_type: Database["public"]["Enums"]["account_type"]
-          avatar_url: string | null
+          avatar_path: string | null
           created_at: string
           deleted_at: string | null
           display_name: string
@@ -1012,7 +1012,7 @@ export type Database = {
         }
         Insert: {
           account_type?: Database["public"]["Enums"]["account_type"]
-          avatar_url?: string | null
+          avatar_path?: string | null
           created_at?: string
           deleted_at?: string | null
           display_name: string
@@ -1024,7 +1024,7 @@ export type Database = {
         }
         Update: {
           account_type?: Database["public"]["Enums"]["account_type"]
-          avatar_url?: string | null
+          avatar_path?: string | null
           created_at?: string
           deleted_at?: string | null
           display_name?: string
@@ -1570,6 +1570,7 @@ export type Database = {
       }
       approve_chore: { Args: { p_occurrence: string }; Returns: undefined }
       can_access_triqui: { Args: { hid: string }; Returns: boolean }
+      can_have_avatar: { Args: never; Returns: boolean }
       can_see_profile: { Args: { other: string }; Returns: boolean }
       cancel_payment: { Args: { p_settlement: string }; Returns: undefined }
       chat_can_access: { Args: { p_conversation: string }; Returns: boolean }
@@ -1580,6 +1581,7 @@ export type Database = {
       chat_people: {
         Args: { p_conversation: string }
         Returns: {
+          avatar_path: string
           display_name: string
           is_member: boolean
           user_id: string
@@ -1739,6 +1741,7 @@ export type Database = {
       }
       delete_absence: { Args: { p_absence: string }; Returns: undefined }
       delete_chore: { Args: { p_chore: string }; Returns: undefined }
+      delete_my_account: { Args: never; Returns: undefined }
       delete_expense: {
         Args: { p_expense: string; p_version: number }
         Returns: undefined
@@ -1776,6 +1779,16 @@ export type Database = {
       force_confirm_expense: {
         Args: { p_expense: string; p_version: number }
         Returns: undefined
+      }
+      get_my_stats: {
+        Args: never
+        Returns: {
+          chores_done: number
+          member_since: string
+          messages_sent: number
+          paid_cents: number
+          roulette_chosen: number
+        }[]
       }
       get_chat: {
         Args: { p_household: string }
@@ -1850,6 +1863,15 @@ export type Database = {
           archived_at: string
           household_id: string
           name: string
+        }[]
+      }
+      my_pending_balances: {
+        Args: never
+        Returns: {
+          household_id: string
+          name: string
+          net_cents: number
+          pending: number
         }[]
       }
       my_triqui_debts: {

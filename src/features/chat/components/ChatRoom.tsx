@@ -134,6 +134,7 @@ export function ChatRoom({ info, people, me, initialMessages, initialHasMore, to
                 mine={item.mine}
                 me={me}
                 senderName={senderName}
+                senderAvatarUrl={person?.avatarUrl ?? null}
                 senderGone={!person?.isMember}
                 lastInGroup={item.lastInGroup}
                 timezone={info.timezone}

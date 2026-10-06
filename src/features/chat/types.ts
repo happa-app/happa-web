@@ -15,7 +15,7 @@ export type ChatMessage = {
 export type MessageVersion = { body: string; writtenAt: string; replacedAt: string };
 
 // Alguien del chat. isMember: sigue en el chat (vive en el hogar, o se fue con saldo pendiente).
-export type ChatPerson = { userId: string; name: string; isMember: boolean };
+export type ChatPerson = { userId: string; name: string; isMember: boolean; avatarUrl: string | null };
 
 export type ChatInfo = {
   conversationId: string;

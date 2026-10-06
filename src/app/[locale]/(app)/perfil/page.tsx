@@ -1,10 +1,11 @@
-// Página /perfil (el círculo de arriba a la derecha): tu nombre, tu correo y cambiar cómo te llaman.
-// Más adelante: tu foto y tus opiniones.
+// Página /perfil (el círculo de arriba a la derecha): tu foto y tu nombre, tus números, tus hogares y
+// los ajustes de tu cuenta. Más adelante: tus opiniones.
 import { getLocale, getTranslations } from "next-intl/server";
-import { Card } from "@/components/ui/Card";
-import { ProfileCard, ProfileForm } from "@/features/profile";
-import { getMyProfile } from "@/features/profile/server";
-import { redirect } from "@/i18n/navigation";
+import { getMyHouseholds } from "@/features/households/server";
+import { ProfileHero, ProfileHouseholds, ProfileSettings, ProfileStats } from "@/features/profile";
+import profileStyles from "@/features/profile/components/Profile.module.css";
+import { getMyProfile, getMyStats } from "@/features/profile/server";
+import { Link, redirect } from "@/i18n/navigation";
 import styles from "../page.module.css";
 
 export default async function ProfilePage() {
@@ -13,17 +14,18 @@ export default async function ProfilePage() {
   if (!profile) {
     return redirect({ href: "/login", locale: await getLocale() });
   }
+  const [stats, households] = await Promise.all([getMyStats(), getMyHouseholds(profile.userId)]);
 
   return (
     <>
-      <section className={styles.intro}>
-        <h1 className={styles.title}>{t("title")}</h1>
-      </section>
-      <ProfileCard profile={profile} />
-      <Card title={t("nameTitle")}>
-        <ProfileForm name={profile.name} />
-      </Card>
+      <ProfileHero profile={profile} />
+      <ProfileStats stats={stats} />
+      <ProfileHouseholds households={households} />
+      <ProfileSettings locale={profile.locale} />
       <p className={styles.muted}>{t("soon")}</p>
+      <Link href="/perfil/borrar" className={profileStyles.dangerLink}>
+        {t("delete.link")}
+      </Link>
     </>
   );
 }

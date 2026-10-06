@@ -32,6 +32,8 @@ export type Absence = {
 export type SchedulePerson = {
   userId: string;
   name: string;
+  // Su foto (null si no tiene)
+  avatarUrl: string | null;
   role: "admin" | "member" | "minor";
   canEdit: boolean;
 };

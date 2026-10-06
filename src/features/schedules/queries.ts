@@ -1,5 +1,6 @@
 // Lecturas de horarios para las páginas (se ejecutan en el servidor).
 // RLS ya filtra: solo llegan los horarios y ausencias de los hogares en los que vives (migración 11).
+import { avatarUrl } from "@/features/profile/avatar";
 import { createClient } from "@/lib/supabase/server";
 import { nowIn, shortTime } from "./time";
 import type { Absence, OtherSchedule, ScheduleBlock, ScheduleKind, ScheduleOverview, SchedulePerson, Weekday } from "./types";
@@ -14,7 +15,7 @@ type BlockRow = {
   label: string | null;
 };
 type AbsenceRow = { id: string; user_id: string; starts_on: string; ends_on: string; note: string | null };
-type MemberRow = { user_id: string; role: string; profiles: { display_name: string } | null };
+type MemberRow = { user_id: string; role: string; profiles: { display_name: string; avatar_path: string | null } | null };
 
 const RESIDENT_ROLES = ["admin", "member", "minor"] as const;
 
@@ -49,7 +50,7 @@ export async function getScheduleOverview(householdId: string, userId: string): 
   const [members, guardianships, blocks, absences] = await Promise.all([
     supabase
       .from("household_members")
-      .select("user_id, role, profiles(display_name)")
+      .select("user_id, role, profiles(display_name, avatar_path)")
       .eq("household_id", householdId)
       .is("left_at", null)
       .in("role", [...RESIDENT_ROLES])
@@ -78,6 +79,7 @@ export async function getScheduleOverview(householdId: string, userId: string): 
   const people: SchedulePerson[] = memberRows.map((m) => ({
     userId: m.user_id,
     name: m.profiles?.display_name ?? "",
+    avatarUrl: avatarUrl(m.profiles?.avatar_path),
     role: m.role as SchedulePerson["role"],
     canEdit: m.user_id === userId || (m.role === "minor" && guarded.has(m.user_id)),
   }));

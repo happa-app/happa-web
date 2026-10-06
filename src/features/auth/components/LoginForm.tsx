@@ -12,11 +12,13 @@ import styles from "./AuthForm.module.css";
 
 type Props = {
   confirmFailed?: boolean;
+  // Vienes de borrar tu cuenta
+  accountDeleted?: boolean;
   // Adónde volver después de entrar (por ejemplo, un enlace de invitación)
   next?: string;
 };
 
-export function LoginForm({ confirmFailed = false, next }: Props) {
+export function LoginForm({ confirmFailed = false, accountDeleted = false, next }: Props) {
   const t = useTranslations("Auth");
   const locale = useLocale();
   const [state, formAction, isPending] = useActionState(signIn, initialAuthState);
@@ -31,6 +33,7 @@ export function LoginForm({ confirmFailed = false, next }: Props) {
         <p className={styles.subtitle}>{t("login.subtitle")}</p>
       </header>
 
+      {accountDeleted && state.status === "idle" ? <Alert tone="success">{t("accountDeleted")}</Alert> : null}
       {confirmFailed && state.status === "idle" ? (
         <Alert tone="error">{t("confirmError")}</Alert>
       ) : null}

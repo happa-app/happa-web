@@ -43,6 +43,15 @@
   border-color: var(--color-brand-strong);
 }
 
+.danger {
+  background: var(--color-error);
+  color: #fff;
+}
+
+.danger:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
 .fullWidth {
   width: 100%;
 }

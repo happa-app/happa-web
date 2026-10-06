@@ -4,6 +4,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
+import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 import { useRoulette } from "../hooks/useRoulette";
 import { MAX_PEOPLE, MIN_PEOPLE, type RoulettePerson, type RouletteSpin } from "../types";
@@ -35,6 +36,7 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
   const locale = useLocale();
   const order = people.map((p) => p.userId);
   const nameOf = (id: string | null) => people.find((p) => p.userId === id)?.name ?? t("someone");
+  const photoOf = (id: string | null) => people.find((p) => p.userId === id)?.avatarUrl ?? null;
   const shortDate = (iso: string) =>
     new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
@@ -74,6 +76,7 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
   const result =
     phase === "done" && shown ? (
       <div className={shown.chosenId === me ? styles.resultMine : styles.result}>
+        <Avatar name={nameOf(shown.chosenId)} imageUrl={photoOf(shown.chosenId)} />
         <p className={styles.resultTitle}>
           {shown.chosenId === me ? t("result.you") : t("result.other", { name: nameOf(shown.chosenId) })}
         </p>
@@ -120,12 +123,15 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
                       disabled={!checked && selected.length >= MAX_PEOPLE}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => toggle(person.userId, e.target.checked)}
                     />
-                    <span className={styles.personName}>{person.userId === me ? t("youCap") : person.name}</span>
-                    {person.awayUntil ? (
-                      <span className={styles.personAway}>{t("form.awayUntil", { date: shortDate(person.awayUntil) })}</span>
-                    ) : person.role === "minor" ? (
-                      <span className={styles.personAway}>{t("form.minor")}</span>
-                    ) : null}
+                    <Avatar name={person.name} imageUrl={person.avatarUrl} size="sm" />
+                    <span className={styles.personText}>
+                      <span className={styles.personName}>{person.userId === me ? t("youCap") : person.name}</span>
+                      {person.awayUntil ? (
+                        <span className={styles.personAway}>{t("form.awayUntil", { date: shortDate(person.awayUntil) })}</span>
+                      ) : person.role === "minor" ? (
+                        <span className={styles.personAway}>{t("form.minor")}</span>
+                      ) : null}
+                    </span>
                   </label>
                 );
               })}

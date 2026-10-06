@@ -21,6 +21,7 @@ export async function getRoulettePage(householdId: string, userId: string): Prom
     people: overview.people.map((p) => ({
       userId: p.userId,
       name: p.name,
+      avatarUrl: p.avatarUrl,
       role: p.role,
       awayUntil: absenceOn(p.userId, overview.absences, today)?.endsOn ?? null,
     })),

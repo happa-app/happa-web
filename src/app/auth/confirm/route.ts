@@ -12,6 +12,11 @@ export async function GET(request: NextRequest) {
   // Solo se permite volver a rutas internas: evita que alguien use el enlace
   // para mandar a la gente a una web externa.
   const next = safeNextPath(searchParams.get("next")) ?? "/inicio";
+  // Cambio de correo: con "Secure email change" hay dos enlaces (uno en cada correo). El primero vuelve
+  // sin código ("message"), y el segundo puede abrirse en otro móvil (sin la cookie del código). Supabase
+  // ya ha hecho su parte antes de volver aquí, así que se va siempre a Tu cuenta, que le pregunta a
+  // Supabase cómo ha quedado.
+  const emailChange = searchParams.get("flow") === "email";
   const code = searchParams.get("code");
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;
@@ -27,7 +32,7 @@ export async function GET(request: NextRequest) {
     confirmed = !error;
   }
 
-  if (confirmed) redirect(next);
+  if (confirmed || emailChange) redirect(next);
 
   const loginPath = next === "/en" || next.startsWith("/en/") ? "/en/login" : "/login";
   redirect(`${loginPath}?error=confirm`);

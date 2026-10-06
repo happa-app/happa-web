@@ -2,12 +2,13 @@
 // Acciones de servidor: funciones que el formulario llama directamente al enviarse.
 // Es el equivalente a tus handlers de "submit", pero se ejecutan en el servidor,
 // así que las comprobaciones no se pueden saltar desde el navegador.
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { redirect as redirectToPath } from "next/navigation";
 import { z } from "zod";
 import { LEGAL_VERSIONS } from "@/features/legal/versions";
 import { localizePath, parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
+import { siteOrigin } from "@/lib/site-origin";
 import { createClient } from "@/lib/supabase/server";
 import { safeNextPath } from "@/utils/safe-path";
 import { toAuthErrorKey } from "./errors";
@@ -15,22 +16,13 @@ import { loginSchema, signupSchema } from "./schemas";
 import type { AuthFormState } from "./types";
 
 const HOME_PATH = "/inicio";
+// La cookie donde next-intl recuerda el idioma (su nombre por defecto)
+const LOCALE_COOKIE = "NEXT_LOCALE";
 const LOGIN_PATH = "/login";
 
 function text(formData: FormData, key: string) {
   const value = formData.get(key);
   return typeof value === "string" ? value : "";
-}
-
-// Dirección de la web (localhost en desarrollo, happa.es en producción).
-// Supabase solo acepta enlaces de vuelta que estén en su lista de URLs permitidas.
-async function siteOrigin() {
-  const h = await headers();
-  const origin = h.get("origin");
-  if (origin) return origin;
-  const host = h.get("x-forwarded-host") ?? h.get("host");
-  const protocol = h.get("x-forwarded-proto") ?? "https";
-  return `${protocol}://${host}`;
 }
 
 export async function signIn(
@@ -50,14 +42,19 @@ export async function signIn(
   }
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithPassword(parsed.data);
+  const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
   if (error) {
     return { status: "error", formError: toAuthErrorKey(error), values };
   }
 
   // Si venía de un enlace (por ejemplo, una invitación), vuelve ahí.
   if (next) redirectToPath(next);
-  return redirect({ href: HOME_PATH, locale });
+  // Si no, a la app en el idioma de tu perfil (aunque entres desde otro móvil). También se guarda en la
+  // cookie de idioma: si no, al ir a /inicio (español, sin /en) se cambiaría al idioma del navegador.
+  const { data: profile } = await supabase.from("profiles").select("locale").eq("id", data.user.id).maybeSingle();
+  const home = profile ? parseLocale(profile.locale) : locale;
+  (await cookies()).set(LOCALE_COOKIE, home, { path: "/", sameSite: "lax" });
+  return redirect({ href: HOME_PATH, locale: home });
 }
 
 export async function signUp(
