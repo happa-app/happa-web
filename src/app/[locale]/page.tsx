@@ -1,6 +1,7 @@
 // Portada para quien no ha iniciado sesión (con sesión, el proxy lleva a /inicio).
 import { getTranslations } from "next-intl/server";
 import { Logo } from "@/components/brand/Logo";
+import { LegalLinks } from "@/features/legal";
 import { Link } from "@/i18n/navigation";
 import styles from "./landing.module.css";
 
@@ -22,6 +23,7 @@ export default async function LandingPage() {
           {t("login")}
         </Link>
       </div>
+      <LegalLinks />
     </main>
   );
 }

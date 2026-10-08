@@ -2,6 +2,7 @@
 // Si ya estás en uno, lleva a la de ese hogar.
 import { getLocale, getTranslations } from "next-intl/server";
 import { SignOutButton } from "@/features/auth";
+import { LegalLinks } from "@/features/legal";
 import { MoreMenu } from "@/features/navigation";
 import { getNavHouseholds } from "@/features/navigation/server";
 import { redirect } from "@/i18n/navigation";
@@ -22,6 +23,7 @@ export default async function MorePage() {
       </section>
       <MoreMenu household={null} />
       <SignOutButton fullWidth />
+      <LegalLinks />
     </>
   );
 }
