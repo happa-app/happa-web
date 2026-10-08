@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>HAPPA</title>
+  </head>
+  <body style="margin:0;padding:0;background:#f6f7f4;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f7f4;">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border-radius:16px;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1f3b4d;">
+            <tr>
+              <td style="padding:28px 28px 0 28px;font-size:22px;font-weight:700;color:#1f3b4d;">Happa</td>
+            </tr>
+{{ if eq (print .Data.locale) "en" }}
+            <tr>
+              <td style="padding:20px 28px 0 28px;">
+                <h1 style="margin:0 0 12px 0;font-size:20px;line-height:1.3;color:#1f3b4d;">Confirm your email</h1>
+                <p style="margin:0 0 12px 0;font-size:15px;line-height:1.5;color:#1f3b4d;">To finish creating your HAPPA account, confirm that this email address is yours.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 28px 8px 28px;">
+                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 24px;background:#3e7d55;color:#ffffff;text-decoration:none;font-weight:600;font-size:15px;border-radius:12px;">Confirm my email</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 28px 0 28px;font-size:13px;line-height:1.5;color:#5b6b75;">If the button doesn't work, copy this link into your browser:<br /><a href="{{ .ConfirmationURL }}" style="color:#3e7d55;word-break:break-all;">{{ .ConfirmationURL }}</a></td>
+            </tr>
+            <tr>
+              <td style="padding:20px 28px 28px 28px;font-size:13px;line-height:1.5;color:#5b6b75;border-top:0;">If you didn't sign up for HAPPA, ignore this email: no account will be created.</td>
+            </tr>
+{{ else }}
+            <tr>
+              <td style="padding:20px 28px 0 28px;">
+                <h1 style="margin:0 0 12px 0;font-size:20px;line-height:1.3;color:#1f3b4d;">Confirma tu correo</h1>
+                <p style="margin:0 0 12px 0;font-size:15px;line-height:1.5;color:#1f3b4d;">Para terminar de crear tu cuenta de HAPPA, confirma que este correo es tuyo.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 28px 8px 28px;">
+                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 24px;background:#3e7d55;color:#ffffff;text-decoration:none;font-weight:600;font-size:15px;border-radius:12px;">Confirmar mi correo</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 28px 0 28px;font-size:13px;line-height:1.5;color:#5b6b75;">Si el botón no funciona, copia este enlace en el navegador:<br /><a href="{{ .ConfirmationURL }}" style="color:#3e7d55;word-break:break-all;">{{ .ConfirmationURL }}</a></td>
+            </tr>
+            <tr>
+              <td style="padding:20px 28px 28px 28px;font-size:13px;line-height:1.5;color:#5b6b75;border-top:0;">Si no te has registrado en HAPPA, ignora este correo: no se creará ninguna cuenta.</td>
+            </tr>
+{{ end }}
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
