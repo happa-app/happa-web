@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>HAPPA</title>
+  </head>
+  <body style="margin:0;padding:0;background:#f6f7f4;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f7f4;">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border-radius:16px;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1f3b4d;">
+            <tr>
+              <td style="padding:28px 28px 0 28px;font-size:22px;font-weight:700;color:#1f3b4d;">Happa</td>
+            </tr>
+{{ if eq (print .Data.locale) "en" }}
+            <tr>
+              <td style="padding:20px 28px 0 28px;">
+                <h1 style="margin:0 0 12px 0;font-size:20px;line-height:1.3;color:#1f3b4d;">Confirm your new email</h1>
+                <p style="margin:0 0 12px 0;font-size:15px;line-height:1.5;color:#1f3b4d;">You asked to change the email of your HAPPA account from <strong>{{ .Email }}</strong> to <strong>{{ .NewEmail }}</strong>.</p>
+                <p style="margin:0 0 12px 0;font-size:15px;line-height:1.5;color:#1f3b4d;">You'll receive this email at both addresses: confirm it from both.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 28px 8px 28px;">
+                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 24px;background:#3e7d55;color:#ffffff;text-decoration:none;font-weight:600;font-size:15px;border-radius:12px;">Confirm the change</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 28px 0 28px;font-size:13px;line-height:1.5;color:#5b6b75;">If the button doesn't work, copy this link into your browser:<br /><a href="{{ .ConfirmationURL }}" style="color:#3e7d55;word-break:break-all;">{{ .ConfirmationURL }}</a></td>
+            </tr>
+            <tr>
+              <td style="padding:20px 28px 28px 28px;font-size:13px;line-height:1.5;color:#5b6b75;border-top:0;">If it wasn't you, don't click anything and change your password: your account keeps its current email.</td>
+            </tr>
+{{ else }}
+            <tr>
+              <td style="padding:20px 28px 0 28px;">
+                <h1 style="margin:0 0 12px 0;font-size:20px;line-height:1.3;color:#1f3b4d;">Confirma tu correo nuevo</h1>
+                <p style="margin:0 0 12px 0;font-size:15px;line-height:1.5;color:#1f3b4d;">Has pedido cambiar el correo de tu cuenta de HAPPA de <strong>{{ .Email }}</strong> a <strong>{{ .NewEmail }}</strong>.</p>
+                <p style="margin:0 0 12px 0;font-size:15px;line-height:1.5;color:#1f3b4d;">Este correo te llega a las dos direcciones: confírmalo desde las dos.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 28px 8px 28px;">
+                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 24px;background:#3e7d55;color:#ffffff;text-decoration:none;font-weight:600;font-size:15px;border-radius:12px;">Confirmar el cambio</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 28px 0 28px;font-size:13px;line-height:1.5;color:#5b6b75;">Si el botón no funciona, copia este enlace en el navegador:<br /><a href="{{ .ConfirmationURL }}" style="color:#3e7d55;word-break:break-all;">{{ .ConfirmationURL }}</a></td>
+            </tr>
+            <tr>
+              <td style="padding:20px 28px 28px 28px;font-size:13px;line-height:1.5;color:#5b6b75;border-top:0;">Si no has sido tú, no pulses nada y cambia tu contraseña: tu cuenta sigue con el correo de siempre.</td>
+            </tr>
+{{ end }}
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
