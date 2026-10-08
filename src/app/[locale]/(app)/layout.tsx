@@ -1,6 +1,7 @@
 // Marco de la zona privada: cabecera (la campana de avisos, el nombre de la app y tu perfil), el
 // contenido y la barra de abajo (Más · Inicio · Casas · Ruleta · Chat). Cerrar sesión está en Más.
 // Todas las páginas dentro de (app) lo comparten; el proxy ya exige sesión para entrar.
+import { unstable_rethrow } from "next/navigation";
 import type { ReactNode } from "react";
 import { BottomNav } from "@/features/navigation";
 import { getNavHouseholds } from "@/features/navigation/server";
@@ -14,7 +15,10 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
   // (Si fallara leer el perfil, la página se enseña igual, sin el círculo de arriba)
   const [{ householdId, householdIds }, profile] = await Promise.all([
     getNavHouseholds(),
-    getMyProfile().catch((e) => {
+    getMyProfile().catch((e: unknown) => {
+      // Los "errores" internos de Next (por ejemplo, el aviso de que la página usa cookies y no puede
+      // ser estática) no son fallos: se dejan pasar para que Next los trate
+      unstable_rethrow(e);
       console.error("[perfil] no se pudo leer:", e);
       return null;
     }),
