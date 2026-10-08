@@ -1,0 +1,91 @@
+<!doctype html>
+<!-- La página que enseña la app cuando no hay internet (la guarda el service worker, public/sw.js).
+     Es estática a propósito: no lleva nada tuyo. -->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f7f4" />
+    <title>Happa · Sin conexión</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+        background: #f6f7f4;
+        color: #1f3b4d;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        text-align: center;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        max-width: 360px;
+      }
+      img {
+        width: 88px;
+        height: 88px;
+      }
+      h1 {
+        margin: 8px 0 0;
+        font-size: 1.5rem;
+      }
+      p {
+        margin: 0;
+        color: #5b6b75;
+        line-height: 1.5;
+      }
+      button {
+        min-height: 48px;
+        margin-top: 8px;
+        padding: 0 24px;
+        border: 0;
+        border-radius: 12px;
+        background: #3e7d55;
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button:focus-visible {
+        outline: 3px solid #69ae7e;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/icons/icon-192.png" alt="" />
+      <h1 id="title">Sin conexión</h1>
+      <p id="text">No hay internet ahora mismo. Cuando vuelva la conexión, HAPPA seguirá donde lo dejaste.</p>
+      <button type="button" id="retry">Reintentar</button>
+    </main>
+    <script>
+      (function () {
+        document.getElementById("retry").onclick = function () {
+          location.reload();
+        };
+        // Sale en la dirección que se intentaba abrir: si es de la app en inglés (/en/...), en inglés
+        if (!/^\/en(\/|$)/.test(location.pathname)) return;
+        document.documentElement.lang = "en";
+        document.title = "Happa · Offline";
+        document.getElementById("title").textContent = "You're offline";
+        document.getElementById("text").textContent =
+          "There's no internet right now. When you're back online, HAPPA will pick up where you left off.";
+        document.getElementById("retry").textContent = "Try again";
+      })();
+    </script>
+  </body>
+</html>
