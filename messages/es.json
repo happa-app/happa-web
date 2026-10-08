@@ -67,7 +67,12 @@
     "terms": "Términos de uso",
     "privacy": "Política de privacidad",
     "draftNotice": "Este documento está en preparación y se publicará antes del lanzamiento.",
-    "back": "Volver"
+    "back": "Volver",
+    "meta": "Versión {version} · Última actualización: {updated}",
+    "summaryTitle": "En pocas palabras",
+    "summaryNote": "Este resumen te ayuda a entenderlo, pero lo que vale es el texto completo.",
+    "contents": "Índice",
+    "linksLabel": "Textos legales"
   },
   "Households": {
     "list": {

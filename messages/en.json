@@ -67,7 +67,12 @@
     "terms": "Terms of use",
     "privacy": "Privacy policy",
     "draftNotice": "This document is being prepared and will be published before launch.",
-    "back": "Back"
+    "back": "Back",
+    "meta": "Version {version} · Last updated: {updated}",
+    "summaryTitle": "In a nutshell",
+    "summaryNote": "This summary helps you understand it, but the full text is what applies.",
+    "contents": "Contents",
+    "linksLabel": "Legal"
   },
   "Households": {
     "list": {
