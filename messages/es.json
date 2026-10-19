@@ -235,7 +235,10 @@
     },
     "membersSection": {
       "title": "Miembros",
-      "you": "tú"
+      "you": "tú",
+      "makeAdmin": "Hacer admin",
+      "makingAdmin": "Un momento…",
+      "makeAdminConfirm": "¿Hacer admin a {name}? Tendrá los mismos permisos que tú en este hogar. No se puede deshacer desde la app."
     },
     "leave": {
       "button": "Salir del hogar",
@@ -253,6 +256,7 @@
       "placesInvalid": "Elige entre 1 y 20 personas",
       "placesTooFew": "Ya vive más gente: no puedes poner menos plazas",
       "notAdmin": "Solo el admin puede cambiar esto",
+      "memberGone": "Esta persona ya no vive en el hogar",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
     }
   },

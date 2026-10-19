@@ -1,15 +1,19 @@
-// Lista de miembros actuales del hogar con su rol.
+// Lista de miembros actuales del hogar con su rol. Si quien mira es admin, junto a cada miembro adulto
+// sale "Hacer admin" (menores y casero no pueden serlo).
 import { useTranslations } from "next-intl";
 import { Avatar } from "@/components/ui/Avatar";
 import type { HouseholdMember } from "../types";
 import styles from "./HouseholdDetail.module.css";
+import { MakeAdminButton } from "./MakeAdminButton";
 
 type Props = {
   members: HouseholdMember[];
   currentUserId: string;
+  householdId: string;
+  isAdmin: boolean;
 };
 
-export function MemberList({ members, currentUserId }: Props) {
+export function MemberList({ members, currentUserId, householdId, isAdmin }: Props) {
   const t = useTranslations("Households");
 
   return (
@@ -26,6 +30,9 @@ export function MemberList({ members, currentUserId }: Props) {
           <span className={m.role === "admin" ? styles.roleAdmin : styles.role}>
             {t(`roles.${m.role}`)}
           </span>
+          {isAdmin && m.role === "member" && m.userId !== currentUserId ? (
+            <MakeAdminButton householdId={householdId} userId={m.userId} name={m.displayName} />
+          ) : null}
         </li>
       ))}
     </ul>

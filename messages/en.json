@@ -235,7 +235,10 @@
     },
     "membersSection": {
       "title": "Members",
-      "you": "you"
+      "you": "you",
+      "makeAdmin": "Make admin",
+      "makingAdmin": "One moment…",
+      "makeAdminConfirm": "Make {name} an admin? They'll have the same permissions as you in this household. This can't be undone from the app."
     },
     "leave": {
       "button": "Leave home",
@@ -253,6 +256,7 @@
       "placesInvalid": "Choose between 1 and 20 people",
       "placesTooFew": "More people already live here: you can't set fewer places",
       "notAdmin": "Only the admin can change this",
+      "memberGone": "This person no longer lives in the household",
       "generic": "Something went wrong. Please try again"
     }
   },

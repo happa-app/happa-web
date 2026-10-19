@@ -55,7 +55,12 @@ export default async function HouseholdSettingsPage({ params }: Props) {
 
       <Card title={t("membersSection.title")}>
         <Occupancy residents={residents} places={household.maxMembers} />
-        <MemberList members={household.members} currentUserId={userId} />
+        <MemberList
+          members={household.members}
+          currentUserId={userId}
+          householdId={household.id}
+          isAdmin={isAdmin}
+        />
       </Card>
 
       {isAdult ? (
