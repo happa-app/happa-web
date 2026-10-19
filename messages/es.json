@@ -7,7 +7,72 @@
     "tagline": "Tu hogar, organizado entre todos",
     "description": "Reparte tareas, divide gastos y comparte la lista de la compra con tu piso, tu pareja o tu familia.",
     "signup": "Crear cuenta",
-    "login": "Ya tengo cuenta"
+    "login": "Ya tengo cuenta",
+    "loginShort": "Entrar",
+    "accountLabel": "Tu cuenta",
+    "notes": {
+      "chores": "Hoy friega Bruno",
+      "shopping": "Falta leche (2)",
+      "expenses": "Carla te debe 12,00 €"
+    },
+    "features": {
+      "title": "Todo lo de casa, en un sitio",
+      "shopping": {
+        "title": "Lista de la compra",
+        "text": "Una lista común que se actualiza al momento para todos, y otra tuya que puedes pasar al hogar cuando quieras."
+      },
+      "expenses": {
+        "title": "Gastos compartidos",
+        "text": "Apuntad quién ha pagado qué. Happa calcula quién debe a quién y cómo quedar en paz."
+      },
+      "chores": {
+        "title": "Tareas por turnos",
+        "text": "Los turnos se reparten solos. Si a alguien le toca estando fuera, se salta y la recupera al volver."
+      },
+      "schedules": {
+        "title": "Horarios",
+        "text": "Clases, trabajo y viajes de cada uno, para saber quién está en casa."
+      },
+      "chat": {
+        "title": "Chat del hogar",
+        "text": "Para hablar con quienes viven contigo sin mezclarlo con otros grupos."
+      },
+      "roulette": {
+        "title": "Ruleta del marrón",
+        "text": "¿Nadie quiere bajar la basura? Que decida la ruleta, al azar de verdad."
+      }
+    },
+    "steps": {
+      "title": "Cómo empezar",
+      "account": {
+        "title": "Crea tu cuenta",
+        "text": "Solo necesitas un correo."
+      },
+      "household": {
+        "title": "Crea tu hogar o únete",
+        "text": "Si ya lo ha creado alguien, entra con el código o el enlace que te pase."
+      },
+      "together": {
+        "title": "Organizaos",
+        "text": "Lo que apunta uno lo ven los demás al momento."
+      }
+    },
+    "install": {
+      "title": "Instálala en tu móvil",
+      "intro": "Happa es una web que se instala como una app: sin pasar por la tienda de apps, con su icono en la pantalla de inicio y avisos en el móvil.",
+      "button": "Instalar Happa",
+      "installed": "Happa ya está instalada. Ábrela desde su icono en la pantalla de inicio.",
+      "ios": {
+        "share": "En Safari, pulsa el botón Compartir <icon></icon> de la barra de abajo.",
+        "add": "Elige «Añadir a pantalla de inicio».",
+        "confirm": "Pulsa «Añadir». Happa aparecerá con las demás apps."
+      },
+      "other": "Abre happa.es en el navegador de tu móvil y, en su menú, elige «Instalar app» o «Añadir a pantalla de inicio»."
+    },
+    "closing": {
+      "title": "Organiza tu casa desde hoy",
+      "text": "Crea tu cuenta, invita a quienes viven contigo y empezad a repartir."
+    }
   },
   "Auth": {
     "login": {

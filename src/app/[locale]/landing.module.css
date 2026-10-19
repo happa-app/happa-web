@@ -1,40 +1,231 @@
+/* Portada. Primero para el móvil; en pantallas anchas, la portada y las listas se reparten en columnas. */
 .page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* ───────────── Barra de arriba: logo y cuenta ───────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.loginLink,
+.signupLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.loginLink {
+  color: var(--color-brand-strong);
+}
+
+.loginLink:hover {
+  background: var(--color-brand-soft);
+}
+
+.signupLink {
+  background: var(--color-brand-strong);
+  color: #fff;
+}
+
+.signupLink:hover {
+  background: var(--color-brand-stronger);
+}
+
+.loginLink:focus-visible,
+.signupLink:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ───────────── Contenido ───────────── */
+.main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-10);
-  min-height: 100dvh;
-  max-width: 440px;
-  margin: 0 auto;
-  padding: var(--space-10) var(--space-4) var(--space-8);
+  gap: calc(var(--space-10) + var(--space-8));
+  padding: var(--space-8) 0 calc(var(--space-10) + var(--space-8));
 }
 
 .hero {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-4);
-  text-align: center;
+  display: grid;
+  gap: var(--space-10);
 }
 
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* El titular es lo que más se ve: grande, apretado y en dos o tres líneas */
 .tagline {
-  margin-top: var(--space-4);
-  font-size: var(--text-2xl);
-  font-weight: 700;
-  line-height: 1.2;
+  max-width: 13ch;
+  font-size: clamp(2.5rem, 9vw, 4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
 }
 
 .description {
+  max-width: 34ch;
   color: var(--color-text-muted);
   font-size: var(--text-lg);
+}
+
+/* Notas de nevera: cada una con el color de su sección en la app, un poco torcida y descolocada */
+.fridge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin: 0;
+  padding: var(--space-2) 0 var(--space-2) var(--space-2);
+  list-style: none;
+}
+
+.note {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5) var(--space-3) var(--space-4);
+  border-left: 6px solid var(--note-color);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  font-weight: 600;
+}
+
+.note svg {
+  flex-shrink: 0;
+  color: var(--note-color);
+}
+
+.noteChores {
+  --note-color: var(--color-schedule-work);
+  transform: rotate(-2.5deg);
+}
+
+.noteShopping {
+  --note-color: var(--color-schedule-class);
+  margin-left: var(--space-8);
+  transform: rotate(1.5deg);
+}
+
+.noteExpenses {
+  --note-color: var(--color-owed);
+  margin-left: var(--space-3);
+  transform: rotate(-1deg);
+}
+
+/* ───────────── Secciones ───────────── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.sectionTitle {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.featureTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.featureText {
+  max-width: 48ch;
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+/* Qué puedes hacer: icono a la izquierda, texto a la derecha (sin tarjetas) */
+.features {
+  display: grid;
+  gap: var(--space-6) var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--space-4);
+}
+
+.featureIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+}
+
+/* Cómo empezar: los pasos sí van en orden, de ahí el número grande */
+.steps {
+  display: grid;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding-left: 3.25rem;
+  counter-increment: step;
+}
+
+.step::before {
+  content: counter(step);
+  position: absolute;
+  top: -0.35rem;
+  left: 0;
+  color: var(--color-brand-strong);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ───────────── Cierre ───────────── */
+.closing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .actions {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  margin-top: var(--space-4);
 }
 
 .action {
@@ -42,6 +233,7 @@
   align-items: center;
   justify-content: center;
   min-height: 52px;
+  padding: 0 var(--space-6);
   border-radius: var(--radius-md);
   font-weight: 600;
   text-decoration: none;
@@ -65,4 +257,34 @@
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-brand-strong);
+}
+
+.footer {
+  padding: var(--space-6) 0 var(--space-8);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ───────────── Pantallas anchas ───────────── */
+@media (min-width: 640px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .actions {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: center;
+    /* Que ocupe buena parte de la pantalla, pero sin pasarse en monitores muy altos */
+    min-height: min(60vh, 520px);
+  }
+
+  .features,
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
