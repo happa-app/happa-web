@@ -13,6 +13,8 @@ export function toHouseholdErrorKey(error: { message?: string; code?: string }):
   if (message.includes("Places must be between")) return "placesInvalid";
   if (message.includes("Fewer places than people")) return "placesTooFew";
   if (message.includes("Only an admin")) return "notAdmin";
+  // set_member_role: la persona se ha ido del hogar mientras tanto
+  if (message.includes("Not an active member")) return "memberGone";
   // Solo se ve en el servidor (terminal de npm run dev o logs de Vercel), nunca en la app.
   console.error("[households] error sin traducir:", error);
   return "generic";

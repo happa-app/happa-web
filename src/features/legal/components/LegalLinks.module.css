@@ -1,0 +1,22 @@
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.links a {
+  color: inherit;
+}
+
+.links a:hover {
+  color: var(--color-text);
+}
+
+.links a:focus-visible {
+  outline: none;
+  border-radius: 4px;
+  box-shadow: var(--focus-ring);
+}

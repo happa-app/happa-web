@@ -57,32 +57,37 @@ export function useRoulette({
     );
   }, []);
 
-  // Anima un giro hasta su resultado; al acabar, sigue con la cola
+  // Anima un giro hasta su resultado; al acabar, sigue con la cola.
+  // La cola se recorre con una función interna (run) que se llama a sí misma: si animate se llamara a sí
+  // misma desde su propio useCallback, podría quedarse con una versión antigua de sí misma.
   const animate = useCallback(
-    (spin: RouletteSpin) => {
-      busy.current = true;
-      known.current.add(spin.id);
-      const order = orderParticipants(spin.participants, orderRef.current);
-      const index = Math.max(0, order.indexOf(spin.chosenId ?? ""));
-      const next = targetRotation(rotationRef.current, index, order.length, Math.random() * 0.6 - 0.3);
-      rotationRef.current = next;
-      setShown(spin);
-      setRotation(next);
-      setPhase("spinning");
-      timer.current = setTimeout(
-        () => {
-          remember(spin);
-          setPhase("done");
-          const following = queue.current.shift();
-          if (!following) {
-            busy.current = false;
-            return;
-          }
-          // Hay otro esperando: antes, que se vea (y se anuncie) a quién le ha tocado este
-          timer.current = setTimeout(() => animate(following), RESULT_MS);
-        },
-        reducedMotion() ? 0 : SPIN_MS,
-      );
+    (first: RouletteSpin) => {
+      function run(spin: RouletteSpin) {
+        busy.current = true;
+        known.current.add(spin.id);
+        const order = orderParticipants(spin.participants, orderRef.current);
+        const index = Math.max(0, order.indexOf(spin.chosenId ?? ""));
+        const next = targetRotation(rotationRef.current, index, order.length, Math.random() * 0.6 - 0.3);
+        rotationRef.current = next;
+        setShown(spin);
+        setRotation(next);
+        setPhase("spinning");
+        timer.current = setTimeout(
+          () => {
+            remember(spin);
+            setPhase("done");
+            const following = queue.current.shift();
+            if (!following) {
+              busy.current = false;
+              return;
+            }
+            // Hay otro esperando: antes, que se vea (y se anuncie) a quién le ha tocado este
+            timer.current = setTimeout(() => run(following), RESULT_MS);
+          },
+          reducedMotion() ? 0 : SPIN_MS,
+        );
+      }
+      run(first);
     },
     [remember],
   );

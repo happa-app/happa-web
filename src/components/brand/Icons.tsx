@@ -235,3 +235,13 @@ export function CameraIcon({ size = 22 }: Props) {
     </svg>
   );
 }
+
+// Compartir (el de Safari en iPhone): una caja con una flecha hacia arriba
+export function ShareIcon({ size = 22 }: Props) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3.5v11M8 7.2l4-3.7 4 3.7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8.5 10.5H7A1.5 1.5 0 0 0 5.5 12v7A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5v-7a1.5 1.5 0 0 0-1.5-1.5h-1.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}

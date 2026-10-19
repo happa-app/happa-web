@@ -5,6 +5,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { getHousehold } from "@/features/households/server";
 import { SignOutButton } from "@/features/auth";
+import { LegalLinks } from "@/features/legal";
 import { MoreMenu } from "@/features/navigation";
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
@@ -35,6 +36,7 @@ export default async function HouseholdMorePage({ params }: Props) {
       </section>
       <MoreMenu household={{ id: household.id, name: household.name }} />
       <SignOutButton fullWidth />
+      <LegalLinks />
     </>
   );
 }

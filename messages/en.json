@@ -7,7 +7,72 @@
     "tagline": "Your home, organised together",
     "description": "Share chores, split expenses and keep one shopping list with your flatmates, partner or family.",
     "signup": "Create account",
-    "login": "I already have an account"
+    "login": "I already have an account",
+    "loginShort": "Log in",
+    "accountLabel": "Your account",
+    "notes": {
+      "chores": "Bruno's on dishes today",
+      "shopping": "Out of milk (2)",
+      "expenses": "Carla owes you €12.00"
+    },
+    "features": {
+      "title": "Everything at home, in one place",
+      "shopping": {
+        "title": "Shopping list",
+        "text": "One shared list that updates instantly for everyone, plus your own list you can pass to the household whenever you like."
+      },
+      "expenses": {
+        "title": "Shared expenses",
+        "text": "Log who paid for what. Happa works out who owes whom and how to settle up."
+      },
+      "chores": {
+        "title": "Chores in turns",
+        "text": "Turns are shared out automatically. If someone's away on their day, they're skipped and catch up when they're back."
+      },
+      "schedules": {
+        "title": "Schedules",
+        "text": "Everyone's classes, work and trips, so you know who's at home."
+      },
+      "chat": {
+        "title": "Household chat",
+        "text": "Talk to the people you live with without mixing it up with other groups."
+      },
+      "roulette": {
+        "title": "Dirty-job roulette",
+        "text": "Nobody wants to take the bins out? Let the roulette decide, truly at random."
+      }
+    },
+    "steps": {
+      "title": "How to get started",
+      "account": {
+        "title": "Create your account",
+        "text": "All you need is an email address."
+      },
+      "household": {
+        "title": "Create your household or join one",
+        "text": "If someone has already created it, join with the code or link they send you."
+      },
+      "together": {
+        "title": "Get organised",
+        "text": "What one person adds, everyone else sees instantly."
+      }
+    },
+    "install": {
+      "title": "Install it on your phone",
+      "intro": "Happa is a website you install like an app: no app store, with its own icon on your home screen and notifications on your phone.",
+      "button": "Install Happa",
+      "installed": "Happa is installed. Open it from its icon on your home screen.",
+      "ios": {
+        "share": "In Safari, tap the Share button <icon></icon> in the bottom bar.",
+        "add": "Choose “Add to Home Screen”.",
+        "confirm": "Tap “Add”. Happa will appear with your other apps."
+      },
+      "other": "Open happa.es in your phone's browser and choose “Install app” or “Add to Home Screen” from its menu."
+    },
+    "closing": {
+      "title": "Get your home organised today",
+      "text": "Create your account, invite the people you live with and start sharing things out."
+    }
   },
   "Auth": {
     "login": {
@@ -67,7 +132,12 @@
     "terms": "Terms of use",
     "privacy": "Privacy policy",
     "draftNotice": "This document is being prepared and will be published before launch.",
-    "back": "Back"
+    "back": "Back",
+    "meta": "Version {version} · Last updated: {updated}",
+    "summaryTitle": "In a nutshell",
+    "summaryNote": "This summary helps you understand it, but the full text is what applies.",
+    "contents": "Contents",
+    "linksLabel": "Legal"
   },
   "Households": {
     "list": {
@@ -165,7 +235,10 @@
     },
     "membersSection": {
       "title": "Members",
-      "you": "you"
+      "you": "you",
+      "makeAdmin": "Make admin",
+      "makingAdmin": "One moment…",
+      "makeAdminConfirm": "Make {name} an admin? They'll have the same permissions as you in this household. This can't be undone from the app."
     },
     "leave": {
       "button": "Leave home",
@@ -183,6 +256,7 @@
       "placesInvalid": "Choose between 1 and 20 people",
       "placesTooFew": "More people already live here: you can't set fewer places",
       "notAdmin": "Only the admin can change this",
+      "memberGone": "This person no longer lives in the household",
       "generic": "Something went wrong. Please try again"
     }
   },
