@@ -222,7 +222,9 @@ enable_signup = true
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = true
 # If enabled, users need to confirm their email address before signing in.
-enable_confirmations = false
+# Activado como en la oficial: al registrarte en local, el correo llega a http://127.0.0.1:54324
+# (los usuarios de supabase/seed.sql ya vienen confirmados).
+enable_confirmations = true
 # If enabled, users will need to reauthenticate or have logged in recently to change their password.
 secure_password_change = false
 # Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
@@ -242,16 +244,25 @@ otp_expiry = 3600
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
 
-# Uncomment to customize email template
-# [auth.email.template.invite]
-# subject = "You have been invited"
-# content_path = "./supabase/templates/invite.html"
+# Correos de HAPPA (supabase/templates). En la oficial se copian a mano: ver supabase/templates/README.md.
+# Si cambias un asunto aquí, cámbialo también en ese README.
+[auth.email.template.confirmation]
+subject = "{{ if eq (print .Data.locale) \"en\" }}Confirm your HAPPA account{{ else }}Confirma tu cuenta de HAPPA{{ end }}"
+content_path = "./supabase/templates/confirmation.html"
 
-# Uncomment to customize notification email template
-# [auth.email.notification.password_changed]
-# enabled = true
-# subject = "Your password has been changed"
-# content_path = "./supabase/templates/password_changed_notification.html"
+[auth.email.template.email_change]
+subject = "{{ if eq (print .Data.locale) \"en\" }}Confirm your new email for HAPPA{{ else }}Confirma tu correo nuevo en HAPPA{{ end }}"
+content_path = "./supabase/templates/email_change.html"
+
+[auth.email.notification.password_changed]
+enabled = true
+subject = "{{ if eq (print .Data.locale) \"en\" }}Your HAPPA password has changed{{ else }}Tu contraseña de HAPPA ha cambiado{{ end }}"
+content_path = "./supabase/templates/password_changed_notification.html"
+
+[auth.email.notification.email_changed]
+enabled = true
+subject = "{{ if eq (print .Data.locale) \"en\" }}Your HAPPA email has changed{{ else }}El correo de tu cuenta de HAPPA ha cambiado{{ end }}"
+content_path = "./supabase/templates/email_changed_notification.html"
 
 [auth.sms]
 # Allow/disallow new user signups via SMS to your project.

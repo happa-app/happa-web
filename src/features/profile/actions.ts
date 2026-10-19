@@ -136,8 +136,9 @@ export async function removeAvatar(): Promise<{ ok: boolean }> {
 }
 
 // ───────────── Idioma ─────────────
-// Se guarda en el perfil (para los avisos al móvil y al entrar desde otro sitio). Cambiar el idioma de
-// la página lo hace el navegador después.
+// Se guarda en el perfil (para los avisos al móvil y al entrar desde otro sitio) y en los datos de la
+// cuenta de Supabase Auth, que es de donde leen el idioma los correos (.Data.locale en
+// supabase/templates). Cambiar el idioma de la página lo hace el navegador después.
 export async function saveLanguage(value: string): Promise<{ ok: boolean }> {
   const locale = parseLocale(value);
   if (locale !== value) return { ok: false };
@@ -149,6 +150,9 @@ export async function saveLanguage(value: string): Promise<{ ok: boolean }> {
     console.error("[perfil] no se pudo guardar el idioma:", error);
     return { ok: false };
   }
+  // Si esto falla, el idioma de la app ya ha cambiado: solo los correos seguirían en el de antes
+  const { error: authError } = await supabase.auth.updateUser({ data: { locale } });
+  if (authError) console.error("[perfil] no se pudo guardar el idioma de los correos:", authError);
   return { ok: true };
 }
 

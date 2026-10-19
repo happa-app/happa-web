@@ -1,10 +1,11 @@
 # Correos de HAPPA (Supabase Auth)
 
-Plantillas de los correos que manda Supabase, en español o en inglés según el idioma con el que se
-registró cada persona (`.Data.locale`; si no hay, en español).
+Plantillas de los correos que manda Supabase, en español o en inglés según el idioma de la cuenta
+(`.Data.locale`: el que se eligió al registrarse, y después el de Perfil → Idioma; si no hay, en español).
 
 En un proyecto de Supabase en la nube, las plantillas **no se leen de esta carpeta**: se copian a mano
 en Supabase → Authentication → Emails. Aquí se guardan para tenerlas en git y poder cambiarlas.
+En la base de datos local sí se usan (`supabase/config.toml`): los correos llegan a http://127.0.0.1:54324.
 
 | En Supabase | Archivo | Asunto (Subject) |
 |---|---|---|
@@ -17,6 +18,10 @@ Reglas:
 
 - **Nada que escriba el usuario entra en un correo** (ni su nombre): cualquiera puede registrarse con el
   correo de otra persona, y así nadie puede usar HAPPA para mandarle textos suyos (phishing).
-- Solo se usan `.ConfirmationURL`, `.Email`, `.NewEmail`, `.OldEmail` y `.Data.locale`.
-- Si cambias algo, comprueba los dos idiomas registrando una cuenta de prueba en `/registro` y en
-  `/en/registro`.
+- Solo se usan `.RedirectTo`, `.TokenHash`, `.Email`, `.NewEmail`, `.OldEmail` y `.Data.locale`.
+- Los enlaces son `{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=…` y no `{{ .ConfirmationURL }}`:
+  así funcionan aunque el correo se abra en otro dispositivo (ver `src/app/auth/confirm/route.ts`).
+  `.RedirectTo` es la dirección que pide la app (`…/auth/confirm?next=…`), y Supabase solo la respeta si
+  está en Authentication → URL Configuration → Redirect URLs (en la oficial: `https://happa.es/**`).
+- Si cambias algo, compruébalo en local en los dos idiomas: regístrate en `/registro` y en `/en/registro`
+  y abre los correos en http://127.0.0.1:54324.
