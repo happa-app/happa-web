@@ -1,6 +1,7 @@
 // Enlace del correo de confirmación. Inicia la sesión y lleva a la app.
-// Acepta los dos formatos de enlace de Supabase: con "code" (plantilla por defecto)
-// y con "token_hash" (plantilla personalizada, la que usaremos con el SMTP propio).
+// Acepta los dos formatos de enlace de Supabase: con "code" (plantilla por defecto) y con "token_hash"
+// (las de supabase/templates). El de "code" solo funciona en el navegador donde se pidió el correo; el de
+// "token_hash", en cualquiera (te registras en el ordenador y abres el correo en el móvil).
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import type { NextRequest } from "next/server";
