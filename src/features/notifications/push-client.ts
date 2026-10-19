@@ -1,5 +1,6 @@
 // Avisos al móvil desde el navegador: activar o desactivar en este dispositivo, y pedir al servidor
 // que envíe lo pendiente. Solo para componentes con "use client".
+import { isIos, isStandalone } from "@/lib/pwa/device";
 import { createClient } from "@/lib/supabase/client";
 
 // La clave pública VAPID (la misma en todos los navegadores). Si falta, no se ofrece activar avisos.
@@ -18,10 +19,7 @@ export type DeviceState =
 export { requestPushDispatch } from "@/lib/push/request";
 
 function isIosWithoutHomeScreen(): boolean {
-  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  const standalone =
-    window.matchMedia("(display-mode: standalone)").matches || (navigator as Navigator & { standalone?: boolean }).standalone === true;
-  return ios && !standalone;
+  return isIos() && !isStandalone();
 }
 
 function supported(): boolean {
