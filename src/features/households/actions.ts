@@ -11,7 +11,7 @@ import { createClient } from "@/lib/supabase/server";
 import { toHouseholdErrorKey } from "./errors";
 import { normalizeInviteCode } from "./invite-code";
 import { createHouseholdSchema, householdIdSchema, inviteCodeSchema, placesSchema } from "./schemas";
-import type { HouseholdFormState, PlacesFormState } from "./types";
+import type { HouseholdFormState, MakeAdminState, PlacesFormState } from "./types";
 
 function text(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -120,6 +120,26 @@ export async function saveHouseholdPlaces(_prev: PlacesFormState, formData: Form
   });
   if (error) return { status: "error", error: toHouseholdErrorKey(error) };
 
+  revalidatePath("/", "layout");
+  return { status: "done" };
+}
+
+// Hacer admin a un adulto del hogar. La base de datos comprueba que quien lo pide es admin y que la
+// otra persona es un miembro adulto que sigue en el hogar (set_member_role, migración 3).
+export async function makeAdmin(_prev: MakeAdminState, formData: FormData): Promise<MakeAdminState> {
+  const householdId = householdIdSchema.safeParse(text(formData, "householdId"));
+  const userId = z.uuid().safeParse(text(formData, "userId"));
+  if (!householdId.success || !userId.success) return { status: "error", error: "generic" };
+
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("set_member_role", {
+    p_household: householdId.data,
+    p_user: userId.data,
+    p_role: "admin",
+  });
+  if (error) return { status: "error", error: toHouseholdErrorKey(error) };
+
+  // Lo que puede hacer cada uno cambia en varias pantallas (plazas, código de invitación, gastos...)
   revalidatePath("/", "layout");
   return { status: "done" };
 }

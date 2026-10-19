@@ -1,0 +1,91 @@
+.install {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-brand-soft);
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.intro {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+}
+
+.button {
+  align-self: flex-start;
+  min-height: 48px;
+  margin-top: var(--space-2);
+  padding: 0 var(--space-6);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-brand-strong);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--color-brand-stronger);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Pasos de iPhone: un número en círculo delante de cada uno */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  counter-increment: step;
+}
+
+.steps li::before {
+  content: counter(step);
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-brand-strong);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+/* El icono de Compartir dentro de la frase, como se ve en Safari */
+.shareIcon {
+  display: inline-flex;
+  vertical-align: -0.2em;
+  margin: 0 0.15em;
+  color: #0a7aff;
+}
+
+.done {
+  max-width: 60ch;
+  font-weight: 600;
+}
+
+.other {
+  max-width: 60ch;
+}
