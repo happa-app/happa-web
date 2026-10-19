@@ -47,8 +47,8 @@ Barra inferior: **Más · Inicio · Casas · Ruleta · Chat**. Las personas, el 
 - **Pendiente (sin implementar)**: opiniones (una automática por cumplimiento de tareas y otra anónima de compañeros al final de la estancia, con estrellas + campos como limpieza o pagos), racha (criterio por decidir), votaciones, series/subs, caja de herramientas (QR del wifi, contratos), recetas (pasos y macros), juegos de previa, buscador de habitaciones libres.
 
 ## Estado actual
-- App desplegada en Vercel como PWA (manifest, iconos, página sin conexión y service worker).
-- Hechos: hogares e invitaciones, plazas, compra, gastos (con compra → gasto y fijos), horarios y ausencias, tareas, chat, avisos (en la app y push), ruleta, perfil (foto, cuenta, idioma, borrar la cuenta) y páginas legales.
+- App desplegada en Vercel como PWA (manifest, iconos, página sin conexión y service worker). Funciones en Fráncfort (`vercel.json` → `fra1`), junto a Supabase (`eu-central-1`).
+- Hechos: portada pública (qué es, cómo funciona y cómo instalarla), hogares e invitaciones, plazas, compra, gastos (con compra → gasto y fijos), horarios y ausencias, tareas, chat, avisos (en la app y push), ruleta, perfil (foto, cuenta, idioma, borrar la cuenta) y páginas legales.
 - 18 migraciones en `supabase/migrations`.
 - Configurando Resend para los correos de Auth.
 
@@ -56,12 +56,25 @@ Barra inferior: **Más · Inicio · Casas · Ruleta · Chat**. Las personas, el 
 - `npm run dev` — servidor local
 - `npm run build` — comprobar que compila antes de hacer push
 - `npm run lint` — eslint
-- `npx supabase db push` / `npx supabase migration new <nombre>` — migraciones
 - `node scripts/push-keys.mjs` — genera las claves VAPID y el secreto de las notificaciones push
 - No hay tests configurados (no hay script `test`). Para comprobar un cambio: `npm run lint` y `npm run build`.
-- Tras cambiar el esquema, regenera `src/types/database.types.ts` (tipos de Supabase).
 
-Variables en `.env.local` (plantilla en `.env.example`): las de Supabase se validan con zod en `src/lib/env.ts` y la app no arranca si faltan. Las de push (`src/lib/push/config.ts`) son opcionales: si faltan, no se envían push y la app sigue funcionando.
+Variables en `.env.local` (plantilla en `.env.example`): las de Supabase se validan con zod en `src/lib/env.ts` y la app no arranca si faltan. Las de push (`src/lib/push/config.ts`) son opcionales: si faltan, no se envían push y la app sigue funcionando. En local, `.env.local` apunta a la BD local (`http://127.0.0.1:54321`, clave publishable); las de la oficial están en las variables de Vercel. Claude no puede leer `.env.local` (permisos).
+
+## Base de datos local (para desarrollar sin tocar la oficial)
+Supabase local en Docker. La oficial solo recibe migraciones con `db push`.
+- `npx supabase start` / `npx supabase stop` — arrancar y parar (los datos se conservan). Studio: http://127.0.0.1:54323 · correos de prueba: http://127.0.0.1:54324
+- `npx supabase db reset` — borra la BD **local** y la rehace con todas las migraciones + `supabase/seed.sql`. Nunca con `--linked` (borraría la oficial).
+- Usuarios de prueba (contraseña `happa1234`): `ana@happa.test` (admin del "Piso de prueba"), `bruno@happa.test`, `carla@happa.test` (tiene un gasto pendiente de confirmar) y `dani@happa.test` (sin hogar).
+- `seed.sql` crea los datos llamando a las funciones SQL de la app haciéndose pasar por cada usuario (`request.jwt.claims` + `set local role authenticated`). Todo el seed va en una transacción: cada bloque acaba con `set constraints all immediate` para que los avisos (triggers diferidos) salgan con el autor correcto. Si una migración cambia una regla, actualiza el seed.
+- Migración nueva: `npx supabase migration new <nombre>` → `npx supabase db reset` para probarla → `npx supabase gen types typescript --local > src/types/database.types.ts`.
+
+## Git y despliegue
+- `main` = lo publicado: cada push a `main` lo publica Vercel en happa.es. **Nunca trabajar ni hacer commits directamente en `main`.**
+- Una rama por tarea, que sale de `main` actualizado (`git checkout main && git pull && git checkout -b <nombre>`). Commits pequeños y frecuentes.
+- Cada push a cualquier rama crea una versión de prueba en Vercel (https, protegida con login de Vercel; usa la BD oficial). Sirve para probar en el móvil lo que exige https: instalar la PWA, push y service worker. Lo demás se prueba en local con `npm run dev`.
+- Al terminar: PR → revisar los cambios y la versión de prueba → merge. Si la rama trae migraciones, `npx supabase db push` **antes** del merge, para que el código nuevo no llegue sin sus tablas.
+- Tras el merge: `git checkout main && git pull && git branch -d <nombre>`.
 
 ## Arquitectura
 
