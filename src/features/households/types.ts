@@ -56,6 +56,7 @@ export const HOUSEHOLD_ERROR_KEYS = [
   "placesInvalid",
   "placesTooFew",
   "notAdmin",
+  "memberGone",
   "generic",
 ] as const;
 
@@ -77,6 +78,14 @@ export type PlacesFormState = {
 };
 
 export const initialPlacesState: PlacesFormState = { status: "idle" };
+
+// Hacer admin a alguien desde Configuración
+export type MakeAdminState = {
+  status: "idle" | "done" | "error";
+  error?: HouseholdErrorKey;
+};
+
+export const initialMakeAdminState: MakeAdminState = { status: "idle" };
 
 export function firstFieldError(
   state: HouseholdFormState,
