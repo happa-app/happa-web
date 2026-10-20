@@ -245,3 +245,13 @@ export function ShareIcon({ size = 22 }: Props) {
     </svg>
   );
 }
+
+// Privacidad: un escudo con una marca
+export function ShieldIcon({ size = 22 }: Props) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3.5 5 6.2v5.3c0 4.3 2.9 7.6 7 9 4.1-1.4 7-4.7 7-9V6.2l-7-2.7Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="m9 12 2.1 2.1L15.2 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}

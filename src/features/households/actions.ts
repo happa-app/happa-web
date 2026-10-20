@@ -10,8 +10,8 @@ import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { toHouseholdErrorKey } from "./errors";
 import { normalizeInviteCode } from "./invite-code";
-import { createHouseholdSchema, householdIdSchema, inviteCodeSchema, placesSchema } from "./schemas";
-import type { HouseholdFormState, MakeAdminState, PlacesFormState } from "./types";
+import { createHouseholdSchema, householdIdSchema, inviteCodeSchema, placesSchema, postalCodeSchema } from "./schemas";
+import type { HouseholdFormState, MakeAdminState, PlacesFormState, PostalCodeFormState } from "./types";
 
 function text(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -23,7 +23,12 @@ export async function createHousehold(
   formData: FormData,
 ): Promise<HouseholdFormState> {
   const locale = parseLocale(formData.get("locale"));
-  const values = { name: text(formData, "name"), kind: text(formData, "kind"), places: text(formData, "places") };
+  const values = {
+    name: text(formData, "name"),
+    kind: text(formData, "kind"),
+    places: text(formData, "places"),
+    postalCode: text(formData, "postalCode"),
+  };
 
   const parsed = createHouseholdSchema.safeParse(values);
   if (!parsed.success) {
@@ -35,10 +40,12 @@ export async function createHousehold(
     p_name: parsed.data.name,
     p_kind: parsed.data.kind,
     p_max_members: parsed.data.places,
+    p_postal_code: parsed.data.postalCode || undefined,
   });
   if (error || !householdId) {
     const key = error ? toHouseholdErrorKey(error) : "generic";
     if (key === "placesInvalid") return { status: "error", fieldErrors: { places: [key] }, values };
+    if (key === "postalCodeInvalid") return { status: "error", fieldErrors: { postalCode: [key] }, values };
     return { status: "error", formError: key, values };
   }
 
@@ -140,6 +147,24 @@ export async function makeAdmin(_prev: MakeAdminState, formData: FormData): Prom
   if (error) return { status: "error", error: toHouseholdErrorKey(error) };
 
   // Lo que puede hacer cada uno cambia en varias pantallas (plazas, código de invitación, gastos...)
+  revalidatePath("/", "layout");
+  return { status: "done" };
+}
+
+// Poner, cambiar o quitar (vacío) el código postal del hogar (solo el admin; la base de datos lo comprueba)
+export async function saveHouseholdPostalCode(_prev: PostalCodeFormState, formData: FormData): Promise<PostalCodeFormState> {
+  const householdId = householdIdSchema.safeParse(text(formData, "householdId"));
+  const postalCode = postalCodeSchema.safeParse(text(formData, "postalCode"));
+  if (!householdId.success) return { status: "error", error: "generic" };
+  if (!postalCode.success) return { status: "error", error: "postalCodeInvalid" };
+
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("set_household_postal_code", {
+    p_household: householdId.data,
+    p_postal_code: postalCode.data,
+  });
+  if (error) return { status: "error", error: toHouseholdErrorKey(error) };
+
   revalidatePath("/", "layout");
   return { status: "done" };
 }

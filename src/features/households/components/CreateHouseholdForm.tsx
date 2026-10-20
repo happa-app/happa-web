@@ -20,6 +20,7 @@ export function CreateHouseholdForm() {
   const nameError = firstFieldError(state, "name");
   const kindError = firstFieldError(state, "kind");
   const placesError = firstFieldError(state, "places");
+  const postalCodeError = firstFieldError(state, "postalCode");
 
   // Las plazas se ponen solas según el tipo (pareja 2, familia 6, pisos 4) hasta que las cambias tú
   const [places, setPlaces] = useState(state.values?.places ?? String(defaultPlaces(state.values?.kind)));
@@ -84,6 +85,18 @@ export function CreateHouseholdForm() {
           setPlaces(value);
         }}
         error={placesError ? t(`errors.${placesError}`) : undefined}
+      />
+
+      {/* Opcional: solo el código postal, nunca la dirección (para mostrar servicios cerca) */}
+      <TextField
+        label={t("postalCode.label")}
+        name="postalCode"
+        inputMode="numeric"
+        autoComplete="postal-code"
+        maxLength={6}
+        hint={t("postalCode.hint")}
+        defaultValue={state.values?.postalCode}
+        error={postalCodeError ? t(`errors.${postalCodeError}`) : undefined}
       />
 
       <Button type="submit" fullWidth disabled={isPending}>

@@ -41,3 +41,28 @@
   font-weight: 600;
   text-decoration: none;
 }
+
+/* "Qué se comparte": plegado bajo la casilla, alineado con su texto */
+.more {
+  margin: var(--space-1) 0 0 calc(20px + var(--space-3));
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.more summary {
+  width: fit-content;
+  color: var(--color-brand-strong);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.more summary:focus-visible {
+  outline: none;
+  border-radius: 4px;
+  box-shadow: var(--focus-ring);
+}
+
+.more p {
+  margin-top: var(--space-1);
+  line-height: 1.45;
+}

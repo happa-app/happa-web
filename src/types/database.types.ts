@@ -710,6 +710,7 @@ export type Database = {
           kind: Database["public"]["Enums"]["household_kind"]
           max_members: number
           name: string
+          postal_code: string | null
           timezone: string
           updated_at: string
         }
@@ -723,6 +724,7 @@ export type Database = {
           kind?: Database["public"]["Enums"]["household_kind"]
           max_members?: number
           name: string
+          postal_code?: string | null
           timezone?: string
           updated_at?: string
         }
@@ -736,6 +738,7 @@ export type Database = {
           kind?: Database["public"]["Enums"]["household_kind"]
           max_members?: number
           name?: string
+          postal_code?: string | null
           timezone?: string
           updated_at?: string
         }
@@ -990,6 +993,44 @@ export type Database = {
           },
           {
             foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_choices: {
+        Row: {
+          created_at: string
+          granted: boolean
+          id: number
+          purpose: string
+          source: string
+          text_version: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          granted: boolean
+          id?: never
+          purpose: string
+          source: string
+          text_version: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          granted?: boolean
+          id?: never
+          purpose?: string
+          source?: string
+          text_version?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_choices_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -1722,6 +1763,7 @@ export type Database = {
           p_kind?: Database["public"]["Enums"]["household_kind"]
           p_max_members?: number
           p_name: string
+          p_postal_code?: string
         }
         Returns: string
       }
@@ -1779,6 +1821,14 @@ export type Database = {
       force_confirm_expense: {
         Args: { p_expense: string; p_version: number }
         Returns: undefined
+      }
+      get_my_privacy_choices: {
+        Args: never
+        Returns: {
+          changed_at: string
+          granted: boolean
+          purpose: string
+        }[]
       }
       get_my_stats: {
         Args: never
@@ -1882,6 +1932,7 @@ export type Database = {
           net_cents: number
         }[]
       }
+      normalize_postal_code: { Args: { p_code: string }; Returns: string }
       notification_category_of: {
         Args: { p_type: Database["public"]["Enums"]["notification_type"] }
         Returns: Database["public"]["Enums"]["notification_category"]
@@ -1908,6 +1959,7 @@ export type Database = {
         }
         Returns: string
       }
+      privacy_choices_purge: { Args: never; Returns: number }
       push_claim: {
         Args: { p_limit?: number; p_secret: string }
         Returns: {
@@ -2063,6 +2115,10 @@ export type Database = {
         Args: { p_household: string; p_max_members: number }
         Returns: undefined
       }
+      set_household_postal_code: {
+        Args: { p_household: string; p_postal_code: string }
+        Returns: undefined
+      }
       set_member_role: {
         Args: {
           p_household: string
@@ -2078,10 +2134,15 @@ export type Database = {
         }
         Returns: undefined
       }
+      set_privacy_choice: {
+        Args: { p_granted: boolean; p_purpose: string; p_version: string }
+        Returns: undefined
+      }
       set_recurring_expense_active: {
         Args: { p_active: boolean; p_recurring: string }
         Returns: undefined
       }
+      signed_in_recently: { Args: { p_minutes?: number }; Returns: boolean }
       share_shopping_item: {
         Args: { p_household: string; p_item: string }
         Returns: undefined
@@ -2124,6 +2185,10 @@ export type Database = {
         Returns: boolean
       }
       triqui_net_cents: {
+        Args: { p_household: string; p_user: string }
+        Returns: number
+      }
+      triqui_pending_count: {
         Args: { p_household: string; p_user: string }
         Returns: number
       }

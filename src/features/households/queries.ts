@@ -55,7 +55,7 @@ export async function getHousehold(id: string): Promise<HouseholdDetail | null> 
 
   const { data: household, error } = await supabase
     .from("households")
-    .select("id, name, kind, invite_code, max_members")
+    .select("id, name, kind, invite_code, max_members, postal_code")
     .eq("id", id)
     .maybeSingle();
   if (error) throw error;
@@ -75,6 +75,7 @@ export async function getHousehold(id: string): Promise<HouseholdDetail | null> 
     kind: household.kind,
     inviteCode: household.invite_code,
     maxMembers: household.max_members,
+    postalCode: household.postal_code,
     members: (members ?? []).map((m) => ({
       userId: m.user_id,
       displayName: m.profiles?.display_name ?? "",

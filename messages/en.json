@@ -101,7 +101,11 @@
       "password": "Password",
       "passwordHint": "At least 8 characters",
       "acceptLegal": "I have read and accept the <terms>terms of use</terms> and the <privacy>privacy policy</privacy>",
-      "isAdult": "I confirm I am 18 or older"
+      "isAdult": "I confirm I am 18 or older",
+      "marketing": "I want to receive HAPPA news and perks by email",
+      "partners": "I want to receive offers for my home from partner companies",
+      "partnersMore": "What is shared",
+      "partnersDetail": "So they can send you their offers, we would pass on your name, your email, your language, your postal code and the type and size of your household. Only to companies in home services, removals, furniture, insurance, financial or rental management services and utilities (electricity, gas or internet). Never your address, your messages or your expenses. You can turn it off at any time in Profile → Privacy."
     },
     "errors": {
       "displayNameRequired": "Enter your name",
@@ -137,7 +141,35 @@
     "summaryTitle": "In a nutshell",
     "summaryNote": "This summary helps you understand it, but the full text is what applies.",
     "contents": "Contents",
-    "linksLabel": "Legal"
+    "linksLabel": "Legal",
+    "basicInfo": {
+      "title": "Basic information on data protection",
+      "controller": {
+        "label": "Controller",
+        "value": "{owner} · {email}",
+        "fallback": "The owner of HAPPA"
+      },
+      "purpose": {
+        "label": "Purpose",
+        "value": "Providing the HAPPA service. If you choose so above: sending you HAPPA news and sharing your data with partner companies."
+      },
+      "basis": {
+        "label": "Legal basis",
+        "value": "The contract (the terms of use) and, for the optional parts, your consent."
+      },
+      "recipients": {
+        "label": "Recipients",
+        "value": "Providers that help us run the service (hosting, email). Partner companies, only if you accept it."
+      },
+      "rights": {
+        "label": "Rights",
+        "value": "Access, correct, delete, object, restrict, take your data with you and withdraw your consent ({email})."
+      },
+      "more": {
+        "label": "More information",
+        "value": "In the <link>privacy policy</link>."
+      }
+    }
   },
   "Households": {
     "list": {
@@ -257,7 +289,19 @@
       "placesTooFew": "More people already live here: you can't set fewer places",
       "notAdmin": "Only the admin can change this",
       "memberGone": "This person no longer lives in the household",
+      "postalCodeInvalid": "Enter a 5-digit postal code, or leave it empty",
       "generic": "Something went wrong. Please try again"
+    },
+    "postalCode": {
+      "title": "Postal code",
+      "label": "Postal code (optional)",
+      "hint": "To show you professionals and services near home. Only the postal code, never the address.",
+      "text": "It's used to show you professionals and services near home. Leave it empty to remove it.",
+      "save": "Save postal code",
+      "saving": "Saving…",
+      "saved": "Saved",
+      "readonly": "Postal code: {code}. Only the admin can change it.",
+      "readonlyEmpty": "No postal code. Only the admin can add it."
     }
   },
   "Nav": {
@@ -349,7 +393,9 @@
       "accountHint": "Your email and password",
       "language": "Language",
       "notifications": "Notifications",
-      "notificationsHint": "What we notify you about and on which phones"
+      "notificationsHint": "What we notify you about and on which phones",
+      "privacy": "Privacy",
+      "privacyHint": "Your data and what you share"
     },
     "photo": {
       "title": "Your photo",
@@ -441,6 +487,18 @@
       "minor": "Minor accounts can't be deleted from here",
       "rateLimited": "Too many attempts. Wait a few minutes and try again",
       "generic": "Something went wrong. Please try again"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "subtitle": "Two options that are only on if you want them. You can change them at any time.",
+      "changedAt": "Last changed: {date}",
+      "neverDecided": "You haven't decided yet (counts as no).",
+      "error": "It couldn't be saved. Please try again.",
+      "minor": "Minor accounts can't receive news or share data with partner companies.",
+      "rightsTitle": "Your data",
+      "rightsText": "To ask for a copy of your data, correct it or exercise any other right, write to us at <email></email> from your account's email.",
+      "policyLink": "Read the privacy policy",
+      "deleteLink": "Delete my account"
     }
   },
   "NotFound": {

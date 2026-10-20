@@ -10,6 +10,7 @@ export { JoinHouseholdForm } from "./components/JoinHouseholdForm";
 export { MemberList } from "./components/MemberList";
 export { Occupancy } from "./components/Occupancy";
 export { PlacesForm } from "./components/PlacesForm";
+export { PostalCodeForm } from "./components/PostalCodeForm";
 export { normalizeInviteCode } from "./invite-code";
 export { defaultPlaces, isFull, MAX_PLACES, residentCount } from "./places";
 export type { HouseholdDetail, HouseholdSummary, InvitePreview } from "./types";

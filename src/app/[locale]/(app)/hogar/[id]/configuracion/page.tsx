@@ -1,5 +1,5 @@
 // Página /hogar/<id>/configuracion (Más → Configuración): quién vive en el hogar, el código para
-// invitar, cuántas personas caben y salir del hogar.
+// invitar, cuántas personas caben, el código postal y salir del hogar.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Card } from "@/components/ui/Card";
@@ -11,6 +11,7 @@ import {
   MemberList,
   Occupancy,
   PlacesForm,
+  PostalCodeForm,
   regenerateInviteCode,
   residentCount,
 } from "@/features/households";
@@ -90,6 +91,21 @@ export default async function HouseholdSettingsPage({ params }: Props) {
           </>
         ) : (
           <p className={styles.subtitle}>{t("places.readonly", { count: household.maxMembers })}</p>
+        )}
+      </Card>
+
+      <Card title={t("postalCode.title")}>
+        {isAdmin ? (
+          <>
+            <p className={styles.subtitle}>{t("postalCode.text")}</p>
+            <PostalCodeForm householdId={household.id} postalCode={household.postalCode} />
+          </>
+        ) : (
+          <p className={styles.subtitle}>
+            {household.postalCode
+              ? t("postalCode.readonly", { code: household.postalCode })
+              : t("postalCode.readonlyEmpty")}
+          </p>
         )}
       </Card>
 

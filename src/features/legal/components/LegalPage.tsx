@@ -1,8 +1,9 @@
 // Páginas legales (/legal/terminos y /legal/privacidad): el logo y el documento en tu idioma.
-// Los términos ya tienen texto; la privacidad aún enseña que está en preparación.
+// Si un documento aún no tiene texto, enseña que está en preparación.
 import { getLocale, getTranslations } from "next-intl/server";
 import { Logo } from "@/components/brand/Logo";
 import { Link } from "@/i18n/navigation";
+import { PRIVACY } from "../content/privacy";
 import { TERMS } from "../content/terms";
 import type { LegalDocument } from "../content/types";
 import { LegalDocumentView } from "./LegalDocumentView";
@@ -13,8 +14,8 @@ type Props = {
 };
 
 function documentFor(document: Props["document"], locale: string): LegalDocument | null {
-  if (document === "terms") return TERMS[locale === "en" ? "en" : "es"];
-  return null;
+  const lang = locale === "en" ? "en" : "es";
+  return document === "terms" ? TERMS[lang] : PRIVACY[lang];
 }
 
 export async function LegalPage({ document }: Props) {

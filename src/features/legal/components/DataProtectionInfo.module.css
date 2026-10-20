@@ -1,0 +1,39 @@
+/* Información básica (registro): plegada, en gris y letra pequeña, que no compita con el formulario */
+.box {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+.title {
+  width: fit-content;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.title:focus-visible {
+  outline: none;
+  border-radius: 4px;
+  box-shadow: var(--focus-ring);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: var(--space-2);
+}
+
+.row dt {
+  font-weight: 600;
+}
+
+.row dd {
+  margin: 0;
+}

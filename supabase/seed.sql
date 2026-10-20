@@ -3,9 +3,10 @@
 -- Nunca se ejecuta en la oficial: `db push` solo sube las migraciones, no este archivo.
 --
 -- Usuarios (contraseña de todos: happa1234):
---   · ana@happa.test    → admin del "Piso de prueba"
---   · bruno@happa.test  → miembro del piso
---   · carla@happa.test  → miembro del piso (tiene un gasto pendiente de confirmar)
+--   · ana@happa.test    → admin del "Piso de prueba"; aceptó las dos opciones de privacidad al registrarse
+--   · bruno@happa.test  → miembro del piso; no aceptó ninguna de las dos al registrarse
+--   · carla@happa.test  → miembro del piso (tiene un gasto pendiente de confirmar); usuaria "de antes":
+--                          nunca se le preguntó por la privacidad
 --   · dani@happa.test   → sin hogar (para probar crear un hogar o unirse con el código)
 --
 -- Los datos se crean con las mismas funciones que usa la app, haciéndose pasar por cada persona
@@ -14,8 +15,9 @@
 -- Las fechas van respecto a hoy, para que los datos parezcan recientes en cada reset.
 
 -- ═════════════ 1. Usuarios ═════════════
--- El trigger handle_new_user crea el perfil y guarda los consentimientos legales, como en el registro.
--- Las versiones de "legal" tienen que coincidir con src/features/legal/versions.ts.
+-- El trigger handle_new_user crea el perfil y guarda los consentimientos legales y las decisiones de
+-- privacidad ("choices"), como en el registro.
+-- Las versiones de "legal" y "choices" tienen que coincidir con src/features/legal/versions.ts.
 insert into auth.users (
   instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
@@ -27,15 +29,17 @@ select
   '{"provider": "email", "providers": ["email"]}',
   jsonb_build_object(
     'display_name', u.name, 'locale', 'es', 'timezone', 'Europe/Madrid',
-    'legal', jsonb_build_object('terms', 'v1-2026-10-08', 'privacy', 'borrador-1')
-  ),
+    'legal', jsonb_build_object('terms', 'v1-2026-10-08', 'privacy', 'v1-2026-10-20')
+  ) || u.choices,
   now(), now(), '', '', '', ''
 from (values
-  ('00000000-0000-4000-8000-00000000000a'::uuid, 'ana@happa.test',   'Ana'),
-  ('00000000-0000-4000-8000-00000000000b'::uuid, 'bruno@happa.test', 'Bruno'),
-  ('00000000-0000-4000-8000-00000000000c'::uuid, 'carla@happa.test', 'Carla'),
-  ('00000000-0000-4000-8000-00000000000d'::uuid, 'dani@happa.test',  'Dani')
-) as u (id, email, name);
+  ('00000000-0000-4000-8000-00000000000a'::uuid, 'ana@happa.test',   'Ana',
+   '{"choices": {"marketing": true, "partners": true, "version": "v3"}}'::jsonb),
+  ('00000000-0000-4000-8000-00000000000b'::uuid, 'bruno@happa.test', 'Bruno',
+   '{"choices": {"marketing": false, "partners": false, "version": "v3"}}'::jsonb),
+  ('00000000-0000-4000-8000-00000000000c'::uuid, 'carla@happa.test', 'Carla', '{}'::jsonb),
+  ('00000000-0000-4000-8000-00000000000d'::uuid, 'dani@happa.test',  'Dani', '{}'::jsonb)
+) as u (id, email, name, choices);
 
 -- Sin su "identidad" de correo, Supabase Auth no deja iniciar sesión con contraseña
 insert into auth.identities (id, user_id, provider, provider_id, identity_data, last_sign_in_at, created_at, updated_at)
@@ -63,7 +67,7 @@ do $$
 begin
   perform set_config('request.jwt.claims', '{"sub": "00000000-0000-4000-8000-00000000000a", "role": "authenticated"}', true);
   set local role authenticated;
-  perform public.create_household('Piso de prueba', 'student_flat', 4);
+  perform public.create_household('Piso de prueba', 'student_flat', 4, '28004');
   set constraints all immediate;
   set constraints all deferred;
   reset role;
@@ -131,15 +135,16 @@ begin
 
   perform public.add_schedule_blocks(hogar, array[1, 2, 3, 4, 5], '09:00', '14:00', 'class', 'Facultad');
 
-  -- Tareas (la BD no deja empezarlas antes de hoy)
+  -- Tareas (la BD no deja empezarlas antes de hoy, y "hoy" es el de la zona horaria del hogar: con
+  -- current_date, que va en UTC, entre las 0:00 y las 2:00 de Madrid sería "ayer" y fallaría)
   perform public.create_chore(
-    hogar, 'Fregar los platos', 2, 'daily', 1, null, current_date, 'rotation', array[ana, bruno, carla]
+    hogar, 'Fregar los platos', 2, 'daily', 1, null, (now() at time zone 'Europe/Madrid')::date, 'rotation', array[ana, bruno, carla]
   );
   perform public.create_chore(
-    hogar, 'Sacar la basura', 1, 'weekly', 1, array[1, 3, 5], current_date, 'fixed', array[bruno]
+    hogar, 'Sacar la basura', 1, 'weekly', 1, array[1, 3, 5], (now() at time zone 'Europe/Madrid')::date, 'fixed', array[bruno]
   );
   perform public.create_chore(
-    hogar, 'Limpiar el baño', 3, 'weekly', 1, array[6], current_date, 'rotation', array[carla, ana]
+    hogar, 'Limpiar el baño', 3, 'weekly', 1, array[6], (now() at time zone 'Europe/Madrid')::date, 'rotation', array[carla, ana]
   );
 
   perform public.send_message(chat, '¡Bienvenidos al piso! 🏠');
