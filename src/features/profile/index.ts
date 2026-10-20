@@ -13,4 +13,5 @@ export { ProfileHero } from "./components/ProfileHero";
 export { ProfileHouseholds } from "./components/ProfileHouseholds";
 export { ProfileSettings } from "./components/ProfileSettings";
 export { ProfileStats } from "./components/ProfileStats";
-export type { MyAccount, MyProfile, MyStats, PendingBalance } from "./types";
+export { PrivacyChoices } from "./components/PrivacyChoices";
+export type { MyAccount, MyPrivacyChoices, MyProfile, MyStats, PendingBalance } from "./types";

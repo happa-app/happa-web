@@ -4,35 +4,9 @@
 // cambia aquí la versión y la fecha, y avisad a los usuarios (apartado 15).
 // Este texto es un borrador hecho con cuidado, pero no es asesoramiento legal: que lo revise quien lleve
 // la parte legal antes del lanzamiento.
-import type { ReactNode } from "react";
-import { Link } from "@/i18n/navigation";
 import { CONTACT_EMAIL, LEGAL_OWNER, PRIVACY_EMAIL } from "../owner";
+import { type Lang, Mail, Owner, PrivacyLink as Privacy } from "./shared";
 import type { LegalDocument } from "./types";
-import styles from "../components/LegalPage.module.css";
-
-type Lang = "es" | "en";
-
-const PENDING: Record<keyof typeof LEGAL_OWNER, Record<Lang, string>> = {
-  name: { es: "nombre o razón social", en: "name or company name" },
-  taxId: { es: "NIF", en: "tax ID" },
-  address: { es: "domicilio", en: "address" },
-  registry: { es: "datos registrales", en: "registry details" },
-};
-
-// Un dato del titular, o "[pendiente: …]" si aún no está rellenado
-function Owner({ field, lang }: { field: keyof typeof LEGAL_OWNER; lang: Lang }) {
-  const value = LEGAL_OWNER[field];
-  if (value) return <>{value}</>;
-  return <mark className={styles.pending}>[{lang === "es" ? "pendiente" : "pending"}: {PENDING[field][lang]}]</mark>;
-}
-
-function Mail({ to }: { to: string }) {
-  return <a href={`mailto:${to}`}>{to}</a>;
-}
-
-function Privacy({ children }: { children: ReactNode }) {
-  return <Link href="/legal/privacidad">{children}</Link>;
-}
 
 export const termsEs: LegalDocument = {
   version: "1",

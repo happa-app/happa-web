@@ -3,6 +3,7 @@
 // contraseña y borrar la cuenta. Quién puede qué lo decide además la base de datos (migración 18).
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { PRIVACY_CHOICES_VERSION, PRIVACY_PURPOSES } from "@/features/legal/versions";
 import { localizePath, parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
 import { siteOrigin } from "@/lib/site-origin";
@@ -133,6 +134,24 @@ export async function removeAvatar(): Promise<{ ok: boolean }> {
   await removeAvatarFiles(supabase, user.userId);
   revalidatePath("/", "layout");
   return { ok: true };
+}
+
+// ───────────── Privacidad ─────────────
+// Activar o desactivar una de las dos opciones de Perfil → Privacidad. La base de datos añade una fila nueva
+// con la fecha (nunca cambia las anteriores: son la prueba de lo que aceptaste y cuándo) y rechaza menores.
+export async function savePrivacyChoice(purpose: string, granted: boolean): Promise<{ ok: boolean; changedAt?: string }> {
+  if (!(PRIVACY_PURPOSES as readonly string[]).includes(purpose) || typeof granted !== "boolean") return { ok: false };
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("set_privacy_choice", {
+    p_purpose: purpose,
+    p_granted: granted,
+    p_version: PRIVACY_CHOICES_VERSION,
+  });
+  if (error) {
+    console.error("[perfil] no se pudo guardar la opción de privacidad:", error);
+    return { ok: false };
+  }
+  return { ok: true, changedAt: new Date().toISOString() };
 }
 
 // ───────────── Idioma ─────────────

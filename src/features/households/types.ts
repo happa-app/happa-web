@@ -31,6 +31,8 @@ export type HouseholdDetail = {
   inviteCode: string;
   // Cuántas personas caben (migración 15)
   maxMembers: number;
+  // Código postal, si lo han puesto (migración 19)
+  postalCode: string | null;
   members: HouseholdMember[];
 };
 
@@ -57,6 +59,7 @@ export const HOUSEHOLD_ERROR_KEYS = [
   "placesTooFew",
   "notAdmin",
   "memberGone",
+  "postalCodeInvalid",
   "generic",
 ] as const;
 
@@ -66,7 +69,7 @@ export type HouseholdFormState = {
   status: "idle" | "error";
   fieldErrors?: Partial<Record<string, string[]>>;
   formError?: HouseholdErrorKey;
-  values?: { name?: string; kind?: string; code?: string; places?: string };
+  values?: { name?: string; kind?: string; code?: string; places?: string; postalCode?: string };
 };
 
 export const initialHouseholdState: HouseholdFormState = { status: "idle" };
@@ -86,6 +89,14 @@ export type MakeAdminState = {
 };
 
 export const initialMakeAdminState: MakeAdminState = { status: "idle" };
+
+// Cambiar el código postal desde Configuración
+export type PostalCodeFormState = {
+  status: "idle" | "done" | "error";
+  error?: HouseholdErrorKey;
+};
+
+export const initialPostalCodeState: PostalCodeFormState = { status: "idle" };
 
 export function firstFieldError(
   state: HouseholdFormState,

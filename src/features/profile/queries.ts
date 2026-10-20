@@ -1,8 +1,9 @@
 // Lecturas del perfil propio (en el servidor). La base de datos solo deja ver y cambiar lo tuyo.
+import { PRIVACY_PURPOSES, type PrivacyPurpose } from "@/features/legal/versions";
 import { parseLocale } from "@/i18n/locale";
 import { createClient } from "@/lib/supabase/server";
 import { avatarUrl } from "./avatar";
-import type { MyAccount, MyProfile, MyStats, PendingBalance } from "./types";
+import type { MyAccount, MyPrivacyChoices, MyProfile, MyStats, PendingBalance } from "./types";
 
 export async function getMyProfile(): Promise<MyProfile | null> {
   const supabase = await createClient();
@@ -73,4 +74,21 @@ export async function getMyAccount(): Promise<MyAccount> {
   const { data, error } = await supabase.auth.getUser();
   if (error) console.error("[perfil] no se pudo leer la cuenta:", error);
   return { email: data.user?.email ?? null, newEmail: data.user?.new_email ?? null };
+}
+
+// Perfil → Privacidad: tus dos decisiones (comunicaciones de HAPPA y cesión a colaboradores).
+// Lo que nunca decidiste sale como "no" (así son los usuarios registrados antes de existir la opción).
+export async function getMyPrivacyChoices(): Promise<MyPrivacyChoices> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.rpc("get_my_privacy_choices");
+  if (error) throw error;
+  const choices = Object.fromEntries(
+    PRIVACY_PURPOSES.map((purpose) => [purpose, { granted: false, changedAt: null }]),
+  ) as MyPrivacyChoices;
+  for (const row of data ?? []) {
+    if ((PRIVACY_PURPOSES as readonly string[]).includes(row.purpose)) {
+      choices[row.purpose as PrivacyPurpose] = { granted: row.granted, changedAt: row.changed_at };
+    }
+  }
+  return choices;
 }

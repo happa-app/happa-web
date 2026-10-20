@@ -1,4 +1,5 @@
 // Tipos del perfil
+import type { PrivacyPurpose } from "@/features/legal/versions";
 import type { Locale } from "@/i18n/routing";
 
 export type MyProfile = {
@@ -73,3 +74,8 @@ export const initialProfileState: ProfileFormState = { status: "idle" };
 
 // Errores al elegir y subir la foto (claves de Profile.photo.errors)
 export type PhotoErrorKey = "notImage" | "tooBig" | "cantOpen" | "uploadFailed" | "generic";
+
+// Perfil → Privacidad: lo que tienes decidido ahora sobre cada opción (privacy_choices, migración 19).
+// changedAt es null si nunca lo decidiste (usuarios de antes): entonces cuenta como "no".
+export type PrivacyChoice = { granted: boolean; changedAt: string | null };
+export type MyPrivacyChoices = Record<PrivacyPurpose, PrivacyChoice>;

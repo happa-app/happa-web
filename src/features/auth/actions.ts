@@ -5,7 +5,7 @@
 import { cookies } from "next/headers";
 import { redirect as redirectToPath } from "next/navigation";
 import { z } from "zod";
-import { LEGAL_VERSIONS } from "@/features/legal/versions";
+import { LEGAL_VERSIONS, PRIVACY_CHOICES_VERSION } from "@/features/legal/versions";
 import { localizePath, parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
 import { siteOrigin } from "@/lib/site-origin";
@@ -87,8 +87,18 @@ export async function signUp(
     password,
     options: {
       emailRedirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(nextPath)}`,
-      // La migración 4 lee estos datos al crear el perfil y guarda el consentimiento legal.
-      data: { display_name: displayName, locale, legal: LEGAL_VERSIONS },
+      // Las migraciones 4 y 19 leen estos datos al crear el perfil: guardan los términos y la privacidad
+      // aceptados y las dos decisiones opcionales (marcadas o no), con la versión de su texto.
+      data: {
+        display_name: displayName,
+        locale,
+        legal: LEGAL_VERSIONS,
+        choices: {
+          marketing: formData.get("marketing") === "on",
+          partners: formData.get("partners") === "on",
+          version: PRIVACY_CHOICES_VERSION,
+        },
+      },
     },
   });
   if (error) {

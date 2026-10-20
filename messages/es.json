@@ -101,7 +101,11 @@
       "password": "Contraseña",
       "passwordHint": "Mínimo 8 caracteres",
       "acceptLegal": "He leído y acepto los <terms>términos de uso</terms> y la <privacy>política de privacidad</privacy>",
-      "isAdult": "Confirmo que tengo 18 años o más"
+      "isAdult": "Confirmo que tengo 18 años o más",
+      "marketing": "Quiero recibir por correo novedades y ventajas de HAPPA",
+      "partners": "Quiero recibir ofertas para mi hogar de empresas colaboradoras",
+      "partnersMore": "Qué se comparte",
+      "partnersDetail": "Para que te envíen sus ofertas, les pasaríamos tu nombre, tu correo, tu idioma, tu código postal y el tipo y tamaño de tu hogar. Solo a empresas de servicios para el hogar, mudanzas, mobiliario, seguros, servicios financieros o de gestión de alquiler y suministros (luz, gas o internet). Nunca tu dirección, tus mensajes ni tus gastos. Puedes quitarlo cuando quieras en Perfil → Privacidad."
     },
     "errors": {
       "displayNameRequired": "Escribe tu nombre",
@@ -137,7 +141,35 @@
     "summaryTitle": "En pocas palabras",
     "summaryNote": "Este resumen te ayuda a entenderlo, pero lo que vale es el texto completo.",
     "contents": "Índice",
-    "linksLabel": "Textos legales"
+    "linksLabel": "Textos legales",
+    "basicInfo": {
+      "title": "Información básica sobre protección de datos",
+      "controller": {
+        "label": "Responsable",
+        "value": "{owner} · {email}",
+        "fallback": "El titular de HAPPA"
+      },
+      "purpose": {
+        "label": "Finalidad",
+        "value": "Darte el servicio de HAPPA. Si lo eliges arriba: enviarte novedades de HAPPA y ceder tus datos a empresas colaboradoras."
+      },
+      "basis": {
+        "label": "Legitimación",
+        "value": "El contrato (los términos de uso) y, para lo opcional, tu consentimiento."
+      },
+      "recipients": {
+        "label": "Destinatarios",
+        "value": "Proveedores que nos dan el servicio (alojamiento, correo). Empresas colaboradoras, solo si lo aceptas."
+      },
+      "rights": {
+        "label": "Derechos",
+        "value": "Acceder, corregir, borrar, oponerte, limitar, llevarte tus datos y retirar tu consentimiento ({email})."
+      },
+      "more": {
+        "label": "Más información",
+        "value": "En la <link>política de privacidad</link>."
+      }
+    }
   },
   "Households": {
     "list": {
@@ -257,7 +289,19 @@
       "placesTooFew": "Ya vive más gente: no puedes poner menos plazas",
       "notAdmin": "Solo el admin puede cambiar esto",
       "memberGone": "Esta persona ya no vive en el hogar",
+      "postalCodeInvalid": "Escribe un código postal de 5 cifras, o déjalo vacío",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
+    },
+    "postalCode": {
+      "title": "Código postal",
+      "label": "Código postal (opcional)",
+      "hint": "Para mostrarte profesionales y servicios cerca de casa. Solo el código postal, nunca la dirección.",
+      "text": "Sirve para mostraros profesionales y servicios cerca de casa. Déjalo vacío para quitarlo.",
+      "save": "Guardar código postal",
+      "saving": "Guardando…",
+      "saved": "Guardado",
+      "readonly": "Código postal: {code}. Solo el admin puede cambiarlo.",
+      "readonlyEmpty": "Sin código postal. Solo el admin puede ponerlo."
     }
   },
   "Nav": {
@@ -349,7 +393,9 @@
       "accountHint": "Tu correo y tu contraseña",
       "language": "Idioma",
       "notifications": "Avisos",
-      "notificationsHint": "De qué te avisamos y en qué móviles"
+      "notificationsHint": "De qué te avisamos y en qué móviles",
+      "privacy": "Privacidad",
+      "privacyHint": "Tus datos y qué compartes"
     },
     "photo": {
       "title": "Tu foto",
@@ -441,6 +487,18 @@
       "minor": "Las cuentas de menores no se pueden borrar desde aquí",
       "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
+    },
+    "privacy": {
+      "title": "Privacidad",
+      "subtitle": "Dos opciones que solo se activan si tú quieres. Puedes cambiarlas cuando quieras.",
+      "changedAt": "Último cambio: {date}",
+      "neverDecided": "Aún no lo has decidido (cuenta como no).",
+      "error": "No se ha podido guardar. Inténtalo de nuevo.",
+      "minor": "Las cuentas de menor no pueden recibir novedades ni compartir datos con empresas colaboradoras.",
+      "rightsTitle": "Tus datos",
+      "rightsText": "Para pedir una copia de tus datos, corregirlos o ejercer cualquier otro derecho, escríbenos a <email></email> desde el correo de tu cuenta.",
+      "policyLink": "Leer la política de privacidad",
+      "deleteLink": "Borrar mi cuenta"
     }
   },
   "NotFound": {

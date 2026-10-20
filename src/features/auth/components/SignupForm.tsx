@@ -6,6 +6,8 @@ import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { CheckboxField } from "@/components/ui/CheckboxField";
 import { TextField } from "@/components/ui/TextField";
+// Directo del componente: el índice de legal también exporta LegalPage, que solo funciona en el servidor
+import { DataProtectionInfo } from "@/features/legal/components/DataProtectionInfo";
 import { Link } from "@/i18n/navigation";
 import { signUp } from "../actions";
 import { firstFieldError, initialAuthState } from "../types";
@@ -99,9 +101,23 @@ export function SignupForm({ next }: Props) {
       <CheckboxField name="acceptLegal" label={legalLabel} error={error("acceptLegal")} />
       <CheckboxField name="isAdult" label={t("fields.isAdult")} error={error("isAdult")} />
 
+      {/* Opcionales y desmarcadas, cada una por su lado (el RGPD pide poder aceptar cada cosa por separado).
+          Primero la más fácil de aceptar; frases cortas que dicen lo que gana la persona, y el detalle de qué
+          se comparte a un clic, antes de aceptar (información por capas). Se cambian luego en Perfil → Privacidad. */}
+      <CheckboxField name="marketing" label={t("fields.marketing")} />
+      <div>
+        <CheckboxField name="partners" label={t("fields.partners")} />
+        <details className={styles.more}>
+          <summary>{t("fields.partnersMore")}</summary>
+          <p>{t("fields.partnersDetail")}</p>
+        </details>
+      </div>
+
       <Button type="submit" fullWidth disabled={isPending}>
         {isPending ? t("signup.submitting") : t("signup.submit")}
       </Button>
+
+      <DataProtectionInfo />
 
       <p className={styles.switch}>
         {t("signup.haveAccount")} <Link href={loginHref}>{t("signup.goToLogin")}</Link>
