@@ -10,7 +10,7 @@ export type PushKeys = {
   publicKey: string;
   // Clave privada VAPID (32 bytes en base64url)
   privateKey: string;
-  // Contacto para los servicios de push, por ejemplo "mailto:info@happa.es"
+  // Contacto para los servicios de push, por ejemplo "mailto:contacto@happa.es"
   subject: string;
 };
 
