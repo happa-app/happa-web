@@ -12,7 +12,8 @@ import { siteOrigin } from "@/lib/site-origin";
 import { createClient } from "@/lib/supabase/server";
 import { safeNextPath } from "@/utils/safe-path";
 import { toAuthErrorKey } from "./errors";
-import { loginSchema, signupSchema } from "./schemas";
+import { clearRecoveryCookie, hasRecoverySession, NEW_PASSWORD_PATH } from "./recovery";
+import { forgotPasswordSchema, loginSchema, newPasswordSchema, signupSchema } from "./schemas";
 import type { AuthFormState } from "./types";
 
 const HOME_PATH = "/inicio";
@@ -111,6 +112,71 @@ export async function signUp(
   // Si el correo ya existía, Supabase responde igual a propósito (para no revelar
   // qué correos están registrados). Por eso siempre se muestra "revisa tu correo".
   return { status: "checkEmail" };
+}
+
+// Pide el correo para recuperar la contraseña. Su enlace pasa por /auth/confirm, que inicia la sesión y
+// lleva a /nueva-contrasena.
+export async function requestPasswordReset(
+  _prevState: AuthFormState,
+  formData: FormData,
+): Promise<AuthFormState> {
+  const locale = parseLocale(formData.get("locale"));
+  const values = { email: text(formData, "email").trim() };
+
+  const parsed = forgotPasswordSchema.safeParse(values);
+  if (!parsed.success) {
+    return { status: "error", fieldErrors: z.flattenError(parsed.error).fieldErrors, values };
+  }
+
+  const supabase = await createClient();
+  const nextPath = localizePath(NEW_PASSWORD_PATH, locale);
+  const { error } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
+    // "flow=recovery": así /auth/confirm sabe que es este enlace, venga en el formato que venga
+    redirectTo: `${await siteOrigin()}/auth/confirm?flow=recovery&next=${encodeURIComponent(nextPath)}`,
+  });
+  if (error) {
+    return { status: "error", formError: toAuthErrorKey(error), values };
+  }
+
+  // Si el correo no tiene cuenta, Supabase responde igual a propósito: así nadie puede averiguar quién
+  // está registrado. Por eso siempre se muestra "si hay una cuenta, te hemos enviado un enlace".
+  return { status: "checkEmail", values };
+}
+
+// Guarda la contraseña nueva. Solo vale con la sesión que abre el enlace del correo (ver recovery.ts):
+// con la sesión de siempre, la contraseña se cambia en Perfil → Tu cuenta, que pide la actual.
+export async function setNewPassword(
+  _prevState: AuthFormState,
+  formData: FormData,
+): Promise<AuthFormState> {
+  const locale = parseLocale(formData.get("locale"));
+
+  const supabase = await createClient();
+  if (!(await hasRecoverySession(supabase))) {
+    return { status: "error", formError: "linkExpired" };
+  }
+
+  const parsed = newPasswordSchema.safeParse({
+    password: text(formData, "password"),
+    repeat: text(formData, "repeat"),
+  });
+  if (!parsed.success) {
+    return { status: "error", fieldErrors: z.flattenError(parsed.error).fieldErrors };
+  }
+
+  const { error } = await supabase.auth.updateUser({ password: parsed.data.password });
+  if (error) {
+    const key = toAuthErrorKey(error);
+    if (key === "samePassword" || key === "passwordWeak") {
+      return { status: "error", fieldErrors: { password: [key] } };
+    }
+    return { status: "error", formError: key };
+  }
+
+  // Cierra la sesión en los demás dispositivos: si alguien había entrado en tu cuenta, se queda fuera.
+  await supabase.auth.signOut({ scope: "others" });
+  await clearRecoveryCookie();
+  return redirect({ href: HOME_PATH, locale });
 }
 
 export async function signOut(formData: FormData) {

@@ -1,10 +1,12 @@
-// Enlace del correo de confirmación. Inicia la sesión y lleva a la app.
+// Enlace de los correos de Auth (confirmar el registro, cambiar el correo y recuperar la contraseña).
+// Inicia la sesión y lleva a la app.
 // Acepta los dos formatos de enlace de Supabase: con "code" (plantilla por defecto) y con "token_hash"
 // (las de supabase/templates). El de "code" solo funciona en el navegador donde se pidió el correo; el de
 // "token_hash", en cualquiera (te registras en el ordenador y abres el correo en el móvil).
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import type { NextRequest } from "next/server";
+import { FORGOT_PASSWORD_PATH, setRecoveryCookie } from "@/features/auth/recovery";
 import { createClient } from "@/lib/supabase/server";
 import { safeNextPath } from "@/utils/safe-path";
 
@@ -18,23 +20,28 @@ export async function GET(request: NextRequest) {
   // ya ha hecho su parte antes de volver aquí, así que se va siempre a Tu cuenta, que le pregunta a
   // Supabase cómo ha quedado.
   const emailChange = searchParams.get("flow") === "email";
+  // Recuperar la contraseña: se marca la sesión para que /nueva-contrasena sepa que viene de este enlace
+  const recovery = searchParams.get("flow") === "recovery";
   const code = searchParams.get("code");
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type") as EmailOtpType | null;
 
   const supabase = await createClient();
-  let confirmed = false;
+  let userId: string | null = null;
 
   if (code) {
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    confirmed = !error;
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+    if (!error) userId = data.user.id;
   } else if (tokenHash && type) {
-    const { error } = await supabase.auth.verifyOtp({ type, token_hash: tokenHash });
-    confirmed = !error;
+    const { data, error } = await supabase.auth.verifyOtp({ type, token_hash: tokenHash });
+    if (!error && data.user) userId = data.user.id;
   }
 
-  if (confirmed || emailChange) redirect(next);
+  if (userId && recovery) await setRecoveryCookie(userId);
+  if (userId || emailChange) redirect(next);
 
-  const loginPath = next === "/en" || next.startsWith("/en/") ? "/en/login" : "/login";
-  redirect(`${loginPath}?error=confirm`);
+  const prefix = next === "/en" || next.startsWith("/en/") ? "/en" : "";
+  // Enlace de recuperación caducado o ya usado: a pedir otro
+  if (recovery) redirect(`${prefix}${FORGOT_PASSWORD_PATH}?error=caducado`);
+  redirect(`${prefix}/login?error=confirm`);
 }

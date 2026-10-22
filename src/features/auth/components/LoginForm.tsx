@@ -60,6 +60,9 @@ export function LoginForm({ confirmFailed = false, accountDeleted = false, next 
         required
         error={passwordError ? t(`errors.${passwordError}`) : undefined}
       />
+      <Link href="/recuperar" className={styles.forgot}>
+        {t("login.forgot")}
+      </Link>
 
       <Button type="submit" fullWidth disabled={isPending}>
         {isPending ? t("login.submitting") : t("login.submit")}

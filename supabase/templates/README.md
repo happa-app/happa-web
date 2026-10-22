@@ -11,6 +11,7 @@ En la base de datos local sí se usan (`supabase/config.toml`): los correos lleg
 |---|---|---|
 | Templates → Confirm sign up | `confirmation.html` | `{{ if eq (print .Data.locale) "en" }}Confirm your HAPPA account{{ else }}Confirma tu cuenta de HAPPA{{ end }}` |
 | Templates → Change email address | `email_change.html` | `{{ if eq (print .Data.locale) "en" }}Confirm your new email for HAPPA{{ else }}Confirma tu correo nuevo en HAPPA{{ end }}` |
+| Templates → Reset password | `recovery.html` | `{{ if eq (print .Data.locale) "en" }}Reset your HAPPA password{{ else }}Cambia tu contraseña de HAPPA{{ end }}` |
 | Security → Password changed (activarla) | `password_changed_notification.html` | `{{ if eq (print .Data.locale) "en" }}Your HAPPA password has changed{{ else }}Tu contraseña de HAPPA ha cambiado{{ end }}` |
 | Security → Email address changed (activarla) | `email_changed_notification.html` | `{{ if eq (print .Data.locale) "en" }}Your HAPPA email has changed{{ else }}El correo de tu cuenta de HAPPA ha cambiado{{ end }}` |
 

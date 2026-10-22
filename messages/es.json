@@ -81,7 +81,8 @@
       "submit": "Iniciar sesión",
       "submitting": "Entrando…",
       "noAccount": "¿Aún no tienes cuenta?",
-      "goToSignup": "Crea una"
+      "goToSignup": "Crea una",
+      "forgot": "¿Has olvidado tu contraseña?"
     },
     "signup": {
       "title": "Crea tu cuenta",
@@ -94,12 +95,30 @@
       "checkEmailText": "Si la dirección es correcta, te hemos enviado un enlace para activar la cuenta. Ábrelo desde este mismo navegador.",
       "backToLogin": "Volver a iniciar sesión"
     },
+    "forgot": {
+      "title": "Recupera tu contraseña",
+      "subtitle": "Escribe el correo de tu cuenta y te enviaremos un enlace para crear una nueva.",
+      "submit": "Enviar enlace",
+      "submitting": "Enviando…",
+      "sentTitle": "Revisa tu correo",
+      "sentText": "Si hay una cuenta con ese correo, te hemos enviado un enlace para crear una contraseña nueva. Caduca en una hora.",
+      "backToLogin": "Volver a iniciar sesión"
+    },
+    "newPassword": {
+      "title": "Crea una contraseña nueva",
+      "subtitle": "Para la cuenta {email}",
+      "submit": "Guardar contraseña",
+      "submitting": "Guardando…",
+      "askAgain": "Pide otro enlace"
+    },
     "fields": {
       "displayName": "Nombre",
       "displayNameHint": "Así te verán tus compañeros",
       "email": "Correo electrónico",
       "password": "Contraseña",
       "passwordHint": "Mínimo 8 caracteres",
+      "newPassword": "Contraseña nueva",
+      "repeatPassword": "Repite la contraseña",
       "acceptLegal": "He leído y acepto los <terms>términos de uso</terms> y la <privacy>política de privacidad</privacy>",
       "isAdult": "Confirmo que tengo 18 años o más",
       "marketing": "Quiero recibir por correo novedades y ventajas de HAPPA",
@@ -115,12 +134,15 @@
       "passwordTooLong": "Máximo 72 caracteres",
       "passwordRequired": "Escribe tu contraseña",
       "passwordWeak": "Esa contraseña es demasiado débil; prueba con otra más larga",
+      "passwordMismatch": "Las dos contraseñas no coinciden",
+      "samePassword": "Esa ya es tu contraseña; elige otra distinta",
       "mustAcceptLegal": "Necesitas aceptar los términos y la privacidad",
       "mustBeAdult": "Para crear una cuenta tienes que ser mayor de edad",
       "invalidCredentials": "Correo o contraseña incorrectos",
       "emailNotConfirmed": "Aún no has confirmado tu correo. Revisa tu bandeja de entrada",
       "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
       "userExists": "Ya existe una cuenta con ese correo",
+      "linkExpired": "El enlace ha caducado o ya se ha usado. Pide otro.",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
     },
     "signOut": "Cerrar sesión",
