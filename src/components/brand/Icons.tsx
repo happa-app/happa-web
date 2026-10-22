@@ -255,3 +255,13 @@ export function ShieldIcon({ size = 22 }: Props) {
     </svg>
   );
 }
+
+export function HelpIcon({ size = 22 }: Props) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M9.6 9.6a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <circle cx="12" cy="16.7" r="1" fill="currentColor" />
+    </svg>
+  );
+}

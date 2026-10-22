@@ -48,8 +48,8 @@ Barra inferior: **Más · Inicio · Casas · Ruleta · Chat**. Las personas, el 
 
 ## Estado actual
 - App desplegada en Vercel como PWA (manifest, iconos, página sin conexión y service worker). Funciones en Fráncfort (`vercel.json` → `fra1`), junto a Supabase (`eu-central-1`).
-- Hechos: portada pública (qué es, cómo funciona y cómo instalarla), hogares e invitaciones, plazas, compra, gastos (con compra → gasto y fijos), horarios y ausencias, tareas, chat, avisos (en la app y push), ruleta, perfil (foto, cuenta, idioma, borrar la cuenta) y páginas legales.
-- 18 migraciones en `supabase/migrations`.
+- Hechos: portada pública (qué es, cómo funciona y cómo instalarla), hogares e invitaciones, plazas, compra, gastos (con compra → gasto y fijos), horarios y ausencias, tareas, chat, avisos (en la app y push), ruleta, perfil (foto, cuenta, idioma, borrar la cuenta), recuperar la contraseña, ayuda y contacto (Más → Ayuda y contacto; se leen en `private.contact_inbox`) y páginas legales.
+- 20 migraciones en `supabase/migrations`.
 - Configurando Resend para los correos de Auth.
 
 ## Comandos
