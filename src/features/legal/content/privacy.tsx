@@ -1,4 +1,4 @@
-// Política de privacidad de HAPPA, en español y en inglés (diseño: docs/superpowers/specs/2026-10-20-privacidad-design.md).
+// Política de privacidad de HAPPA, en español y en inglés (el documento de diseño se guarda fuera del repo).
 //
 // Si cambias algo importante: sube la versión en ../versions.ts y cambia aquí la versión y la fecha. Si cambia
 // lo que se cede a empresas colaboradoras (datos o sectores), sube también PRIVACY_CHOICES_VERSION y el texto

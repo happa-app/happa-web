@@ -12,7 +12,7 @@ const secret = randomBytes(32).toString("base64url");
 
 console.log(`NEXT_PUBLIC_VAPID_PUBLIC_KEY=${raw.toString("base64url")}`);
 console.log(`VAPID_PRIVATE_KEY=${priv.d}`);
-console.log("VAPID_SUBJECT=mailto:info@happa.es");
+console.log("VAPID_SUBJECT=mailto:contacto@happa.es");
 console.log(`PUSH_DISPATCH_SECRET=${secret}`);
 console.log("");
 console.log("-- En Supabase → SQL Editor:");
