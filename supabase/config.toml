@@ -254,6 +254,10 @@ content_path = "./supabase/templates/confirmation.html"
 subject = "{{ if eq (print .Data.locale) \"en\" }}Confirm your new email for HAPPA{{ else }}Confirma tu correo nuevo en HAPPA{{ end }}"
 content_path = "./supabase/templates/email_change.html"
 
+[auth.email.template.recovery]
+subject = "{{ if eq (print .Data.locale) \"en\" }}Reset your HAPPA password{{ else }}Cambia tu contraseña de HAPPA{{ end }}"
+content_path = "./supabase/templates/recovery.html"
+
 [auth.email.notification.password_changed]
 enabled = true
 subject = "{{ if eq (print .Data.locale) \"en\" }}Your HAPPA password has changed{{ else }}Tu contraseña de HAPPA ha cambiado{{ end }}"

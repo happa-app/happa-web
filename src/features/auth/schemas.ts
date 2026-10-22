@@ -19,5 +19,18 @@ export const signupSchema = z.object({
   isAdult: z.literal(true, "mustBeAdult"),
 });
 
+// Recuperar la contraseña: el correo al que mandar el enlace
+export const forgotPasswordSchema = z.object({
+  email: z.email("emailInvalid"),
+});
+
+// Contraseña nueva (después de abrir el enlace): las mismas reglas que al registrarse, escrita dos veces
+export const newPasswordSchema = z
+  .object({
+    password: z.string().min(8, "passwordTooShort").max(72, "passwordTooLong"),
+    repeat: z.string(),
+  })
+  .refine((data) => data.repeat === data.password, { message: "passwordMismatch", path: ["repeat"] });
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type SignupInput = z.infer<typeof signupSchema>;

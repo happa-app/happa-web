@@ -14,7 +14,7 @@ import { safeNextPath } from "@/utils/safe-path";
 const handleI18nRouting = createIntlMiddleware(routing);
 
 // Rutas que se pueden ver sin sesión. Cualquier ruta nueva es privada por defecto.
-const PUBLIC_PATHS = ["/", "/login", "/registro"];
+const PUBLIC_PATHS = ["/", "/login", "/registro", "/recuperar"];
 const PUBLIC_PREFIXES = ["/legal"];
 // Con sesión iniciada, estas rutas llevan directamente a la app.
 const GUEST_ONLY_PATHS = ["/", "/login", "/registro"];

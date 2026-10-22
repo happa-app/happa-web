@@ -30,6 +30,15 @@
   font-weight: 600;
 }
 
+/* "¿Has olvidado tu contraseña?", pegado bajo el campo de la contraseña */
+.forgot {
+  align-self: flex-end;
+  margin-top: calc(var(--space-3) * -1);
+  padding: var(--space-1) 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
 .linkButton {
   display: flex;
   align-items: center;

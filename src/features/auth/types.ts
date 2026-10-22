@@ -8,12 +8,15 @@ export const AUTH_ERROR_KEYS = [
   "passwordTooLong",
   "passwordRequired",
   "passwordWeak",
+  "passwordMismatch",
+  "samePassword",
   "mustAcceptLegal",
   "mustBeAdult",
   "invalidCredentials",
   "emailNotConfirmed",
   "rateLimited",
   "userExists",
+  "linkExpired",
   "generic",
 ] as const;
 
