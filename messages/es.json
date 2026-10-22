@@ -343,7 +343,43 @@
     "profileHint": "Tu foto, tu cuenta y el idioma",
     "personalList": "Mi lista personal",
     "personalListHint": "Tus cosas, y lo que quieras pedir a casa",
-    "noHousehold": "Cuando estés en un hogar, aquí tendrás su configuración y el resto de sus secciones."
+    "noHousehold": "Cuando estés en un hogar, aquí tendrás su configuración y el resto de sus secciones.",
+    "help": "HAPPA",
+    "contact": "Ayuda y contacto",
+    "contactHint": "Errores, dudas o ideas"
+  },
+  "Contact": {
+    "title": "Ayuda y contacto",
+    "subtitle": "¿Algo no funciona, tienes una duda o se te ocurre una mejora? Cuéntanoslo.",
+    "backShort": "Más",
+    "kindLabel": "¿Qué nos quieres contar?",
+    "kinds": {
+      "bug": "Error",
+      "question": "Pregunta",
+      "idea": "Idea",
+      "other": "Otro"
+    },
+    "messageLabel": "Tu mensaje",
+    "placeholders": {
+      "bug": "Qué estabas haciendo y qué ha pasado. Por ejemplo: «al guardar un gasto sale un error»",
+      "question": "¿Qué te gustaría saber?",
+      "idea": "¿Qué cambiarías o qué echas en falta?",
+      "other": "Cuéntanos"
+    },
+    "counter": "{count} de {max} caracteres",
+    "send": "Enviar",
+    "sending": "Enviando…",
+    "sentTitle": "Gracias, lo hemos recibido",
+    "sentText": "Lo leeremos pronto. Si hace falta, te contestamos a {email}.",
+    "back": "Volver a Más",
+    "orEmail": "¿Prefieres el correo? Escríbenos a <email></email>",
+    "mailSubject": "Contacto desde HAPPA",
+    "errors": {
+      "messageRequired": "Escribe tu mensaje",
+      "messageTooLong": "Máximo 2000 caracteres",
+      "rateLimited": "Has mandado varios mensajes seguidos. Espera un rato o escríbenos por correo.",
+      "generic": "No se ha podido enviar. Inténtalo de nuevo"
+    }
   },
   "Roulette": {
     "title": "Ruleta del marrón",

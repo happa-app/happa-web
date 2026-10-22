@@ -13,7 +13,7 @@ const AEPD = "https://www.aepd.es";
 
 export const privacyEs: LegalDocument = {
   version: "1",
-  updated: "20 de octubre de 2026",
+  updated: "22 de octubre de 2026",
   summary: [
     <>Usamos tus datos para darte el servicio de HAPPA. No vendemos ni cedemos tus datos sin tu permiso.</>,
     <>Lo que compartes en un hogar lo ven las personas de ese hogar, y nadie más.</>,
@@ -69,6 +69,11 @@ export const privacyEs: LegalDocument = {
             móvil para mandarte avisos (una dirección del servicio de notificaciones y sus claves).
           </li>
           <li>
+            <strong>Lo que nos escribes:</strong> los mensajes que nos mandas desde Ayuda y contacto o por correo, con el
+            tipo de consulta, el hogar desde el que escribes, tu idioma y el modelo de móvil o navegador, para entenderlo
+            y responderte.
+          </li>
+          <li>
             <strong>Tus decisiones y aceptaciones:</strong> qué versión de los términos y de esta política aceptaste, y
             qué has decidido sobre las opciones del apartado 3, con su fecha.
           </li>
@@ -89,6 +94,10 @@ export const privacyEs: LegalDocument = {
               <strong>Darte el servicio</strong> (tu cuenta, tus hogares y todo lo que hacéis en ellos, avisos y correos
               de la cuenta), incluido mostrarte profesionales y servicios cerca de tu hogar con su código postal. Base:
               el contrato que aceptas con los <TermsLink>términos de uso</TermsLink> (art. 6.1.b del RGPD).
+            </li>
+            <li>
+              <strong>Atender lo que nos escribes</strong> (errores, dudas e ideas) y responderte. Base: el contrato
+              (art. 6.1.b) y nuestro interés legítimo en arreglar y mejorar HAPPA (art. 6.1.f).
             </li>
             <li>
               <strong>Seguridad y prevención de abusos</strong> (detectar accesos indebidos, spam o fraude). Base:
@@ -131,6 +140,10 @@ export const privacyEs: LegalDocument = {
       body: (
         <ul>
           <li>Mientras tengas tu cuenta.</li>
+          <li>
+            Los mensajes que nos mandas desde Ayuda y contacto, como mucho 2 años. Si borras tu cuenta, se borran con
+            ella.
+          </li>
           <li>
             Al borrarla, borramos tu correo y tu contraseña, tu foto, tus avisos, tus suscripciones del móvil y tu lista
             de la compra personal, sales de tus hogares y tu perfil pasa a llamarse «Usuario eliminado». Lo que
@@ -332,7 +345,7 @@ export const privacyEs: LegalDocument = {
 
 export const privacyEn: LegalDocument = {
   version: "1",
-  updated: "20 October 2026",
+  updated: "22 October 2026",
   summary: [
     <>We use your data to provide the HAPPA service. We never sell or share your data without your permission.</>,
     <>What you share in a household is seen by the people in that household, and nobody else.</>,
@@ -388,6 +401,11 @@ export const privacyEn: LegalDocument = {
             its keys).
           </li>
           <li>
+            <strong>What you write to us:</strong> the messages you send us from Help and contact or by email, with the
+            type of request, the household you write from, your language and your phone or browser model, so we can
+            understand it and reply.
+          </li>
+          <li>
             <strong>Your choices and acceptances:</strong> which version of the terms and of this policy you accepted, and
             what you decided about the options in section 3, with their dates.
           </li>
@@ -409,6 +427,10 @@ export const privacyEn: LegalDocument = {
               notifications and account emails), including showing you professionals and services near your home using
               its postal code. Basis: the contract you accept with the <TermsLink>terms of use</TermsLink> (art. 6.1.b
               GDPR).
+            </li>
+            <li>
+              <strong>Handling what you write to us</strong> (bugs, questions and ideas) and replying. Basis: the
+              contract (art. 6.1.b) and our legitimate interest in fixing and improving HAPPA (art. 6.1.f).
             </li>
             <li>
               <strong>Security and abuse prevention</strong> (detecting unauthorised access, spam or fraud). Basis: our
@@ -452,6 +474,10 @@ export const privacyEn: LegalDocument = {
       body: (
         <ul>
           <li>For as long as you have your account.</li>
+          <li>
+            The messages you send us from Help and contact, for 2 years at most. If you delete your account, they are
+            deleted with it.
+          </li>
           <li>
             When you delete it, we delete your email and password, your photo, your notifications, your phone
             subscriptions and your personal shopping list, you leave your households and your profile is renamed

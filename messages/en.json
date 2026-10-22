@@ -343,7 +343,43 @@
     "profileHint": "Your photo, account and language",
     "personalList": "My personal list",
     "personalListHint": "Your things, and what you want to ask home for",
-    "noHousehold": "Once you're in a home, its settings and the rest of its sections will be here."
+    "noHousehold": "Once you're in a home, its settings and the rest of its sections will be here.",
+    "help": "HAPPA",
+    "contact": "Help and contact",
+    "contactHint": "Bugs, questions or ideas"
+  },
+  "Contact": {
+    "title": "Help and contact",
+    "subtitle": "Something not working, a question or an idea for an improvement? Tell us.",
+    "backShort": "More",
+    "kindLabel": "What would you like to tell us?",
+    "kinds": {
+      "bug": "Bug",
+      "question": "Question",
+      "idea": "Idea",
+      "other": "Other"
+    },
+    "messageLabel": "Your message",
+    "placeholders": {
+      "bug": "What were you doing and what happened? For example: “I get an error when saving an expense”",
+      "question": "What would you like to know?",
+      "idea": "What would you change or what's missing?",
+      "other": "Tell us"
+    },
+    "counter": "{count} of {max} characters",
+    "send": "Send",
+    "sending": "Sending…",
+    "sentTitle": "Thanks, we've got it",
+    "sentText": "We'll read it soon. If needed, we'll reply to {email}.",
+    "back": "Back to More",
+    "orEmail": "Prefer email? Write to <email></email>",
+    "mailSubject": "Contact from HAPPA",
+    "errors": {
+      "messageRequired": "Write your message",
+      "messageTooLong": "2000 characters maximum",
+      "rateLimited": "You've sent several messages in a row. Wait a while or email us.",
+      "generic": "It couldn't be sent. Please try again"
+    }
   },
   "Roulette": {
     "title": "Chore roulette",

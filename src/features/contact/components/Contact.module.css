@@ -1,0 +1,127 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  padding: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+/* Qué es: cuatro opciones en una fila (dos y dos en pantallas muy estrechas) */
+.kinds {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-md);
+  background: var(--color-border);
+}
+
+@media (max-width: 340px) {
+  .kinds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.kind,
+.kindActive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.kind {
+  color: var(--color-text-muted);
+}
+
+.kindActive {
+  background: var(--color-surface);
+  color: var(--color-brand-strong);
+  box-shadow: 0 1px 2px rgb(31 59 77 / 12%);
+}
+
+.kind:focus-within,
+.kindActive:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
+.textarea {
+  min-height: 140px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-base); /* 16 px: evita que iPhone haga zoom al escribir */
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-brand-strong);
+  box-shadow: var(--focus-ring);
+}
+
+.textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.hint {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.error {
+  font-size: var(--text-sm);
+  color: var(--color-error);
+}
+
+.mail {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.mail a {
+  font-weight: 600;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-weight: 600;
+  text-decoration: none;
+}

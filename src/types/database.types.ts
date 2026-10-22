@@ -340,6 +340,57 @@ export type Database = {
           },
         ]
       }
+      contact_messages: {
+        Row: {
+          created_at: string
+          household_id: string | null
+          id: number
+          kind: string
+          locale: string
+          message: string
+          status: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          household_id?: string | null
+          id?: never
+          kind: string
+          locale: string
+          message: string
+          status?: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          household_id?: string | null
+          id?: never
+          kind?: string
+          locale?: string
+          message?: string
+          status?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_messages_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_messages_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       conversation_reads: {
         Row: {
           conversation_id: string
@@ -2092,6 +2143,16 @@ export type Database = {
       }
       schedule_lock_person: {
         Args: { p_household: string; p_user: string }
+        Returns: undefined
+      }
+      send_contact_message: {
+        Args: {
+          p_household?: string
+          p_kind: string
+          p_locale?: string
+          p_message: string
+          p_user_agent?: string
+        }
         Returns: undefined
       }
       send_message: {
