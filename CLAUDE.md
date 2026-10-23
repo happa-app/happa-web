@@ -26,6 +26,7 @@ App de gestión del hogar compartido (pisos de estudiantes, parejas y familias).
 - **RLS activado en todas las tablas**, con políticas explícitas. Nunca uses la service_role key: todo el código usa la clave anon, también en el servidor.
 - Secretos solo en `.env.local` (en `.gitignore`) y en las variables de Vercel. Nunca los subas al repo.
 - Hay menores (hogares familiares): cuidar privacidad, RGPD, cookies y política de privacidad.
+- Captcha (Cloudflare Turnstile) activado en Supabase Auth: lo piden el registro, el login, recuperar la contraseña y la sesión aparte de `fresh.ts`. Cualquier formulario nuevo que llame a esas funciones de Auth necesita `<Captcha />` (`src/components/ui/Captcha.tsx`) y pasar `captchaToken(formData)` (`src/lib/captcha.ts`). Sin `NEXT_PUBLIC_TURNSTILE_SITE_KEY` no se pinta (en local va la clave de prueba, ver `supabase/config.toml`).
 
 ## Modelo de datos (reglas clave)
 - Un usuario puede pertenecer a varios hogares. Un profesional no puede ser también usuario de un hogar (`account_type` = `resident` | `professional`; la BD lo impide).

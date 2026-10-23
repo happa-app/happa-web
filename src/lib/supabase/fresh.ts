@@ -14,9 +14,10 @@ function newClient() {
 
 export type FreshClient = ReturnType<typeof newClient>;
 
-export async function signInFresh(email: string, password: string) {
+// captchaToken: el del formulario (src/lib/captcha.ts), porque Supabase también pide el captcha aquí
+export async function signInFresh(email: string, password: string, captchaToken?: string) {
   const client = newClient();
-  const { error } = await client.auth.signInWithPassword({ email, password });
+  const { error } = await client.auth.signInWithPassword({ email, password, options: { captchaToken } });
   return { client, error };
 }
 

@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import { Captcha } from "@/components/ui/Captcha";
 import { TextField } from "@/components/ui/TextField";
 import { Link } from "@/i18n/navigation";
 import { signIn } from "../actions";
@@ -63,6 +64,8 @@ export function LoginForm({ confirmFailed = false, accountDeleted = false, next 
       <Link href="/recuperar" className={styles.forgot}>
         {t("login.forgot")}
       </Link>
+
+      <Captcha resetKey={state} />
 
       <Button type="submit" fullWidth disabled={isPending}>
         {isPending ? t("login.submitting") : t("login.submit")}

@@ -143,6 +143,7 @@
       "rateLimited": "Too many attempts. Wait a few minutes and try again",
       "userExists": "An account with that email already exists",
       "linkExpired": "The link has expired or has already been used. Request another one.",
+      "captchaFailed": "We couldn't check that you're not a robot. Wait a moment and try again.",
       "generic": "Something went wrong. Please try again"
     },
     "signOut": "Sign out",
@@ -544,6 +545,7 @@
       "pendingMoney": "You have expenses or payments waiting for confirmation: confirm them before deleting your account",
       "minor": "Minor accounts can't be deleted from here",
       "rateLimited": "Too many attempts. Wait a few minutes and try again",
+      "captchaFailed": "We couldn't check that you're not a robot. Wait a moment and try again.",
       "generic": "Something went wrong. Please try again"
     },
     "privacy": {

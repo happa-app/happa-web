@@ -1,0 +1,6 @@
+/* Sin caja propia (ni la del div que añade Turnstile): mientras no enseña nada, no ocupa sitio ni suma el
+   hueco entre campos. Si tiene que enseñar la casilla, su recuadro ocupa su sitio como un campo más. */
+.captcha,
+.captcha :global(div) {
+  display: contents;
+}

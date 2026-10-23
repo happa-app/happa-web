@@ -188,6 +188,11 @@ export const privacyEs: LegalDocument = {
               en la Unión Europea.
             </li>
             <li>
+              <strong>Cloudflare (Turnstile):</strong> comprueba que no eres un robot al registrarte, al entrar y en
+              otros formularios con tu contraseña, con datos técnicos de tu navegador y tu dirección IP. No usa cookies
+              de seguimiento. Base: nuestro interés legítimo en evitar abusos (apartado 3).
+            </li>
+            <li>
               <strong>Google, Apple y Mozilla:</strong> sus servicios de notificaciones llevan los avisos a tu móvil,
               según el que uses. El contenido de cada aviso va cifrado.
             </li>
@@ -324,6 +329,10 @@ export const privacyEs: LegalDocument = {
             <li>
               <strong>happa_hogar</strong>: recuerda el último hogar que abriste, para que la barra de abajo te lleve a
               él.
+            </li>
+            <li>
+              <strong>happa_recovery</strong>: solo al recuperar tu contraseña, durante 15 minutos, para comprobar que
+              vienes del enlace del correo.
             </li>
           </ul>
         </>
@@ -523,6 +532,11 @@ export const privacyEn: LegalDocument = {
               the European Union.
             </li>
             <li>
+              <strong>Cloudflare (Turnstile):</strong> checks that you are not a robot when you sign up, sign in and in
+              other forms with your password, using technical data from your browser and your IP address. It does not
+              use tracking cookies. Basis: our legitimate interest in preventing abuse (section 3).
+            </li>
+            <li>
               <strong>Google, Apple and Mozilla:</strong> their notification services deliver notifications to your phone,
               depending on which one you use. The content of each notification is encrypted.
             </li>
@@ -658,6 +672,10 @@ export const privacyEn: LegalDocument = {
             </li>
             <li>
               <strong>happa_hogar</strong>: remembers the last household you opened, so the bottom bar takes you there.
+            </li>
+            <li>
+              <strong>happa_recovery</strong>: only when you reset your password, for 15 minutes, to check that you come
+              from the email link.
             </li>
           </ul>
         </>

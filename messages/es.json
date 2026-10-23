@@ -143,6 +143,7 @@
       "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
       "userExists": "Ya existe una cuenta con ese correo",
       "linkExpired": "El enlace ha caducado o ya se ha usado. Pide otro.",
+      "captchaFailed": "No hemos podido comprobar que no eres un robot. Espera un momento y vuelve a intentarlo.",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
     },
     "signOut": "Cerrar sesión",
@@ -544,6 +545,7 @@
       "pendingMoney": "Tienes gastos o pagos sin confirmar: confírmalos antes de borrar tu cuenta",
       "minor": "Las cuentas de menores no se pueden borrar desde aquí",
       "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
+      "captchaFailed": "No hemos podido comprobar que no eres un robot. Espera un momento y vuelve a intentarlo.",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
     },
     "privacy": {
