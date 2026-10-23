@@ -210,10 +210,13 @@ token_verifications = 30
 web3 = 30
 
 # Configure one of the supported captcha providers: `hcaptcha`, `turnstile`.
-# [auth.captcha]
-# enabled = true
-# provider = "hcaptcha"
-# secret = ""
+# Captcha de Cloudflare Turnstile, como en la oficial. En local se usa la clave secreta de prueba de
+# Cloudflare (es pública y siempre aprueba). La app necesita en .env.local la clave de prueba del sitio:
+# NEXT_PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA
+[auth.captcha]
+enabled = true
+provider = "turnstile"
+secret = "1x0000000000000000000000000000000AA"
 
 [auth.email]
 # Allow/disallow new user signups via email to your project.

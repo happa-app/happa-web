@@ -17,6 +17,7 @@ export const AUTH_ERROR_KEYS = [
   "rateLimited",
   "userExists",
   "linkExpired",
+  "captchaFailed",
   "generic",
 ] as const;
 

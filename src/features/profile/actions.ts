@@ -7,6 +7,7 @@ import { PRIVACY_CHOICES_VERSION, PRIVACY_PURPOSES } from "@/features/legal/vers
 import { localizePath, parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
 import { siteOrigin } from "@/lib/site-origin";
+import { captchaToken } from "@/lib/captcha";
 import { dropFresh, signInFresh } from "@/lib/supabase/fresh";
 import { createClient } from "@/lib/supabase/server";
 import { AVATAR_BUCKET, isAvatarPathOf } from "./avatar";
@@ -37,6 +38,8 @@ function authKey(error: { code?: string; status?: number }): ProfileErrorKey {
       return "wrongPassword";
     case "same_password":
       return "samePassword";
+    case "captcha_failed":
+      return "captchaFailed";
     case "weak_password":
       return "passwordWeak";
     case "email_exists":
@@ -218,7 +221,7 @@ export async function changePassword(_prev: ProfileFormState, formData: FormData
   const email = await myEmail(supabase);
   if (!email) return fail("generic");
 
-  const fresh = await signInFresh(email, current);
+  const fresh = await signInFresh(email, current, captchaToken(formData));
   if (fresh.error) {
     const key = authKey(fresh.error);
     return fail(key, key === "wrongPassword" ? "current" : undefined);
@@ -251,7 +254,7 @@ export async function deleteAccount(_prev: ProfileFormState, formData: FormData)
   if (!user || !email) return fail("generic");
 
   // 1. Que seas tú: con una sesión aparte, recién abierta con tu contraseña (la base de datos lo exige)
-  const fresh = await signInFresh(email, password);
+  const fresh = await signInFresh(email, password, captchaToken(formData));
   if (fresh.error) {
     const key = authKey(fresh.error);
     return fail(key, key === "wrongPassword" ? "password" : undefined);

@@ -57,6 +57,7 @@ export const PROFILE_ERROR_KEYS = [
   "pendingMoney",
   "minor",
   "rateLimited",
+  "captchaFailed",
   "generic",
 ] as const;
 export type ProfileErrorKey = (typeof PROFILE_ERROR_KEYS)[number];

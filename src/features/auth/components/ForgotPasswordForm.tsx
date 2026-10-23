@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import { Captcha } from "@/components/ui/Captcha";
 import { TextField } from "@/components/ui/TextField";
 import { Link } from "@/i18n/navigation";
 import { requestPasswordReset } from "../actions";
@@ -57,6 +58,8 @@ export function ForgotPasswordForm({ linkExpired = false }: Props) {
         defaultValue={state.values?.email}
         error={emailError ? t(`errors.${emailError}`) : undefined}
       />
+
+      <Captcha resetKey={state} />
 
       <Button type="submit" fullWidth disabled={isPending}>
         {isPending ? t("forgot.submitting") : t("forgot.submit")}

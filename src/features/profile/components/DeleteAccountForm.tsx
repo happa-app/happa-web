@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import { Captcha } from "@/components/ui/Captcha";
 import { CheckboxField } from "@/components/ui/CheckboxField";
 import { TextField } from "@/components/ui/TextField";
 import { deleteAccount } from "../actions";
@@ -29,6 +30,8 @@ export function DeleteAccountForm() {
         error={errorFor("password")}
       />
       <CheckboxField name="confirm" label={t("delete.confirm")} error={errorFor("confirm")} />
+      <Captcha resetKey={state} />
+
       <Button type="submit" variant="danger" fullWidth disabled={isPending}>
         {isPending ? t("delete.deleting") : t("delete.submit")}
       </Button>

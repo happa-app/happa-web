@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useActionState, type ReactNode } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import { Captcha } from "@/components/ui/Captcha";
 import { CheckboxField } from "@/components/ui/CheckboxField";
 import { TextField } from "@/components/ui/TextField";
 // Directo del componente: el índice de legal también exporta LegalPage, que solo funciona en el servidor
@@ -112,6 +113,8 @@ export function SignupForm({ next }: Props) {
           <p>{t("fields.partnersDetail")}</p>
         </details>
       </div>
+
+      <Captcha resetKey={state} />
 
       <Button type="submit" fullWidth disabled={isPending}>
         {isPending ? t("signup.submitting") : t("signup.submit")}

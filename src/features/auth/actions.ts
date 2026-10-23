@@ -8,6 +8,7 @@ import { z } from "zod";
 import { LEGAL_VERSIONS, PRIVACY_CHOICES_VERSION } from "@/features/legal/versions";
 import { localizePath, parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
+import { captchaToken } from "@/lib/captcha";
 import { siteOrigin } from "@/lib/site-origin";
 import { createClient } from "@/lib/supabase/server";
 import { safeNextPath } from "@/utils/safe-path";
@@ -43,7 +44,10 @@ export async function signIn(
   }
 
   const supabase = await createClient();
-  const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
+  const { data, error } = await supabase.auth.signInWithPassword({
+    ...parsed.data,
+    options: { captchaToken: captchaToken(formData) },
+  });
   if (error) {
     return { status: "error", formError: toAuthErrorKey(error), values };
   }
@@ -87,6 +91,7 @@ export async function signUp(
     email,
     password,
     options: {
+      captchaToken: captchaToken(formData),
       emailRedirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(nextPath)}`,
       // Las migraciones 4 y 19 leen estos datos al crear el perfil: guardan los términos y la privacidad
       // aceptados y las dos decisiones opcionales (marcadas o no), con la versión de su texto.
@@ -131,6 +136,7 @@ export async function requestPasswordReset(
   const supabase = await createClient();
   const nextPath = localizePath(NEW_PASSWORD_PATH, locale);
   const { error } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
+    captchaToken: captchaToken(formData),
     // "flow=recovery": así /auth/confirm sabe que es este enlace, venga en el formato que venga
     redirectTo: `${await siteOrigin()}/auth/confirm?flow=recovery&next=${encodeURIComponent(nextPath)}`,
   });

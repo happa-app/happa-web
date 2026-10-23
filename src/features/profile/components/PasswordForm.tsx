@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import { Captcha } from "@/components/ui/Captcha";
 import { TextField } from "@/components/ui/TextField";
 import { changePassword } from "../actions";
 import { initialProfileState } from "../types";
@@ -44,6 +45,8 @@ export function PasswordForm() {
         maxLength={72}
         error={errorFor("repeat")}
       />
+      <Captcha resetKey={state} />
+
       <Button type="submit" variant="secondary" disabled={isPending}>
         {isPending ? t("saving") : t("account.changePassword")}
       </Button>

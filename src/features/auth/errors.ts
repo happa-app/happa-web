@@ -10,6 +10,8 @@ export function toAuthErrorKey(error: { code?: string; status?: number }): AuthE
       return "emailNotConfirmed";
     case "weak_password":
       return "passwordWeak";
+    case "captcha_failed":
+      return "captchaFailed";
     case "same_password":
       return "samePassword";
     case "user_already_exists":
