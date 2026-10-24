@@ -217,6 +217,15 @@ export function GlobeIcon({ size = 22 }: Props) {
   );
 }
 
+// Tema: media luna
+export function MoonIcon({ size = 22 }: Props) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 // Borrar: una papelera
 export function TrashIcon({ size = 22 }: Props) {
   return (

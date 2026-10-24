@@ -452,6 +452,8 @@
       "account": "Account",
       "accountHint": "Your email and password",
       "language": "Language",
+      "theme": "Theme",
+      "themeHint": "Light, dark or like your device",
       "notifications": "Notifications",
       "notificationsHint": "What we notify you about and on which phones",
       "privacy": "Privacy",
@@ -485,6 +487,16 @@
       "title": "Language",
       "subtitle": "For the app and for phone notifications.",
       "error": "The language couldn't be changed. Please try again"
+    },
+    "theme": {
+      "title": "Theme",
+      "subtitle": "How HAPPA looks on this device.",
+      "choices": {
+        "system": "Same as device",
+        "light": "Light",
+        "dark": "Dark"
+      },
+      "systemHint": "Changes when your phone or computer does"
     },
     "account": {
       "title": "Your account",

@@ -13,7 +13,7 @@ const AEPD = "https://www.aepd.es";
 
 export const privacyEs: LegalDocument = {
   version: "1",
-  updated: "22 de octubre de 2026",
+  updated: "25 de octubre de 2026",
   summary: [
     <>Usamos tus datos para darte el servicio de HAPPA. No vendemos ni cedemos tus datos sin tu permiso.</>,
     <>Lo que compartes en un hogar lo ven las personas de ese hogar, y nadie más.</>,
@@ -334,6 +334,10 @@ export const privacyEs: LegalDocument = {
               <strong>happa_recovery</strong>: solo al recuperar tu contraseña, durante 15 minutos, para comprobar que
               vienes del enlace del correo.
             </li>
+            <li>
+              <strong>happa-tema</strong> (en el almacenamiento del navegador, no es una cookie): el tema claro u oscuro,
+              si lo eliges en Perfil → Tema.
+            </li>
           </ul>
         </>
       ),
@@ -354,7 +358,7 @@ export const privacyEs: LegalDocument = {
 
 export const privacyEn: LegalDocument = {
   version: "1",
-  updated: "22 October 2026",
+  updated: "25 October 2026",
   summary: [
     <>We use your data to provide the HAPPA service. We never sell or share your data without your permission.</>,
     <>What you share in a household is seen by the people in that household, and nobody else.</>,
@@ -676,6 +680,10 @@ export const privacyEn: LegalDocument = {
             <li>
               <strong>happa_recovery</strong>: only when you reset your password, for 15 minutes, to check that you come
               from the email link.
+            </li>
+            <li>
+              <strong>happa-tema</strong> (in the browser’s storage, not a cookie): the light or dark theme, if you choose
+              one in Profile → Theme.
             </li>
           </ul>
         </>

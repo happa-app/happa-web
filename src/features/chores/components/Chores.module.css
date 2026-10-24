@@ -191,8 +191,8 @@ a.rowTitle:hover {
 }
 
 .pillReview {
-  background: #e3f1f0;
-  color: #2c6763;
+  background: var(--color-review-soft);
+  color: var(--color-review);
 }
 
 .pillDone {
@@ -273,13 +273,13 @@ button.check:hover:not(:disabled) .checkCircle {
 
 .checkDone .checkCircle {
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .checkReview .checkCircle {
-  border-color: #5d9f9a;
-  background: #e3f1f0;
-  color: #2c6763;
+  border-color: var(--color-review-border);
+  background: var(--color-review-soft);
+  color: var(--color-review);
 }
 
 .checkLocked .checkCircle {
@@ -694,7 +694,7 @@ button.check:hover:not(:disabled) .checkCircle {
   height: 24px;
   border-radius: 50%;
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
   font-size: 0.8125rem;
   font-weight: 700;
 }

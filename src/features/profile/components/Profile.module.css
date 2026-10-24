@@ -298,7 +298,16 @@
 }
 
 .optionName {
+  display: flex;
+  flex-direction: column;
   font-weight: 600;
+}
+
+/* Una línea debajo del nombre de una opción ("Cambia solo cuando lo hace tu móvil") */
+.optionHint {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 400;
 }
 
 .optionCheck {

@@ -22,6 +22,14 @@
   --color-schedule-class: #7fbfba;  /* horarios: clase (turquesa de los diseños, algo más intenso) */
   --color-schedule-work: #e3a75f;   /* horarios: trabajo */
   --color-schedule-away: #a9b4bb;   /* horarios: fuera, y los días de ausencia */
+  /* Texto encima de un color fuerte (botones verdes, la burbuja de tus mensajes, el número de avisos) */
+  --color-on-accent: #fff;
+  /* Tareas: esperando el visto bueno (turquesa) */
+  --color-review: #2c6763;
+  --color-review-soft: #e3f1f0;
+  --color-review-border: #5d9f9a;
+  /* Compra: producto al pasar el ratón */
+  --color-chip-hover: #d3e8da;
 
   /* Tipografía */
   /* Geist la carga el layout; si fallara, se usa la fuente del sistema */
@@ -48,4 +56,46 @@
   --radius-lg: 20px;
   --shadow-card: 0 1px 2px rgb(31 59 77 / 6%), 0 8px 24px rgb(31 59 77 / 8%);
   --focus-ring: 0 0 0 3px rgb(62 125 85 / 35%);
+}
+
+/* Tema oscuro: negro y grises neutros, con el verde de la marca solo como acento (enlaces, botones, iconos)
+   y el ámbar para lo que pide atención. Las tarjetas se separan del fondo con un borde finísimo de luz en
+   vez de sombra (sobre negro, la sombra no se ve).
+   Se activa con <html data-theme="dark">, que pone el script de src/lib/theme.ts antes de pintar la página
+   (según lo elegido en Perfil → Tema, o lo que tenga el dispositivo).
+   El verde de los botones es más claro que en el tema claro, para que los enlaces se lean sobre el fondo
+   oscuro; por eso el texto encima de él (--color-on-accent) pasa a ser oscuro. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-brand: #69ae7e;
+  --color-brand-strong: #8fcaa1;
+  --color-brand-stronger: #acdcbb;
+  /* Rellenos suaves (tu saldo, los círculos de iconos y caras): gris, con un toque de verde casi invisible */
+  --color-brand-soft: #1f2422;
+  --color-accent: #3a4846;
+
+  --color-text: #ececea;
+  --color-text-muted: #a0a4a6;
+  --color-bg: #101112;
+  --color-surface: #1a1c1d;
+  --color-border: #2c2f31;
+  --color-error: #f2938a;
+  --color-error-soft: #33201f;
+  --color-success-soft: #1f2422;
+  --color-owed: #9ad3ab;
+  --color-owe: #e8b46a;
+  --color-owe-soft: #2e261b;
+  --color-schedule-class: #6aa9a2;
+  --color-schedule-work: #d29c58;
+  --color-schedule-away: #5c6266;
+
+  --color-on-accent: #0e1510;
+  --color-review: #9ccfc8;
+  --color-review-soft: #1c2928;
+  --color-review-border: #4a7d77;
+  --color-chip-hover: #262b29;
+
+  --shadow-card: 0 0 0 1px rgb(255 255 255 / 6%);
+  --focus-ring: 0 0 0 3px rgb(143 202 161 / 45%);
 }

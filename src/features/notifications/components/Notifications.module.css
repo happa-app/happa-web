@@ -34,7 +34,7 @@
   border: 2px solid var(--color-bg);
   border-radius: 999px;
   background: var(--color-owe);
-  color: #fff;
+  color: var(--color-on-accent);
   font-size: 0.6875rem;
   font-weight: 700;
   line-height: 1;

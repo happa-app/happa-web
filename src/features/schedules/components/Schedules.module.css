@@ -132,7 +132,7 @@
 
 .dayTabActive {
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .dayTab:focus-visible,

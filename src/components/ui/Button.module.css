@@ -26,7 +26,7 @@
 
 .primary {
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .primary:hover:not(:disabled) {
@@ -45,7 +45,7 @@
 
 .danger {
   background: var(--color-error);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .danger:hover:not(:disabled) {

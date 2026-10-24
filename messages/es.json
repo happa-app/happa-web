@@ -452,6 +452,8 @@
       "account": "Cuenta",
       "accountHint": "Tu correo y tu contraseña",
       "language": "Idioma",
+      "theme": "Tema",
+      "themeHint": "Claro, oscuro o como el dispositivo",
       "notifications": "Avisos",
       "notificationsHint": "De qué te avisamos y en qué móviles",
       "privacy": "Privacidad",
@@ -485,6 +487,16 @@
       "title": "Idioma",
       "subtitle": "El de la app y el de los avisos al móvil.",
       "error": "No se pudo cambiar el idioma. Inténtalo de nuevo"
+    },
+    "theme": {
+      "title": "Tema",
+      "subtitle": "Cómo se ve HAPPA en este dispositivo.",
+      "choices": {
+        "system": "Igual que el dispositivo",
+        "light": "Claro",
+        "dark": "Oscuro"
+      },
+      "systemHint": "Cambia solo cuando lo hace tu móvil u ordenador"
     },
     "account": {
       "title": "Tu cuenta",
