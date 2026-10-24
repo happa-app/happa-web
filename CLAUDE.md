@@ -74,7 +74,7 @@ Supabase local en Docker. La oficial solo recibe migraciones con `db push`.
 - `main` = lo publicado: cada push a `main` lo publica Vercel en happa.es. **Nunca trabajar ni hacer commits directamente en `main`.**
 - Una rama por tarea, que sale de `main` actualizado (`git checkout main && git pull && git checkout -b <nombre>`). Commits pequeños y frecuentes.
 - Cada push a cualquier rama crea una versión de prueba en Vercel (https, protegida con login de Vercel; usa la BD oficial). Sirve para probar en el móvil lo que exige https: instalar la PWA, push y service worker. Lo demás se prueba en local con `npm run dev`.
-- Al terminar: PR → revisar los cambios y la versión de prueba → merge. Si la rama trae migraciones, `npx supabase db push` **antes** del merge, para que el código nuevo no llegue sin sus tablas.
+- Al terminar: PR → revisar los cambios y la versión de prueba → merge. Si la rama trae migraciones, `npx supabase db push --linked` **antes** del merge, para que el código nuevo no llegue sin sus tablas (con `--linked`: en la próxima versión de la CLI, sin él irá a la BD local).
 - Tras el merge: `git checkout main && git pull && git branch -d <nombre>`.
 
 ## Arquitectura
