@@ -94,6 +94,8 @@ Patrón común (no todas tienen todos los archivos; copia el de una feature pare
 - `errors.ts`: traduce los mensajes de los `raise exception` de SQL a claves de i18n. Si cambias un mensaje en una migración, actualiza el `errors.ts` correspondiente.
 - Además: `types.ts`, `components/` y módulos de lógica pura sin React (`logic.ts`, `split.ts`, `settle.ts`, `dates.ts`...).
 
+Pantallas de carga: cada carpeta de `(app)` que tiene páginas dentro lleva un `loading.tsx` de una línea que reexporta `PageSkeleton` (`src/components/ui/PageSkeleton.tsx`). Un `loading.tsx` solo aparece cuando cambia la carpeta que tiene justo debajo: si creas una carpeta con subpáginas, añádele el suyo.
+
 Los formularios con estado controlado se envían con `submitWithoutReset` (`src/utils/forms.ts`) para evitar el reset automático de React 19.
 
 ### Supabase
