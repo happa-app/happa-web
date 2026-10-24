@@ -142,7 +142,7 @@
 
 .bubbleMine {
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .bubblePending {
@@ -307,7 +307,7 @@
   border: 0;
   border-radius: 999px;
   background: var(--color-text);
-  color: #fff;
+  color: var(--color-bg);
   font: inherit;
   font-size: var(--text-sm);
   font-weight: 600;
@@ -324,7 +324,7 @@
   padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
   border-radius: var(--radius-md);
   background: var(--color-text);
-  color: #fff;
+  color: var(--color-bg);
   font-size: var(--text-sm);
 }
 
@@ -394,7 +394,7 @@
   border: 0;
   border-radius: 50%;
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
   cursor: pointer;
 }
 
@@ -505,7 +505,7 @@
   padding: 0 7px;
   border-radius: 999px;
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
   font-size: 0.8125rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -613,7 +613,7 @@
   height: 20px;
   border: 2px solid var(--color-brand-strong);
   border-radius: 6px;
-  color: #fff;
+  color: var(--color-on-accent);
   font-size: 0.75rem;
   font-weight: 700;
 }
@@ -795,7 +795,7 @@
 .pollSubmit {
   border: 0;
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .pollSubmit:disabled,

@@ -43,7 +43,7 @@
 
 .signupLink {
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .signupLink:hover {
@@ -246,7 +246,7 @@
 
 .primary {
   background: var(--color-brand-strong);
-  color: #fff;
+  color: var(--color-on-accent);
 }
 
 .primary:hover {

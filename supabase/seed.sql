@@ -29,7 +29,7 @@ select
   '{"provider": "email", "providers": ["email"]}',
   jsonb_build_object(
     'display_name', u.name, 'locale', 'es', 'timezone', 'Europe/Madrid',
-    'legal', jsonb_build_object('terms', 'v1-2026-10-08', 'privacy', 'v1-2026-10-20')
+    'legal', jsonb_build_object('terms', 'v1-2026-10-08', 'privacy', 'v1-2026-10-25')
   ) || u.choices,
   now(), now(), '', '', '', ''
 from (values

@@ -117,7 +117,7 @@
 }
 
 .chipButton:hover {
-  background: #d3e8da;
+  background: var(--color-chip-hover);
 }
 
 .chipButton:focus-visible {
