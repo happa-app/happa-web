@@ -1306,5 +1306,8 @@
     "errors": {
       "generic": "Something went wrong. Please try again"
     }
+  },
+  "Captcha": {
+    "checking": "Checking you're not a robot…"
   }
 }
