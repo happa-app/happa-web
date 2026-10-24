@@ -1,5 +1,6 @@
 // Lecturas de hogares para las páginas (se ejecutan en el servidor).
 // Las políticas RLS ya filtran: cada consulta solo devuelve lo que la persona puede ver.
+import { cache } from "react";
 import { avatarUrl } from "@/features/profile/avatar";
 import { createClient } from "@/lib/supabase/server";
 import { householdIdSchema } from "./schemas";
@@ -49,25 +50,25 @@ export async function getMyHouseholds(userId: string): Promise<HouseholdSummary[
 }
 
 // Un hogar con sus miembros actuales. null si no existe o no eres miembro.
-export async function getHousehold(id: string): Promise<HouseholdDetail | null> {
+// El hogar y sus miembros se piden a la vez (si no eres del hogar, RLS devuelve las dos cosas vacías).
+// cache(): si el layout y la página lo piden en la misma visita, se lee una sola vez (React lo guarda
+// solo durante esa petición; en la siguiente se vuelve a leer)
+export const getHousehold = cache(async (id: string): Promise<HouseholdDetail | null> => {
   if (!householdIdSchema.safeParse(id).success) return null;
   const supabase = await createClient();
 
-  const { data: household, error } = await supabase
-    .from("households")
-    .select("id, name, kind, invite_code, max_members, postal_code")
-    .eq("id", id)
-    .maybeSingle();
+  const [{ data: household, error }, { data: members, error: membersError }] = await Promise.all([
+    supabase.from("households").select("id, name, kind, invite_code, max_members, postal_code").eq("id", id).maybeSingle(),
+    supabase
+      .from("household_members")
+      .select("user_id, role, profiles(display_name, avatar_path)")
+      .eq("household_id", id)
+      .is("left_at", null)
+      .order("joined_at"),
+  ]);
   if (error) throw error;
-  if (!household) return null;
-
-  const { data: members, error: membersError } = await supabase
-    .from("household_members")
-    .select("user_id, role, profiles(display_name, avatar_path)")
-    .eq("household_id", id)
-    .is("left_at", null)
-    .order("joined_at");
   if (membersError) throw membersError;
+  if (!household) return null;
 
   return {
     id: household.id,
@@ -83,7 +84,7 @@ export async function getHousehold(id: string): Promise<HouseholdDetail | null> 
       role: m.role,
     })),
   };
-}
+});
 
 // Lo que se ve de un hogar al abrir su enlace de invitación (migraciones 5 y 15).
 export async function getInvitePreview(code: string): Promise<InvitePreview | null> {

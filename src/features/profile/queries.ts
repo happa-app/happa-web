@@ -1,11 +1,14 @@
 // Lecturas del perfil propio (en el servidor). La base de datos solo deja ver y cambiar lo tuyo.
+import { cache } from "react";
 import { PRIVACY_PURPOSES, type PrivacyPurpose } from "@/features/legal/versions";
 import { parseLocale } from "@/i18n/locale";
 import { createClient } from "@/lib/supabase/server";
 import { avatarUrl } from "./avatar";
 import type { MyAccount, MyPrivacyChoices, MyProfile, MyStats, PendingBalance } from "./types";
 
-export async function getMyProfile(): Promise<MyProfile | null> {
+// cache(): si el layout y la página lo piden en la misma visita, se lee una sola vez (React lo guarda
+// solo durante esa petición; en la siguiente se vuelve a leer)
+export const getMyProfile = cache(async (): Promise<MyProfile | null> => {
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
   const userId = data?.claims.sub;
@@ -28,7 +31,7 @@ export async function getMyProfile(): Promise<MyProfile | null> {
     memberSince: profile.created_at,
     isMinor: profile.is_minor,
   };
-}
+});
 
 // Tus números en todos tus hogares
 export async function getMyStats(): Promise<MyStats> {

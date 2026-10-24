@@ -1,0 +1,47 @@
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Bloques grises que "respiran" despacio */
+.block {
+  display: block;
+  border-radius: var(--radius-md);
+  background: var(--color-border);
+  opacity: 0.55;
+  animation: breathe 1.4s ease-in-out infinite;
+}
+
+.title {
+  width: 55%;
+  height: 28px;
+}
+
+.subtitle {
+  width: 35%;
+  height: 16px;
+  margin-top: calc(-1 * var(--space-2));
+}
+
+.card {
+  height: 120px;
+  border-radius: var(--radius-lg);
+}
+
+.cardShort {
+  height: 72px;
+  border-radius: var(--radius-lg);
+}
+
+@keyframes breathe {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    animation: none;
+  }
+}
