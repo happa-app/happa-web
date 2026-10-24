@@ -14,11 +14,13 @@ type Props = {
   editing: boolean;
   onCancelEdit: () => void;
   disabled?: boolean;
+  // Abrir el formulario de votación (solo si puedes crearlas)
+  onOpenPoll?: () => void;
 };
 
 const COUNTER_FROM = MAX_MESSAGE - 200;
 
-export function Composer({ value, onChange, onSubmit, editing, onCancelEdit, disabled = false }: Props) {
+export function Composer({ value, onChange, onSubmit, editing, onCancelEdit, disabled = false, onOpenPoll }: Props) {
   const t = useTranslations("Chat");
   const ref = useRef<HTMLTextAreaElement | null>(null);
 
@@ -61,6 +63,18 @@ export function Composer({ value, onChange, onSubmit, editing, onCancelEdit, dis
         </p>
       ) : null}
       <div className={styles.composerRow}>
+        {onOpenPoll && !editing ? (
+          <button
+            type="button"
+            className={styles.pollButton}
+            onClick={onOpenPoll}
+            disabled={disabled}
+            aria-label={t("poll.open")}
+            title={t("poll.open")}
+          >
+            <PollIcon />
+          </button>
+        ) : null}
         <label htmlFor="chat-message" className="visually-hidden">
           {t("message")}
         </label>
@@ -100,6 +114,14 @@ function SendIcon() {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M4 12 20 4l-4 16-4.5-6.5L4 12Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
       <path d="m11.5 13.5 3-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function PollIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 20V11M12 20V5M19 20v-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
     </svg>
   );
 }

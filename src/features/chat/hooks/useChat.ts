@@ -8,11 +8,15 @@
 //     Si falla, se queda marcado para reintentarlo.
 //  4. Al volver a la app (otra pestaña, móvil bloqueado) se piden los mensajes que hayan llegado mientras.
 //  5. Lo que llega de otros mientras miras el chat se marca como leído.
+//  6. Votaciones: sus datos (opciones y votos) se piden aparte, en cuanto aparece su mensaje. Cada voto
+//     cambia la fila de la votación (polls), y Realtime avisa para volver a pedir esa votación.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { requestPushDispatch } from "@/lib/push/request";
 import { createClient } from "@/lib/supabase/client";
 import {
+  createPoll,
   editMessage,
+  fetchPolls,
   fetchMessages,
   fetchNewer,
   fetchVersions,
@@ -21,11 +25,12 @@ import {
   sendMessage,
   toMessage,
   unhideMessage,
+  votePoll,
   type MessageRow,
 } from "../api";
 import { toChatErrorKey } from "../errors";
 import { normalizeTimestamp, upsertMessage } from "../timeline";
-import { MAX_MESSAGE, type ChatErrorKey, type ChatMessage } from "../types";
+import { MAX_MESSAGE, type ChatErrorKey, type ChatMessage, type ChatPoll } from "../types";
 
 const READ_DELAY_MS = 800;
 
@@ -37,13 +42,15 @@ type Options = {
   me: string;
   initialMessages: ChatMessage[];
   initialHasMore: boolean;
+  // Las votaciones de los mensajes que trae la página
+  initialPolls: ChatPoll[];
   // Avisa cuando llega un mensaje (para bajar la pantalla si hace falta)
   onIncoming?: (message: ChatMessage) => void;
   // Después de mandar (para lanzar los avisos al móvil de los demás)
   onSent?: () => void;
 };
 
-export function useChat({ conversationId, me, initialMessages, initialHasMore, onIncoming, onSent }: Options) {
+export function useChat({ conversationId, me, initialMessages, initialHasMore, initialPolls, onIncoming, onSent }: Options) {
   const supabase = useMemo(() => createClient(), []);
   const [messages, setMessages] = useState(initialMessages);
   const [hasMore, setHasMore] = useState(initialHasMore);
@@ -51,6 +58,12 @@ export function useChat({ conversationId, me, initialMessages, initialHasMore, o
   const [error, setError] = useState<ChatErrorKey | null>(null);
   // El último mensaje borrado para mí (para poder deshacerlo)
   const [lastHidden, setLastHidden] = useState<ChatMessage | null>(null);
+  // Las votaciones, por id de su mensaje
+  const [polls, setPolls] = useState<Record<string, ChatPoll>>(() =>
+    Object.fromEntries(initialPolls.map((p) => [p.messageId, p])),
+  );
+  // Las que ya se han pedido (para no pedirlas dos veces)
+  const requestedPolls = useRef(new Set(initialPolls.map((p) => p.messageId)));
 
   // Copias para leer lo último desde funciones que no se vuelven a crear
   const messagesRef = useRef(messages);
@@ -108,6 +121,19 @@ export function useChat({ conversationId, me, initialMessages, initialHasMore, o
     }
   }, [supabase, conversationId, receive]);
 
+  // Vuelve a pedir una votación (cuando alguien vota)
+  const reloadPoll = useCallback(
+    async (pollId: string) => {
+      try {
+        const [poll] = await fetchPolls(supabase, [pollId]);
+        if (poll) setPolls((current) => ({ ...current, [pollId]: poll }));
+      } catch (e) {
+        console.error("[chat] no se pudo actualizar la votación:", e);
+      }
+    },
+    [supabase],
+  );
+
   useEffect(() => {
     channelCount += 1;
     const filter = `conversation_id=eq.${conversationId}`;
@@ -116,6 +142,10 @@ export function useChat({ conversationId, me, initialMessages, initialHasMore, o
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages", filter }, (payload) =>
         receive(toMessage(payload.new as MessageRow)),
       )
+      // Alguien ha votado: se vuelve a pedir esa votación
+      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "polls", filter }, (payload) => {
+        void reloadPoll((payload.new as { message_id: string }).message_id);
+      })
       .on("postgres_changes", { event: "UPDATE", schema: "public", table: "messages", filter }, (payload) => {
         const updated = toMessage(payload.new as MessageRow);
         // Solo si lo tenemos (si lo borré para mí, no vuelve)
@@ -140,7 +170,22 @@ export function useChat({ conversationId, me, initialMessages, initialHasMore, o
       if (readTimer.current) clearTimeout(readTimer.current);
       void supabase.removeChannel(channel);
     };
-  }, [supabase, conversationId, receive, catchUp, scheduleRead]);
+  }, [supabase, conversationId, receive, catchUp, scheduleRead, reloadPoll]);
+
+  // Cuando aparecen votaciones que aún no tenemos (en vivo, al ponerse al día o al cargar anteriores)
+  useEffect(() => {
+    const missing = messages
+      .filter((m) => m.kind === "poll" && !m.pending && !requestedPolls.current.has(m.id))
+      .map((m) => m.id);
+    if (missing.length === 0) return;
+    missing.forEach((id) => requestedPolls.current.add(id));
+    fetchPolls(supabase, missing)
+      .then((list) => setPolls((current) => ({ ...current, ...Object.fromEntries(list.map((p) => [p.messageId, p])) })))
+      .catch((e) => {
+        missing.forEach((id) => requestedPolls.current.delete(id));
+        console.error("[chat] no se pudieron cargar las votaciones:", e);
+      });
+  }, [supabase, messages]);
 
   // Mandar. Devuelve false si el texto no vale (para no vaciar la caja).
   const send = useCallback(
@@ -162,6 +207,7 @@ export function useChat({ conversationId, me, initialMessages, initialHasMore, o
         body,
         createdAt: normalizeTimestamp(new Date().toISOString()),
         editedAt: null,
+        kind: "text",
         pending: true,
       };
       setMessages((list) => upsertMessage(list, temp));
@@ -271,6 +317,51 @@ export function useChat({ conversationId, me, initialMessages, initialHasMore, o
 
   const versions = useCallback((messageId: string) => fetchVersions(supabase, messageId), [supabase]);
 
+  // Crear una votación. Devuelve true si se creó (para cerrar el formulario).
+  const sendPoll = useCallback(
+    async (poll: { question: string; options: string[]; multiple: boolean; minorsCanVote: boolean }): Promise<boolean> => {
+      try {
+        const saved = await createPoll(supabase, conversationId, poll);
+        receive(saved);
+        setError(null);
+        requestPushDispatch();
+        sentRef.current?.();
+        return true;
+      } catch (e) {
+        setError(toChatErrorKey(e as { message?: string }));
+        return false;
+      }
+    },
+    [supabase, conversationId, receive],
+  );
+
+  // Votar: se ve al momento y, si falla, vuelve a como estaba. optionIds sustituye a mi voto anterior.
+  const vote = useCallback(
+    async (pollId: string, optionIds: string[]) => {
+      const before = polls[pollId];
+      if (!before) return;
+      const updated: ChatPoll = {
+        ...before,
+        options: before.options.map((o) => ({
+          ...o,
+          voters: optionIds.includes(o.id)
+            ? o.voters.includes(me)
+              ? o.voters
+              : [...o.voters, me]
+            : o.voters.filter((v) => v !== me),
+        })),
+      };
+      setPolls((current) => ({ ...current, [pollId]: updated }));
+      try {
+        await votePoll(supabase, pollId, optionIds);
+      } catch (e) {
+        setPolls((current) => ({ ...current, [pollId]: before }));
+        setError(toChatErrorKey(e as { message?: string }));
+      }
+    },
+    [supabase, polls, me],
+  );
+
   return {
     messages,
     hasMore,
@@ -287,5 +378,8 @@ export function useChat({ conversationId, me, initialMessages, initialHasMore, o
     undoHide,
     loadOlder,
     versions,
+    polls,
+    sendPoll,
+    vote,
   };
 }

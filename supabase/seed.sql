@@ -148,6 +148,8 @@ begin
   );
 
   perform public.send_message(chat, '¡Bienvenidos al piso! 🏠');
+  -- Una votación (Bruno vota más abajo)
+  perform public.create_poll(chat, '¿Qué cenamos el viernes?', array['Pizza', 'Sushi', 'Tacos'], false, false);
   set constraints all immediate;
   set constraints all deferred;
   reset role;
@@ -185,6 +187,11 @@ begin
   update public.shopping_items set checked_at = now() where household_id = hogar and name = 'Pan';
 
   perform public.send_message(chat, '¡Gracias! Esta semana me toca la basura.');
+  perform public.vote_poll(
+    (select message_id from public.polls where conversation_id = chat),
+    array[(select o.id from public.poll_options o join public.polls p on p.message_id = o.poll_id
+           where p.conversation_id = chat and o.label = 'Pizza')]
+  );
   set constraints all immediate;
   set constraints all deferred;
   reset role;
