@@ -1306,5 +1306,8 @@
     "errors": {
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
     }
+  },
+  "Captcha": {
+    "checking": "Comprobando que no eres un robot…"
   }
 }

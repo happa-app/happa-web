@@ -4,3 +4,11 @@
 .captcha :global(div) {
   display: contents;
 }
+
+/* "Comprobando que no eres un robot…" mientras se espera al código */
+.checking {
+  margin: 0;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
