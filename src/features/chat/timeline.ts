@@ -60,6 +60,8 @@ export function upsertMessage(list: ChatMessage[], message: ChatMessage): ChatMe
 export function canEdit(message: ChatMessage, me: string, now: Date = new Date()): boolean {
   return (
     message.senderId === me &&
+    // Una votación no se edita (migración 21)
+    message.kind === "text" &&
     !message.pending &&
     !message.failed &&
     now.getTime() - toDate(message.createdAt).getTime() < EDIT_MINUTES * 60_000

@@ -1208,6 +1208,34 @@
     "send": "Send",
     "save": "Save the change",
     "leftNotice": "You no longer live in this household. You stay in the chat until you settle what you owe.",
+    "poll": {
+      "open": "Create a poll",
+      "newTitle": "New poll",
+      "question": "Question",
+      "questionPlaceholder": "For example: what shall we have for dinner on Friday?",
+      "options": "Options",
+      "optionPlaceholder": "Option {number}",
+      "removeOption": "Remove option {number}",
+      "addOption": "Add option",
+      "allowMultiple": "People can choose several options",
+      "allowMinors": "Minors can vote",
+      "problems": {
+        "question": "Write the question",
+        "options": "Add at least two options",
+        "repeated": "Two options are the same"
+      },
+      "cancel": "Cancel",
+      "send": "Create poll",
+      "sending": "Creating…",
+      "single": "Choose one",
+      "multiple": "You can choose several",
+      "voters": "{count, plural, =0 {no votes yet} one {# person has voted} other {# people have voted}}",
+      "optionLabel": "{label}: {count, plural, one {# vote} other {# votes}}",
+      "you": "You",
+      "someone": "Someone",
+      "residentsOnly": "Only people who live in the household can vote",
+      "minorsCannotVote": "Minors can't vote in this poll"
+    },
     "errors": {
       "empty": "Write something before sending it",
       "tooLong": "2,000 characters at most",
@@ -1215,6 +1243,11 @@
       "tooLate": "Messages can only be edited for 15 minutes",
       "notFound": "That message is no longer here",
       "notAllowed": "You're no longer in this chat",
+      "pollQuestion": "Write the question (200 characters at most)",
+      "pollOptions": "Add between 2 and 10 options, of 80 characters at most",
+      "pollRepeated": "Two options are the same",
+      "pollAdultsOnly": "Polls are created by the adults who live in the household",
+      "pollCannotVote": "You can't vote in this poll",
       "generic": "Something went wrong. Please try again"
     }
   },

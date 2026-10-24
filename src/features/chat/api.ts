@@ -1,10 +1,11 @@
 // Acceso a los mensajes del chat. Recibe el cliente de Supabase como parámetro, así sirve igual en el
-// servidor (primera carga) y en el navegador (en vivo). Los permisos los aplica la base de datos (migración 13).
+// servidor (primera carga) y en el navegador (en vivo). Los permisos los aplica la base de datos
+// (migraciones 13 y 21).
 import type { AppSupabaseClient } from "@/lib/supabase/types";
 import { normalizeTimestamp } from "./timeline";
-import { PAGE_SIZE, type ChatMessage, type MessageVersion } from "./types";
+import { PAGE_SIZE, type ChatMessage, type ChatPoll, type MessageVersion } from "./types";
 
-const MESSAGE_FIELDS = "id, sender_id, body, created_at, edited_at";
+const MESSAGE_FIELDS = "id, sender_id, body, created_at, edited_at, kind";
 
 export type MessageRow = {
   id: string;
@@ -12,6 +13,7 @@ export type MessageRow = {
   body: string;
   created_at: string;
   edited_at: string | null;
+  kind: string;
 };
 
 export function toMessage(row: MessageRow): ChatMessage {
@@ -21,6 +23,7 @@ export function toMessage(row: MessageRow): ChatMessage {
     body: row.body,
     createdAt: normalizeTimestamp(row.created_at),
     editedAt: row.edited_at ? normalizeTimestamp(row.edited_at) : null,
+    kind: row.kind === "poll" ? "poll" : "text",
   };
 }
 
@@ -94,4 +97,65 @@ export async function fetchVersions(supabase: AppSupabaseClient, messageId: stri
     writtenAt: normalizeTimestamp(v.written_at),
     replacedAt: normalizeTimestamp(v.replaced_at),
   }));
+}
+
+// ───────────── Votaciones (migración 21) ─────────────
+
+type PollRow = {
+  message_id: string;
+  question: string;
+  multiple: boolean;
+  minors_can_vote: boolean;
+  poll_options: { id: string; position: number; label: string }[];
+  poll_votes: { option_id: string; user_id: string; created_at: string }[];
+};
+
+function toPoll(row: PollRow): ChatPoll {
+  const votes = [...row.poll_votes].sort((a, b) => a.created_at.localeCompare(b.created_at));
+  return {
+    messageId: row.message_id,
+    question: row.question,
+    multiple: row.multiple,
+    minorsCanVote: row.minors_can_vote,
+    options: [...row.poll_options]
+      .sort((a, b) => a.position - b.position)
+      .map((o) => ({
+        id: o.id,
+        label: o.label,
+        voters: votes.filter((v) => v.option_id === o.id).map((v) => v.user_id),
+      })),
+  };
+}
+
+// Las votaciones de esos mensajes, con sus opciones y sus votos
+export async function fetchPolls(supabase: AppSupabaseClient, messageIds: string[]): Promise<ChatPoll[]> {
+  if (messageIds.length === 0) return [];
+  const { data, error } = await supabase
+    .from("polls")
+    .select("message_id, question, multiple, minors_can_vote, poll_options(id, position, label), poll_votes(option_id, user_id, created_at)")
+    .in("message_id", messageIds);
+  if (error) throw error;
+  return ((data ?? []) as PollRow[]).map(toPoll);
+}
+
+export async function createPoll(
+  supabase: AppSupabaseClient,
+  conversationId: string,
+  poll: { question: string; options: string[]; multiple: boolean; minorsCanVote: boolean },
+): Promise<ChatMessage> {
+  const { data, error } = await supabase.rpc("create_poll", {
+    p_conversation: conversationId,
+    p_question: poll.question,
+    p_options: poll.options,
+    p_multiple: poll.multiple,
+    p_minors_can_vote: poll.minorsCanVote,
+  });
+  if (error) throw error;
+  return toMessage(data as unknown as MessageRow);
+}
+
+// optionIds sustituye a tu voto anterior (vacío = quitar el voto)
+export async function votePoll(supabase: AppSupabaseClient, pollId: string, optionIds: string[]) {
+  const { error } = await supabase.rpc("vote_poll", { p_poll: pollId, p_options: optionIds });
+  if (error) throw error;
 }

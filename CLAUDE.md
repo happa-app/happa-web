@@ -44,13 +44,13 @@ Barra inferior: **Más · Inicio · Casas · Ruleta · Chat**. Las personas, el 
 - **Horario**: uno por hogar, importable de otro. Sirve para saber quién está en casa.
 - **Tareas**: cuentan como hechas al marcarlas; cualquier adulto puede decir "no está hecha" y vuelve a pendiente. Si la tarea pide visto bueno y la marca un menor, espera a que un adulto la apruebe. Si se pasa el día, sigue siendo de esa persona como atrasada. Si le toca a alguien ausente, se salta y la recupera a la vuelta.
 - **Ruleta "del marrón"**: 100 % aleatoria (la elección la hace la BD con `random()`).
-- **Chat**: hecho el de inquilinos; el del casero es para la fase 2 (el tipo `landlord` ya existe en la BD). Quien se va del hogar con saldo pendiente en gastos sigue en el chat hasta saldarlo; quien se va sin deudas deja de verlo.
-- **Pendiente (sin implementar)**: opiniones (una automática por cumplimiento de tareas y otra anónima de compañeros al final de la estancia, con estrellas + campos como limpieza o pagos), racha (criterio por decidir), votaciones, series/subs, caja de herramientas (QR del wifi, contratos), recetas (pasos y macros), juegos de previa, buscador de habitaciones libres.
+- **Chat**: hecho el de inquilinos, con votaciones (las crean los adultos; quien la crea elige si son de una o varias respuestas y si votan los menores; votos públicos; nunca se cierran y el voto se puede cambiar); el del casero es para la fase 2 (el tipo `landlord` ya existe en la BD). Quien se va del hogar con saldo pendiente en gastos sigue en el chat hasta saldarlo; quien se va sin deudas deja de verlo.
+- **Pendiente (sin implementar)**: opiniones (una automática por cumplimiento de tareas y otra anónima de compañeros al final de la estancia, con estrellas + campos como limpieza o pagos), racha (criterio por decidir), series/subs, caja de herramientas (QR del wifi, contratos), recetas (pasos y macros), juegos de previa, buscador de habitaciones libres.
 
 ## Estado actual
 - App desplegada en Vercel como PWA (manifest, iconos, página sin conexión y service worker). Funciones en Fráncfort (`vercel.json` → `fra1`), junto a Supabase (`eu-central-1`).
 - Hechos: portada pública (qué es, cómo funciona y cómo instalarla), hogares e invitaciones, plazas, compra, gastos (con compra → gasto y fijos), horarios y ausencias, tareas, chat, avisos (en la app y push), ruleta, perfil (foto, cuenta, idioma, borrar la cuenta), recuperar la contraseña, ayuda y contacto (Más → Ayuda y contacto; se leen en `private.contact_inbox`) y páginas legales.
-- 20 migraciones en `supabase/migrations`.
+- 21 migraciones en `supabase/migrations`.
 - Configurando Resend para los correos de Auth.
 
 ## Comandos

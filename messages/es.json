@@ -1208,6 +1208,34 @@
     "send": "Enviar",
     "save": "Guardar el cambio",
     "leftNotice": "Ya no vives en este hogar. Sigues en el chat hasta que saldes tus gastos pendientes.",
+    "poll": {
+      "open": "Crear una votación",
+      "newTitle": "Nueva votación",
+      "question": "Pregunta",
+      "questionPlaceholder": "Por ejemplo: ¿qué cenamos el viernes?",
+      "options": "Opciones",
+      "optionPlaceholder": "Opción {number}",
+      "removeOption": "Quitar la opción {number}",
+      "addOption": "Añadir opción",
+      "allowMultiple": "Se pueden elegir varias opciones",
+      "allowMinors": "Pueden votar los menores",
+      "problems": {
+        "question": "Escribe la pregunta",
+        "options": "Pon al menos dos opciones",
+        "repeated": "Hay dos opciones iguales"
+      },
+      "cancel": "Cancelar",
+      "send": "Crear votación",
+      "sending": "Creando…",
+      "single": "Elige una",
+      "multiple": "Puedes elegir varias",
+      "voters": "{count, plural, =0 {nadie ha votado} one {# persona ha votado} other {# personas han votado}}",
+      "optionLabel": "{label}: {count, plural, one {# voto} other {# votos}}",
+      "you": "Tú",
+      "someone": "Alguien",
+      "residentsOnly": "Solo votan quienes viven en el hogar",
+      "minorsCannotVote": "En esta votación no votan los menores"
+    },
     "errors": {
       "empty": "Escribe algo antes de mandarlo",
       "tooLong": "Como mucho 2.000 letras",
@@ -1215,6 +1243,11 @@
       "tooLate": "Solo se puede editar durante 15 minutos",
       "notFound": "Ese mensaje ya no está",
       "notAllowed": "Ya no estás en este chat",
+      "pollQuestion": "Escribe la pregunta (como mucho 200 caracteres)",
+      "pollOptions": "Pon entre 2 y 10 opciones, de como mucho 80 caracteres",
+      "pollRepeated": "Hay dos opciones iguales",
+      "pollAdultsOnly": "Las votaciones las crean los adultos que viven en el hogar",
+      "pollCannotVote": "No puedes votar en esta votación",
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
     }
   },

@@ -43,6 +43,7 @@ export default async function ChatPage({ params }: Props) {
         me={userId}
         initialMessages={page.messages}
         initialHasMore={page.hasMore}
+        initialPolls={page.polls}
         today={page.today}
       />
     </>

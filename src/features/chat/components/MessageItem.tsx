@@ -5,7 +5,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Avatar } from "@/components/ui/Avatar";
 import { canEdit, formatTime } from "../timeline";
-import type { ChatMessage, MessageVersion } from "../types";
+import type { ChatMessage, ChatPerson, ChatPoll, MessageVersion } from "../types";
+import { PollCard } from "./PollCard";
 import styles from "./Chat.module.css";
 
 type Props = {
@@ -25,6 +26,11 @@ type Props = {
   onRetry: () => void;
   onDiscard: () => void;
   loadVersions: (messageId: string) => Promise<MessageVersion[]>;
+  // Si es una votación: sus datos (mientras llegan, se ve la pregunta), la gente del chat y si puedes votar
+  poll?: ChatPoll;
+  people: Map<string, ChatPerson>;
+  cannotVote: "notResident" | "minor" | null;
+  onVote: (optionIds: string[]) => void;
 };
 
 export function MessageItem(props: Props) {
@@ -50,8 +56,10 @@ export function MessageItem(props: Props) {
     }
   }
 
+  const isPoll = message.kind === "poll";
   const bubbleClass = [
-    mine ? styles.bubbleMine : styles.bubble,
+    // Las votaciones van en una tarjeta clara también si son tuyas (para que se lean bien las opciones)
+    isPoll ? styles.bubblePoll : mine ? styles.bubbleMine : styles.bubble,
     message.pending ? styles.bubblePending : "",
     message.failed ? styles.bubbleFailed : "",
   ]
@@ -69,7 +77,11 @@ export function MessageItem(props: Props) {
       ) : null}
       <div className={styles.bubbleLine}>
         <div className={bubbleClass}>
-          <p className={styles.body}>{message.body}</p>
+          {isPoll && props.poll ? (
+            <PollCard poll={props.poll} me={me} people={props.people} cannotVote={props.cannotVote} onVote={props.onVote} />
+          ) : (
+            <p className={styles.body}>{message.body}</p>
+          )}
           <p className={styles.meta}>
             {message.editedAt ? (
               <button type="button" className={styles.editedButton} onClick={toggleHistory} aria-expanded={historyOpen}>

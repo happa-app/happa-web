@@ -917,6 +917,7 @@ export type Database = {
           created_at: string
           edited_at: string | null
           id: string
+          kind: string
           sender_id: string | null
         }
         Insert: {
@@ -925,6 +926,7 @@ export type Database = {
           created_at?: string
           edited_at?: string | null
           id?: string
+          kind?: string
           sender_id?: string | null
         }
         Update: {
@@ -933,6 +935,7 @@ export type Database = {
           created_at?: string
           edited_at?: string | null
           id?: string
+          kind?: string
           sender_id?: string | null
         }
         Relationships: [
@@ -1047,6 +1050,120 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      poll_options: {
+        Row: {
+          id: string
+          label: string
+          poll_id: string
+          position: number
+        }
+        Insert: {
+          id?: string
+          label: string
+          poll_id: string
+          position: number
+        }
+        Update: {
+          id?: string
+          label?: string
+          poll_id?: string
+          position?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "poll_options_poll_id_fkey"
+            columns: ["poll_id"]
+            isOneToOne: false
+            referencedRelation: "polls"
+            referencedColumns: ["message_id"]
+          },
+        ]
+      }
+      poll_votes: {
+        Row: {
+          created_at: string
+          option_id: string
+          poll_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          option_id: string
+          poll_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          option_id?: string
+          poll_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "poll_votes_option_id_fkey"
+            columns: ["option_id"]
+            isOneToOne: false
+            referencedRelation: "poll_options"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "poll_votes_poll_id_fkey"
+            columns: ["poll_id"]
+            isOneToOne: false
+            referencedRelation: "polls"
+            referencedColumns: ["message_id"]
+          },
+          {
+            foreignKeyName: "poll_votes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      polls: {
+        Row: {
+          conversation_id: string
+          message_id: string
+          minors_can_vote: boolean
+          multiple: boolean
+          question: string
+          updated_at: string
+        }
+        Insert: {
+          conversation_id: string
+          message_id: string
+          minors_can_vote?: boolean
+          multiple?: boolean
+          question: string
+          updated_at?: string
+        }
+        Update: {
+          conversation_id?: string
+          message_id?: string
+          minors_can_vote?: boolean
+          multiple?: boolean
+          question?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "polls_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "polls_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: true
+            referencedRelation: "messages"
             referencedColumns: ["id"]
           },
         ]
@@ -1679,6 +1796,10 @@ export type Database = {
           user_id: string
         }[]
       }
+      chat_resident_role: {
+        Args: { p_conversation: string; p_user: string }
+        Returns: Database["public"]["Enums"]["household_role"]
+      }
       chat_summary: {
         Args: { p_household: string }
         Returns: {
@@ -1818,6 +1939,30 @@ export type Database = {
         }
         Returns: string
       }
+      create_poll: {
+        Args: {
+          p_conversation: string
+          p_minors_can_vote?: boolean
+          p_multiple?: boolean
+          p_options: string[]
+          p_question: string
+        }
+        Returns: {
+          body: string
+          conversation_id: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          kind: string
+          sender_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "messages"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       create_recurring_expense: {
         Args: {
           p_amount_cents: number
@@ -1860,6 +2005,7 @@ export type Database = {
           created_at: string
           edited_at: string | null
           id: string
+          kind: string
           sender_id: string | null
         }
         SetofOptions: {
@@ -2163,6 +2309,7 @@ export type Database = {
           created_at: string
           edited_at: string | null
           id: string
+          kind: string
           sender_id: string | null
         }
         SetofOptions: {
@@ -2332,6 +2479,10 @@ export type Database = {
           p_starts_at: string
           p_weekday: number
         }
+        Returns: undefined
+      }
+      vote_poll: {
+        Args: { p_options: string[]; p_poll: string }
         Returns: undefined
       }
     }

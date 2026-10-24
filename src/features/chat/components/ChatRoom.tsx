@@ -4,9 +4,10 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { useChat } from "../hooks/useChat";
 import { buildTimeline, type DayLabel } from "../timeline";
-import type { ChatInfo, ChatMessage, ChatPerson } from "../types";
+import type { ChatInfo, ChatMessage, ChatPerson, ChatPoll } from "../types";
 import { Composer } from "./Composer";
 import { MessageItem } from "./MessageItem";
+import { PollComposer } from "./PollComposer";
 import styles from "./Chat.module.css";
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
   me: string;
   initialMessages: ChatMessage[];
   initialHasMore: boolean;
+  initialPolls: ChatPoll[];
   // Hoy en la zona horaria del hogar (lo calcula el servidor, para que coincida al cargar)
   today: string;
 };
@@ -27,7 +29,7 @@ function scrollToBottom(smooth: boolean) {
   window.scrollTo({ top: document.documentElement.scrollHeight, behavior: smooth ? "smooth" : "auto" });
 }
 
-export function ChatRoom({ info, people, me, initialMessages, initialHasMore, today }: Props) {
+export function ChatRoom({ info, people, me, initialMessages, initialHasMore, initialPolls, today }: Props) {
   const t = useTranslations("Chat");
   const locale = useLocale();
   const [newBelow, setNewBelow] = useState(0);
@@ -36,6 +38,7 @@ export function ChatRoom({ info, people, me, initialMessages, initialHasMore, to
     me,
     initialMessages,
     initialHasMore,
+    initialPolls,
     onIncoming: () => {
       if (nearBottom()) requestAnimationFrame(() => scrollToBottom(true));
       else setNewBelow((n) => n + 1);
@@ -45,6 +48,9 @@ export function ChatRoom({ info, people, me, initialMessages, initialHasMore, to
   const [editing, setEditing] = useState<ChatMessage | null>(null);
   const [editText, setEditText] = useState("");
   const [menuFor, setMenuFor] = useState<string | null>(null);
+  const [pollOpen, setPollOpen] = useState(false);
+  // Crean votaciones los adultos que viven en el hogar (la base de datos lo vuelve a comprobar)
+  const canCreatePolls = info.isResident && !info.isMinor;
   const keepScroll = useRef<number | null>(null);
 
   const names = new Map(people.map((p) => [p.userId, p]));
@@ -153,6 +159,16 @@ export function ChatRoom({ info, people, me, initialMessages, initialHasMore, to
                 onRetry={() => chat.retry(message)}
                 onDiscard={() => chat.discard(message)}
                 loadVersions={chat.versions}
+                poll={chat.polls[message.id]}
+                people={names}
+                cannotVote={
+                  !info.isResident
+                    ? "notResident"
+                    : info.isMinor && !chat.polls[message.id]?.minorsCanVote
+                      ? "minor"
+                      : null
+                }
+                onVote={(optionIds) => void chat.vote(message.id, optionIds)}
               />
             );
           })}
@@ -195,6 +211,16 @@ export function ChatRoom({ info, people, me, initialMessages, initialHasMore, to
         </p>
       ) : null}
 
+      {pollOpen ? (
+        <PollComposer
+          onCreate={async (poll) => {
+            const ok = await chat.sendPoll(poll);
+            if (ok) requestAnimationFrame(() => scrollToBottom(true));
+            return ok;
+          }}
+          onCancel={() => setPollOpen(false)}
+        />
+      ) : (
       <Composer
         value={editing ? editText : draft}
         onChange={editing ? setEditText : setDraft}
@@ -204,7 +230,9 @@ export function ChatRoom({ info, people, me, initialMessages, initialHasMore, to
           setEditing(null);
           setEditText("");
         }}
+        onOpenPoll={canCreatePolls ? () => setPollOpen(true) : undefined}
       />
+      )}
     </>
   );
 }
