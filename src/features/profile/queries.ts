@@ -74,9 +74,33 @@ export async function getMyPendingBalances(userId: string): Promise<PendingBalan
 // Tu correo (preguntado a Supabase: el de la sesión puede ser el viejo) y el nuevo, si lo estás cambiando
 export async function getMyAccount(): Promise<MyAccount> {
   const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
+  const [{ data, error }, confirmedWithGoogle] = await Promise.all([
+    supabase.auth.getUser(),
+    signedInWithGoogleRecently(supabase),
+  ]);
   if (error) console.error("[perfil] no se pudo leer la cuenta:", error);
-  return { email: data.user?.email ?? null, newEmail: data.user?.new_email ?? null };
+  // Con qué puede entrar (Supabase lo apunta al registrarse o al unir una cuenta de Google)
+  const providers = (data.user?.app_metadata?.providers as string[] | undefined) ?? [];
+  return {
+    email: data.user?.email ?? null,
+    newEmail: data.user?.new_email ?? null,
+    hasPassword: providers.includes("email"),
+    hasGoogle: providers.includes("google"),
+    confirmedWithGoogle,
+  };
+}
+
+// Minutos que vale haber vuelto a entrar con Google para confirmar algo delicado (la base de datos da 10:
+// aquí algo menos, para que no caduque justo entre la pantalla y el botón)
+const GOOGLE_CONFIRM_MINUTES = 8;
+
+// ¿La sesión de este navegador se abrió con Google hace un momento? Lo dice el token, firmado por Supabase
+// ("amr": cómo y cuándo entraste), así que no se puede falsificar.
+export async function signedInWithGoogleRecently(supabase: Awaited<ReturnType<typeof createClient>>): Promise<boolean> {
+  const { data } = await supabase.auth.getClaims();
+  const amr = (data?.claims.amr ?? []) as { method?: string; timestamp?: number }[];
+  const now = Math.floor(Date.now() / 1000);
+  return amr.some((a) => a.method === "oauth" && now - (a.timestamp ?? 0) < GOOGLE_CONFIRM_MINUTES * 60);
 }
 
 // Perfil → Privacidad: tus dos decisiones (comunicaciones de HAPPA y cesión a colaboradores).

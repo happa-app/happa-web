@@ -4,7 +4,7 @@ import { Alert } from "@/components/ui/Alert";
 import { Card } from "@/components/ui/Card";
 import { formatMoney } from "@/features/expenses/money";
 import { Link } from "@/i18n/navigation";
-import type { PendingBalance } from "../types";
+import type { MyAccount, PendingBalance } from "../types";
 import { DeleteAccountForm } from "./DeleteAccountForm";
 import styles from "./Profile.module.css";
 
@@ -12,9 +12,13 @@ type Props = {
   isMinor: boolean;
   // Saldos pendientes en tus hogares (negativo = debes)
   balances: PendingBalance[];
+  // Con qué puedes confirmar que eres tú (contraseña, Google o los dos)
+  account: Pick<MyAccount, "hasPassword" | "hasGoogle" | "confirmedWithGoogle">;
+  // Volviste de Google y algo falló
+  googleFailed?: boolean;
 };
 
-export function DeleteAccount({ isMinor, balances }: Props) {
+export function DeleteAccount({ isMinor, balances, account, googleFailed = false }: Props) {
   const t = useTranslations("Profile.delete");
   const locale = useLocale();
 
@@ -77,7 +81,7 @@ export function DeleteAccount({ isMinor, balances }: Props) {
             </Alert>
           ) : null}
           <Card title={t("formTitle")}>
-            <DeleteAccountForm />
+            <DeleteAccountForm account={account} googleFailed={googleFailed} />
           </Card>
         </>
       )}

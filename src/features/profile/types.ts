@@ -36,6 +36,11 @@ export type PendingBalance = {
 export type MyAccount = {
   email: string | null;
   newEmail: string | null;
+  // Con qué entra: correo y contraseña, Google o los dos
+  hasPassword: boolean;
+  hasGoogle: boolean;
+  // Acaba de volver a entrar con Google (hace menos de unos minutos): vale para confirmar lo delicado
+  confirmedWithGoogle: boolean;
 };
 
 // Errores que pueden ver los usuarios (claves de messages/*.json → Profile.errors)
@@ -58,6 +63,7 @@ export const PROFILE_ERROR_KEYS = [
   "minor",
   "rateLimited",
   "captchaFailed",
+  "googleNotConfirmed",
   "generic",
 ] as const;
 export type ProfileErrorKey = (typeof PROFILE_ERROR_KEYS)[number];

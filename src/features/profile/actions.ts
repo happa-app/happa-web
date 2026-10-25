@@ -2,15 +2,18 @@
 // Acciones del perfil (se ejecutan en el servidor, con tu sesión): nombre, foto, idioma, correo,
 // contraseña y borrar la cuenta. Quién puede qué lo decide además la base de datos (migración 18).
 import { revalidatePath } from "next/cache";
+import { redirect as redirectToPath } from "next/navigation";
 import { z } from "zod";
 import { PRIVACY_CHOICES_VERSION, PRIVACY_PURPOSES } from "@/features/legal/versions";
 import { localizePath, parseLocale } from "@/i18n/locale";
 import { redirect } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 import { siteOrigin } from "@/lib/site-origin";
 import { captchaToken } from "@/lib/captcha";
-import { dropFresh, signInFresh } from "@/lib/supabase/fresh";
+import { dropFresh, signInFresh, type FreshClient } from "@/lib/supabase/fresh";
 import { createClient } from "@/lib/supabase/server";
 import { AVATAR_BUCKET, isAvatarPathOf } from "./avatar";
+import { signedInWithGoogleRecently } from "./queries";
 import { displayNameSchema, emailSchema, newPasswordSchema } from "./schemas";
 import { PROFILE_ERROR_KEYS, type ProfileErrorKey, type ProfileFormState } from "./types";
 
@@ -242,41 +245,81 @@ export async function changePassword(_prev: ProfileFormState, formData: FormData
 }
 
 // ───────────── Borrar la cuenta ─────────────
+// Confirmar con Google (para quien entra con Google y no tiene contraseña): se va a Google y se vuelve a
+// esta misma pantalla con una sesión recién abierta con Google, que vale unos minutos (migración 23).
+export async function confirmWithGoogle(formData: FormData) {
+  const locale = parseLocale(formData.get("locale"));
+  const back = localizePath("/perfil/borrar", locale);
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(back)}`,
+      // Que Google pregunte con qué cuenta, aunque haya una sola: así se nota que es una confirmación
+      queryParams: { prompt: "select_account" },
+    },
+  });
+  if (error || !data.url) {
+    console.error("[perfil] no se pudo empezar a confirmar con Google:", error);
+    redirectToPath(`${back}?google=error`);
+  }
+  redirectToPath(data.url);
+}
+
+// Dos formas de confirmar que eres tú: tu contraseña (con una sesión aparte, recién abierta con ella) o
+// haber vuelto a entrar con Google hace un momento (method=google). La base de datos lo vuelve a comprobar.
 export async function deleteAccount(_prev: ProfileFormState, formData: FormData): Promise<ProfileFormState> {
   const locale = parseLocale(formData.get("locale"));
+  const withGoogle = formData.get("method") === "google";
   const password = text(formData, "password");
-  if (!password) return fail("passwordRequired", "password");
+  if (!withGoogle && !password) return fail("passwordRequired", "password");
   if (formData.get("confirm") !== "on") return fail("confirmRequired", "confirm");
 
   const supabase = await createClient();
   const user = await me(supabase);
-  const email = await myEmail(supabase);
-  if (!user || !email) return fail("generic");
+  if (!user) return fail("generic");
+
+  if (withGoogle) {
+    if (!(await signedInWithGoogleRecently(supabase))) return fail("googleNotConfirmed");
+    return finishDeletion(supabase, supabase, user.userId, locale, async (key) => fail(key));
+  }
 
   // 1. Que seas tú: con una sesión aparte, recién abierta con tu contraseña (la base de datos lo exige)
+  const email = await myEmail(supabase);
+  if (!email) return fail("generic");
   const fresh = await signInFresh(email, password, captchaToken(formData));
   if (fresh.error) {
     const key = authKey(fresh.error);
     return fail(key, key === "wrongPassword" ? "password" : undefined);
   }
-  const stop = async (key: ProfileErrorKey): Promise<ProfileFormState> => {
+  return finishDeletion(fresh.client, supabase, user.userId, locale, async (key) => {
     await dropFresh(fresh.client);
     return fail(key);
-  };
+  });
+}
 
+// El resto del borrado, ya confirmado que eres tú. confirmed: la sesión que lo demuestra (la aparte de la
+// contraseña, o la de este navegador si acabas de entrar con Google). stop: cómo parar si algo falla.
+async function finishDeletion(
+  confirmed: Supabase | FreshClient,
+  supabase: Supabase,
+  userId: string,
+  locale: Locale,
+  stop: (key: ProfileErrorKey) => Promise<ProfileFormState>,
+): Promise<ProfileFormState> {
   // 2. Que no debas dinero ni tengas nada a medias (antes de tocar la foto; la base de datos lo vuelve
   //    a mirar al borrar). Primero se apuntan los gastos fijos que ya tocaban, como en la página.
-  const { data: memberships } = await fresh.client
+  const { data: memberships } = await confirmed
     .from("household_members")
     .select("household_id")
-    .eq("user_id", user.userId)
+    .eq("user_id", userId)
     .is("left_at", null)
     .in("role", ["admin", "member"]);
   for (const m of memberships ?? []) {
-    const { error: syncError } = await fresh.client.rpc("sync_recurring_expenses", { p_household: m.household_id });
+    const { error: syncError } = await confirmed.rpc("sync_recurring_expenses", { p_household: m.household_id });
     if (syncError) console.error("[perfil] no se pudieron poner al día los gastos fijos:", syncError);
   }
-  const { data: balances, error: balancesError } = await fresh.client.rpc("my_pending_balances");
+  const { data: balances, error: balancesError } = await confirmed.rpc("my_pending_balances");
   if (balancesError) {
     console.error("[perfil] no se pudieron leer los saldos:", balancesError);
     return stop("generic");
@@ -285,19 +328,20 @@ export async function deleteAccount(_prev: ProfileFormState, formData: FormData)
   if ((balances ?? []).some((b) => Number(b.pending) > 0)) return stop("pendingMoney");
 
   // 3. Tu foto (desde SQL no se puede borrar: se hace aquí, antes)
-  const { error: photoError } = await supabase.from("profiles").update({ avatar_path: null }).eq("id", user.userId);
-  if (photoError || !(await removeAvatarFiles(supabase, user.userId))) {
+  const { error: photoError } = await supabase.from("profiles").update({ avatar_path: null }).eq("id", userId);
+  if (photoError || !(await removeAvatarFiles(supabase, userId))) {
     if (photoError) console.error("[perfil] no se pudo quitar la foto antes de borrar:", photoError);
     return stop("generic");
   }
 
   // 4. La cuenta
-  const { error } = await fresh.client.rpc("delete_my_account");
+  const { error } = await confirmed.rpc("delete_my_account");
   if (error) {
     const message = error.message ?? "";
     if (message.includes("You owe money")) return stop("owesMoney");
     if (message.includes("Pending money")) return stop("pendingMoney");
     if (message.includes("Minor accounts")) return stop("minor");
+    if (message.includes("Recent password required")) return stop("googleNotConfirmed");
     console.error("[perfil] no se pudo borrar la cuenta:", error);
     return stop("generic");
   }
