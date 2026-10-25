@@ -111,6 +111,17 @@
       "submitting": "Guardando…",
       "askAgain": "Pide otro enlace"
     },
+    "google": {
+      "continue": "Continuar con Google",
+      "or": "o con tu correo",
+      "error": "No se ha podido entrar con Google. Inténtalo de nuevo o usa tu correo."
+    },
+    "welcome": {
+      "title": "Antes de empezar",
+      "subtitle": "Has entrado con Google ({email}). Solo falta esto para crear tu cuenta.",
+      "submit": "Empezar",
+      "submitting": "Guardando…"
+    },
     "fields": {
       "displayName": "Nombre",
       "displayNameHint": "Así te verán tus compañeros",

@@ -1,5 +1,5 @@
-// Enlace de los correos de Auth (confirmar el registro, cambiar el correo y recuperar la contraseña).
-// Inicia la sesión y lleva a la app.
+// Enlace de vuelta de Auth: los correos (confirmar el registro, cambiar el correo y recuperar la contraseña)
+// y al volver de Google. Inicia la sesión y lleva a la app (o, la primera vez con Google, a /bienvenida).
 // Acepta los dos formatos de enlace de Supabase: con "code" (plantilla por defecto) y con "token_hash"
 // (las de supabase/templates). El de "code" solo funciona en el navegador donde se pidió el correo; el de
 // "token_hash", en cualquiera (te registras en el ordenador y abres el correo en el móvil).
@@ -37,10 +37,16 @@ export async function GET(request: NextRequest) {
     if (!error && data.user) userId = data.user.id;
   }
 
+  const prefix = next === "/en" || next.startsWith("/en/") ? "/en" : "";
+
   if (userId && recovery) await setRecoveryCookie(userId);
+  // Primera vez con Google: antes de nada, aceptar los términos (y después, adonde iba)
+  if (userId && !recovery) {
+    const { data: pending } = await supabase.rpc("needs_signup_completion");
+    if (pending) redirect(`${prefix}/bienvenida?next=${encodeURIComponent(next)}`);
+  }
   if (userId || emailChange) redirect(next);
 
-  const prefix = next === "/en" || next.startsWith("/en/") ? "/en" : "";
   // Enlace de recuperación caducado o ya usado: a pedir otro
   if (recovery) redirect(`${prefix}${FORGOT_PASSWORD_PATH}?error=caducado`);
   redirect(`${prefix}/login?error=confirm`);

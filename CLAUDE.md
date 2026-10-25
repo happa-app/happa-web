@@ -49,8 +49,8 @@ Barra inferior: **Más · Inicio · Casas · Ruleta · Chat**. Las personas, el 
 
 ## Estado actual
 - App desplegada en Vercel como PWA (manifest, iconos, página sin conexión y service worker). Funciones en Fráncfort (`vercel.json` → `fra1`), junto a Supabase (`eu-central-1`).
-- Hechos: portada pública (qué es, cómo funciona y cómo instalarla), hogares e invitaciones, plazas, compra, gastos (con compra → gasto y fijos), horarios y ausencias, tareas, chat, avisos (en la app y push), ruleta, perfil (foto, cuenta, idioma, borrar la cuenta), recuperar la contraseña, ayuda y contacto (Más → Ayuda y contacto; se leen en `private.contact_inbox`) y páginas legales.
-- 21 migraciones en `supabase/migrations`.
+- Hechos: portada pública (qué es, cómo funciona y cómo instalarla), hogares e invitaciones, plazas, compra, gastos (con compra → gasto y fijos), horarios y ausencias, tareas, chat, avisos (en la app y push), ruleta, perfil (foto, cuenta, idioma, borrar la cuenta), recuperar la contraseña, entrar con Google (la primera vez pasa por "Antes de empezar", `/bienvenida`, para aceptar los términos; el layout de `(app)` y `/auth/confirm` mandan allí a quien le falte), ayuda y contacto (Más → Ayuda y contacto; se leen en `private.contact_inbox`) y páginas legales.
+- 22 migraciones en `supabase/migrations`.
 - Configurando Resend para los correos de Auth.
 
 ## Comandos
@@ -66,7 +66,7 @@ Variables en `.env.local` (plantilla en `.env.example`): las de Supabase se vali
 Supabase local en Docker. La oficial solo recibe migraciones con `db push`.
 - `npx supabase start` / `npx supabase stop` — arrancar y parar (los datos se conservan). Studio: http://127.0.0.1:54323 · correos de prueba: http://127.0.0.1:54324
 - `npx supabase db reset` — borra la BD **local** y la rehace con todas las migraciones + `supabase/seed.sql`. Nunca con `--linked` (borraría la oficial).
-- Usuarios de prueba (contraseña `happa1234`): `ana@happa.test` (admin del "Piso de prueba"), `bruno@happa.test`, `carla@happa.test` (tiene un gasto pendiente de confirmar) y `dani@happa.test` (sin hogar).
+- Usuarios de prueba (contraseña `happa1234`): `ana@happa.test` (admin del "Piso de prueba"), `bruno@happa.test`, `carla@happa.test` (tiene un gasto pendiente de confirmar) `dani@happa.test` (sin hogar) y `eva@happa.test` (como si hubiera entrado con Google: va a "Antes de empezar").
 - `seed.sql` crea los datos llamando a las funciones SQL de la app haciéndose pasar por cada usuario (`request.jwt.claims` + `set local role authenticated`). Todo el seed va en una transacción: cada bloque acaba con `set constraints all immediate` para que los avisos (triggers diferidos) salgan con el autor correcto. Si una migración cambia una regla, actualiza el seed.
 - Migración nueva: `npx supabase migration new <nombre>` → `npx supabase db reset` para probarla → `npx supabase gen types typescript --local > src/types/database.types.ts`.
 

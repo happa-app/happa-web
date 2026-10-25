@@ -1,19 +1,22 @@
 // Marco de la zona privada: cabecera (la campana de avisos, el nombre de la app y tu perfil), el
 // contenido y la barra de abajo (Más · Inicio · Casas · Ruleta · Chat). Cerrar sesión está en Más.
 // Todas las páginas dentro de (app) lo comparten; el proxy ya exige sesión para entrar.
+import { getLocale } from "next-intl/server";
 import { unstable_rethrow } from "next/navigation";
 import type { ReactNode } from "react";
+import { needsSignupCompletion } from "@/features/auth/server";
 import { BottomNav } from "@/features/navigation";
 import { getNavHouseholds } from "@/features/navigation/server";
 import { NotificationBell, PushKeeper } from "@/features/notifications";
 import { ProfileButton } from "@/features/profile";
 import { getMyProfile } from "@/features/profile/server";
+import { redirect } from "@/i18n/navigation";
 import styles from "./app-layout.module.css";
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   // El hogar al que llevan "Inicio", "Ruleta" y "Chat" al abrir la app, en cuáles vives, y tu perfil
   // (Si fallara leer el perfil, la página se enseña igual, sin el círculo de arriba)
-  const [{ householdId, householdIds }, profile] = await Promise.all([
+  const [{ householdId, householdIds }, profile, pendingSignup] = await Promise.all([
     getNavHouseholds(),
     getMyProfile().catch((e: unknown) => {
       // Los "errores" internos de Next (por ejemplo, el aviso de que la página usa cookies y no puede
@@ -22,7 +25,10 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
       console.error("[perfil] no se pudo leer:", e);
       return null;
     }),
+    // Quien entró con Google y aún no ha aceptado los términos va antes a "Antes de empezar"
+    needsSignupCompletion(),
   ]);
+  if (pendingSignup) return redirect({ href: "/bienvenida", locale: await getLocale() });
 
   return (
     <div className={styles.shell}>

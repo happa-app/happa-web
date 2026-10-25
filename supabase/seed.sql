@@ -8,6 +8,9 @@
 --   · carla@happa.test  → miembro del piso (tiene un gasto pendiente de confirmar); usuaria "de antes":
 --                          nunca se le preguntó por la privacidad
 --   · dani@happa.test   → sin hogar (para probar crear un hogar o unirse con el código)
+--   · eva@happa.test    → como si hubiera entrado con Google: nombre de Google y sin términos aceptados, así
+--                          que al entrar va a "Antes de empezar" (/bienvenida). Tiene contraseña solo para
+--                          poder probarlo en local sin configurar Google
 --
 -- Los datos se crean con las mismas funciones que usa la app, haciéndose pasar por cada persona
 -- (como hace Supabase en cada petición): así se cumplen las mismas reglas y permisos. Si una migración
@@ -29,7 +32,7 @@ select
   '{"provider": "email", "providers": ["email"]}',
   jsonb_build_object(
     'display_name', u.name, 'locale', 'es', 'timezone', 'Europe/Madrid',
-    'legal', jsonb_build_object('terms', 'v1-2026-10-08', 'privacy', 'v1-2026-10-25')
+    'legal', jsonb_build_object('terms', 'v1-2026-10-08', 'privacy', 'v1-2026-10-25b')
   ) || u.choices,
   now(), now(), '', '', '', ''
 from (values
@@ -40,6 +43,19 @@ from (values
   ('00000000-0000-4000-8000-00000000000c'::uuid, 'carla@happa.test', 'Carla', '{}'::jsonb),
   ('00000000-0000-4000-8000-00000000000d'::uuid, 'dani@happa.test',  'Dani', '{}'::jsonb)
 ) as u (id, email, name, choices);
+
+-- Eva: como llegan los datos de Google (full_name, sin "legal" ni "choices")
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change_token_new, email_change
+) values (
+  '00000000-0000-0000-0000-000000000000', '00000000-0000-4000-8000-00000000000e', 'authenticated', 'authenticated',
+  'eva@happa.test', extensions.crypt('happa1234', extensions.gen_salt('bf')), now(),
+  '{"provider": "google", "providers": ["google", "email"]}',
+  '{"full_name": "Eva Martín", "name": "Eva Martín"}',
+  now(), now(), '', '', '', ''
+);
 
 -- Sin su "identidad" de correo, Supabase Auth no deja iniciar sesión con contraseña
 insert into auth.identities (id, user_id, provider, provider_id, identity_data, last_sign_in_at, created_at, updated_at)

@@ -1879,6 +1879,19 @@ export type Database = {
         Returns: undefined
       }
       complete_chore: { Args: { p_occurrence: string }; Returns: undefined }
+      complete_signup: {
+        Args: {
+          p_choices: string
+          p_display_name: string
+          p_is_adult: boolean
+          p_locale: string
+          p_marketing: boolean
+          p_partners: boolean
+          p_privacy: string
+          p_terms: string
+        }
+        Returns: undefined
+      }
       confirm_expense: {
         Args: { p_expense: string; p_version: number }
         Returns: undefined
@@ -2129,6 +2142,7 @@ export type Database = {
           net_cents: number
         }[]
       }
+      needs_signup_completion: { Args: never; Returns: boolean }
       normalize_postal_code: { Args: { p_code: string }; Returns: string }
       notification_category_of: {
         Args: { p_type: Database["public"]["Enums"]["notification_type"] }

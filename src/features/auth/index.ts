@@ -4,3 +4,4 @@ export { LoginForm } from "./components/LoginForm";
 export { NewPasswordForm } from "./components/NewPasswordForm";
 export { SignupForm } from "./components/SignupForm";
 export { SignOutButton } from "./components/SignOutButton";
+export { WelcomeForm } from "./components/WelcomeForm";
