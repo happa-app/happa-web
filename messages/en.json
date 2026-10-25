@@ -525,7 +525,8 @@
       "newPasswordHint": "At least 8 characters.",
       "repeatPassword": "Repeat the new password",
       "changePassword": "Change password",
-      "passwordChanged": "Password changed. We've signed you out on your other devices."
+      "passwordChanged": "Password changed. We've signed you out on your other devices.",
+      "googleNoPassword": "You sign in with Google, so you don't have a HAPPA password. If you want one (to also sign in with your email), create it from <link>Forgot your password?</link>: you'll get a link by email."
     },
     "delete": {
       "link": "Delete my account",
@@ -549,7 +550,12 @@
       "confirm": "I understand my account will be deleted forever",
       "submit": "Delete my account forever",
       "deleting": "Deleting…",
-      "minor": "Minor accounts aren't deleted from here: ask for it by writing to <email>privacidad@happa.es</email> (ideally from the email of the adult who manages you)."
+      "minor": "Minor accounts aren't deleted from here: ask for it by writing to <email>privacidad@happa.es</email> (ideally from the email of the adult who manages you).",
+      "googleConfirmed": "You've confirmed with Google that it's you. Just tick the box.",
+      "withGoogle": "You sign in with Google: to confirm it's you, sign in with Google again.",
+      "orGoogle": "Or confirm it's you with Google",
+      "googleButton": "Confirm with Google",
+      "googleError": "We couldn't confirm with Google. Please try again."
     },
     "errors": {
       "nameRequired": "Write your name",
@@ -570,6 +576,7 @@
       "minor": "Minor accounts can't be deleted from here",
       "rateLimited": "Too many attempts. Wait a few minutes and try again",
       "captchaFailed": "We couldn't check that you're not a robot. Wait a moment and try again.",
+      "googleNotConfirmed": "To delete your account, confirm with Google again (the confirmation lasts a few minutes).",
       "generic": "Something went wrong. Please try again"
     },
     "privacy": {

@@ -525,7 +525,8 @@
       "newPasswordHint": "Al menos 8 caracteres.",
       "repeatPassword": "Repite la contraseña nueva",
       "changePassword": "Cambiar la contraseña",
-      "passwordChanged": "Contraseña cambiada. Hemos cerrado tu sesión en los demás dispositivos."
+      "passwordChanged": "Contraseña cambiada. Hemos cerrado tu sesión en los demás dispositivos.",
+      "googleNoPassword": "Entras con Google, así que no tienes contraseña de HAPPA. Si quieres una (para entrar también con tu correo), créala desde <link>¿Has olvidado tu contraseña?</link>: te llegará un enlace al correo."
     },
     "delete": {
       "link": "Borrar mi cuenta",
@@ -549,7 +550,12 @@
       "confirm": "Entiendo que mi cuenta se borra para siempre",
       "submit": "Borrar mi cuenta para siempre",
       "deleting": "Borrando…",
-      "minor": "Las cuentas de menores no se borran desde aquí: pídelo escribiendo a <email>privacidad@happa.es</email> (mejor desde el correo del adulto que te gestiona)."
+      "minor": "Las cuentas de menores no se borran desde aquí: pídelo escribiendo a <email>privacidad@happa.es</email> (mejor desde el correo del adulto que te gestiona).",
+      "googleConfirmed": "Has confirmado con Google que eres tú. Solo falta marcar la casilla.",
+      "withGoogle": "Entras con Google: para confirmar que eres tú, vuelve a entrar con Google.",
+      "orGoogle": "O confirma que eres tú con Google",
+      "googleButton": "Confirmar con Google",
+      "googleError": "No se ha podido confirmar con Google. Inténtalo de nuevo."
     },
     "errors": {
       "nameRequired": "Escribe tu nombre",
@@ -570,6 +576,7 @@
       "minor": "Las cuentas de menores no se pueden borrar desde aquí",
       "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
       "captchaFailed": "No hemos podido comprobar que no eres un robot. Espera un momento y vuelve a intentarlo.",
+      "googleNotConfirmed": "Para borrar la cuenta, vuelve a confirmar con Google (la confirmación dura unos minutos).",
       "generic": "Algo ha fallado. Inténtalo de nuevo"
     },
     "privacy": {

@@ -50,7 +50,7 @@ Barra inferior: **Más · Inicio · Casas · Ruleta · Chat**. Las personas, el 
 ## Estado actual
 - App desplegada en Vercel como PWA (manifest, iconos, página sin conexión y service worker). Funciones en Fráncfort (`vercel.json` → `fra1`), junto a Supabase (`eu-central-1`).
 - Hechos: portada pública (qué es, cómo funciona y cómo instalarla), hogares e invitaciones, plazas, compra, gastos (con compra → gasto y fijos), horarios y ausencias, tareas, chat, avisos (en la app y push), ruleta, perfil (foto, cuenta, idioma, borrar la cuenta), recuperar la contraseña, entrar con Google (la primera vez pasa por "Antes de empezar", `/bienvenida`, para aceptar los términos; el layout de `(app)` y `/auth/confirm` mandan allí a quien le falte), ayuda y contacto (Más → Ayuda y contacto; se leen en `private.contact_inbox`) y páginas legales.
-- 22 migraciones en `supabase/migrations`.
+- 23 migraciones en `supabase/migrations`.
 - Configurando Resend para los correos de Auth.
 
 ## Comandos
@@ -101,7 +101,7 @@ Pantallas de carga: cada carpeta de `(app)` que tiene páginas dentro lleva un `
 Los formularios con estado controlado se envían con `submitWithoutReset` (`src/utils/forms.ts`) para evitar el reset automático de React 19.
 
 ### Supabase
-- Clientes: `src/lib/supabase/server.ts` (cookies), `client.ts` (navegador) y `fresh.ts` (sesión aparte para volver a pedir la contraseña en operaciones delicadas). La seguridad depende de RLS y de las funciones SQL.
+- Clientes: `src/lib/supabase/server.ts` (cookies), `client.ts` (navegador) y `fresh.ts` (sesión aparte para volver a pedir la contraseña en operaciones delicadas). Quien entra con Google no tiene contraseña: para borrar la cuenta confirma volviendo a entrar con Google (`confirmWithGoogle`), y la BD acepta una sesión `oauth` reciente igual que una de contraseña (`signed_in_recently`, migración 23). La seguridad depende de RLS y de las funciones SQL.
 - Los comentarios del código citan "migración N" según el orden de los archivos de `supabase/migrations/`.
 
 ### Notificaciones push

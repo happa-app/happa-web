@@ -41,7 +41,15 @@ export default async function AccountPage({ searchParams }: Props) {
         <EmailForm email={account.email} />
       </Card>
       <Card title={t("account.passwordTitle")}>
-        <PasswordForm />
+        {/* Quien solo entra con Google no tiene contraseña de HAPPA que poner como "actual": se crea una
+            con el enlace del correo de "¿Has olvidado tu contraseña?" */}
+        {account.hasGoogle && !account.hasPassword ? (
+          <p className={styles.subtitle}>
+            {t.rich("account.googleNoPassword", { link: (chunks) => <Link href="/recuperar">{chunks}</Link> })}
+          </p>
+        ) : (
+          <PasswordForm />
+        )}
       </Card>
     </>
   );
