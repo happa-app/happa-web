@@ -111,6 +111,17 @@
       "submitting": "Saving…",
       "askAgain": "Request another link"
     },
+    "google": {
+      "continue": "Continue with Google",
+      "or": "or with your email",
+      "error": "We couldn't sign you in with Google. Try again or use your email."
+    },
+    "welcome": {
+      "title": "Before you start",
+      "subtitle": "You've signed in with Google ({email}). This is all we need to create your account.",
+      "submit": "Start",
+      "submitting": "Saving…"
+    },
     "fields": {
       "displayName": "Name",
       "displayNameHint": "This is how your housemates will see you",

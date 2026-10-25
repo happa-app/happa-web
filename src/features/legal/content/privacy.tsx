@@ -51,6 +51,8 @@ export const privacyEs: LegalDocument = {
         <ul>
           <li>
             <strong>Tu cuenta:</strong> correo y contraseña (la guardamos cifrada: nadie puede leerla, ni nosotros).
+            Si entras con Google, en lugar de la contraseña Google nos da tu nombre, tu correo y tu foto de perfil de
+            Google; nunca tu contraseña de Google.
           </li>
           <li>
             <strong>Tu perfil:</strong> nombre, foto (si la pones), idioma y zona horaria.
@@ -396,6 +398,8 @@ export const privacyEn: LegalDocument = {
         <ul>
           <li>
             <strong>Your account:</strong> email and password (stored encrypted: nobody can read it, not even us).
+            If you sign in with Google, instead of a password Google gives us your name, your email and your Google
+            profile photo; never your Google password.
           </li>
           <li>
             <strong>Your profile:</strong> name, photo (if you add one), language and time zone.

@@ -2,7 +2,7 @@
 // Cuando publiquéis los textos definitivos (o los cambiéis), sube la versión aquí (como mucho 20 letras).
 export const LEGAL_VERSIONS = {
   terms: "v1-2026-10-08",
-  privacy: "v1-2026-10-25",
+  privacy: "v1-2026-10-25b",
 } as const;
 
 // Versión del texto de las dos decisiones opcionales de privacidad (las casillas del registro y los interruptores

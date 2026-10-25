@@ -33,4 +33,11 @@ export const newPasswordSchema = z
   .refine((data) => data.repeat === data.password, { message: "passwordMismatch", path: ["repeat"] });
 
 export type LoginInput = z.infer<typeof loginSchema>;
+// "Antes de empezar" (/bienvenida): lo del registro que Google no nos da (nombre, términos y edad)
+export const completeSignupSchema = z.object({
+  displayName: z.string().trim().min(1, "displayNameRequired").max(60, "displayNameTooLong"),
+  acceptLegal: z.literal(true, "mustAcceptLegal"),
+  isAdult: z.literal(true, "mustBeAdult"),
+});
+
 export type SignupInput = z.infer<typeof signupSchema>;

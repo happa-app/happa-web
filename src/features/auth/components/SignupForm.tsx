@@ -11,6 +11,7 @@ import { TextField } from "@/components/ui/TextField";
 import { DataProtectionInfo } from "@/features/legal/components/DataProtectionInfo";
 import { Link } from "@/i18n/navigation";
 import { signUp } from "../actions";
+import { GoogleButton } from "./GoogleButton";
 import { firstFieldError, initialAuthState } from "../types";
 import styles from "./AuthForm.module.css";
 
@@ -57,74 +58,76 @@ export function SignupForm({ next }: Props) {
   });
 
   return (
-    <form action={formAction} className={styles.form} noValidate>
+    <div className={styles.form}>
       <header className={styles.header}>
         <h1 className={styles.title}>{t("signup.title")}</h1>
         <p className={styles.subtitle}>{t("signup.subtitle")}</p>
       </header>
+      <GoogleButton locale={locale} next={next} />
+      <form action={formAction} className={styles.form} noValidate>
+        {state.formError ? <Alert tone="error">{t(`errors.${state.formError}`)}</Alert> : null}
 
-      {state.formError ? <Alert tone="error">{t(`errors.${state.formError}`)}</Alert> : null}
+        <input type="hidden" name="locale" value={locale} />
+        {next ? <input type="hidden" name="next" value={next} /> : null}
 
-      <input type="hidden" name="locale" value={locale} />
-      {next ? <input type="hidden" name="next" value={next} /> : null}
+        <TextField
+          label={t("fields.displayName")}
+          name="displayName"
+          autoComplete="given-name"
+          maxLength={60}
+          required
+          hint={t("fields.displayNameHint")}
+          defaultValue={state.values?.displayName}
+          error={error("displayName")}
+        />
+        <TextField
+          label={t("fields.email")}
+          name="email"
+          type="email"
+          autoComplete="email"
+          inputMode="email"
+          required
+          defaultValue={state.values?.email}
+          error={error("email")}
+        />
+        <TextField
+          label={t("fields.password")}
+          name="password"
+          type="password"
+          autoComplete="new-password"
+          minLength={8}
+          required
+          hint={t("fields.passwordHint")}
+          error={error("password")}
+        />
 
-      <TextField
-        label={t("fields.displayName")}
-        name="displayName"
-        autoComplete="given-name"
-        maxLength={60}
-        required
-        hint={t("fields.displayNameHint")}
-        defaultValue={state.values?.displayName}
-        error={error("displayName")}
-      />
-      <TextField
-        label={t("fields.email")}
-        name="email"
-        type="email"
-        autoComplete="email"
-        inputMode="email"
-        required
-        defaultValue={state.values?.email}
-        error={error("email")}
-      />
-      <TextField
-        label={t("fields.password")}
-        name="password"
-        type="password"
-        autoComplete="new-password"
-        minLength={8}
-        required
-        hint={t("fields.passwordHint")}
-        error={error("password")}
-      />
+        <CheckboxField name="acceptLegal" label={legalLabel} error={error("acceptLegal")} />
+        <CheckboxField name="isAdult" label={t("fields.isAdult")} error={error("isAdult")} />
 
-      <CheckboxField name="acceptLegal" label={legalLabel} error={error("acceptLegal")} />
-      <CheckboxField name="isAdult" label={t("fields.isAdult")} error={error("isAdult")} />
+        {/* Opcionales y desmarcadas, cada una por su lado (el RGPD pide poder aceptar cada cosa por separado).
+            Primero la más fácil de aceptar; frases cortas que dicen lo que gana la persona, y el detalle de qué
+            se comparte a un clic, antes de aceptar (información por capas). Se cambian luego en Perfil → Privacidad. */}
+        <CheckboxField name="marketing" label={t("fields.marketing")} />
+        <div>
+          <CheckboxField name="partners" label={t("fields.partners")} />
+          <details className={styles.more}>
+            <summary>{t("fields.partnersMore")}</summary>
+            <p>{t("fields.partnersDetail")}</p>
+          </details>
+        </div>
 
-      {/* Opcionales y desmarcadas, cada una por su lado (el RGPD pide poder aceptar cada cosa por separado).
-          Primero la más fácil de aceptar; frases cortas que dicen lo que gana la persona, y el detalle de qué
-          se comparte a un clic, antes de aceptar (información por capas). Se cambian luego en Perfil → Privacidad. */}
-      <CheckboxField name="marketing" label={t("fields.marketing")} />
-      <div>
-        <CheckboxField name="partners" label={t("fields.partners")} />
-        <details className={styles.more}>
-          <summary>{t("fields.partnersMore")}</summary>
-          <p>{t("fields.partnersDetail")}</p>
-        </details>
-      </div>
+        <Captcha resetKey={state} />
 
-      <Captcha resetKey={state} />
+        <Button type="submit" fullWidth disabled={isPending}>
+          {isPending ? t("signup.submitting") : t("signup.submit")}
+        </Button>
 
-      <Button type="submit" fullWidth disabled={isPending}>
-        {isPending ? t("signup.submitting") : t("signup.submit")}
-      </Button>
+        <DataProtectionInfo />
 
-      <DataProtectionInfo />
-
-      <p className={styles.switch}>
-        {t("signup.haveAccount")} <Link href={loginHref}>{t("signup.goToLogin")}</Link>
-      </p>
-    </form>
+        <p className={styles.switch}>
+          {t("signup.haveAccount")} <Link href={loginHref}>{t("signup.goToLogin")}</Link>
+        </p>
+      </form>
+    </div>
   );
 }

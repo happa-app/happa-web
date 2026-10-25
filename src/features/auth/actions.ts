@@ -14,7 +14,7 @@ import { createClient } from "@/lib/supabase/server";
 import { safeNextPath } from "@/utils/safe-path";
 import { toAuthErrorKey } from "./errors";
 import { clearRecoveryCookie, hasRecoverySession, NEW_PASSWORD_PATH } from "./recovery";
-import { forgotPasswordSchema, loginSchema, newPasswordSchema, signupSchema } from "./schemas";
+import { completeSignupSchema, forgotPasswordSchema, loginSchema, newPasswordSchema, signupSchema } from "./schemas";
 import type { AuthFormState } from "./types";
 
 const HOME_PATH = "/inicio";
@@ -182,6 +182,63 @@ export async function setNewPassword(
   // Cierra la sesión en los demás dispositivos: si alguien había entrado en tu cuenta, se queda fuera.
   await supabase.auth.signOut({ scope: "others" });
   await clearRecoveryCookie();
+  return redirect({ href: HOME_PATH, locale });
+}
+
+// Entrar (o registrarse) con Google. Supabase devuelve la dirección de Google y se va allí; al volver, Google
+// pasa por /auth/confirm, que inicia la sesión y, si es la primera vez, lleva a /bienvenida.
+export async function signInWithGoogle(formData: FormData) {
+  const locale = parseLocale(formData.get("locale"));
+  const next = safeNextPath(text(formData, "next")) ?? localizePath(HOME_PATH, locale);
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(next)}`,
+      // Que Google pregunte siempre con qué cuenta (por si en el móvil hay varias)
+      queryParams: { prompt: "select_account" },
+    },
+  });
+  if (error || !data.url) {
+    console.error("[auth] no se pudo empezar a entrar con Google:", error);
+    redirectToPath(`${localizePath(LOGIN_PATH, locale)}?error=google`);
+  }
+  redirectToPath(data.url);
+}
+
+// "Antes de empezar": lo del registro que Google no nos da. Guarda lo mismo que el registro normal.
+export async function completeSignup(_prevState: AuthFormState, formData: FormData): Promise<AuthFormState> {
+  const locale = parseLocale(formData.get("locale"));
+  const next = safeNextPath(text(formData, "next"));
+  const values = { displayName: text(formData, "displayName") };
+
+  const parsed = completeSignupSchema.safeParse({
+    displayName: values.displayName,
+    acceptLegal: formData.get("acceptLegal") === "on",
+    isAdult: formData.get("isAdult") === "on",
+  });
+  if (!parsed.success) {
+    return { status: "error", fieldErrors: z.flattenError(parsed.error).fieldErrors, values };
+  }
+
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("complete_signup", {
+    p_display_name: parsed.data.displayName,
+    p_locale: locale,
+    p_terms: LEGAL_VERSIONS.terms,
+    p_privacy: LEGAL_VERSIONS.privacy,
+    p_is_adult: parsed.data.isAdult,
+    p_marketing: formData.get("marketing") === "on",
+    p_partners: formData.get("partners") === "on",
+    p_choices: PRIVACY_CHOICES_VERSION,
+  });
+  if (error) {
+    console.error("[auth] no se pudo terminar el registro:", error);
+    return { status: "error", formError: "generic", values };
+  }
+
+  (await cookies()).set(LOCALE_COOKIE, locale, { path: "/", sameSite: "lax" });
+  if (next) redirectToPath(next);
   return redirect({ href: HOME_PATH, locale });
 }
 

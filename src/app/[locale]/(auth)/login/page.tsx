@@ -12,6 +12,7 @@ export default async function LoginPage({ searchParams }: Props) {
       confirmFailed={error === "confirm"}
       accountDeleted={cuenta === "borrada"}
       next={typeof next === "string" ? next : undefined}
+      googleFailed={error === "google"}
     />
   );
 }
