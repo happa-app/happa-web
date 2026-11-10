@@ -43,3 +43,7 @@ next-env.d.ts
 
 # Maquetas de estilo (solo en local)
 /pruebas-estilos/
+
+# Instrucciones de Claude Code (solo en local: viven en .claude/CLAUDE.md)
+/CLAUDE.md
+/.claude/CLAUDE.md
