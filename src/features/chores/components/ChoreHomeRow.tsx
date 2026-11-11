@@ -62,7 +62,7 @@ export function ChoreHomeRow({ householdId, day, chore, names, me, isAdult, toda
   }
 
   return (
-    <li className={styles.homeRow}>
+    <li className={overdue ? `${styles.homeRow} ${styles.homeRowOverdue}` : styles.homeRow}>
       <div className={styles.homeRowLine}>
         {canComplete(day, me, isAdult) ? (
           <ChoreActionButton

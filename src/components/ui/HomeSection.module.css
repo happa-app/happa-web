@@ -58,27 +58,6 @@
   gap: var(--space-4);
 }
 
-/* Etiqueta pequeña de un bloque dentro de la tarjeta ("Últimos gastos") */
-.label {
-  margin: 0 0 var(--space-1);
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-  font-weight: 700;
-}
-
-/* Lista sencilla: texto a la izquierda, cifra a la derecha */
-.list {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.list > li + li {
-  border-top: 1px solid var(--color-border);
-}
-
 .row {
   display: flex;
   align-items: center;
@@ -115,12 +94,6 @@ a.row:focus-visible {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   overflow-wrap: anywhere;
-}
-
-.rowValue {
-  flex-shrink: 0;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
 }
 
 .muted {

@@ -262,7 +262,9 @@
     "seeAll": "see all",
     "seeList": "see list",
     "seeWeek": "see week",
-    "seeAllOf": "See all of {section}"
+    "seeAllOf": "See all of {section}",
+    "seeListOf": "See list of shopping items",
+    "seeWeekOf": "See week of the schedule"
   },
   "Legal": {
     "terms": "Terms of use",

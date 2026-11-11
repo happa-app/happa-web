@@ -330,28 +330,10 @@ export async function getMyExpensesSummary(
   };
 }
 
-const HOME_RECENT = 3;
-
-// Para Inicio: tu saldo, cuántas cosas esperan que las confirmes, los saldos de todos (para "quedar en
-// paz" y los nombres) y los últimos gastos.
+// Para Inicio: tu saldo, cuántas cosas esperan que las confirmes y los saldos de todos (para "quedar en
+// paz" y los nombres).
 export async function getExpensesHome(householdId: string, userId: string): Promise<ExpensesHome> {
-  const supabase = await createClient();
-  const [summary, recent] = await Promise.all([
-    // (Ya pone al día los gastos fijos antes de leer los saldos)
-    getMyExpensesSummary(householdId, userId),
-    supabase
-      .from("expenses")
-      .select(EXPENSE_FIELDS)
-      .eq("household_id", householdId)
-      .order("spent_on", { ascending: false })
-      .order("created_at", { ascending: false })
-      .limit(HOME_RECENT),
-  ]);
-  if (recent.error) throw recent.error;
-  return {
-    netCents: summary.netCents,
-    toConfirm: summary.toConfirm,
-    people: summary.people,
-    recent: ((recent.data ?? []) as unknown as ExpenseRow[]).map(toExpense),
-  };
+  // (Ya pone al día los gastos fijos antes de leer los saldos)
+  const summary = await getMyExpensesSummary(householdId, userId);
+  return { netCents: summary.netCents, toConfirm: summary.toConfirm, people: summary.people };
 }

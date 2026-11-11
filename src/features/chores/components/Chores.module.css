@@ -834,6 +834,13 @@ button.check:hover:not(:disabled) .checkCircle {
   background: var(--color-error-soft);
 }
 
+/* En el post-it el botón está a la derecha: el aviso se abre hacia la izquierda y debajo, para no salirse de la pantalla */
+.postit .checkForm .actionError {
+  top: calc(100% + 4px);
+  left: auto;
+  right: 0;
+}
+
 /* Próximos días: una caja con un grupo por día */
 .groups {
   display: flex;
@@ -926,17 +933,21 @@ button.check:hover:not(:disabled) .checkCircle {
   border-top: 1px solid var(--color-border);
 }
 
+/* 44 px de alto: así las zonas táctiles de 44 px de filas seguidas no se solapan */
 .homeRow {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: var(--space-1);
+  min-height: 44px;
   padding: var(--space-2) 0;
 }
 
+/* Hueco de 14 px: es lo que sobresale la zona táctil del botón (margin -14px), así no tapa el título */
 .homeRowLine {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 14px;
 }
 
 .homeDot {
@@ -988,6 +999,11 @@ button.check:hover:not(:disabled) .checkCircle {
 /* Botón redondo dentro de la fila compacta: círculo de 16 px con el área de toque de 44 px */
 .homeRowLine .checkForm {
   margin: -14px;
+}
+
+/* Una atrasada con botón: el círculo en coral */
+.homeRowOverdue .checkCircle {
+  border-color: var(--color-owe);
 }
 
 .homeRowLine .checkCircle {

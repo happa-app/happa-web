@@ -5,7 +5,7 @@
 // se abre con "ver lista ›" de la cabecera.
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { HomeSection } from "@/components/ui/HomeSection";
+import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
 import { useShoppingList } from "../hooks/useShoppingList";
 import { canEditItem, shownQuantity } from "../rules";
 import type { ShoppingItem } from "../types";
@@ -63,7 +63,7 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
       meta={pending.length > 0 ? String(pending.length) : undefined}
       href={href}
       linkLabel={tHome("seeList")}
-      linkAriaLabel={tHome("seeAllOf", { section: t("title") })}
+      linkAriaLabel={tHome("seeListOf")}
     >
       {shown.length > 0 ? (
         <ul className={styles.chips} aria-label={t("pending")}>
@@ -91,7 +91,7 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
           {hidden > 0 ? <li className={styles.more}>{t("previewMore", { count: hidden })}</li> : null}
         </ul>
       ) : (
-        <p className={styles.empty}>{t("home.empty")}</p>
+        <p className={homeStyles.muted}>{t("home.empty")}</p>
       )}
 
       {error ? (

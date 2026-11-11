@@ -68,7 +68,6 @@ export type ExpensesHome = {
   netCents: number;
   toConfirm: number;
   people: BalancePerson[];
-  recent: Expense[];
 };
 
 export type ExpensesOverview = {

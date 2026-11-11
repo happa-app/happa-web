@@ -64,7 +64,7 @@
   --radius-md: 8px;
   --radius-lg: 10px;
   --shadow-card: 0 0 0 1px var(--color-border);
-  --focus-ring: 0 0 0 3px rgb(18 57 63 / 35%);
+  --focus-ring: 0 0 0 3px rgb(18 57 63 / 70%);
 }
 
 /* Tema oscuro: negro y grises neutros, con la mostaza como acento (botones, enlaces, iconos
@@ -112,5 +112,5 @@
   --color-chip-hover: #242626;
 
   --shadow-card: 0 0 0 1px var(--color-border);
-  --focus-ring: 0 0 0 3px rgb(214 178 82 / 45%);
+  --focus-ring: 0 0 0 3px rgb(214 178 82 / 70%);
 }

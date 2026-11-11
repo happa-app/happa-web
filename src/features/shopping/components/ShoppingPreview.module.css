@@ -86,12 +86,6 @@
   font-weight: 600;
 }
 
-.empty {
-  margin: 0;
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-}
-
 /* "Leche: comprado · Deshacer" y avisos */
 .status {
   display: flex;

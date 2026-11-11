@@ -613,7 +613,14 @@
   height: 10px;
   border-radius: 5px;
   background: var(--color-border);
+}
+
+/* Recorta los tramos con la forma de la barra; así la raya de "ahora" puede sobresalir de la pista */
+.dayClip {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
+  border-radius: 5px;
 }
 
 .dayHome,
@@ -635,10 +642,14 @@
   opacity: 0.45;
 }
 
+/* Sobresale 3 px por arriba y por abajo y lleva un contorno del color del fondo: se ve también sobre el verde de "en casa" */
 .dayNow {
+  top: -3px;
+  bottom: -3px;
   width: 2px;
   margin-left: -1px;
   background: var(--color-label);
+  box-shadow: 0 0 0 1px var(--color-bg);
 }
 
 .dayMarksScale {

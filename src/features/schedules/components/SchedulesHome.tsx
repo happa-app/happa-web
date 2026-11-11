@@ -49,7 +49,7 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
       meta={t("home.count", { home, total: people.length })}
       href={base}
       linkLabel={tHome("seeWeek")}
-      linkAriaLabel={tHome("seeAllOf", { section: t("title") })}
+      linkAriaLabel={tHome("seeWeekOf")}
     >
       <div className={homeStyles.card}>
         {hasAnything ? (
@@ -59,17 +59,19 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
                 <div key={person.userId} className={styles.dayRow}>
                   <span className={styles.dayName}>{person.userId === currentUserId ? t("youCap") : person.name}</span>
                   <span className={styles.dayTrack}>
-                    {day.away ? (
-                      <i className={styles.dayAway} />
-                    ) : (
-                      day.home.map((seg) => (
-                        <i
-                          key={seg.from}
-                          className={styles.dayHome}
-                          style={{ left: `${pct(seg.from)}%`, width: `${pct(seg.to) - pct(seg.from)}%` }}
-                        />
-                      ))
-                    )}
+                    <span className={styles.dayClip}>
+                      {day.away ? (
+                        <i className={styles.dayAway} />
+                      ) : (
+                        day.home.map((seg) => (
+                          <i
+                            key={seg.from}
+                            className={styles.dayHome}
+                            style={{ left: `${pct(seg.from)}%`, width: `${pct(seg.to) - pct(seg.from)}%` }}
+                          />
+                        ))
+                      )}
+                    </span>
                     {nowInWindow ? <i className={styles.dayNow} style={{ left: `${pct(now.minutes)}%` }} /> : null}
                   </span>
                 </div>
