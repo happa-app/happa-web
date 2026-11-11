@@ -700,7 +700,9 @@
     "personalTitle": "Mi lista personal",
     "personalSubtitle": "Solo la ves tú. Si necesitas algo de casa, pídelo y aparecerá en la lista común.",
     "personalTeaser": "Tus cosas, y lo que quieras pedir a casa",
-    "pendingCount": "{count, plural, =0 {Nada por comprar} one {# producto por comprar} other {# productos por comprar}}",
+    "home": {
+      "empty": "No falta nada."
+    },
     "previewMore": "+{count} más",
     "previewBought": "{name}: comprado",
     "undo": "Deshacer",

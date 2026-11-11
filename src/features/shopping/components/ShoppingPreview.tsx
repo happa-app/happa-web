@@ -60,6 +60,7 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
   return (
     <HomeSection
       title={t("title")}
+      meta={pending.length > 0 ? String(pending.length) : undefined}
       href={href}
       linkLabel={tHome("seeList")}
       linkAriaLabel={tHome("seeAllOf", { section: t("title") })}
@@ -80,7 +81,7 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
                   <Quantity item={item} />
                 </button>
               ) : (
-                <span className={styles.chip}>
+                <span className={`${styles.chip} ${item.pending ? styles.chipPending : ""}`}>
                   {item.name}
                   <Quantity item={item} />
                 </span>
@@ -89,7 +90,9 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
           ))}
           {hidden > 0 ? <li className={styles.more}>{t("previewMore", { count: hidden })}</li> : null}
         </ul>
-      ) : null}
+      ) : (
+        <p className={styles.empty}>{t("home.empty")}</p>
+      )}
 
       {error ? (
         <p className={styles.error} role="alert">
