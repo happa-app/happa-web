@@ -259,7 +259,9 @@
   },
   "Home": {
     "greeting": "Hi, {name}",
-    "seeAll": "See all",
+    "seeAll": "see all",
+    "seeList": "see list",
+    "seeWeek": "see week",
     "seeAllOf": "See all of {section}"
   },
   "Legal": {
@@ -372,8 +374,7 @@
       "full": "This home is full. Ask someone who lives there to add a place, then open the link again."
     },
     "detail": {
-      "back": "My homes",
-      "comingSoon": "Coming soon here: events and polls."
+      "back": "My homes"
     },
     "settings": {
       "title": "Settings",

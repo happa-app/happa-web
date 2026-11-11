@@ -1,7 +1,6 @@
 // Tareas en Inicio: cuántas te tocan, y las de hoy (más las tuyas atrasadas) con el botón de "hecha".
 // Los próximos días, el reparto de la semana y crear o cambiar tareas están en su página.
 import { useTranslations } from "next-intl";
-import { BroomIcon } from "@/components/brand/Icons";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
 import { Link } from "@/i18n/navigation";
@@ -52,7 +51,6 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
   return (
     <HomeSection
       title={t("title")}
-      icon={<BroomIcon />}
       href={base}
       linkLabel={tHome("seeAll")}
       linkAriaLabel={tHome("seeAllOf", { section: t("title") })}

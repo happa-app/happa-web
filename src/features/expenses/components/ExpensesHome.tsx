@@ -1,7 +1,6 @@
 // Gastos en Inicio: tu saldo, lo que espera que lo confirmes, cómo quedar en paz y los últimos gastos.
 // Todo lo demás (apuntar pagos, el historial, los gastos fijos) está en su página.
 import { useLocale, useTranslations } from "next-intl";
-import { WalletIcon } from "@/components/brand/Icons";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
 import { Link } from "@/i18n/navigation";
@@ -33,7 +32,6 @@ export function ExpensesHome({ householdId, currentUserId, data }: Props) {
   return (
     <HomeSection
       title={t("title")}
-      icon={<WalletIcon />}
       href={base}
       linkLabel={tHome("seeAll")}
       linkAriaLabel={tHome("seeAllOf", { section: t("title") })}

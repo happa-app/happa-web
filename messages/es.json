@@ -259,7 +259,9 @@
   },
   "Home": {
     "greeting": "Hola, {name}",
-    "seeAll": "Ver todo",
+    "seeAll": "ver todo",
+    "seeList": "ver lista",
+    "seeWeek": "ver semana",
     "seeAllOf": "Ver todo de {section}"
   },
   "Legal": {
@@ -372,8 +374,7 @@
       "full": "Este hogar está lleno. Pide a alguien de la casa que añada una plaza y vuelve a abrir el enlace."
     },
     "detail": {
-      "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: eventos y votaciones."
+      "back": "Mis casas"
     },
     "settings": {
       "title": "Configuración",

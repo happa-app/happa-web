@@ -1,12 +1,11 @@
 "use client";
 // Acceso a la lista de la compra desde la página del hogar, con lo que falta por comprar.
 // Va en vivo, igual que la lista: si alguien añade o compra algo, se ve aquí al momento.
-// Tocar un producto lo marca como comprado (con "Deshacer" unos segundos); tocar el resto
-// de la tarjeta abre la lista completa.
+// Tocar un producto lo marca como comprado (con "Deshacer" unos segundos); la lista completa
+// se abre con "ver lista ›" de la cabecera.
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { CartIcon } from "@/components/brand/Icons";
-import { Link } from "@/i18n/navigation";
+import { HomeSection } from "@/components/ui/HomeSection";
 import { useShoppingList } from "../hooks/useShoppingList";
 import { canEditItem, shownQuantity } from "../rules";
 import type { ShoppingItem } from "../types";
@@ -29,6 +28,7 @@ type Props = {
 
 export function ShoppingPreview({ householdId, initialItems, currentUserId, canManageAll, href }: Props) {
   const t = useTranslations("Shopping");
+  const tHome = useTranslations("Home");
   const { items, error, toggle } = useShoppingList({ type: "household", householdId }, initialItems);
   const [lastBoughtId, setLastBoughtId] = useState<string | null>(null);
 
@@ -58,23 +58,12 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
   }
 
   return (
-    <div className={styles.card}>
-      <div className={styles.header}>
-        <span className={styles.icon}>
-          <CartIcon />
-        </span>
-        <span className={styles.text}>
-          {/* El enlace cubre toda la tarjeta (ver .link::after en el CSS); los botones quedan por encima */}
-          <Link href={href} className={styles.link}>
-            {t("title")}
-          </Link>
-          <span className={styles.count}>{t("pendingCount", { count: pending.length })}</span>
-        </span>
-        <span className={styles.chevron} aria-hidden="true">
-          ›
-        </span>
-      </div>
-
+    <HomeSection
+      title={t("title")}
+      href={href}
+      linkLabel={tHome("seeList")}
+      linkAriaLabel={tHome("seeAllOf", { section: t("title") })}
+    >
       {shown.length > 0 ? (
         <ul className={styles.chips} aria-label={t("pending")}>
           {shown.map((item) => (
@@ -118,7 +107,7 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
           </>
         ) : null}
       </p>
-    </div>
+    </HomeSection>
   );
 }
 

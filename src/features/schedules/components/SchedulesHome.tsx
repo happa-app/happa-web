@@ -1,7 +1,6 @@
 // Horarios en Inicio: quién está en casa ahora y quién fuera (y hasta cuándo), según lo apuntado.
 // La semana entera, las ausencias y editar el horario están en su página.
 import { useLocale, useTranslations } from "next-intl";
-import { ClockIcon } from "@/components/brand/Icons";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
 import { formatDay, formatTime } from "../format";
@@ -40,9 +39,8 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
   return (
     <HomeSection
       title={t("title")}
-      icon={<ClockIcon />}
       href={base}
-      linkLabel={tHome("seeAll")}
+      linkLabel={tHome("seeWeek")}
       linkAriaLabel={tHome("seeAllOf", { section: t("title") })}
     >
       <div className={homeStyles.card}>
