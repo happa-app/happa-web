@@ -18,6 +18,7 @@
   --color-owed: #12393f;           /* gastos: te deben */
   --color-owe: #b7511a;            /* gastos: debes, y todo lo que avisa (naranja; contraste AA sobre el fondo) */
   --color-owe-soft: #fef4ec;
+  --color-label: #b7511a;          /* etiquetas en mayúsculas de las secciones de Inicio */
   --color-schedule-class: #7fbfba;  /* horarios: clase (turquesa de los diseños, algo más intenso) */
   --color-schedule-work: #e3a75f;   /* horarios: trabajo */
   --color-schedule-away: #a9b4bb;   /* horarios: fuera, y los días de ausencia */
@@ -66,19 +67,19 @@
   --focus-ring: 0 0 0 3px rgb(18 57 63 / 35%);
 }
 
-/* Tema oscuro: negro y grises neutros, con el petróleo aclarado como acento (enlaces, botones, iconos)
-   y el naranja para lo que pide atención. El verde solo sale en el logo. Las tarjetas se separan del
+/* Tema oscuro: negro y grises neutros, con la mostaza como acento (botones, enlaces, iconos
+   y etiquetas) y un coral suave para lo que debes o avisa. El verde solo sale en el logo. Las tarjetas se separan del
    fondo con un borde finísimo (--shadow-card) en vez de sombra (sobre negro, la sombra no se ve).
    Se activa con <html data-theme="dark">, que pone el script de src/lib/theme.ts antes de pintar la página
    (según lo elegido en Perfil → Tema, o lo que tenga el dispositivo).
-   El petróleo de los botones es más claro que en el tema claro, para que los enlaces se lean sobre el fondo
+   La mostaza de los botones es clara para que los enlaces se lean sobre el fondo
    oscuro; por eso el texto encima de él (--color-on-accent) pasa a ser oscuro. */
 :root[data-theme="dark"] {
   color-scheme: dark;
 
   --color-brand: #69ae7e;
-  --color-brand-strong: #a8cfcb;
-  --color-brand-stronger: #c4e0dd;
+  --color-brand-strong: #d6b252;
+  --color-brand-stronger: #e2c46e;
   /* Rellenos suaves (tu saldo, los círculos de iconos y caras): gris neutro */
   --color-brand-soft: #232525;
 
@@ -90,25 +91,26 @@
   --color-error: #f2938a;
   --color-error-soft: #33201f;
   --color-success-soft: #232525;
-  --color-owed: #ebeceb;
-  --color-owe: #f08a4b;
-  --color-owe-soft: #2b1f17;
+  --color-owed: #c9cccb;
+  --color-owe: #f0a08c;
+  --color-owe-soft: #2e211d;
   --color-schedule-class: #6aa9a2;
   --color-schedule-work: #d29c58;
   --color-schedule-away: #5c6266;
 
-  --color-on-accent: #0f1414;
+  --color-on-accent: #241c03;
   --color-note: #d6b252;
   --color-note-ink: #241c03;
-  --color-rule: var(--color-text);
+  --color-rule: #3a3d3d;
   --color-nav: #0b0c0c;
   --color-nav-ink: #858a8a;
-  --color-nav-active: #f6cf63;
+  --color-nav-active: #d6b252;
+  --color-label: #d6b252;
   --color-review: #9ccfc8;
   --color-review-soft: #1c2928;
   --color-review-border: #4a7d77;
   --color-chip-hover: #242626;
 
   --shadow-card: 0 0 0 1px var(--color-border);
-  --focus-ring: 0 0 0 3px rgb(168 207 203 / 45%);
+  --focus-ring: 0 0 0 3px rgb(214 178 82 / 45%);
 }
