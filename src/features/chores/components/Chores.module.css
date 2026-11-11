@@ -878,6 +878,26 @@ button.check:hover:not(:disabled) .checkCircle {
   min-width: 0;
 }
 
+/* El círculo de "hecha" dentro del post-it va en tinta oscura: la mostaza del tema oscuro se perdería sobre el amarillo */
+.postit .checkCircle {
+  border-color: var(--color-note-ink);
+}
+
+.postit button.check:hover:not(:disabled) .checkCircle,
+.postit .checkPending .checkCircle {
+  background: transparent;
+  color: var(--color-note-ink);
+}
+
+.postit .checkDone .checkCircle {
+  background: var(--color-note-ink);
+  color: var(--color-note);
+}
+
+.postit .check:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-note-ink);
+}
+
 .postitLabel {
   margin: 0;
   font-size: 0.66rem;
