@@ -1093,9 +1093,11 @@
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
     },
     "home": {
+      "title": "Hoy en casa",
       "atHome": "En casa",
-      "empty": "Aún no hay horarios. Apunta cuándo estás fuera para que los demás sepan quién hay en casa.",
-      "count": "{home} de {total} en casa"
+      "empty": "Nadie ha apuntado su horario. Apunta el tuyo y sabréis quién hay en casa.",
+      "count": "{home} de {total}",
+      "mine": "Mi horario"
     }
   },
   "Chores": {

@@ -1093,9 +1093,11 @@
       "generic": "Something went wrong. Please try again"
     },
     "home": {
+      "title": "Home today",
       "atHome": "At home",
-      "empty": "No schedules yet. Add when you're out so everyone knows who's home.",
-      "count": "{home} of {total} at home"
+      "empty": "Nobody has added their schedule. Add yours so everyone knows who's home.",
+      "count": "{home} of {total}",
+      "mine": "My schedule"
     }
   },
   "Chores": {

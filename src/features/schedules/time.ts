@@ -100,3 +100,31 @@ export function presenceAt(
   if (current) return { state: "out", block: current };
   return { state: "home", next: today.find((b) => (toMinutes(b.startsAt) ?? 0) > at.minutes) ?? null };
 }
+
+// Ventana que dibujan las barras de Inicio: de 8:00 a 24:00, en minutos desde medianoche
+export const DAY_START = 480;
+export const DAY_END = 1440;
+
+// Los tramos de un día en los que alguien está en casa (o away si tiene una ausencia ese día)
+export type DayPresence = { away: true } | { away: false; home: { from: number; to: number }[] };
+
+export function dayPresence(
+  userId: string,
+  blocks: ScheduleBlock[],
+  absences: Absence[],
+  day: { date: string; weekday: Weekday },
+): DayPresence {
+  if (absenceOn(userId, absences, day.date)) return { away: true };
+  // En casa = lo que queda de la ventana al quitar las franjas fuera (que vienen ordenadas)
+  const home: { from: number; to: number }[] = [];
+  let cursor = DAY_START;
+  for (const block of blocksOf(userId, blocks, day.weekday)) {
+    const start = toMinutes(block.startsAt);
+    const end = toMinutes(block.endsAt);
+    if (start === null || end === null) continue; // una hora rota se ignora, como en presenceAt
+    if (start > cursor) home.push({ from: cursor, to: Math.min(start, DAY_END) });
+    cursor = Math.max(cursor, end);
+  }
+  if (cursor < DAY_END) home.push({ from: cursor, to: DAY_END });
+  return { away: false, home };
+}

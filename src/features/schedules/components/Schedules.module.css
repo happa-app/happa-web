@@ -583,3 +583,81 @@
 .homePerson > span:first-child {
   flex-shrink: 0;
 }
+
+/* Barras del día en Inicio: de 8:00 a 24:00, una por persona */
+.dayBars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.dayRow,
+.dayMarks {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.dayName {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dayTrack {
+  position: relative;
+  display: block;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.dayHome,
+.dayAway,
+.dayNow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.dayHome {
+  background: var(--color-owed);
+}
+
+.dayAway {
+  left: 0;
+  right: 0;
+  background: var(--color-text-muted);
+  opacity: 0.45;
+}
+
+.dayNow {
+  width: 2px;
+  margin-left: -1px;
+  background: var(--color-label);
+}
+
+.dayMarksScale {
+  position: relative;
+  display: block;
+  height: 1em;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+.dayMarksScale > span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.dayMarksScale > span:first-child {
+  transform: none;
+}
+
+.dayMarksScale > span:last-child {
+  transform: translateX(-100%);
+}
