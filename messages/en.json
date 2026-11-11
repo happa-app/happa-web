@@ -4,44 +4,12 @@
     "description": "Run your home together: shared chores, expenses and shopping."
   },
   "Landing": {
-    "tagline": "Your home, organised together",
+    "tagline": "Home, run together",
     "description": "Share chores, split expenses and keep one shopping list with your flatmates, partner or family.",
     "signup": "Create account",
     "login": "I already have an account",
     "loginShort": "Log in",
     "accountLabel": "Your account",
-    "notes": {
-      "chores": "Bruno's on dishes today",
-      "shopping": "Out of milk (2)",
-      "expenses": "Carla owes you €12.00"
-    },
-    "features": {
-      "title": "Everything at home, in one place",
-      "shopping": {
-        "title": "Shopping list",
-        "text": "One shared list that updates instantly for everyone, plus your own list you can pass to the household whenever you like."
-      },
-      "expenses": {
-        "title": "Shared expenses",
-        "text": "Log who paid for what. Happa works out who owes whom and how to settle up."
-      },
-      "chores": {
-        "title": "Chores in turns",
-        "text": "Turns are shared out automatically. If someone's away on their day, they're skipped and catch up when they're back."
-      },
-      "schedules": {
-        "title": "Schedules",
-        "text": "Everyone's classes, work and trips, so you know who's at home."
-      },
-      "chat": {
-        "title": "Household chat",
-        "text": "Talk to the people you live with without mixing it up with other groups."
-      },
-      "roulette": {
-        "title": "Dirty-job roulette",
-        "text": "Nobody wants to take the bins out? Let the roulette decide, truly at random."
-      }
-    },
     "steps": {
       "title": "How to get started",
       "account": {
@@ -72,6 +40,127 @@
     "closing": {
       "title": "Get your home organised today",
       "text": "Create your account, invite the people you live with and start sharing things out."
+    },
+    "tryDemo": "Try the demo",
+    "soon": "We're finishing the last details: sign-up opens very soon.",
+    "share": "Share Happa",
+    "shareCopied": "Link copied",
+    "shareText": "Have a look at Happa: it helps everyone at home stay organised.",
+    "closingClosed": {
+      "title": "Opening very soon",
+      "text": "While we finish, show it to the people you live with. When sign-up opens, you'll already know how it works."
+    }
+  },
+  "Demo": {
+    "title": "Try it right here",
+    "intro": "A made-up flat, with Bruno and Carla as flatmates. Tap anything you like: nothing is saved.",
+    "tabsLabel": "What do you want to try",
+    "household": "Elm Street flat",
+    "you": "You",
+    "tabs": {
+      "shopping": "Shopping",
+      "expenses": "Expenses",
+      "chores": "Chores",
+      "roulette": "Roulette",
+      "chat": "Chat",
+      "schedules": "Schedules"
+    },
+    "about": {
+      "shopping": "One shared list that everyone sees straight away. Tick what's already in the trolley or add something.",
+      "expenses": "Note down who pays for what. Happa does the sums and says who owes whom.",
+      "chores": "Turns rotate on their own. If it's someone's turn while they're away, it's skipped and they make it up when they're back.",
+      "roulette": "Nobody wants to take the rubbish out? Let the roulette decide, truly at random.",
+      "chat": "A chat just for the household, with polls so you can decide without arguing.",
+      "schedules": "Everyone's classes, work and trips, so you know who's home before texting “anyone in?”."
+    },
+    "shopping": {
+      "items": {
+        "milk": "Milk",
+        "paper": "Kitchen roll",
+        "tomatoes": "Tomatoes",
+        "coffee": "Coffee"
+      },
+      "askedBy": "Asked for by {name}",
+      "askedByYou": "You asked for it",
+      "addLabel": "Add to the list",
+      "addPlaceholder": "Add something…",
+      "add": "Add",
+      "left": "{count, plural, =0 {All bought} one {# thing left} other {# things left}}"
+    },
+    "expenses": {
+      "oweBruno": "You owe Bruno",
+      "oweBrunoAmount": "€18.40",
+      "oweCarla": "You owe Carla",
+      "oweCarlaAmount": "€5.80",
+      "zero": "€0.00",
+      "pay": "Pay Bruno",
+      "waiting": "Paid. Waiting for Bruno to confirm…",
+      "settled": "Bruno has confirmed it. You two are even.",
+      "recent": "Where it comes from",
+      "weekly": "Weekly shop",
+      "weeklyAmount": "€42.60",
+      "weeklyBy": "Bruno paid, split three ways",
+      "internet": "Internet",
+      "internetAmount": "€30.00",
+      "internetBy": "Fixed expense. Carla paid this month, split three ways"
+    },
+    "chores": {
+      "today": "Today",
+      "dishes": "Wash the dishes",
+      "dishesWho": "It's your turn",
+      "dishesDone": "Done",
+      "trash": "Take the rubbish out",
+      "trashWho": "Bruno has already done it",
+      "bathroom": "Clean the bathroom",
+      "bathroomWho": "Carla is away: it's skipped and she makes it up when she's back",
+      "rotation": "Dishwashing turns",
+      "days": {
+        "d1": "Mon",
+        "d2": "Tue",
+        "d3": "Today",
+        "d4": "Thu",
+        "d5": "Fri"
+      }
+    },
+    "roulette": {
+      "question": "Who takes the rubbish out?",
+      "spin": "Spin the roulette",
+      "spinning": "Spinning…",
+      "again": "Spin again",
+      "result": "It's {name}'s turn.",
+      "resultYou": "It's landed on you.",
+      "wheelLabel": "Roulette with three names: you, Bruno and Carla"
+    },
+    "chat": {
+      "m1": "What are we having for dinner on Friday?",
+      "pollTitle": "Friday dinner",
+      "options": {
+        "pizza": "Pizza",
+        "tortilla": "Spanish omelette",
+        "sushi": "Sushi"
+      },
+      "noVotes": "No votes",
+      "hint": "Tap an option to vote. You can change your mind.",
+      "reply": "I vote {option}"
+    },
+    "schedule": {
+      "days": {
+        "d1": "Mon",
+        "d2": "Tue",
+        "d3": "Wed",
+        "d4": "Thu",
+        "d5": "Fri"
+      },
+      "daysLabel": "Day of the week",
+      "kinds": {
+        "class": "Class",
+        "work": "Work",
+        "away": "Away"
+      },
+      "atHome": "At 18:00 at home: {names}",
+      "nobody": "At 18:00 nobody is home",
+      "to": "22:00",
+      "from": "8:00"
     }
   },
   "Auth": {
@@ -155,11 +244,18 @@
       "userExists": "An account with that email already exists",
       "linkExpired": "The link has expired or has already been used. Request another one.",
       "captchaFailed": "We couldn't check that you're not a robot. Wait a moment and try again.",
-      "generic": "Something went wrong. Please try again"
+      "generic": "Something went wrong. Please try again",
+      "signupClosed": "Sign-up isn't open yet."
     },
     "signOut": "Sign out",
     "confirmError": "The link is invalid or has expired. Sign in or sign up again.",
-    "accountDeleted": "Your account has been deleted. Thanks for using HAPPA."
+    "accountDeleted": "Your account has been deleted. Thanks for using HAPPA.",
+    "signupClosed": {
+      "title": "We're not open yet",
+      "text": "We're finishing the last details before opening sign-up. In the meantime, you can try the demo.",
+      "demo": "Try the demo",
+      "login": "I already have an account"
+    }
   },
   "Home": {
     "greeting": "Hi, {name}",
