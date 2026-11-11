@@ -751,7 +751,7 @@
     "tile": {
       "owed": "Te deben {amount}",
       "owe": "Debes {amount}",
-      "even": "Estás en paz",
+      "even": "Estáis en paz",
       "toConfirm": "{count, plural, one {# por confirmar} other {# por confirmar}}"
     },
     "pending": {
@@ -963,12 +963,8 @@
     },
     "leftChat": "Escribir al hogar en el chat",
     "home": {
-      "recent": "Últimos gastos",
-      "noExpenses": "Aún no hay gastos apuntados.",
-      "paidBy": "Pagado por {names} · {date}",
-      "youPay": "Le pagas a {name}",
-      "paysYou": "{name} te paga",
-      "pending": "por confirmar"
+      "owesYou": "{name} te debe {amount}",
+      "youOwe": "Le debes {amount} a {name}"
     }
   },
   "Schedules": {

@@ -1,12 +1,12 @@
-// Gastos en Inicio: tu saldo, lo que espera que lo confirmes, cómo quedar en paz y los últimos gastos.
+// Gastos en Inicio: tu saldo, lo que espera que lo confirmes y la balanza de lo que hay con cada persona.
 // Todo lo demás (apuntar pagos, el historial, los gastos fijos) está en su página.
 import { useLocale, useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
 import { Link } from "@/i18n/navigation";
-import { formatDay, nameMap } from "../format";
+import { nameMap } from "../format";
 import { formatMoney } from "../money";
-import { suggestTransfers } from "../settle";
+import { myBalanceBars, suggestTransfers } from "../settle";
 import type { ExpensesHome as ExpensesHomeData } from "../types";
 import styles from "./Expenses.module.css";
 
@@ -24,10 +24,9 @@ export function ExpensesHome({ householdId, currentUserId, data }: Props) {
   const names = nameMap(data.people);
   const name = (id: string) => names.get(id) ?? t("someone");
   const amount = formatMoney(Math.abs(data.netCents), locale);
-  const list = new Intl.ListFormat(locale, { type: "conjunction" });
 
-  // Solo los pagos sugeridos en los que estás tú
-  const mine = suggestTransfers(data.people).filter((tr) => tr.from === currentUserId || tr.to === currentUserId);
+  // La balanza: los pagos sugeridos en los que estás tú, con su longitud ya calculada
+  const bars = myBalanceBars(suggestTransfers(data.people), currentUserId);
 
   return (
     <HomeSection
@@ -48,50 +47,39 @@ export function ExpensesHome({ householdId, currentUserId, data }: Props) {
           ) : null}
         </div>
 
-        {mine.length > 0 ? (
-          <div>
-            <p className={homeStyles.label}>{t("settle.title")}</p>
-            <ul className={homeStyles.list}>
-              {mine.map((tr) => (
-                <li key={`${tr.from}-${tr.to}`} className={homeStyles.row}>
-                  <span className={homeStyles.rowTitle}>
-                    {tr.from === currentUserId ? t("home.youPay", { name: name(tr.to) }) : t("home.paysYou", { name: name(tr.from) })}
+        {bars.length > 0 ? (
+          <ul className={styles.balance}>
+            {bars.map((bar) => {
+              const money = formatMoney(bar.amountCents, locale);
+              return (
+                <li key={bar.userId} className={styles.balanceRow}>
+                  <span className="visually-hidden">
+                    {bar.owesMe
+                      ? t("home.owesYou", { name: name(bar.userId), amount: money })
+                      : t("home.youOwe", { name: name(bar.userId), amount: money })}
                   </span>
-                  <span className={homeStyles.rowValue}>{formatMoney(tr.amountCents, locale)}</span>
+                  <span className={styles.balanceName} aria-hidden="true">
+                    {name(bar.userId)}
+                  </span>
+                  {/* Dos mitades: a la izquierda lo que debes, a la derecha lo que te deben */}
+                  <span className={styles.balanceHalfLeft} aria-hidden="true">
+                    {bar.owesMe ? null : <span className={styles.barOwe} style={{ width: `${bar.widthPct}%` }} />}
+                  </span>
+                  <span className={styles.balanceHalfRight} aria-hidden="true">
+                    {bar.owesMe ? <span className={styles.barOwed} style={{ width: `${bar.widthPct}%` }} /> : null}
+                  </span>
+                  <span
+                    className={`${styles.balanceAmount} ${bar.owesMe ? styles.homeOwed : styles.homeOwe}`}
+                    aria-hidden="true"
+                  >
+                    {bar.owesMe ? "" : "−"}
+                    {money}
+                  </span>
                 </li>
-              ))}
-            </ul>
-          </div>
+              );
+            })}
+          </ul>
         ) : null}
-
-        <div>
-          <p className={homeStyles.label}>{t("home.recent")}</p>
-          {data.recent.length === 0 ? (
-            <p className={homeStyles.muted}>{t("home.noExpenses")}</p>
-          ) : (
-            <ul className={homeStyles.list}>
-              {data.recent.map((expense) => {
-                const payers = list.format(
-                  expense.payers.map((p) => (p.userId === currentUserId ? t("youObject") : name(p.userId))),
-                );
-                return (
-                  <li key={expense.id}>
-                    <Link href={`${base}/${expense.id}`} className={homeStyles.row}>
-                      <span className={homeStyles.rowMain}>
-                        <span className={homeStyles.rowTitle}>{expense.description}</span>
-                        <span className={homeStyles.rowMeta}>
-                          {t("home.paidBy", { names: payers, date: formatDay(expense.spentOn, locale) })}
-                          {expense.status === "pending" ? ` · ${t("home.pending")}` : null}
-                        </span>
-                      </span>
-                      <span className={homeStyles.rowValue}>{formatMoney(expense.amountCents, locale)}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
 
         <ButtonLink href={`${base}/nuevo`} variant="secondary" fullWidth>
           {t("addExpense")}

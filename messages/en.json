@@ -963,12 +963,8 @@
     },
     "leftChat": "Message the household in the chat",
     "home": {
-      "recent": "Latest expenses",
-      "noExpenses": "No expenses yet.",
-      "paidBy": "Paid by {names} · {date}",
-      "youPay": "You pay {name}",
-      "paysYou": "{name} pays you",
-      "pending": "to confirm"
+      "owesYou": "{name} owes you {amount}",
+      "youOwe": "You owe {name} {amount}"
     }
   },
   "Schedules": {

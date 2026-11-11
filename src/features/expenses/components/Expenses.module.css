@@ -481,8 +481,8 @@
   min-height: 32px;
   padding: 0 var(--space-3);
   border-radius: 999px;
-  background: var(--color-owe-soft);
-  color: var(--color-owe);
+  background: var(--color-note);
+  color: var(--color-note-ink);
   font-size: var(--text-sm);
   font-weight: 700;
   text-decoration: none;
@@ -495,4 +495,63 @@
 .homeBadge:focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
+}
+
+/* La balanza: nombre | mitad izquierda (debes) | mitad derecha (te deben) | importe */
+.balance {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.balanceRow {
+  display: grid;
+  grid-template-columns: minmax(0, 5.5rem) 1fr 1fr auto;
+  align-items: center;
+  column-gap: var(--space-2);
+}
+
+.balanceName {
+  overflow: hidden;
+  font-size: var(--text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.balanceHalfLeft,
+.balanceHalfRight {
+  display: flex;
+  height: 12px;
+}
+
+/* La mitad izquierda crece hacia la izquierda, desde el centro */
+.balanceHalfLeft {
+  justify-content: flex-end;
+  border-right: 2px solid var(--color-border);
+}
+
+.barOwe,
+.barOwed {
+  display: block;
+  height: 100%;
+}
+
+.barOwe {
+  border-radius: 6px 0 0 6px;
+  background: var(--color-owe);
+}
+
+.barOwed {
+  border-radius: 0 6px 6px 0;
+  background: var(--color-owed);
+}
+
+.balanceAmount {
+  min-width: 4.5rem;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
 }
