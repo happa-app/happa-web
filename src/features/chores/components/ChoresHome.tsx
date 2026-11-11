@@ -44,6 +44,8 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
   const hidden = rows.length - shown.length;
   const byId = new Map(chores.map((c) => [c.id, c]));
   const { note, rest } = pickNote(shown, me);
+  // Si no tienes nada pendiente hoy (aunque haya filas de otras personas), "Hoy te libras."
+  const freeToday = !note && !shown.some((d) => d.assigneeId === me && d.status === "pending");
   const noteChore = note ? byId.get(note.choreId) : undefined;
 
   return (
@@ -79,7 +81,7 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
               />
             </div>
           ) : null}
-          {!note && shown.length === 0 ? <p className={homeStyles.muted}>{t("home.todayEmpty")}</p> : null}
+          {freeToday ? <p className={homeStyles.muted}>{t("home.todayEmpty")}</p> : null}
           {rest.length > 0 ? (
             <ul className={styles.homeList}>
               {rest.flatMap((day) => {

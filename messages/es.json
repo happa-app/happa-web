@@ -968,6 +968,7 @@
     },
     "leftChat": "Escribir al hogar en el chat",
     "home": {
+      "youEven": "Estás en paz",
       "owesYou": "{name} te debe {amount}",
       "youOwe": "Le debes {amount} a {name}"
     }

@@ -968,6 +968,7 @@
     },
     "leftChat": "Message the household in the chat",
     "home": {
+      "youEven": "You're square",
       "owesYou": "{name} owes you {amount}",
       "youOwe": "You owe {name} {amount}"
     }

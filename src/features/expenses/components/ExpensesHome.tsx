@@ -26,6 +26,8 @@ export function ExpensesHome({ householdId, currentUserId, data }: Props) {
   const amount = formatMoney(Math.abs(data.netCents), locale);
 
   // La balanza: los pagos sugeridos en los que estás tú, con su longitud ya calculada
+  // "Estáis en paz" solo si nadie del hogar debe nada; si no, "Estás en paz" (tú sí, otros no)
+  const everyoneEven = data.people.every((p) => p.netCents === 0);
   const bars = myBalanceBars(suggestTransfers(data.people), currentUserId);
 
   return (
@@ -38,7 +40,7 @@ export function ExpensesHome({ householdId, currentUserId, data }: Props) {
       <div className={homeStyles.card}>
         <div className={styles.homeBalance}>
           <p className={data.netCents > 0 ? styles.homeOwed : data.netCents < 0 ? styles.homeOwe : styles.homeEven}>
-            {data.netCents > 0 ? t("tile.owed", { amount }) : data.netCents < 0 ? t("tile.owe", { amount }) : t("tile.even")}
+            {data.netCents > 0 ? t("tile.owed", { amount }) : data.netCents < 0 ? t("tile.owe", { amount }) : everyoneEven ? t("tile.even") : t("home.youEven")}
           </p>
           {data.toConfirm > 0 ? (
             <Link href={base} className={styles.homeBadge}>
