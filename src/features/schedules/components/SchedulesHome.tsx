@@ -113,7 +113,7 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
         ) : (
           <p className={homeStyles.muted}>{t("home.empty")}</p>
         )}
-        <ButtonLink href={`${base}/editar`} variant="secondary" fullWidth>
+        <ButtonLink href={`${base}/editar`} fullWidth>
           {t("home.mine")}
         </ButtonLink>
       </div>

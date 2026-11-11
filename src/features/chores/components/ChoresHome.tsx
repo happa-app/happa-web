@@ -59,7 +59,7 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
         <div className={homeStyles.card}>
           <p className={homeStyles.muted}>{isAdult ? t("home.emptyAdult") : t("home.emptyMinor")}</p>
           {isAdult ? (
-            <ButtonLink href={`${base}/nueva`} variant="secondary" fullWidth>
+            <ButtonLink href={`${base}/nueva`} fullWidth>
               {t("home.createFirst")}
             </ButtonLink>
           ) : null}
@@ -81,7 +81,12 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
               />
             </div>
           ) : null}
-          {freeToday ? <p className={homeStyles.muted}>{t("home.todayEmpty")}</p> : null}
+          {/* Sin tareas tuyas hoy: el post-it sale igual, con "Hoy te libras." */}
+          {freeToday ? (
+            <div className={styles.postit}>
+              <p className={styles.postitTitle}>{t("home.todayEmpty")}</p>
+            </div>
+          ) : null}
           {rest.length > 0 ? (
             <ul className={styles.homeList}>
               {rest.flatMap((day) => {

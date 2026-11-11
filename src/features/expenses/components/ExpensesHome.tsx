@@ -83,7 +83,7 @@ export function ExpensesHome({ householdId, currentUserId, data }: Props) {
           </ul>
         ) : null}
 
-        <ButtonLink href={`${base}/nuevo`} variant="secondary" fullWidth>
+        <ButtonLink href={`${base}/nuevo`} fullWidth>
           {t("addExpense")}
         </ButtonLink>
       </div>
