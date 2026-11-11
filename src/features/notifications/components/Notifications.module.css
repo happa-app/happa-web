@@ -34,7 +34,7 @@
   border: 2px solid var(--color-bg);
   border-radius: 999px;
   background: var(--color-owe);
-  color: var(--color-on-accent);
+  color: var(--color-on-owe);
   font-size: 0.6875rem;
   font-weight: 700;
   line-height: 1;
@@ -117,7 +117,7 @@
 }
 
 .dot {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
 }
 
 .dotOff {

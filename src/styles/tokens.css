@@ -1,9 +1,13 @@
 /* Variables de diseño de HAPPA. Cambia aquí un color o un tamaño y cambia en toda la app. */
 :root {
-  /* Marca: petróleo y mostaza. El verde del icono (--color-brand) se queda solo en el logo. */
+  /* Marca: petróleo y verde. El verde del logo es el acento: rellenos en verde claro con texto oscuro encima,
+     y texto e iconos en un verde oscuro (en el tema claro el verde del logo no se lee sobre el papel).
+     Lo que avisa (debes, atrasada) va en naranja o coral. */
   --color-brand: #69ae7e;          /* verde del icono: solo el logo */
-  --color-brand-strong: #12393f;   /* petróleo: botones, enlaces e iconos (contraste alto con texto blanco) */
-  --color-brand-stronger: #0b2a2f; /* botón al pasar el ratón o pulsar */
+  --color-brand-strong: #2f6b47;   /* verde oscuro: texto, enlaces, iconos y bordes de acento (5,8:1 sobre el fondo) */
+  --color-brand-stronger: #245638; /* lo mismo, más oscuro, al pasar el ratón */
+  --color-fill: #69ae7e;           /* relleno de acento: botones, burbuja propia, marcas (texto oscuro encima) */
+  --color-fill-strong: #5b9f70;    /* relleno al pasar el ratón o pulsar */
   --color-brand-soft: #e3ebea;     /* fondos suaves */
 
   /* Texto y superficies */
@@ -18,21 +22,24 @@
   --color-owed: #12393f;           /* gastos: te deben */
   --color-owe: #b7511a;            /* gastos: debes, y todo lo que avisa (naranja; contraste AA sobre el fondo) */
   --color-owe-soft: #fef4ec;
-  --color-label: #b7511a;          /* etiquetas en mayúsculas de las secciones de Inicio */
+  --color-label: #2f6b47;          /* etiquetas en mayúsculas de las secciones de Inicio */
   --color-schedule-class: #7fbfba;  /* horarios: clase (turquesa de los diseños, algo más intenso) */
   --color-schedule-work: #e3a75f;   /* horarios: trabajo */
   --color-schedule-away: #a9b4bb;   /* horarios: fuera, y los días de ausencia */
-  /* Texto encima de un color fuerte (botones petróleo, la burbuja de tus mensajes, el número de avisos) */
-  --color-on-accent: #fff;
-  /* Mostaza: post-it y aviso "por confirmar" */
-  --color-note: #f6cf63;
-  --color-note-ink: #3a2c05;
+  /* Texto encima del relleno de acento (botones, la burbuja de tus mensajes) */
+  --color-on-accent: #0f1414;
+  /* Texto encima de los rellenos de aviso: el oscuro no llega a 4,5:1 sobre el naranja ni el rojo del tema claro */
+  --color-on-owe: #fff;
+  --color-on-error: #fff;
+  /* Verde claro: post-it y aviso "por confirmar" */
+  --color-note: #bfe0c8;
+  --color-note-ink: #173d27;
   /* Raya gruesa encima de cada sección */
   --color-rule: var(--color-text);
   /* Barra de navegación de abajo */
   --color-nav: #12393f;
   --color-nav-ink: #9db5b6;        /* pestañas no activas */
-  --color-nav-active: #f6cf63;     /* pestaña activa */
+  --color-nav-active: #8fcaa1;     /* pestaña activa */
   /* Tareas: esperando el visto bueno (turquesa) */
   --color-review: #2c6763;
   --color-review-soft: #e3f1f0;
@@ -64,22 +71,24 @@
   --radius-md: 8px;
   --radius-lg: 10px;
   --shadow-card: 0 0 0 1px var(--color-border);
-  --focus-ring: 0 0 0 3px rgb(18 57 63 / 70%);
+  --focus-ring: 0 0 0 3px rgb(47 107 71 / 70%);
 }
 
-/* Tema oscuro: negro y grises neutros, con la mostaza como acento (botones, enlaces, iconos
-   y etiquetas) y un coral suave para lo que debes o avisa. El verde solo sale en el logo. Las tarjetas se separan del
+/* Tema oscuro: negro y grises neutros, con el verde del logo como acento (botones, enlaces, iconos
+   y etiquetas) y un coral suave para lo que debes o avisa. Las tarjetas se separan del
    fondo con un borde finísimo (--shadow-card) en vez de sombra (sobre negro, la sombra no se ve).
    Se activa con <html data-theme="dark">, que pone el script de src/lib/theme.ts antes de pintar la página
    (según lo elegido en Perfil → Tema, o lo que tenga el dispositivo).
-   La mostaza de los botones es clara para que los enlaces se lean sobre el fondo
-   oscuro; por eso el texto encima de él (--color-on-accent) pasa a ser oscuro. */
+   El verde sirve a la vez de relleno y de texto sobre el fondo oscuro; el texto
+   encima del relleno (--color-on-accent) es oscuro. */
 :root[data-theme="dark"] {
   color-scheme: dark;
 
   --color-brand: #69ae7e;
-  --color-brand-strong: #d6b252;
-  --color-brand-stronger: #e2c46e;
+  --color-brand-strong: #69ae7e;
+  --color-brand-stronger: #82bf94;
+  --color-fill: #69ae7e;
+  --color-fill-strong: #82bf94;
   /* Rellenos suaves (tu saldo, los círculos de iconos y caras): gris neutro */
   --color-brand-soft: #232525;
 
@@ -98,19 +107,21 @@
   --color-schedule-work: #d29c58;
   --color-schedule-away: #5c6266;
 
-  --color-on-accent: #241c03;
-  --color-note: #d6b252;
-  --color-note-ink: #241c03;
+  --color-on-accent: #0f1414;
+  --color-on-owe: #0f1414;
+  --color-on-error: #0f1414;
+  --color-note: #69ae7e;
+  --color-note-ink: #0f1414;
   --color-rule: #3a3d3d;
   --color-nav: #0b0c0c;
   --color-nav-ink: #858a8a;
-  --color-nav-active: #d6b252;
-  --color-label: #d6b252;
+  --color-nav-active: #69ae7e;
+  --color-label: #69ae7e;
   --color-review: #9ccfc8;
   --color-review-soft: #1c2928;
   --color-review-border: #4a7d77;
   --color-chip-hover: #242626;
 
   --shadow-card: 0 0 0 1px var(--color-border);
-  --focus-ring: 0 0 0 3px rgb(214 178 82 / 70%);
+  --focus-ring: 0 0 0 3px rgb(105 174 126 / 70%);
 }

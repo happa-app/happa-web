@@ -3,7 +3,7 @@
 // Se registra al abrir la app (ServiceWorker.tsx) y también al activar los avisos.
 // Solo se guarda la página sin conexión y su icono: nunca nada tuyo (las páginas de la app no se guardan).
 
-const CACHE = "happa-offline-v2";
+const CACHE = "happa-offline-v3";
 const OFFLINE_URL = "/offline.html";
 const OFFLINE_FILES = [OFFLINE_URL, "/icons/icon-192.png"];
 

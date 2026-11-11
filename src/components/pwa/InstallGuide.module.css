@@ -25,7 +25,7 @@
   padding: 0 var(--space-6);
   border: 0;
   border-radius: var(--radius-md);
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
   font: inherit;
   font-weight: 600;
@@ -33,7 +33,7 @@
 }
 
 .button:hover {
-  background: var(--color-brand-stronger);
+  background: var(--color-fill-strong);
 }
 
 .button:focus-visible {

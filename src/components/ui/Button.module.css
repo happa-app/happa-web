@@ -25,12 +25,12 @@
 }
 
 .primary {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
 }
 
 .primary:hover:not(:disabled) {
-  background: var(--color-brand-stronger);
+  background: var(--color-fill-strong);
 }
 
 .secondary {
@@ -45,7 +45,7 @@
 
 .danger {
   background: var(--color-error);
-  color: var(--color-on-accent);
+  color: var(--color-on-error);
 }
 
 .danger:hover:not(:disabled) {

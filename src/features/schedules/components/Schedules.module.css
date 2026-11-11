@@ -73,7 +73,7 @@
 }
 
 .dotHome {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
 }
 
 .dotOut {
@@ -131,7 +131,7 @@
 }
 
 .dayTabActive {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
 }
 

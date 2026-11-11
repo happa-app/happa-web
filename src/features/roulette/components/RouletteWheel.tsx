@@ -6,7 +6,7 @@ import styles from "./Roulette.module.css";
 
 // Colores de los trozos (con el texto que se lee bien encima)
 const COLORS = [
-  { fill: "#f6cf63", text: "#3a2c05" },
+  { fill: "#69ae7e", text: "#0f1414" },
   { fill: "#a1d1cd", text: "#12393f" },
   { fill: "#e3a75f", text: "#12393f" },
   { fill: "#12393f", text: "#ffffff" },
