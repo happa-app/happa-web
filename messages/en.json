@@ -259,8 +259,12 @@
   },
   "Home": {
     "greeting": "Hi, {name}",
-    "seeAll": "See all",
-    "seeAllOf": "See all of {section}"
+    "seeAll": "see all",
+    "seeList": "see list",
+    "seeWeek": "see week",
+    "seeAllOf": "See all of {section}",
+    "seeListOf": "See list of shopping items",
+    "seeWeekOf": "See week of the schedule"
   },
   "Legal": {
     "terms": "Terms of use",
@@ -372,8 +376,7 @@
       "full": "This home is full. Ask someone who lives there to add a place, then open the link again."
     },
     "detail": {
-      "back": "My homes",
-      "comingSoon": "Coming soon here: events and polls."
+      "back": "My homes"
     },
     "settings": {
       "title": "Settings",
@@ -699,7 +702,10 @@
     "personalTitle": "My personal list",
     "personalSubtitle": "Only you can see it. If you need something for home, request it and it'll appear on the shared list.",
     "personalTeaser": "Your things, and what you want to ask home for",
-    "pendingCount": "{count, plural, =0 {Nothing to buy} one {# item to buy} other {# items to buy}}",
+    "home": {
+      "title": "Shopping",
+      "empty": "Nothing missing."
+    },
     "previewMore": "+{count} more",
     "previewBought": "{name}: bought",
     "undo": "Undo",
@@ -962,12 +968,9 @@
     },
     "leftChat": "Message the household in the chat",
     "home": {
-      "recent": "Latest expenses",
-      "noExpenses": "No expenses yet.",
-      "paidBy": "Paid by {names} · {date}",
-      "youPay": "You pay {name}",
-      "paysYou": "{name} pays you",
-      "pending": "to confirm"
+      "youEven": "You're square",
+      "owesYou": "{name} owes you {amount}",
+      "youOwe": "You owe {name} {amount}"
     }
   },
   "Schedules": {
@@ -1093,9 +1096,11 @@
       "generic": "Something went wrong. Please try again"
     },
     "home": {
+      "title": "Home today",
       "atHome": "At home",
-      "empty": "No schedules yet. Add when you're out so everyone knows who's home.",
-      "count": "{home} of {total} at home"
+      "empty": "Nobody has added their schedule. Add yours so everyone knows who's home.",
+      "count": "{home} of {total}",
+      "mine": "My schedule"
     }
   },
   "Chores": {
@@ -1297,6 +1302,14 @@
       "generic": "Something went wrong. Please try again"
     },
     "home": {
+      "today": "Your turn today",
+      "review": "waiting for approval",
+      "since": "{name} · since {date}",
+      "sinceYesterday": "{name} · since yesterday",
+      "todayEmpty": "You're off the hook today.",
+      "emptyAdult": "No chores yet. Who's doing the dishes today?",
+      "emptyMinor": "No chores for you yet. When someone gives you one, it'll show up here.",
+      "createFirst": "Add a chore",
       "more": "{count, plural, one {See # more chore today} other {See # more chores today}}"
     }
   },

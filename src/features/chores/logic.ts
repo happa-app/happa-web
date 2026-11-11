@@ -83,3 +83,9 @@ export function weekShare(days: ChoreDay[], chores: Chore[], people: ChorePerson
     };
   });
 }
+
+// El post-it de Inicio: la primera fila tuya y pendiente. El resto, igual y en el mismo orden.
+export function pickNote(rows: ChoreDay[], me: string): { note: ChoreDay | null; rest: ChoreDay[] } {
+  const note = rows.find((d) => d.assigneeId === me && d.status === "pending") ?? null;
+  return { note, rest: note ? rows.filter((d) => d !== note) : rows };
+}

@@ -25,27 +25,27 @@
 }
 
 .primary {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
 }
 
 .primary:hover:not(:disabled) {
-  background: var(--color-brand-stronger);
+  background: var(--color-fill-strong);
 }
 
 .secondary {
-  background: var(--color-surface);
+  background: transparent;
   color: var(--color-brand-strong);
-  border-color: var(--color-border);
+  border: 1.5px solid var(--color-brand-strong);
 }
 
 .secondary:hover:not(:disabled) {
-  border-color: var(--color-brand-strong);
+  background: var(--color-brand-soft);
 }
 
 .danger {
   background: var(--color-error);
-  color: var(--color-on-accent);
+  color: var(--color-on-error);
 }
 
 .danger:hover:not(:disabled) {

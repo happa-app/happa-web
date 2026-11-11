@@ -51,7 +51,7 @@
   min-height: 48px;
   border: 0;
   border-radius: var(--radius-md);
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
   font-size: 1.75rem;
   line-height: 1;
@@ -59,7 +59,7 @@
 }
 
 .addButton:hover {
-  background: var(--color-brand-stronger);
+  background: var(--color-fill-strong);
 }
 
 .addButton:focus-visible {

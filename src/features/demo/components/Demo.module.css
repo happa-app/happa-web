@@ -264,7 +264,7 @@ label.row {
   padding: 0 var(--space-4);
   border: 0;
   border-radius: var(--radius-md);
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
   font: inherit;
   font-weight: 600;
@@ -277,7 +277,7 @@ label.row {
 
 .wideButton:hover:not(:disabled),
 .smallButton:hover:not(:disabled) {
-  background: var(--color-brand-stronger);
+  background: var(--color-fill-strong);
 }
 
 .wideButton:disabled,
@@ -534,7 +534,7 @@ label.row {
 }
 
 .dayButtonActive {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
 }
 

@@ -219,7 +219,7 @@ a.rowTitle:hover {
 }
 
 .effortDotOn {
-  background: var(--color-brand);
+  background: var(--color-brand-strong);
 }
 
 /* Botón redondo de "hecha" */
@@ -272,7 +272,7 @@ button.check:hover:not(:disabled) .checkCircle {
 }
 
 .checkDone .checkCircle {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
 }
 
@@ -412,7 +412,7 @@ button.check:hover:not(:disabled) .checkCircle {
   position: absolute;
   inset: 0 auto 0 0;
   border-radius: 999px;
-  background: var(--color-brand);
+  background: var(--color-brand-strong);
 }
 
 .shareNumbers {
@@ -542,7 +542,7 @@ button.check:hover:not(:disabled) .checkCircle {
 .segmentOptionActive {
   background: var(--color-surface);
   color: var(--color-brand-strong);
-  box-shadow: 0 1px 2px rgb(31 59 77 / 12%);
+  box-shadow: 0 1px 2px rgb(18 57 63 / 12%);
 }
 
 .segmentOption:focus-within,
@@ -693,7 +693,7 @@ button.check:hover:not(:disabled) .checkCircle {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
   font-size: 0.8125rem;
   font-weight: 700;
@@ -834,6 +834,13 @@ button.check:hover:not(:disabled) .checkCircle {
   background: var(--color-error-soft);
 }
 
+/* En el post-it el botón está a la derecha: el aviso se abre hacia la izquierda y debajo, para no salirse de la pantalla */
+.postit .checkForm .actionError {
+  top: calc(100% + 4px);
+  left: auto;
+  right: 0;
+}
+
 /* Próximos días: una caja con un grupo por día */
 .groups {
   display: flex;
@@ -861,14 +868,182 @@ button.check:hover:not(:disabled) .checkCircle {
 }
 
 /* ───── Inicio ───── */
-.homeSummary {
+/* ───── Inicio: post-it y lista compacta ───── */
+.postit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 3px;
+  background: var(--color-note);
+  color: var(--color-note-ink);
+  transform: rotate(-1deg);
+}
+
+.postitText {
+  min-width: 0;
+}
+
+/* El círculo de "hecha" dentro del post-it va en tinta oscura: el verde de los círculos se perdería sobre el verde del post-it */
+.postit .checkCircle {
+  border-color: var(--color-note-ink);
+}
+
+.postit button.check:hover:not(:disabled) .checkCircle,
+.postit .checkPending .checkCircle {
+  background: transparent;
+  color: var(--color-note-ink);
+}
+
+.postit .checkDone .checkCircle {
+  background: var(--color-note-ink);
+  color: var(--color-note);
+}
+
+.postit .check:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-note-ink);
+}
+
+.postitLabel {
   margin: 0;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.postitTitle {
+  color: inherit;
+  text-decoration: none;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.homeList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.homeList > li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+/* 44 px de alto: así las zonas táctiles de 44 px de filas seguidas no se solapan */
+.homeRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: var(--space-2) 0;
+}
+
+/* Hueco de 14 px: es lo que sobresale la zona táctil del botón (margin -14px), así no tapa el título */
+.homeRowLine {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.homeDot {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--color-text);
+  border-radius: 50%;
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.homeDotDone {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.homeDotOverdue {
+  border-color: var(--color-owe);
+  color: var(--color-owe);
+}
+
+.homeRowTitle {
+  flex: 1;
+  text-decoration: none;
+  min-width: 0;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.homeRowTitleDone {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.postitTitle:hover,
+.postitTitle:focus-visible,
+.homeRowTitle:hover,
+.homeRowTitle:focus-visible {
+  text-decoration: underline;
+}
+
+/* Botón redondo dentro de la fila compacta: círculo de 16 px con el área de toque de 44 px */
+.homeRowLine .checkForm {
+  margin: -14px;
+}
+
+/* Una atrasada con botón: el círculo en coral */
+.homeRowOverdue .checkCircle {
+  border-color: var(--color-owe);
+}
+
+.homeRowLine .checkCircle {
+  width: 16px;
+  height: 16px;
+  border-width: 1.5px;
+}
+
+.homeRowLine .checkCircle svg {
+  width: 10px;
+  height: 10px;
+}
+
+.homeWho {
+  flex-shrink: 0;
+  margin: 0;
+  color: var(--color-text-muted);
   font-size: var(--text-sm);
 }
 
-.homeAlert {
+.homeWhoOverdue {
   color: var(--color-owe);
   font-weight: 600;
+}
+
+.homeReview {
+  flex-shrink: 0;
+  padding: 1px var(--space-2);
+  border: 1px solid var(--color-review-border);
+  border-radius: 999px;
+  color: var(--color-text);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.homeRowActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-left: calc(16px + var(--space-2));
 }
 
 .homeMore {

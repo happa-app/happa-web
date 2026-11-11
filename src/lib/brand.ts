@@ -2,6 +2,6 @@
 // Tienen que coincidir con src/styles/tokens.css.
 
 // El fondo de la app (--color-bg): también es el color de la barra de arriba y de la pantalla de carga
-export const APP_BACKGROUND = "#f6f7f4";
+export const APP_BACKGROUND = "#f6f5f0";
 // El mismo fondo en el tema oscuro (--color-bg de :root[data-theme="dark"])
-export const APP_BACKGROUND_DARK = "#101112";
+export const APP_BACKGROUND_DARK = "#121313";

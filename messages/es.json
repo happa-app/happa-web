@@ -259,8 +259,12 @@
   },
   "Home": {
     "greeting": "Hola, {name}",
-    "seeAll": "Ver todo",
-    "seeAllOf": "Ver todo de {section}"
+    "seeAll": "ver todo",
+    "seeList": "ver lista",
+    "seeWeek": "ver semana",
+    "seeAllOf": "Ver todo de {section}",
+    "seeListOf": "Ver lista de la compra",
+    "seeWeekOf": "Ver semana del horario"
   },
   "Legal": {
     "terms": "Términos de uso",
@@ -372,8 +376,7 @@
       "full": "Este hogar está lleno. Pide a alguien de la casa que añada una plaza y vuelve a abrir el enlace."
     },
     "detail": {
-      "back": "Mis casas",
-      "comingSoon": "Muy pronto, aquí: eventos y votaciones."
+      "back": "Mis casas"
     },
     "settings": {
       "title": "Configuración",
@@ -699,7 +702,10 @@
     "personalTitle": "Mi lista personal",
     "personalSubtitle": "Solo la ves tú. Si necesitas algo de casa, pídelo y aparecerá en la lista común.",
     "personalTeaser": "Tus cosas, y lo que quieras pedir a casa",
-    "pendingCount": "{count, plural, =0 {Nada por comprar} one {# producto por comprar} other {# productos por comprar}}",
+    "home": {
+      "title": "Compra",
+      "empty": "No falta nada."
+    },
     "previewMore": "+{count} más",
     "previewBought": "{name}: comprado",
     "undo": "Deshacer",
@@ -750,7 +756,7 @@
     "tile": {
       "owed": "Te deben {amount}",
       "owe": "Debes {amount}",
-      "even": "Estás en paz",
+      "even": "Estáis en paz",
       "toConfirm": "{count, plural, one {# por confirmar} other {# por confirmar}}"
     },
     "pending": {
@@ -962,12 +968,9 @@
     },
     "leftChat": "Escribir al hogar en el chat",
     "home": {
-      "recent": "Últimos gastos",
-      "noExpenses": "Aún no hay gastos apuntados.",
-      "paidBy": "Pagado por {names} · {date}",
-      "youPay": "Le pagas a {name}",
-      "paysYou": "{name} te paga",
-      "pending": "por confirmar"
+      "youEven": "Estás en paz",
+      "owesYou": "{name} te debe {amount}",
+      "youOwe": "Le debes {amount} a {name}"
     }
   },
   "Schedules": {
@@ -1093,9 +1096,11 @@
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
     },
     "home": {
+      "title": "Hoy en casa",
       "atHome": "En casa",
-      "empty": "Aún no hay horarios. Apunta cuándo estás fuera para que los demás sepan quién hay en casa.",
-      "count": "{home} de {total} en casa"
+      "empty": "Nadie ha apuntado su horario. Apunta el tuyo y sabréis quién hay en casa.",
+      "count": "{home} de {total}",
+      "mine": "Mi horario"
     }
   },
   "Chores": {
@@ -1297,6 +1302,14 @@
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
     },
     "home": {
+      "today": "Hoy te toca",
+      "review": "espera visto bueno",
+      "since": "{name} · desde el {date}",
+      "sinceYesterday": "{name} · desde ayer",
+      "todayEmpty": "Hoy te libras.",
+      "emptyAdult": "Todavía no hay tareas. ¿Quién friega hoy?",
+      "emptyMinor": "Aún no tienes tareas. Cuando te pongan alguna, sale aquí.",
+      "createFirst": "Crear una tarea",
       "more": "{count, plural, one {Ver # tarea más de hoy} other {Ver # tareas más de hoy}}"
     }
   },

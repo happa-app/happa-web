@@ -6,12 +6,12 @@ import styles from "./Roulette.module.css";
 
 // Colores de los trozos (con el texto que se lee bien encima)
 const COLORS = [
-  { fill: "#69ae7e", text: "#ffffff" },
-  { fill: "#a1d1cd", text: "#1f3b4d" },
-  { fill: "#e3a75f", text: "#1f3b4d" },
-  { fill: "#3e7d55", text: "#ffffff" },
-  { fill: "#e6f2ea", text: "#1f3b4d" },
-  { fill: "#7fbfba", text: "#1f3b4d" },
+  { fill: "#69ae7e", text: "#0f1414" },
+  { fill: "#a1d1cd", text: "#12393f" },
+  { fill: "#e3a75f", text: "#12393f" },
+  { fill: "#12393f", text: "#ffffff" },
+  { fill: "#e3ebea", text: "#12393f" },
+  { fill: "#7fbfba", text: "#12393f" },
 ];
 
 const SIZE = 300;

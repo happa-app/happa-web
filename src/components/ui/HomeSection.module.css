@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 2px solid var(--color-rule);
 }
 
 .head {
@@ -12,29 +14,13 @@
 }
 
 .title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
   min-width: 0;
-  font-size: var(--text-lg);
+  margin: 0;
+  color: var(--color-label);
+  font-size: 0.66rem;
   font-weight: 700;
-}
-
-.icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background: var(--color-brand-soft);
-  color: var(--color-brand-strong);
-}
-
-.icon svg {
-  width: 20px;
-  height: 20px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
 }
 
 .more {
@@ -43,6 +29,7 @@
   align-items: center;
   min-height: 44px;
   padding: 0 var(--space-1);
+  color: var(--color-text-muted);
   font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
@@ -64,36 +51,11 @@
   box-shadow: var(--focus-ring);
 }
 
-/* Tarjeta blanca de dentro (la usan los resúmenes de cada sección) */
+/* Contenedor de dentro (lo usan los resúmenes de cada sección): sin caja, fondo ni sombra */
 .card {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
-}
-
-/* Etiqueta pequeña de un bloque dentro de la tarjeta ("Últimos gastos") */
-.label {
-  margin: 0 0 var(--space-1);
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-  font-weight: 700;
-}
-
-/* Lista sencilla: texto a la izquierda, cifra a la derecha */
-.list {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.list > li + li {
-  border-top: 1px solid var(--color-border);
 }
 
 .row {
@@ -132,12 +94,6 @@ a.row:focus-visible {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   overflow-wrap: anywhere;
-}
-
-.rowValue {
-  flex-shrink: 0;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
 }
 
 .muted {

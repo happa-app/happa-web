@@ -73,7 +73,7 @@
 }
 
 .dotHome {
-  background: var(--color-brand);
+  background: var(--color-brand-strong);
 }
 
 .dotOut {
@@ -131,7 +131,7 @@
 }
 
 .dayTabActive {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
 }
 
@@ -490,7 +490,7 @@
 .segmentOptionActive {
   background: var(--color-surface);
   color: var(--color-brand-strong);
-  box-shadow: 0 1px 2px rgb(31 59 77 / 12%);
+  box-shadow: 0 1px 2px rgb(18 57 63 / 12%);
 }
 
 .segmentOption:focus-within,
@@ -582,4 +582,93 @@
 
 .homePerson > span:first-child {
   flex-shrink: 0;
+}
+
+/* Barras del día en Inicio: de 8:00 a 24:00, una por persona */
+.dayBars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.dayRow,
+.dayMarks {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.dayName {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dayTrack {
+  position: relative;
+  display: block;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-border);
+}
+
+/* Recorta los tramos con la forma de la barra; así la raya de "ahora" puede sobresalir de la pista */
+.dayClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.dayHome,
+.dayAway,
+.dayNow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.dayHome {
+  background: var(--color-owed);
+}
+
+.dayAway {
+  left: 0;
+  right: 0;
+  background: var(--color-text-muted);
+  opacity: 0.45;
+}
+
+/* Sobresale 3 px por arriba y por abajo y lleva un contorno del color del fondo: se ve también sobre el verde de "en casa" */
+.dayNow {
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--color-label);
+  box-shadow: 0 0 0 1px var(--color-bg);
+}
+
+.dayMarksScale {
+  position: relative;
+  display: block;
+  height: 1em;
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+
+.dayMarksScale > span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.dayMarksScale > span:first-child {
+  transform: none;
+}
+
+.dayMarksScale > span:last-child {
+  transform: translateX(-100%);
 }

@@ -1,26 +1,27 @@
-// Una parte de la página del hogar (Inicio): título con su icono, "Ver todo" (lleva a su página) y
-// debajo un resumen más completo que una tarjeta (gastos, horarios, tareas).
+// Una parte de la página del hogar (Inicio): raya arriba, etiqueta en mayúsculas pequeñas (con un dato
+// detrás si hace falta), enlace "ver todo ›" a la derecha (lleva a su página) y debajo el resumen.
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import styles from "./HomeSection.module.css";
 
 type Props = {
   title: string;
-  icon: ReactNode;
+  // Dato que va detrás de la etiqueta: "Compra · 5"
+  meta?: string;
   href: string;
-  // "Ver todo" y, para lectores de pantalla, "Ver todo de Gastos"
+  // "ver todo" y, para lectores de pantalla, "Ver todo de Gastos"
   linkLabel: string;
   linkAriaLabel: string;
   children: ReactNode;
 };
 
-export function HomeSection({ title, icon, href, linkLabel, linkAriaLabel, children }: Props) {
+export function HomeSection({ title, meta, href, linkLabel, linkAriaLabel, children }: Props) {
   return (
     <section className={styles.section}>
       <div className={styles.head}>
         <h2 className={styles.title}>
-          <span className={styles.icon}>{icon}</span>
           {title}
+          {meta ? ` · ${meta}` : null}
         </h2>
         <Link href={href} className={styles.more} aria-label={linkAriaLabel}>
           {linkLabel}

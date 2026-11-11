@@ -1,11 +1,10 @@
 // Horarios en Inicio: quién está en casa ahora y quién fuera (y hasta cuándo), según lo apuntado.
 // La semana entera, las ausencias y editar el horario están en su página.
 import { useLocale, useTranslations } from "next-intl";
-import { ClockIcon } from "@/components/brand/Icons";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
 import { formatDay, formatTime } from "../format";
-import { fromMinutes, presenceAt } from "../time";
+import { DAY_END, DAY_START, dayPresence, presenceAt } from "../time";
 import type { Absence, ScheduleBlock, SchedulePerson, Weekday } from "../types";
 import styles from "./Schedules.module.css";
 
@@ -37,21 +36,58 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
     );
   const home = rows.filter((r) => r.presence.state === "home").length;
 
+  // Barras del día: "Tú" primero y luego el orden de people
+  const bars = [...people]
+    .sort((a, b) => Number(b.userId === currentUserId) - Number(a.userId === currentUserId))
+    .map((person) => ({ person, day: dayPresence(person.userId, blocks, absences, now) }));
+  const pct = (minutes: number) => ((minutes - DAY_START) / (DAY_END - DAY_START)) * 100;
+  const nowInWindow = now.minutes >= DAY_START && now.minutes < DAY_END;
+
   return (
     <HomeSection
-      title={t("title")}
-      icon={<ClockIcon />}
+      title={t("home.title")}
+      meta={t("home.count", { home, total: people.length })}
       href={base}
-      linkLabel={tHome("seeAll")}
-      linkAriaLabel={tHome("seeAllOf", { section: t("title") })}
+      linkLabel={tHome("seeWeek")}
+      linkAriaLabel={tHome("seeWeekOf")}
     >
       <div className={homeStyles.card}>
         {hasAnything ? (
-          <div>
-            <p className={homeStyles.label}>
-              {t("now.title", { time: formatTime(fromMinutes(now.minutes)) })} · {t("home.count", { home, total: people.length })}
-            </p>
-            <ul className={homeStyles.list}>
+          <>
+            <div className={styles.dayBars} aria-hidden="true">
+              {bars.map(({ person, day }) => (
+                <div key={person.userId} className={styles.dayRow}>
+                  <span className={styles.dayName}>{person.userId === currentUserId ? t("youCap") : person.name}</span>
+                  <span className={styles.dayTrack}>
+                    <span className={styles.dayClip}>
+                      {day.away ? (
+                        <i className={styles.dayAway} />
+                      ) : (
+                        day.home.map((seg) => (
+                          <i
+                            key={seg.from}
+                            className={styles.dayHome}
+                            style={{ left: `${pct(seg.from)}%`, width: `${pct(seg.to) - pct(seg.from)}%` }}
+                          />
+                        ))
+                      )}
+                    </span>
+                    {nowInWindow ? <i className={styles.dayNow} style={{ left: `${pct(now.minutes)}%` }} /> : null}
+                  </span>
+                </div>
+              ))}
+              <div className={styles.dayMarks}>
+                <span />
+                <span className={styles.dayMarksScale}>
+                  {[8, 12, 16, 20, 24].map((h) => (
+                    <span key={h} style={{ left: `${pct(h * 60)}%` }}>
+                      {h}h
+                    </span>
+                  ))}
+                </span>
+              </div>
+            </div>
+            <ul className="visually-hidden">
               {rows.map(({ person, presence }) => (
                 <li key={person.userId} className={homeStyles.row}>
                   <span className={styles.homePerson}>
@@ -73,12 +109,12 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
                 </li>
               ))}
             </ul>
-          </div>
+          </>
         ) : (
           <p className={homeStyles.muted}>{t("home.empty")}</p>
         )}
-        <ButtonLink href={`${base}/editar`} variant="secondary" fullWidth>
-          {t("actions.editMine")}
+        <ButtonLink href={`${base}/editar`} fullWidth>
+          {t("home.mine")}
         </ButtonLink>
       </div>
     </HomeSection>

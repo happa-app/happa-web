@@ -47,3 +47,6 @@ next-env.d.ts
 # Instrucciones de Claude Code (solo en local: viven en .claude/CLAUDE.md)
 /CLAUDE.md
 /.claude/CLAUDE.md
+
+# Maquetas de las sesiones de diseño con Claude (compañero visual)
+/.superpowers/

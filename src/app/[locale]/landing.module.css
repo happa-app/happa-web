@@ -42,12 +42,12 @@
 }
 
 .signupLink {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
 }
 
 .signupLink:hover {
-  background: var(--color-brand-stronger);
+  background: var(--color-fill-strong);
 }
 
 .loginLink:focus-visible,
@@ -146,12 +146,12 @@
 }
 
 .primary {
-  background: var(--color-brand-strong);
+  background: var(--color-fill);
   color: var(--color-on-accent);
 }
 
 .primary:hover {
-  background: var(--color-brand-stronger);
+  background: var(--color-fill-strong);
 }
 
 .secondary {

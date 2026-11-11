@@ -1,5 +1,5 @@
-// Página /hogar/<id> (pestaña "Inicio" de la barra de abajo): el hogar con lo que falta en la compra y un
-// resumen de gastos, horarios y tareas (cada uno con su página para verlo todo). El chat tiene su pestaña;
+// Página /hogar/<id> (pestaña "Inicio" de la barra de abajo): el hogar con un resumen, por este orden, de
+// gastos, tareas, compra y horario (cada uno con su página para verlo todo). El chat tiene su pestaña;
 // las personas, la invitación, las plazas y salir del hogar están en Más → Configuración.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -60,6 +60,8 @@ export default async function HouseholdPage({ params }: Props) {
 
       {isResident ? (
         <>
+          {expenses ? <ExpensesHome householdId={household.id} currentUserId={userId} data={expenses} /> : null}
+          {chores ? <ChoresHome householdId={household.id} overview={chores} currentUserId={userId} /> : null}
           <ShoppingPreview
             householdId={household.id}
             initialItems={shoppingItems}
@@ -67,7 +69,6 @@ export default async function HouseholdPage({ params }: Props) {
             canManageAll={isAdult}
             href={`/hogar/${household.id}/compra`}
           />
-          {expenses ? <ExpensesHome householdId={household.id} currentUserId={userId} data={expenses} /> : null}
           {schedules ? (
             <SchedulesHome
               householdId={household.id}
@@ -78,8 +79,6 @@ export default async function HouseholdPage({ params }: Props) {
               currentUserId={userId}
             />
           ) : null}
-          {chores ? <ChoresHome householdId={household.id} overview={chores} currentUserId={userId} /> : null}
-          <p className={styles.muted}>{t("detail.comingSoon")}</p>
         </>
       ) : null}
     </>
