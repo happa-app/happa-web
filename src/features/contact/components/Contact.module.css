@@ -63,7 +63,7 @@
 .kindActive {
   background: var(--color-surface);
   color: var(--color-brand-strong);
-  box-shadow: 0 1px 2px rgb(18 57 63 / 12%);
+  box-shadow: 0 1px 2px rgb(28 31 31 / 12%);
 }
 
 .kind:focus-within,
