@@ -1298,7 +1298,6 @@
       "review": "waiting for approval",
       "since": "{name} · since {date}",
       "sinceYesterday": "{name} · since yesterday",
-      "markDone": "Mark as done",
       "todayEmpty": "You're off the hook today.",
       "emptyAdult": "No chores yet. Who's doing the dishes today?",
       "emptyMinor": "No chores for you yet. When someone gives you one, it'll show up here.",

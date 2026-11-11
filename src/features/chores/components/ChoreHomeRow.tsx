@@ -38,14 +38,14 @@ export function ChoreHomeRow({ householdId, day, chore, names, me, isAdult, toda
         : t("home.since", { name, date: formatShortDate(day.dueOn, locale) });
   }
 
+  // Círculo decorativo (si se puede completar, el círculo es el botón)
+  const dotClass = [styles.homeDot, done && styles.homeDotDone, overdue && styles.homeDotOverdue]
+    .filter(Boolean)
+    .join(" ");
+
   const actions: ReactNode[] = [];
   if (canTake(day)) {
     actions.push(<ChoreActionButton key="take" fields={{ ...fields, intent: "take" }} label={t("row.take")} />);
-  }
-  if (canComplete(day, me, isAdult)) {
-    actions.push(
-      <ChoreActionButton key="complete" fields={{ ...fields, intent: "complete" }} label={t("home.markDone")} />,
-    );
   }
   if (canApprove(day, isAdult)) {
     actions.push(<ChoreActionButton key="approve" fields={{ ...fields, intent: "approve" }} label={t("row.approve")} />);
@@ -64,9 +64,17 @@ export function ChoreHomeRow({ householdId, day, chore, names, me, isAdult, toda
   return (
     <li className={styles.homeRow}>
       <div className={styles.homeRowLine}>
-        <span className={done ? `${styles.homeDot} ${styles.homeDotDone}` : overdue ? `${styles.homeDot} ${styles.homeDotOverdue}` : styles.homeDot} aria-hidden="true">
-          {done ? "✓" : overdue ? "!" : null}
-        </span>
+        {canComplete(day, me, isAdult) ? (
+          <ChoreActionButton
+            look="check"
+            fields={{ ...fields, intent: "complete" }}
+            label={t("row.complete", { title: chore.title })}
+          />
+        ) : (
+          <span className={dotClass} aria-hidden="true">
+            {done ? "✓" : overdue ? "!" : null}
+          </span>
+        )}
         <Link
           href={`/hogar/${householdId}/tareas/dia/${day.id}`}
           className={done ? `${styles.homeRowTitle} ${styles.homeRowTitleDone}` : styles.homeRowTitle}

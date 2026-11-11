@@ -1298,7 +1298,6 @@
       "review": "espera visto bueno",
       "since": "{name} · desde el {date}",
       "sinceYesterday": "{name} · desde ayer",
-      "markDone": "Marcar como hecha",
       "todayEmpty": "Hoy te libras.",
       "emptyAdult": "Todavía no hay tareas. ¿Quién friega hoy?",
       "emptyMinor": "Aún no tienes tareas. Cuando te pongan alguna, sale aquí.",
