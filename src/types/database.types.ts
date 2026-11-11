@@ -1780,6 +1780,7 @@ export type Database = {
       approve_chore: { Args: { p_occurrence: string }; Returns: undefined }
       can_access_triqui: { Args: { hid: string }; Returns: boolean }
       can_have_avatar: { Args: never; Returns: boolean }
+      can_see_avatar: { Args: { p_owner: string }; Returns: boolean }
       can_see_profile: { Args: { other: string }; Returns: boolean }
       cancel_payment: { Args: { p_settlement: string }; Returns: undefined }
       chat_can_access: { Args: { p_conversation: string }; Returns: boolean }
