@@ -452,7 +452,7 @@
 }
 
 .switch:checked {
-  background: var(--color-fill);
+  background: var(--color-brand-strong);
 }
 
 .switch:checked::after {

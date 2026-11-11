@@ -117,7 +117,7 @@
 }
 
 .dot {
-  background: var(--color-fill);
+  background: var(--color-brand-strong);
 }
 
 .dotOff {
