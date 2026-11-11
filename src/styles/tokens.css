@@ -17,7 +17,7 @@
   --color-success-soft: #e3ebea;
   --color-owed: #12393f;           /* gastos: te deben */
   --color-owe: #b7511a;            /* gastos: debes, y todo lo que avisa (naranja; contraste AA sobre el fondo) */
-  --color-owe-soft: #fbe8dc;
+  --color-owe-soft: #fef4ec;
   --color-schedule-class: #7fbfba;  /* horarios: clase (turquesa de los diseños, algo más intenso) */
   --color-schedule-work: #e3a75f;   /* horarios: trabajo */
   --color-schedule-away: #a9b4bb;   /* horarios: fuera, y los días de ausencia */
