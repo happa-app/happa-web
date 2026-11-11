@@ -701,6 +701,7 @@
     "personalSubtitle": "Solo la ves tú. Si necesitas algo de casa, pídelo y aparecerá en la lista común.",
     "personalTeaser": "Tus cosas, y lo que quieras pedir a casa",
     "home": {
+      "title": "Compra",
       "empty": "No falta nada."
     },
     "previewMore": "+{count} más",

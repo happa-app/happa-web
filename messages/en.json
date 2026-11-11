@@ -701,6 +701,7 @@
     "personalSubtitle": "Only you can see it. If you need something for home, request it and it'll appear on the shared list.",
     "personalTeaser": "Your things, and what you want to ask home for",
     "home": {
+      "title": "Shopping",
       "empty": "Nothing missing."
     },
     "previewMore": "+{count} more",

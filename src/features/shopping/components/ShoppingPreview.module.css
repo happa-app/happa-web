@@ -27,19 +27,27 @@
   overflow-wrap: anywhere;
 }
 
-/* Producto que puedes marcar */
 /* Mientras se guarda el cambio */
 .chipPending {
   opacity: 0.6;
 }
 
+/* Producto que puedes marcar */
 .chipButton {
+  position: relative;
   align-items: center;
   font: inherit;
   font-size: var(--text-sm);
   text-align: left;
   cursor: pointer;
   transition: background-color 0.15s ease;
+}
+
+/* Zona táctil de al menos 44 px de alto sin cambiar el aspecto (la etiqueta mide ~31 px) */
+.chipButton::before {
+  content: "";
+  position: absolute;
+  inset: -7px 0;
 }
 
 .chipButton:hover {

@@ -59,7 +59,7 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
 
   return (
     <HomeSection
-      title={t("title")}
+      title={t("home.title")}
       meta={pending.length > 0 ? String(pending.length) : undefined}
       href={href}
       linkLabel={tHome("seeList")}
