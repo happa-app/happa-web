@@ -4,44 +4,12 @@
     "description": "Organiza tu hogar: tareas, gastos y compra compartidos."
   },
   "Landing": {
-    "tagline": "Tu hogar, organizado entre todos",
+    "tagline": "La casa, entre todos",
     "description": "Reparte tareas, divide gastos y comparte la lista de la compra con tu piso, tu pareja o tu familia.",
     "signup": "Crear cuenta",
     "login": "Ya tengo cuenta",
     "loginShort": "Entrar",
     "accountLabel": "Tu cuenta",
-    "notes": {
-      "chores": "Hoy friega Bruno",
-      "shopping": "Falta leche (2)",
-      "expenses": "Carla te debe 12,00 €"
-    },
-    "features": {
-      "title": "Todo lo de casa, en un sitio",
-      "shopping": {
-        "title": "Lista de la compra",
-        "text": "Una lista común que se actualiza al momento para todos, y otra tuya que puedes pasar al hogar cuando quieras."
-      },
-      "expenses": {
-        "title": "Gastos compartidos",
-        "text": "Apuntad quién ha pagado qué. Happa calcula quién debe a quién y cómo quedar en paz."
-      },
-      "chores": {
-        "title": "Tareas por turnos",
-        "text": "Los turnos se reparten solos. Si a alguien le toca estando fuera, se salta y la recupera al volver."
-      },
-      "schedules": {
-        "title": "Horarios",
-        "text": "Clases, trabajo y viajes de cada uno, para saber quién está en casa."
-      },
-      "chat": {
-        "title": "Chat del hogar",
-        "text": "Para hablar con quienes viven contigo sin mezclarlo con otros grupos."
-      },
-      "roulette": {
-        "title": "Ruleta del marrón",
-        "text": "¿Nadie quiere bajar la basura? Que decida la ruleta, al azar de verdad."
-      }
-    },
     "steps": {
       "title": "Cómo empezar",
       "account": {
@@ -72,6 +40,127 @@
     "closing": {
       "title": "Organiza tu casa desde hoy",
       "text": "Crea tu cuenta, invita a quienes viven contigo y empezad a repartir."
+    },
+    "tryDemo": "Probar la demo",
+    "soon": "Estamos terminando los últimos detalles: el registro abre muy pronto.",
+    "share": "Compartir Happa",
+    "shareCopied": "Enlace copiado",
+    "shareText": "Mira Happa: para organizar la casa entre todos.",
+    "closingClosed": {
+      "title": "Abrimos muy pronto",
+      "text": "Mientras terminamos, enséñasela a quienes viven contigo. Cuando abramos el registro, ya sabréis cómo va."
+    }
+  },
+  "Demo": {
+    "title": "Pruébala aquí mismo",
+    "intro": "Un piso inventado, con Bruno y Carla de compañeros. Toca lo que quieras: no se guarda nada.",
+    "tabsLabel": "Qué quieres probar",
+    "household": "Piso de la calle Olmo",
+    "you": "Tú",
+    "tabs": {
+      "shopping": "Compra",
+      "expenses": "Gastos",
+      "chores": "Tareas",
+      "roulette": "Ruleta",
+      "chat": "Chat",
+      "schedules": "Horarios"
+    },
+    "about": {
+      "shopping": "Una lista común que todos ven al momento. Marca lo que ya está en el carro o apunta algo.",
+      "expenses": "Apuntad quién paga qué. Happa hace las cuentas y dice quién debe a quién.",
+      "chores": "Los turnos rotan solos. Si a alguien le toca estando fuera, se salta y la recupera al volver.",
+      "roulette": "¿Nadie quiere bajar la basura? Que decida la ruleta, al azar de verdad.",
+      "chat": "Un chat solo para la casa, con votaciones para decidir sin discutir.",
+      "schedules": "Las clases, el trabajo y los viajes de cada uno, para saber quién está en casa antes de escribir «¿hay alguien?»."
+    },
+    "shopping": {
+      "items": {
+        "milk": "Leche",
+        "paper": "Papel de cocina",
+        "tomatoes": "Tomates",
+        "coffee": "Café"
+      },
+      "askedBy": "Lo pidió {name}",
+      "askedByYou": "Lo pediste tú",
+      "addLabel": "Añadir a la lista",
+      "addPlaceholder": "Añadir algo…",
+      "add": "Añadir",
+      "left": "{count, plural, =0 {Todo comprado} one {Falta # cosa} other {Faltan # cosas}}"
+    },
+    "expenses": {
+      "oweBruno": "Debes a Bruno",
+      "oweBrunoAmount": "18,40 €",
+      "oweCarla": "Debes a Carla",
+      "oweCarlaAmount": "5,80 €",
+      "zero": "0,00 €",
+      "pay": "Pagar a Bruno",
+      "waiting": "Pagado. Falta que Bruno lo confirme…",
+      "settled": "Bruno lo ha confirmado. Con él estás en paz.",
+      "recent": "De dónde sale",
+      "weekly": "Compra de la semana",
+      "weeklyAmount": "42,60 €",
+      "weeklyBy": "Pagó Bruno, entre los tres",
+      "internet": "Internet",
+      "internetAmount": "30,00 €",
+      "internetBy": "Gasto fijo. Este mes pagó Carla, entre los tres"
+    },
+    "chores": {
+      "today": "Hoy",
+      "dishes": "Fregar los platos",
+      "dishesWho": "Te toca a ti",
+      "dishesDone": "Hecha",
+      "trash": "Sacar la basura",
+      "trashWho": "Bruno ya la ha hecho",
+      "bathroom": "Limpiar el baño",
+      "bathroomWho": "Carla está fuera: se salta y la recupera al volver",
+      "rotation": "Turnos de fregar",
+      "days": {
+        "d1": "Lun",
+        "d2": "Mar",
+        "d3": "Hoy",
+        "d4": "Jue",
+        "d5": "Vie"
+      }
+    },
+    "roulette": {
+      "question": "¿Quién baja la basura?",
+      "spin": "Girar la ruleta",
+      "spinning": "Girando…",
+      "again": "Girar otra vez",
+      "result": "Le toca a {name}.",
+      "resultYou": "Te ha tocado a ti.",
+      "wheelLabel": "Ruleta con tres nombres: tú, Bruno y Carla"
+    },
+    "chat": {
+      "m1": "¿Qué cenamos el viernes?",
+      "pollTitle": "Cena del viernes",
+      "options": {
+        "pizza": "Pizza",
+        "tortilla": "Tortilla de patatas",
+        "sushi": "Sushi"
+      },
+      "noVotes": "Sin votos",
+      "hint": "Toca una opción para votar. Puedes cambiar de idea.",
+      "reply": "Yo voto {option}"
+    },
+    "schedule": {
+      "days": {
+        "d1": "Lun",
+        "d2": "Mar",
+        "d3": "Mié",
+        "d4": "Jue",
+        "d5": "Vie"
+      },
+      "daysLabel": "Día de la semana",
+      "kinds": {
+        "class": "Clase",
+        "work": "Trabajo",
+        "away": "De viaje"
+      },
+      "atHome": "A las 18:00 en casa: {names}",
+      "nobody": "A las 18:00 no hay nadie en casa",
+      "to": "22:00",
+      "from": "8:00"
     }
   },
   "Auth": {
@@ -155,11 +244,18 @@
       "userExists": "Ya existe una cuenta con ese correo",
       "linkExpired": "El enlace ha caducado o ya se ha usado. Pide otro.",
       "captchaFailed": "No hemos podido comprobar que no eres un robot. Espera un momento y vuelve a intentarlo.",
-      "generic": "Algo ha fallado. Inténtalo de nuevo"
+      "generic": "Algo ha fallado. Inténtalo de nuevo",
+      "signupClosed": "El registro todavía no está abierto."
     },
     "signOut": "Cerrar sesión",
     "confirmError": "El enlace no es válido o ha caducado. Inicia sesión o vuelve a registrarte.",
-    "accountDeleted": "Tu cuenta se ha borrado. Gracias por haber usado HAPPA."
+    "accountDeleted": "Tu cuenta se ha borrado. Gracias por haber usado HAPPA.",
+    "signupClosed": {
+      "title": "Todavía no hemos abierto",
+      "text": "Estamos terminando los últimos detalles antes de abrir el registro. Mientras tanto, puedes probar la demo.",
+      "demo": "Probar la demo",
+      "login": "Ya tengo cuenta"
+    }
   },
   "Home": {
     "greeting": "Hola, {name}",

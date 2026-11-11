@@ -1,0 +1,716 @@
+/* La demo de la portada: un escenario con la app y, al lado, el texto.
+   Móvil primero: todo en una columna (titular, pestañas, la frase y la pantalla). A partir de 900px, dos
+   mitades: el texto se desplaza y el escenario se queda fijo. */
+.split {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: 0 var(--space-4);
+}
+
+.reading {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  /* Al llegar con el botón "Probar la demo", que el título no quede pegado al borde */
+  scroll-margin-top: var(--space-6);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-display), var(--font-sans);
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.intro {
+  max-width: 40ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+}
+
+/* ───────────── Capítulos (en el móvil, pestañas en fila) ───────────── */
+.chapters {
+  display: flex;
+  gap: var(--space-5);
+  /* Si no caben, se deslizan de lado sin mover la página */
+  margin: 0 calc(var(--space-4) * -1);
+  padding: var(--space-1) var(--space-4);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chapter {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  /* La raya de abajo: gruesa y del color de la sección cuando es la activa */
+  border-bottom: 4px solid transparent;
+  background: none;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.chapter:hover {
+  color: var(--color-text);
+}
+
+.chapter:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.chapterActive {
+  border-bottom-color: var(--note);
+  color: var(--color-text);
+}
+
+/* La frase de cada capítulo, en el móvil, sale fuera de la pestaña (.about) */
+.chapterText {
+  display: none;
+}
+
+.about {
+  max-width: 40ch;
+  /* Reserva sitio para tres líneas: al cambiar de pestaña la pantalla no salta */
+  min-height: 4.5em;
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+
+/* ───────────── El escenario ───────────── */
+/* Un campo de color liso que coge un poco del color de la sección activa. color-mix lo calcula a partir
+   de las variables del tema, así que vale para claro y oscuro sin escribir ningún color a mano. */
+.stage {
+  display: grid;
+  place-items: center;
+  margin: 0 calc(var(--space-4) * -1);
+  padding: var(--space-8) var(--space-4);
+  background: color-mix(in srgb, var(--note) 24%, var(--color-bg));
+  transition: background-color 0.6s ease;
+}
+
+/* La app: sin marco de móvil, solo su pantalla */
+.device {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 360px;
+  height: 560px;
+  border-radius: 28px;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.deviceTop {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6) var(--space-5) var(--space-3);
+}
+
+.household {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.screenTitle {
+  font-family: var(--font-display), var(--font-sans);
+  font-size: var(--text-2xl);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.screen {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4) var(--space-5);
+  overflow-y: auto;
+  animation: appear 0.35s ease;
+}
+
+/* "display: flex" ganaría al atributo hidden: hay que decirlo a mano */
+.screen[hidden] {
+  display: none;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* ───────────── Piezas comunes de las escenas ───────────── */
+.subtitle {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.count {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  list-style: none;
+  overflow: hidden;
+}
+
+.list > li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 56px;
+  padding: var(--space-2) var(--space-4);
+}
+
+label.row {
+  cursor: pointer;
+}
+
+.rowText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.rowTitle {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.rowMeta {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.qty {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.rowDone .rowTitle {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+/* Tarea de quien está fuera: apagada, "en pausa" */
+.rowAway {
+  background: var(--color-bg);
+}
+
+.rowAway .rowTitle {
+  color: var(--color-text-muted);
+}
+
+.check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  accent-color: var(--color-brand-strong);
+  cursor: inherit;
+}
+
+.amount {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.wideButton,
+.smallButton {
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-brand-strong);
+  color: var(--color-on-accent);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.wideButton {
+  width: 100%;
+}
+
+.wideButton:hover:not(:disabled),
+.smallButton:hover:not(:disabled) {
+  background: var(--color-brand-stronger);
+}
+
+.wideButton:disabled,
+.smallButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.wideButton:focus-visible,
+.smallButton:focus-visible,
+.addInput:focus-visible,
+.option:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ───────────── Compra ───────────── */
+.addForm {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+.addInput {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  /* 16px: con menos, el iPhone hace zoom al tocar el campo */
+  font: inherit;
+  font-size: 1rem;
+}
+
+/* ───────────── Gastos ───────────── */
+.balance {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.balance strong {
+  font-size: var(--text-lg);
+  font-variant-numeric: tabular-nums;
+}
+
+.owed {
+  color: var(--color-owed);
+}
+
+.owe {
+  color: var(--color-owe);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-owe-soft);
+  color: var(--color-owe);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.statusOk {
+  background: var(--color-success-soft);
+  color: var(--color-owed);
+}
+
+/* ───────────── Tareas ───────────── */
+.week {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2) 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+}
+
+.dayName {
+  color: var(--color-text-muted);
+}
+
+.dayWho {
+  font-weight: 600;
+}
+
+.dayToday {
+  background: var(--color-brand-soft);
+}
+
+.dayToday .dayWho {
+  color: var(--color-brand-strong);
+}
+
+/* ───────────── Ruleta ───────────── */
+.roulette {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.question {
+  font-weight: 600;
+}
+
+.wheel {
+  display: grid;
+  place-items: center;
+  width: 230px;
+  max-width: 100%;
+}
+
+.result {
+  min-height: 3em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.roulette .wideButton {
+  margin-top: auto;
+}
+
+/* ───────────── Chat ───────────── */
+.message {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  max-width: 85%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 4px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.messageMine {
+  align-self: flex-end;
+  border-radius: var(--radius-md) var(--radius-md) 4px var(--radius-md);
+  background: var(--color-brand-soft);
+  box-shadow: none;
+}
+
+.author {
+  color: var(--color-brand-strong);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.pollTitle {
+  font-size: var(--text-lg);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.optionMine {
+  border-color: var(--color-brand-strong);
+}
+
+.bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--color-brand-soft);
+  transition: width 0.3s ease;
+}
+
+.optionText,
+.optionCount {
+  position: relative;
+}
+
+.optionText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.optionText .rowMeta {
+  font-weight: 400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+}
+
+/* ───────────── Horarios ───────────── */
+.days {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-1);
+}
+
+.dayButton {
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dayButton:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.dayButtonActive {
+  background: var(--color-brand-strong);
+  color: var(--color-on-accent);
+}
+
+.people {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.personName {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+/* El día de 8:00 a 22:00: los tramos se colocan dentro con left y width en % */
+.track {
+  position: relative;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.block {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-2);
+  /* Estos dos colores son oscuros en el tema claro y claros en el oscuro: encima se lee bien el color
+     del fondo de la página, que hace justo lo contrario */
+  color: var(--color-bg);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.blockClass {
+  background: var(--color-review);
+}
+
+.blockWork {
+  background: var(--color-owe);
+}
+
+.blockAway {
+  background: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.hours {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.hours + .status {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen {
+    animation: none;
+  }
+
+  .stage,
+  .chapter {
+    transition: none;
+  }
+}
+
+/* ───────────── Pantallas anchas: dos mitades ───────────── */
+@media (min-width: 900px) {
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+    gap: 0;
+    padding: 12px;
+  }
+
+  .reading {
+    padding: 0 clamp(var(--space-6), 5vw, 5rem);
+  }
+
+  .demo {
+    gap: 0;
+  }
+
+  .heading {
+    padding: 14svh 0 6svh;
+  }
+
+  .title {
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+  }
+
+  /* Los capítulos pasan a ser bloques altos, uno debajo de otro. El que está en el centro de la pantalla
+     se lee entero; los demás quedan apagados. */
+  .chapters {
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: 0 0 22svh;
+    overflow: visible;
+  }
+
+  .chapter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-3);
+    min-height: 62svh;
+    padding: 0 0 0 var(--space-6);
+    border-bottom: 0;
+    border-left: 6px solid var(--color-border);
+    color: var(--color-text);
+    opacity: 0.32;
+    transition:
+      opacity 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .chapter:hover {
+    opacity: 0.6;
+  }
+
+  .chapterActive,
+  .chapterActive:hover {
+    border-left-color: var(--note);
+    opacity: 1;
+  }
+
+  .chapterTitle {
+    font-family: var(--font-display), var(--font-sans);
+    font-size: clamp(2.5rem, 4.6vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .chapterText {
+    display: block;
+    max-width: 30ch;
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+  .about {
+    display: none;
+  }
+
+  /* El escenario se queda pegado arriba mientras pasa el texto (position: sticky) */
+  .stage {
+    position: sticky;
+    top: 12px;
+    height: calc(100svh - 24px);
+    margin: 0;
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+  }
+
+  .device {
+    height: min(620px, 100%);
+  }
+}

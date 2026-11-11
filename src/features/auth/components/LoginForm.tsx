@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Captcha } from "@/components/ui/Captcha";
 import { TextField } from "@/components/ui/TextField";
 import { Link } from "@/i18n/navigation";
+import { SIGNUP_CLOSED } from "@/lib/signup";
 import { signIn } from "../actions";
 import { GoogleButton } from "./GoogleButton";
 import { firstFieldError, initialAuthState } from "../types";
@@ -76,12 +77,15 @@ export function LoginForm({ confirmFailed = false, accountDeleted = false, next,
           {isPending ? t("login.submitting") : t("login.submit")}
         </Button>
 
-        <p className={styles.switch}>
-          {t("login.noAccount")}{" "}
-          <Link href={{ pathname: "/registro", query: next ? { next } : undefined }}>
-            {t("login.goToSignup")}
-          </Link>
-        </p>
+        {/* Con el registro cerrado (modo demo) no se invita a crear cuenta */}
+        {SIGNUP_CLOSED ? null : (
+          <p className={styles.switch}>
+            {t("login.noAccount")}{" "}
+            <Link href={{ pathname: "/registro", query: next ? { next } : undefined }}>
+              {t("login.goToSignup")}
+            </Link>
+          </p>
+        )}
       </form>
     </div>
   );

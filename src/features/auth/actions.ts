@@ -2,6 +2,7 @@
 // Acciones de servidor: funciones que el formulario llama directamente al enviarse.
 // Es el equivalente a tus handlers de "submit", pero se ejecutan en el servidor,
 // así que las comprobaciones no se pueden saltar desde el navegador.
+import { SIGNUP_CLOSED } from "@/lib/signup";
 import { cookies } from "next/headers";
 import { redirect as redirectToPath } from "next/navigation";
 import { z } from "zod";
@@ -72,6 +73,10 @@ export async function signUp(
     email: text(formData, "email").trim(),
     displayName: text(formData, "displayName"),
   };
+
+  // Registro cerrado (modo demo): la página ya no enseña el formulario, pero una acción del servidor se
+  // puede llamar a mano, así que también se corta aquí.
+  if (SIGNUP_CLOSED) return { status: "error", formError: "signupClosed", values };
 
   const parsed = signupSchema.safeParse({
     displayName: values.displayName,
