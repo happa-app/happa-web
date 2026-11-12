@@ -1,4 +1,4 @@
-// Tarjeta blanca con sombra suave: el contenedor básico de las pantallas de la app.
+// Contenedor básico de las pantallas de la app: sin caja; con título lleva raya y etiqueta (como Section).
 import type { ReactNode } from "react";
 import styles from "./Card.module.css";
 

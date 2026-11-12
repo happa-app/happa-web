@@ -1,5 +1,6 @@
 // Aviso en Inicio: hogares que dejaste donde aún tienes saldo pendiente, con enlace a sus gastos.
 import { useLocale, useTranslations } from "next-intl";
+import { Section } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
 import { formatMoney } from "../money";
 import type { LeftDebt } from "../types";
@@ -11,8 +12,7 @@ export function LeftDebts({ debts }: { debts: LeftDebt[] }) {
   if (debts.length === 0) return null;
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{t("leftDebts.title")}</h2>
+    <Section title={t("leftDebts.title")}>
       <ul className={styles.list}>
         {debts.map((d) => {
           const amount = formatMoney(Math.abs(d.netCents), locale);
@@ -25,7 +25,7 @@ export function LeftDebts({ debts }: { debts: LeftDebt[] }) {
                 <span className={d.netCents < 0 ? styles.owe : styles.owed}>
                   {d.netCents < 0 ? t("leftDebts.owe", { amount }) : t("leftDebts.owed", { amount })}
                 </span>
-                <span className={styles.tileChevron} aria-hidden="true">
+                <span className={styles.rowChevron} aria-hidden="true">
                   ›
                 </span>
               </Link>
@@ -33,6 +33,6 @@ export function LeftDebts({ debts }: { debts: LeftDebt[] }) {
           );
         })}
       </ul>
-    </section>
+    </Section>
   );
 }

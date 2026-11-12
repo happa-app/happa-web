@@ -17,17 +17,6 @@
 }
 
 /* ───── Secciones y listas ───── */
-.section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.sectionTitle {
-  font-size: var(--text-base);
-  font-weight: 700;
-}
-
 .empty {
   margin: 0;
   padding: var(--space-2) 0;
@@ -334,13 +323,6 @@
   gap: var(--space-3);
 }
 
-/* Flecha al final de una fila que lleva a otra página */
-.tileChevron {
-  flex-shrink: 0;
-  font-size: var(--text-xl);
-  color: var(--color-text-muted);
-}
-
 /* Fila-enlace de una sección vacía ("Añade los que se pagan solos…") */
 .emptyLink {
   display: flex;
@@ -471,4 +453,11 @@
   font-size: var(--text-sm);
   font-variant-numeric: tabular-nums;
   text-align: right;
+}
+
+/* "›" al final de una fila-enlace (hogares que dejaste) */
+.rowChevron {
+  flex-shrink: 0;
+  font-size: var(--text-xl);
+  color: var(--color-text-muted);
 }
