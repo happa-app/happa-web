@@ -1,16 +1,18 @@
 // Página /hogar/<id>/gastos: tu saldo, lo que te toca confirmar, el ajuste para quedar en paz,
-// los gastos fijos, los saldos de todos y el historial. Para adultos del hogar y para quien se fue
+// los saldos de todos, los gastos fijos y el historial. Para adultos del hogar y para quien se fue
 // con saldo pendiente.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Alert } from "@/components/ui/Alert";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Section } from "@/components/ui/Section";
 import {
   BalanceList,
   ExpenseList,
   MyBalance,
   nameMap,
   PaymentList,
+  pendingCounts,
   PendingForMe,
   RecurringTile,
   SettleUp,
@@ -51,6 +53,10 @@ export default async function ExpensesPage({ params }: Props) {
   ]);
   const boughtCount = shoppingItems.filter((i) => i.checkedAt).length;
   const names = nameMap(people);
+  const everyoneEven = people.every((p) => p.netCents === 0);
+  // Los gastos fijos solo cuentan para quien vive aquí
+  const myRecurring = context.isCurrent ? recurring : [];
+  const { forMe: toConfirm } = pendingCounts(expenses, payments, myRecurring, userId);
   const myNet = people.find((p) => p.userId === userId)?.netCents ?? 0;
 
   return (
@@ -70,7 +76,7 @@ export default async function ExpensesPage({ params }: Props) {
         </Link>
       ) : null}
 
-      <MyBalance netCents={myNet} />
+      <MyBalance netCents={myNet} everyoneEven={everyoneEven} toConfirm={toConfirm} />
       {context.isCurrent ? (
         <ButtonLink href={`/hogar/${id}/gastos/nuevo`} fullWidth>
           {t("addExpense")}
@@ -87,7 +93,7 @@ export default async function ExpensesPage({ params }: Props) {
         currentUserId={userId}
         expenses={expenses}
         payments={payments}
-        recurring={context.isCurrent ? recurring : []}
+        recurring={myRecurring}
         names={names}
       />
       <SettleUp
@@ -98,17 +104,12 @@ export default async function ExpensesPage({ params }: Props) {
         names={names}
         today={todayIn(context.timezone)}
       />
-      {context.isCurrent ? (
-        <RecurringTile
-          href={`/hogar/${id}/gastos/fijos`}
-          recurring={recurring}
-          currentUserId={userId}
-          currentIds={new Set(people.filter((p) => p.isCurrent).map((p) => p.userId))}
-        />
-      ) : null}
       <BalanceList people={people} currentUserId={userId} />
-      <ExpenseList householdId={id} currentUserId={userId} expenses={expenses} names={names} />
-      <PaymentList payments={payments} names={names} />
+      {context.isCurrent ? <RecurringTile householdId={id} recurring={recurring} /> : null}
+      <Section title={t("expenses.title")}>
+        <ExpenseList householdId={id} currentUserId={userId} expenses={expenses} names={names} />
+        <PaymentList payments={payments} names={names} />
+      </Section>
     </>
   );
 }

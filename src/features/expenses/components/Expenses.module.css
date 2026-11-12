@@ -16,51 +16,6 @@
   color: var(--color-text-muted);
 }
 
-/* ───── Tu saldo ───── */
-.balanceCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-1);
-  padding: var(--space-6) var(--space-5);
-  border-radius: var(--radius-lg);
-  text-align: center;
-}
-
-.balanceOwed {
-  background: var(--color-success-soft);
-  color: var(--color-owed);
-}
-
-.balanceOwe {
-  background: var(--color-owe-soft);
-  color: var(--color-owe);
-}
-
-.balanceEven {
-  background: var(--color-surface);
-  color: var(--color-text);
-  box-shadow: var(--shadow-card);
-}
-
-.balanceLabel,
-.balanceText {
-  margin: 0;
-  font-weight: 600;
-}
-
-.balanceLabel {
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-}
-
-.balanceAmount {
-  margin: 0;
-  font-size: var(--text-2xl);
-  font-weight: 800;
-  line-height: 1.1;
-}
-
 /* ───── Secciones y listas ───── */
 .section {
   display: flex;
@@ -75,26 +30,30 @@
 
 .empty {
   margin: 0;
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  padding: var(--space-2) 0;
   color: var(--color-text-muted);
-  text-align: center;
 }
 
+/* Listas sin caja: filas separadas por una línea fina */
 .list {
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
   list-style: none;
-  overflow: hidden;
 }
 
-.list > li + li {
+.list > li {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.list > li:last-child {
+  border-bottom: 0;
+}
+
+/* Los pagos van justo debajo de los gastos, en el mismo Historial */
+.list + .list {
+  margin-top: var(--space-2);
   border-top: 1px solid var(--color-border);
 }
 
@@ -103,8 +62,8 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  min-height: 56px;
-  padding: var(--space-3) var(--space-4);
+  min-height: 44px;
+  padding: var(--space-2) 0;
 }
 
 .expenseRow {
@@ -112,13 +71,13 @@
   text-decoration: none;
 }
 
-.expenseRow:hover {
-  background: var(--color-bg);
+.expenseRow:hover .rowTitle {
+  text-decoration: underline;
 }
 
 .expenseRow:focus-visible {
   outline: none;
-  box-shadow: inset var(--focus-ring);
+  box-shadow: var(--focus-ring);
 }
 
 .rowMain {
@@ -227,7 +186,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: var(--space-4);
+  padding: var(--space-2) 0;
 }
 
 .transfer {
@@ -379,70 +338,32 @@
   gap: var(--space-3);
 }
 
-/* ───── Tarjeta en la página del hogar ───── */
-.tile {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
-  color: inherit;
-  text-decoration: none;
-  transition: transform 0.15s ease;
-}
-
-.tile:hover {
-  transform: translateY(-1px);
-}
-
-.tile:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
-.tileIcon {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: var(--color-brand-soft);
-  color: var(--color-brand-strong);
-}
-
-.tileText {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  min-width: 0;
-  font-size: var(--text-sm);
-}
-
-.tileTitle {
-  font-size: var(--text-base);
-  font-weight: 700;
-}
-
-.tileBadge {
-  margin-top: 2px;
-  padding: 1px var(--space-2);
-  border-radius: 999px;
-  background: var(--color-owe-soft);
-  color: var(--color-owe);
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
+/* Flecha al final de una fila que lleva a otra página */
 .tileChevron {
   flex-shrink: 0;
   font-size: var(--text-xl);
   color: var(--color-text-muted);
+}
+
+/* Fila-enlace de una sección vacía ("Añade los que se pagan solos…") */
+.emptyLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: var(--space-2) 0;
+  color: var(--color-brand-strong);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.emptyLink:hover {
+  text-decoration: underline;
+}
+
+.emptyLink:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 /* ───── Inicio ───── */

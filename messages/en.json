@@ -748,10 +748,9 @@
     "someone": "someone",
     "cancel": "Cancel",
     "balance": {
-      "title": "Your balance",
-      "owed": "You are owed",
-      "owe": "You owe",
-      "even": "You're all square"
+      "owedSr": "{name}: is owed {amount}",
+      "oweSr": "{name}: owes {amount}",
+      "evenSr": "{name}: is all square"
     },
     "tile": {
       "owed": "You are owed {amount}",
@@ -760,7 +759,7 @@
       "toConfirm": "{count, plural, one {# to confirm} other {# to confirm}}"
     },
     "pending": {
-      "title": "Waiting for you",
+      "title": "To confirm",
       "expense": "{name} added “{description}”",
       "expenseMeta": "Total {amount} · your share {share}",
       "confirm": "Confirm",
@@ -786,7 +785,7 @@
       "waiting": "A payment is waiting to be confirmed."
     },
     "balances": {
-      "title": "Balances",
+      "title": "How the house is doing",
       "left": "No longer lives here"
     },
     "expenses": {
@@ -805,8 +804,7 @@
       "sourceRecurring": "Recurring"
     },
     "payments": {
-      "title": "Payments",
-      "line": "{from} → {to}"
+      "paid": "{from} paid {to}"
     },
     "status": {
       "pending": "Pending · {done}/{total}",
@@ -911,12 +909,13 @@
       "link": "{count, plural, one {Was it the shopping? Turn the bought item into an expense} other {Was it the shopping? Turn the # bought items into an expense}}"
     },
     "recurring": {
+      "sectionTitle": "Recurring",
+      "seeAll": "see all",
+      "seeAllAria": "See all recurring expenses",
       "title": "Recurring expenses",
       "subtitle": "Subscriptions, internet, electricity… Confirmed once, then added automatically whenever they're due.",
       "add": "New recurring expense",
       "empty": "No recurring expenses yet. Add the subscriptions and bills that repeat and they'll be added automatically.",
-      "tileEmpty": "Subscriptions and bills that add themselves",
-      "tileActive": "{count, plural, =0 {None active} one {# active} other {# active}}",
       "schedule": "{frequency, select, weekly {{interval, plural, one {Weekly} other {Every # weeks}}} monthly {{interval, plural, one {Monthly} =3 {Quarterly} =6 {Every 6 months} other {Every # months}}} yearly {{interval, plural, one {Yearly} other {Every # years}}} other {}}",
       "scheduleOption": "{frequency, select, weekly {{interval, plural, one {Every week} other {Every # weeks}}} monthly {{interval, plural, one {Every month} =3 {Every 3 months (quarterly)} =6 {Every 6 months} other {Every # months}}} yearly {{interval, plural, one {Every year} other {Every # years}}} other {}}",
       "everyText": "{frequency, select, weekly {{interval, plural, one {every week} other {every # weeks}}} monthly {{interval, plural, one {every month} other {every # months}}} yearly {{interval, plural, one {every year} other {every # years}}} other {}}",
@@ -969,6 +968,7 @@
     "leftChat": "Message the household in the chat",
     "home": {
       "youEven": "You're square",
+      "noRecurring": "Add the ones that repeat (internet, power…)",
       "owesYou": "{name} owes you {amount}",
       "youOwe": "You owe {name} {amount}"
     }

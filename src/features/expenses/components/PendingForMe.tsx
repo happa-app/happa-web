@@ -1,8 +1,9 @@
 // "Te toca a ti": gastos y gastos fijos que esperan tu confirmación, pagos que dicen haberte hecho
 // y tus pagos que aún no te han confirmado.
 import { useLocale, useTranslations } from "next-intl";
+import { Section } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
-import { myEffect, recurringShareOf, recurringWaitingForMe, waitingForMe } from "../format";
+import { myEffect, pendingCounts, recurringShareOf, recurringWaitingForMe, waitingForMe } from "../format";
 import { formatMoney } from "../money";
 import type { Expense, Payment, RecurringExpense } from "../types";
 import { ActionButton } from "./ActionButton";
@@ -26,11 +27,11 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
   const paymentsToMe = payments.filter((p) => p.status === "pending" && p.toUser === currentUserId);
   const myPendingPayments = payments.filter((p) => p.status === "pending" && p.fromUser === currentUserId);
   const recurringToConfirm = recurring.filter((r) => recurringWaitingForMe(r, currentUserId));
-  if (toConfirm.length + paymentsToMe.length + myPendingPayments.length + recurringToConfirm.length === 0) return null;
+  const { total } = pendingCounts(expenses, payments, recurring, currentUserId);
+  if (total === 0) return null;
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{t("pending.title")}</h2>
+    <Section title={t("pending.title")} meta={String(total)}>
       <ul className={styles.list}>
         {toConfirm.map((e) => {
           const { shareCents } = myEffect(e, currentUserId);
@@ -44,6 +45,7 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
                 <ActionButton
                   kind="expense"
                   variant="primary"
+                size="sm"
                   fields={{ householdId, expenseId: e.id, version: String(e.version), intent: "confirm", returnTo: "list" }}
                   label={t("pending.confirm")}
                 />
@@ -71,6 +73,7 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
               <ActionButton
                 kind="recurring"
                 variant="primary"
+                size="sm"
                 fields={{ householdId, recurringId: r.id, version: String(r.version), intent: "confirm", returnTo: "overview" }}
                 label={t("pending.confirm")}
               />
@@ -90,12 +93,14 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
               <ActionButton
                 kind="payment"
                 variant="primary"
+                size="sm"
                 fields={{ householdId, paymentId: p.id, intent: "confirm" }}
                 label={t("pending.confirmPayment")}
               />
               <ActionButton
                 kind="payment"
                 fields={{ householdId, paymentId: p.id, intent: "reject" }}
+                size="sm"
                 label={t("pending.rejectPayment")}
                 confirmText={t("pending.rejectPaymentConfirm", { name: name(p.fromUser) })}
               />
@@ -113,6 +118,7 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
               <ActionButton
                 kind="payment"
                 fields={{ householdId, paymentId: p.id, intent: "cancel" }}
+                size="sm"
                 label={t("pending.cancelPayment")}
                 confirmText={t("pending.cancelPaymentConfirm")}
               />
@@ -120,6 +126,6 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
           </li>
         ))}
       </ul>
-    </section>
+    </Section>
   );
 }

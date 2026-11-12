@@ -28,7 +28,7 @@ export function PayForm({ householdId, intent, otherUserId, otherName, defaultCe
 
   if (!open) {
     return (
-      <Button type="button" variant="secondary" onClick={() => setOpen(true)}>
+      <Button type="button" variant="secondary" size="sm" onClick={() => setOpen(true)}>
         {openLabel}
       </Button>
     );
@@ -57,10 +57,10 @@ export function PayForm({ householdId, intent, otherUserId, otherName, defaultCe
       </label>
       {intent === "paid" ? <p className={styles.hint}>{t("settle.paidHint", { name: otherName })}</p> : null}
       <div className={styles.buttonRow}>
-        <Button type="submit" disabled={isPending}>
+        <Button type="submit" size="sm" disabled={isPending}>
           {t("settle.save")}
         </Button>
-        <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
+        <Button type="button" variant="secondary" size="sm" onClick={() => setOpen(false)}>
           {t("cancel")}
         </Button>
       </div>

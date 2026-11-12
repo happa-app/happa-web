@@ -11,7 +11,7 @@ export { RecurringList } from "./components/RecurringList";
 export { RecurringTile } from "./components/RecurringTile";
 export { SettleUp } from "./components/SettleUp";
 export { ExpensesHome } from "./components/ExpensesHome";
-export { nameMap, todayIn } from "./format";
+export { nameMap, pendingCounts, todayIn } from "./format";
 export { uuidSchema } from "./schemas";
 export type {
   BalancePerson,

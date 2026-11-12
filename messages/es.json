@@ -748,10 +748,9 @@
     "someone": "alguien",
     "cancel": "Cancelar",
     "balance": {
-      "title": "Tu saldo",
-      "owed": "Te deben",
-      "owe": "Debes",
-      "even": "Estás en paz"
+      "owedSr": "{name}: le deben {amount}",
+      "oweSr": "{name}: debe {amount}",
+      "evenSr": "{name}: está en paz"
     },
     "tile": {
       "owed": "Te deben {amount}",
@@ -760,7 +759,7 @@
       "toConfirm": "{count, plural, one {# por confirmar} other {# por confirmar}}"
     },
     "pending": {
-      "title": "Te toca a ti",
+      "title": "Por confirmar",
       "expense": "{name} ha añadido «{description}»",
       "expenseMeta": "Total {amount} · a ti te tocan {share}",
       "confirm": "Confirmar",
@@ -786,7 +785,7 @@
       "waiting": "Hay un pago esperando confirmación."
     },
     "balances": {
-      "title": "Saldos",
+      "title": "Cómo va el piso",
       "left": "Ya no vive aquí"
     },
     "expenses": {
@@ -805,8 +804,7 @@
       "sourceRecurring": "Fijo"
     },
     "payments": {
-      "title": "Pagos",
-      "line": "{from} → {to}"
+      "paid": "{from} pagó a {to}"
     },
     "status": {
       "pending": "Pendiente · {done}/{total}",
@@ -911,12 +909,13 @@
       "link": "{count, plural, one {¿Es la compra? Pasa a gastos el producto comprado} other {¿Es la compra? Pasa a gastos los # productos comprados}}"
     },
     "recurring": {
+      "sectionTitle": "Fijos",
+      "seeAll": "ver todos",
+      "seeAllAria": "Ver todos los gastos fijos",
       "title": "Gastos fijos",
       "subtitle": "Suscripciones, internet, luz… Se confirman una vez y después se apuntan solos cada vez que toca.",
       "add": "Nuevo gasto fijo",
       "empty": "Aún no hay gastos fijos. Apunta las suscripciones y facturas que se repiten y se añadirán solas.",
-      "tileEmpty": "Suscripciones y facturas que se apuntan solas",
-      "tileActive": "{count, plural, =0 {Ninguno activo} one {# activo} other {# activos}}",
       "schedule": "{frequency, select, weekly {{interval, plural, one {Semanal} other {Cada # semanas}}} monthly {{interval, plural, one {Mensual} =3 {Trimestral} =6 {Semestral} other {Cada # meses}}} yearly {{interval, plural, one {Anual} other {Cada # años}}} other {}}",
       "scheduleOption": "{frequency, select, weekly {{interval, plural, one {Cada semana} other {Cada # semanas}}} monthly {{interval, plural, one {Cada mes} =3 {Cada 3 meses (trimestral)} =6 {Cada 6 meses (semestral)} other {Cada # meses}}} yearly {{interval, plural, one {Cada año} other {Cada # años}}} other {}}",
       "everyText": "{frequency, select, weekly {{interval, plural, one {cada semana} other {cada # semanas}}} monthly {{interval, plural, one {cada mes} other {cada # meses}}} yearly {{interval, plural, one {cada año} other {cada # años}}} other {}}",
@@ -969,6 +968,7 @@
     "leftChat": "Escribir al hogar en el chat",
     "home": {
       "youEven": "Estás en paz",
+      "noRecurring": "Añade los que se pagan solos (internet, luz…)",
       "owesYou": "{name} te debe {amount}",
       "youOwe": "Le debes {amount} a {name}"
     }
