@@ -63,6 +63,9 @@ export type Transfer = { from: string; to: string; amountCents: number };
 // Una fila de "la balanza" de Inicio: lo que hay entre otra persona y tú
 export type BalanceBar = { userId: string; amountCents: number; owesMe: boolean; widthPct: number };
 
+// Una fila de la balanza de todo el piso: el saldo neto de cada persona
+export type NetBar = { userId: string; netCents: number; widthPct: number };
+
 // Para Inicio
 export type ExpensesHome = {
   netCents: number;

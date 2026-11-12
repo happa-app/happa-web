@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { myBalanceBars } from "./settle.ts";
+import { myBalanceBars, netBars } from "./settle.ts";
 
 test("ordena, escala al mayor y separa el sentido", () => {
   const t = [
@@ -28,4 +28,20 @@ test("una sola deuda ocupa todo el ancho", () => {
   assert.deepEqual(myBalanceBars([{ from: "b", to: "me", amountCents: 700 }], "me"), [
     { userId: "b", amountCents: 700, owesMe: true, widthPct: 100 },
   ]);
+});
+test("netBars escala al mayor saldo y mantiene el orden", () => {
+  assert.deepEqual(netBars([{ userId: "a", netCents: 3040 }, { userId: "b", netCents: -1520 }, { userId: "c", netCents: -1520 }]), [
+    { userId: "a", netCents: 3040, widthPct: 100 },
+    { userId: "b", netCents: -1520, widthPct: 50 },
+    { userId: "c", netCents: -1520, widthPct: 50 },
+  ]);
+});
+test("netBars sin barra para quien está a cero", () => {
+  assert.equal(netBars([{ userId: "a", netCents: 500 }, { userId: "b", netCents: 0 }])[1].widthPct, 0);
+});
+test("netBars todos a cero: sin barras y sin dividir entre cero", () => {
+  assert.deepEqual(netBars([{ userId: "a", netCents: 0 }, { userId: "b", netCents: 0 }]).map((b) => b.widthPct), [0, 0]);
+});
+test("netBars mínimo del 4 %", () => {
+  assert.equal(netBars([{ userId: "a", netCents: 100000 }, { userId: "b", netCents: -50 }])[1].widthPct, 4);
 });

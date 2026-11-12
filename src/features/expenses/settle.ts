@@ -1,7 +1,7 @@
 // Ajuste automático: con los saldos de cada uno, propone las transferencias para quedar en paz.
 // Quien más debe paga a quien más le deben, y así hasta cuadrar. Salen como mucho (personas − 1)
 // transferencias. Es solo una sugerencia: lo que cuenta son los pagos que se apuntan y se confirman.
-import type { BalanceBar, Transfer } from "./types";
+import type { BalanceBar, NetBar, Transfer } from "./types";
 
 export function suggestTransfers(people: { userId: string; netCents: number }[]): Transfer[] {
   const byId = (a: { userId: string }, b: { userId: string }) => (a.userId < b.userId ? -1 : a.userId > b.userId ? 1 : 0);
@@ -44,4 +44,15 @@ export function myBalanceBars(transfers: Transfer[], me: string): BalanceBar[] {
       };
     })
     .sort((a, b) => Number(b.owesMe) - Number(a.owesMe) || b.amountCents - a.amountCents);
+}
+
+// La balanza de todo el piso: el saldo neto de cada uno, en el mismo orden que llega. La longitud es
+// proporcional al mayor saldo (en valor absoluto), con mínimo 4 % para los saldos pequeños; quien está a cero no tiene barra.
+export function netBars(people: { userId: string; netCents: number }[]): NetBar[] {
+  const largest = Math.max(0, ...people.map((p) => Math.abs(p.netCents)));
+  return people.map((p) => ({
+    userId: p.userId,
+    netCents: p.netCents,
+    widthPct: p.netCents === 0 ? 0 : Math.max(4, Math.round((Math.abs(p.netCents) / largest) * 100)),
+  }));
 }
