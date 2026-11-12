@@ -5,7 +5,7 @@
 // se abre con "ver lista ›" de la cabecera.
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
+import { Section, sectionStyles } from "@/components/ui/Section";
 import { useShoppingList } from "../hooks/useShoppingList";
 import { canEditItem, shownQuantity } from "../rules";
 import type { ShoppingItem } from "../types";
@@ -58,12 +58,10 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
   }
 
   return (
-    <HomeSection
+    <Section
       title={t("home.title")}
       meta={pending.length > 0 ? String(pending.length) : undefined}
-      href={href}
-      linkLabel={tHome("seeList")}
-      linkAriaLabel={tHome("seeListOf")}
+      link={{ href, label: tHome("seeList"), ariaLabel: tHome("seeListOf") }}
     >
       {shown.length > 0 ? (
         <ul className={styles.chips} aria-label={t("pending")}>
@@ -91,7 +89,7 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
           {hidden > 0 ? <li className={styles.more}>{t("previewMore", { count: hidden })}</li> : null}
         </ul>
       ) : (
-        <p className={homeStyles.muted}>{t("home.empty")}</p>
+        <p className={sectionStyles.muted}>{t("home.empty")}</p>
       )}
 
       {error ? (
@@ -110,7 +108,7 @@ export function ShoppingPreview({ householdId, initialItems, currentUserId, canM
           </>
         ) : null}
       </p>
-    </HomeSection>
+    </Section>
   );
 }
 

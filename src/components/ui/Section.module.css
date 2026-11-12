@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
+  min-height: 44px; /* igual de alta con enlace y sin él */
 }
 
 .title {

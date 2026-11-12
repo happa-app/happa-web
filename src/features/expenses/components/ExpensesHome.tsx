@@ -2,7 +2,7 @@
 // Todo lo demás (apuntar pagos, el historial, los gastos fijos) está en su página.
 import { useLocale, useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
+import { Section, sectionStyles } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
 import { nameMap } from "../format";
 import { formatMoney } from "../money";
@@ -31,13 +31,11 @@ export function ExpensesHome({ householdId, currentUserId, data }: Props) {
   const bars = myBalanceBars(suggestTransfers(data.people), currentUserId);
 
   return (
-    <HomeSection
+    <Section
       title={t("title")}
-      href={base}
-      linkLabel={tHome("seeAll")}
-      linkAriaLabel={tHome("seeAllOf", { section: t("title") })}
+      link={{ href: base, label: tHome("seeAll"), ariaLabel: tHome("seeAllOf", { section: t("title") }) }}
     >
-      <div className={homeStyles.card}>
+      <div className={sectionStyles.card}>
         <div className={styles.homeBalance}>
           <p className={data.netCents > 0 ? styles.homeOwed : data.netCents < 0 ? styles.homeOwe : styles.homeEven}>
             {data.netCents > 0 ? t("tile.owed", { amount }) : data.netCents < 0 ? t("tile.owe", { amount }) : everyoneEven ? t("tile.even") : t("home.youEven")}
@@ -87,6 +85,6 @@ export function ExpensesHome({ householdId, currentUserId, data }: Props) {
           {t("addExpense")}
         </ButtonLink>
       </div>
-    </HomeSection>
+    </Section>
   );
 }

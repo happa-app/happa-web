@@ -6,8 +6,9 @@
 }
 
 .title {
-  font-size: var(--text-xl);
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   line-height: 1.25;
 }
 
@@ -34,8 +35,9 @@
 
 .back {
   align-self: flex-start;
-  font-size: var(--text-sm);
-  font-weight: 600;
+  color: var(--color-brand-strong);
+  font-size: 0.8rem;
+  font-weight: 700;
   text-decoration: none;
 }
 

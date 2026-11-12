@@ -2,7 +2,7 @@
 // Los próximos días, el reparto de la semana y crear o cambiar tareas están en su página.
 import { useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
+import { Section, sectionStyles } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
 import { isOverdue, pickNote, sortDays } from "../logic";
 import type { ChoresOverview } from "../types";
@@ -49,15 +49,13 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
   const noteChore = note ? byId.get(note.choreId) : undefined;
 
   return (
-    <HomeSection
+    <Section
       title={t("title")}
-      href={base}
-      linkLabel={tHome("seeAll")}
-      linkAriaLabel={tHome("seeAllOf", { section: t("title") })}
+      link={{ href: base, label: tHome("seeAll"), ariaLabel: tHome("seeAllOf", { section: t("title") }) }}
     >
       {chores.length === 0 ? (
-        <div className={homeStyles.card}>
-          <p className={homeStyles.muted}>{isAdult ? t("home.emptyAdult") : t("home.emptyMinor")}</p>
+        <div className={sectionStyles.card}>
+          <p className={sectionStyles.muted}>{isAdult ? t("home.emptyAdult") : t("home.emptyMinor")}</p>
           {isAdult ? (
             <ButtonLink href={`${base}/nueva`} fullWidth>
               {t("home.createFirst")}
@@ -115,6 +113,6 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
           ) : null}
         </>
       )}
-    </HomeSection>
+    </Section>
   );
 }
