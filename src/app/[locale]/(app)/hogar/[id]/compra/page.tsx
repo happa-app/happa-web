@@ -40,7 +40,6 @@ export default async function HouseholdShoppingPage({ params }: Props) {
       </Link>
       <section className={styles.intro}>
         <h1 className={styles.title}>{t("title")}</h1>
-        <p className={styles.subtitle}>{t("householdSubtitle")}</p>
       </section>
       <ShoppingList
         scope={{ type: "household", householdId: household.id }}

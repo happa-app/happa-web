@@ -30,7 +30,6 @@ export default async function PersonalShoppingPage() {
       </Link>
       <section className={styles.intro}>
         <h1 className={styles.title}>{t("personalTitle")}</h1>
-        <p className={styles.subtitle}>{t("personalSubtitle")}</p>
       </section>
       <ShoppingList
         scope={{ type: "personal", userId }}

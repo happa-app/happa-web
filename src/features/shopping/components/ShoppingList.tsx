@@ -3,7 +3,8 @@
 import { useTranslations } from "next-intl";
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
-import { Link } from "@/i18n/navigation";
+import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Section } from "@/components/ui/Section";
 import { useShoppingList } from "../hooks/useShoppingList";
 import { MAX_QUANTITY } from "../schemas";
 import { canEditItem, shownQuantity } from "../rules";
@@ -76,27 +77,35 @@ export function ShoppingList({
     const editable = canEdit(item) && !item.pending;
     const quantity = shownQuantity(item);
     const requester =
-      item.requestedBy === currentUserId ? t("you") : (item.requestedByName ?? t("someone"));
+      item.requestedBy === currentUserId
+        ? t("requestedByYou")
+        : t("requestedBy", { name: item.requestedByName ?? t("someone") });
 
     return (
       <li key={item.id} className={`${styles.item} ${item.pending ? styles.saving : ""}`}>
         <div className={styles.row}>
-          <input
-            type="checkbox"
-            className={styles.check}
-            checked={checked}
-            disabled={!editable}
-            onChange={() => void toggle(item)}
-            aria-label={checked ? t("markPending", { name: item.name }) : t("markBought", { name: item.name })}
-          />
+          <span className={styles.checkWrap}>
+            {/* El input real sigue ahí (teclado y lectores de pantalla); el círculo es solo el dibujo */}
+            <input
+              type="checkbox"
+              className={styles.check}
+              checked={checked}
+              disabled={!editable}
+              onChange={() => void toggle(item)}
+              aria-label={checked ? t("markPending", { name: item.name }) : t("markBought", { name: item.name })}
+            />
+            <span className={styles.checkCircle} aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </span>
           <div className={styles.text}>
-            <span className={checked ? styles.nameDone : styles.name}>{item.name}</span>
-            {quantity || (isHousehold && item.requestedBy) ? (
-              <span className={styles.meta}>
-                {quantity ? <span className={styles.quantity}>{quantity}</span> : null}
-                {isHousehold && item.requestedBy ? <span>{t("requestedBy", { name: requester })}</span> : null}
-              </span>
-            ) : null}
+            <span>
+              <span className={checked ? styles.nameDone : styles.name}>{item.name}</span>
+              {quantity ? <span className={styles.quantity}>{quantity}</span> : null}
+            </span>
+            {isHousehold && item.requestedBy ? <span className={styles.meta}>{requester}</span> : null}
           </div>
           {!isHousehold && !checked && shareTargets.length > 0 && editable ? (
             <button
@@ -138,6 +147,7 @@ export function ShoppingList({
 
   return (
     <div className={styles.wrapper}>
+      <p className={styles.subtitle}>{t("pendingCount", { count: pendingItems.length })}</p>
       <form className={styles.addForm} onSubmit={onAdd} noValidate>
         <label className="visually-hidden" htmlFor="shopping-name">
           {t("add.name")}
@@ -173,7 +183,7 @@ export function ShoppingList({
           }
         />
         <button type="submit" className={styles.addButton} aria-label={t("add.submit")}>
-          +
+          <span aria-hidden="true">+</span>
         </button>
       </form>
 
@@ -182,23 +192,22 @@ export function ShoppingList({
         {sharedTo ? t("shared", { name: sharedTo }) : ""}
       </p>
 
-      {items.length === 0 ? <p className={styles.empty}>{t("empty")}</p> : null}
-
-      {pendingItems.length > 0 ? (
-        <section className={styles.section} aria-label={t("pending")}>
+      <Section title={t("pending")} meta={String(pendingItems.length)}>
+        {pendingItems.length > 0 ? (
           <ul className={styles.list}>{pendingItems.map(renderItem)}</ul>
-        </section>
-      ) : null}
+        ) : (
+          <p className={styles.empty}>{t("empty")}</p>
+        )}
+      </Section>
 
       {boughtItems.length > 0 ? (
-        <section className={styles.section}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>{t("bought", { count: boughtItems.length })}</h2>
-            <div className={styles.headerActions}>
+        <Section title={t("bought")} meta={String(boughtItems.length)}>
+          {(toExpensesHref && boughtItems.some((i) => !i.pending)) || clearable.length > 0 ? (
+            <div className={styles.boughtActions}>
               {toExpensesHref && boughtItems.some((i) => !i.pending) ? (
-                <Link href={toExpensesHref} className={styles.textButton}>
+                <ButtonLink href={toExpensesHref} variant="secondary" size="sm">
                   {t("toExpenses")}
-                </Link>
+                </ButtonLink>
               ) : null}
               {clearable.length > 0 ? (
                 <button type="button" className={styles.textButton} onClick={onClearBought}>
@@ -206,9 +215,9 @@ export function ShoppingList({
                 </button>
               ) : null}
             </div>
-          </div>
+          ) : null}
           <ul className={styles.list}>{boughtItems.map(renderItem)}</ul>
-        </section>
+        </Section>
       ) : null}
     </div>
   );
