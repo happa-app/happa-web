@@ -49,12 +49,16 @@ export function ChoreDayDetail({ householdId, day, chore, people, me, isAdult, t
 
   return (
     <>
-      <div className={styles.card}>
-        <dl className={styles.facts}>
+      <dl className={styles.facts}>
+        <div className={styles.fact}>
           <dt>{t("day.who")}</dt>
           <dd>{nameOf(day.assigneeId)}</dd>
+        </div>
+        <div className={styles.fact}>
           <dt>{t("day.when")}</dt>
           <dd>{day.dueOn === today ? `${t("todayCap")} (${formatDay(day.dueOn, locale)})` : formatDay(day.dueOn, locale)}</dd>
+        </div>
+        <div className={styles.fact}>
           <dt>{t("day.status")}</dt>
           <dd>
             <span
@@ -71,31 +75,37 @@ export function ChoreDayDetail({ householdId, day, chore, people, me, isAdult, t
               {t(`statuses.${status}`)}
             </span>
           </dd>
+        </div>
+        <div className={styles.fact}>
           <dt>{t("day.repeats")}</dt>
           <dd>{t(schedule.key, schedule.values)}</dd>
+        </div>
+        <div className={styles.fact}>
           <dt>{t("day.split")}</dt>
           <dd>{who}</dd>
+        </div>
+        <div className={styles.fact}>
           <dt>{t("form.effort")}</dt>
           <dd>{t(`efforts.${chore.effort}`)}</dd>
-          {chore.notes ? (
-            <>
-              <dt>{t("day.notes")}</dt>
-              <dd>{chore.notes}</dd>
-            </>
-          ) : null}
-        </dl>
-        {history.length > 0 || day.manual ? (
-          <ul className={styles.history}>
-            {history.map((h) => (
-              <li key={h.at + h.text}>
-                {h.text} · {formatMoment(h.at, locale, timezone)}
-              </li>
-            ))}
-            {day.manual ? <li>{t("day.manual")}</li> : null}
-          </ul>
+        </div>
+        {chore.notes ? (
+          <div className={styles.fact}>
+            <dt>{t("day.notes")}</dt>
+            <dd>{chore.notes}</dd>
+          </div>
         ) : null}
-        {chore.requiresApproval ? <p className={styles.hint}>{t("day.approvalNote")}</p> : null}
-      </div>
+      </dl>
+      {history.length > 0 || day.manual ? (
+        <ul className={styles.history}>
+          {history.map((h) => (
+            <li key={h.at + h.text}>
+              {h.text} · {formatMoment(h.at, locale, timezone)}
+            </li>
+          ))}
+          {day.manual ? <li>{t("day.manual")}</li> : null}
+        </ul>
+      ) : null}
+      {chore.requiresApproval ? <p className={styles.hint}>{t("day.approvalNote")}</p> : null}
 
       <div className={styles.buttonRow}>
         {canComplete(day, me, isAdult) ? (

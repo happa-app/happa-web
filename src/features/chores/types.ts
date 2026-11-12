@@ -78,9 +78,6 @@ export type ChoresOverview = {
   days: ChoreDay[];
 };
 
-// Para la tarjeta de la página del hogar
-export type ChoresSummary = { choreCount: number; myToday: number; myOverdue: number; toApprove: number };
-
 // Errores que pueden ver los usuarios (claves de messages/*.json → Chores.errors)
 export const CHORE_ERROR_KEYS = [
   "titleRequired",

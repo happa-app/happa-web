@@ -25,7 +25,7 @@ export function ChoreList({ householdId, chores, days, names, me, isAdult, today
     userId === null ? t("free") : userId === me ? t("youCap") : (names[userId] ?? t("someone"));
 
   if (chores.length === 0) {
-    return <p className={styles.empty}>{isAdult ? t("manage.emptyAdult") : t("manage.empty")}</p>;
+    return <p className={styles.muted}>{isAdult ? t("manage.emptyAdult") : t("manage.empty")}</p>;
   }
 
   return (

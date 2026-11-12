@@ -10,6 +10,6 @@ export { ChoresHome } from "./components/ChoresHome";
 export { UpcomingDays } from "./components/UpcomingDays";
 export { WeekShare } from "./components/WeekShare";
 export { addDays } from "./dates";
-export { isOverdue, pickNote, sortDays, summarize, weekShare } from "./logic";
+export { isOverdue, pickNote, sortDays, weekShare } from "./logic";
 export { uuidSchema } from "./schemas";
-export type { Chore, ChoreDay, ChorePerson, ChoresOverview, ChoresSummary } from "./types";
+export type { Chore, ChoreDay, ChorePerson, ChoresOverview } from "./types";

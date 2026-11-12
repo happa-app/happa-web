@@ -52,7 +52,9 @@ export default async function ChoresPage({ params }: Props) {
   );
   const { note } = pickNote(mine, userId);
   const noteChore = note ? (chores.find((c) => c.id === note.choreId) ?? null) : null;
-  const overdue = sorted.filter((d) => isOverdue(d, today));
+  // La tarea del post-it no se repite como fila
+  const rest = sorted.filter((d) => d.id !== note?.id);
+  const overdue = rest.filter((d) => isOverdue(d, today));
   const toApprove = sorted.filter((d) => d.status === "review");
 
   return (
@@ -95,7 +97,7 @@ export default async function ChoresPage({ params }: Props) {
           <ChoreDaySection
             {...section}
             title={t("sections.today")}
-            days={sorted.filter((d) => d.dueOn === today && d.status !== "review")}
+            days={rest.filter((d) => d.dueOn === today && d.status !== "review")}
             emptyText={t("sections.todayEmpty")}
           />
           <UpcomingDays
@@ -104,7 +106,7 @@ export default async function ChoresPage({ params }: Props) {
           />
           <WeekShare rows={weekShare(days, chores, people, today)} me={userId} />
 
-          <div className={styles.actions} style={isAdult ? { gridTemplateColumns: "1fr 1fr" } : undefined}>
+          <div className={styles.actionsTwo}>
             {isAdult ? (
               <ButtonLink href={`/hogar/${id}/tareas/nueva`} fullWidth>
                 {t("actions.new")}

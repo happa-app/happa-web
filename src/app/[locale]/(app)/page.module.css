@@ -33,6 +33,12 @@
   }
 }
 
+.actionsTwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
 .back {
   align-self: flex-start;
   color: var(--color-brand-strong);
