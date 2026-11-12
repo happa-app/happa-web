@@ -47,6 +47,18 @@ export function recurringWaitingForMe(r: RecurringExpense, userId: string): bool
   return r.status === "pending" && recurringParticipants(r).includes(userId) && !r.confirmedBy.includes(userId);
 }
 
+// En qué punto está un gasto fijo, para decidir qué enseñar en su fila. Solo "confirmed" (confirmado, activo y con
+// pagador en el hogar) tiene un próximo cargo que enseñar; el resto muestra su estado.
+export type RecurringState = "payerGone" | "pending" | "rejected" | "paused" | "confirmed";
+
+export function recurringState(r: RecurringExpense, currentIds: Set<string>): RecurringState {
+  if (!currentIds.has(r.paidBy)) return "payerGone";
+  if (r.status === "pending") return "pending";
+  if (r.status === "rejected") return "rejected";
+  if (!r.active) return "paused";
+  return "confirmed";
+}
+
 // Lo que te toca en cada cargo, contando solo a quienes siguen en el hogar (si se indica quiénes son)
 export function recurringShareOf(r: RecurringExpense, userId: string, currentIds?: Set<string>): number {
   const shares = currentIds ? r.shares.filter((s) => currentIds.has(s.userId)) : r.shares;

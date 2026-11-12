@@ -2,7 +2,7 @@
 // puede hacer cada uno (confirmar, rechazar, pausar, editar, borrar).
 import { useLocale, useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { formatDay, recurringParticipants, recurringShareOf, recurringWaitingForMe } from "../format";
+import { formatDay, recurringParticipants, recurringState, recurringShareOf, recurringWaitingForMe } from "../format";
 import { formatMoney } from "../money";
 import type { RecurringExpense } from "../types";
 import { ActionButton } from "./ActionButton";
@@ -50,6 +50,7 @@ export function RecurringList({
         const missing = people.filter((id) => !r.confirmedBy.includes(id));
         const gone = r.shares.map((s) => s.userId).filter((id) => !currentIds.has(id));
         const payerGone = !currentIds.has(r.paidBy);
+        const state = recurringState(r, currentIds);
         // Lo que te toca en cada cargo (no se enseña si no se va a cobrar: en pausa o sin quien pague)
         const myShare = r.active && !payerGone ? recurringShareOf(r, currentUserId, currentIds) : 0;
         // Quien lo creó lo puede editar o borrar solo mientras no se haya confirmado nunca; luego, solo un admin
@@ -82,16 +83,16 @@ export function RecurringList({
               <span className={styles.rowAmount}>{formatMoney(r.amountCents, locale)}</span>
             </div>
 
-            {payerGone ? (
+            {state === "payerGone" ? (
               <p className={styles.tagRejected}>{t("recurring.payerGone", { name: realName(r.paidBy) })}</p>
-            ) : r.status === "pending" ? (
+            ) : state === "pending" ? (
               <p className={styles.chipPending}>{t("recurring.waitingFor", { names: inList(missing) })}</p>
-            ) : r.status === "rejected" ? (
+            ) : state === "rejected" ? (
               <p className={styles.tagRejected}>
                 {t("recurring.rejectedBy", { name: byName(r.rejectedBy) })}
                 {r.rejectedReason ? <span className={styles.reason}>“{r.rejectedReason}”</span> : null}
               </p>
-            ) : !r.active ? (
+            ) : state === "paused" ? (
               <p className={styles.chipRejected}>{t("recurring.paused")}</p>
             ) : (
               <p className={styles.chipConfirmed}>
@@ -116,7 +117,7 @@ export function RecurringList({
                   fields={{ ...fields, intent: "confirm" }}
                   label={t("recurring.confirm")}
                 />
-                <RejectForm householdId={householdId} targetId={r.id} version={r.version} kind="recurring" />
+                <RejectForm householdId={householdId} targetId={r.id} version={r.version} kind="recurring" size="sm" />
               </div>
             ) : null}
 

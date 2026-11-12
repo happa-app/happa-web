@@ -147,7 +147,10 @@ export function ShoppingList({
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.subtitle}>{t("pendingCount", { count: pendingItems.length })}</p>
+      <p className={styles.subtitle}>
+        {t("pendingCount", { count: pendingItems.length })}
+        {scope.type === "personal" ? ` · ${t("onlyYou")}` : null}
+      </p>
       <form className={styles.addForm} onSubmit={onAdd} noValidate>
         <label className="visually-hidden" htmlFor="shopping-name">
           {t("add.name")}
@@ -192,7 +195,7 @@ export function ShoppingList({
         {sharedTo ? t("shared", { name: sharedTo }) : ""}
       </p>
 
-      <Section title={t("pending")} meta={String(pendingItems.length)}>
+      <Section title={t("pending")} meta={pendingItems.length > 0 ? String(pendingItems.length) : undefined}>
         {pendingItems.length > 0 ? (
           <ul className={styles.list}>{pendingItems.map(renderItem)}</ul>
         ) : (

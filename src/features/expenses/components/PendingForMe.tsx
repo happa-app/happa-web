@@ -32,7 +32,7 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
   if (total === 0) return null;
 
   return (
-    <Section title={t("pending.title")} meta={String(forMe)}>
+    <Section title={t("pending.title")} meta={forMe > 0 ? String(forMe) : undefined}>
       <ul className={styles.list}>
         {toConfirm.map((e) => {
           const { shareCents } = myEffect(e, currentUserId);

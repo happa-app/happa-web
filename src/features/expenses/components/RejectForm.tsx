@@ -13,9 +13,11 @@ type Props = {
   targetId: string;
   version: number;
   kind?: "expense" | "recurring";
+  // Mismo tamaño que los botones que tiene al lado
+  size?: "md" | "sm";
 };
 
-export function RejectForm({ householdId, targetId, version, kind = "expense" }: Props) {
+export function RejectForm({ householdId, targetId, version, kind = "expense", size }: Props) {
   const t = useTranslations("Expenses");
   const locale = useLocale();
   const [open, setOpen] = useState(false);
@@ -26,7 +28,7 @@ export function RejectForm({ householdId, targetId, version, kind = "expense" }:
 
   if (!open) {
     return (
-      <Button type="button" variant="secondary" onClick={() => setOpen(true)}>
+      <Button type="button" variant="secondary" size={size} onClick={() => setOpen(true)}>
         {t("detail.reject")}
       </Button>
     );

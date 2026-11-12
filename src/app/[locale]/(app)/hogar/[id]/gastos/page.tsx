@@ -53,6 +53,7 @@ export default async function ExpensesPage({ params }: Props) {
   ]);
   const boughtCount = shoppingItems.filter((i) => i.checkedAt).length;
   const names = nameMap(people);
+  const currentIds = new Set(people.filter((p) => p.isCurrent).map((p) => p.userId));
   const everyoneEven = people.every((p) => p.netCents === 0);
   // Los gastos fijos solo cuentan para quien vive aquí
   const myRecurring = context.isCurrent ? recurring : [];
@@ -105,7 +106,7 @@ export default async function ExpensesPage({ params }: Props) {
         today={todayIn(context.timezone)}
       />
       <BalanceList people={people} currentUserId={userId} />
-      {context.isCurrent ? <RecurringTile householdId={id} recurring={recurring} /> : null}
+      {context.isCurrent ? <RecurringTile householdId={id} recurring={recurring} currentIds={currentIds} /> : null}
       <Section title={t("expenses.title")}>
         <ExpenseList householdId={id} currentUserId={userId} expenses={expenses} names={names} />
         <PaymentList payments={payments} names={names} />

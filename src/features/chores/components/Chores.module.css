@@ -8,11 +8,8 @@
 
 .empty {
   margin: 0;
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  padding: var(--space-2) 0;
   color: var(--color-text-muted);
-  text-align: center;
 }
 
 .muted,
@@ -509,9 +506,15 @@ button.check:hover:not(:disabled) .checkCircle {
   color: var(--color-bg);
 }
 
-.segmentOption:focus-within,
+.segmentOption:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: -4px;
+}
+
+/* Anillo interior (overflow: hidden recortaría uno exterior); sobre la opción activa, con el color del fondo */
 .segmentOptionActive:focus-within {
-  box-shadow: var(--focus-ring);
+  outline: 2px solid var(--color-bg);
+  outline-offset: -4px;
 }
 
 .dayPicker {

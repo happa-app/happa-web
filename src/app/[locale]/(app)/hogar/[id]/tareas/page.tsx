@@ -98,7 +98,7 @@ export default async function ChoresPage({ params }: Props) {
             {...section}
             title={t("sections.today")}
             days={rest.filter((d) => d.dueOn === today && d.status !== "review")}
-            emptyText={t("sections.todayEmpty")}
+            emptyText={note?.dueOn === today ? undefined : t("sections.todayEmpty")}
           />
           <UpcomingDays
             {...section}
