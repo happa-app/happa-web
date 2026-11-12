@@ -1172,17 +1172,11 @@
       "rotation": "Por turnos: {names}",
       "free": "Libre: quien la coja"
     },
-    "summary": {
-      "today": "{count, plural, =0 {Hoy no te toca nada} one {Hoy te toca # tarea} other {Hoy te tocan # tareas}}",
-      "overdue": "{count, plural, one {# atrasada} other {# atrasadas}}",
-      "toApprove": "{count, plural, one {# por dar el visto bueno} other {# por dar el visto bueno}}",
-      "allGood": "Nada atrasado. ¡Bien!"
-    },
     "sections": {
       "overdue": "Atrasadas",
-      "toApprove": "Por dar el visto bueno",
+      "toApprove": "Esperan tu visto bueno",
       "waiting": "Esperando el visto bueno",
-      "today": "Hoy, {date}",
+      "today": "Hoy",
       "todayEmpty": "Hoy no hay nada que hacer."
     },
     "upcoming": {
@@ -1193,7 +1187,7 @@
       "emptyMine": "No te toca nada en los próximos días."
     },
     "share": {
-      "title": "Reparto de esta semana",
+      "title": "Reparto de la semana",
       "numbers": "{count, plural, one {# tarea} other {# tareas}} · {points, plural, one {# punto} other {# puntos}} · {done, plural, =0 {ninguna hecha} one {# hecha} other {# hechas}}",
       "hint": "Puntos según el esfuerzo: ligera 1, normal 2, pesada 3. De lunes a domingo."
     },

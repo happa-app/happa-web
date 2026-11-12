@@ -6,8 +6,8 @@ import { Section, sectionStyles } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
 import { isOverdue, pickNote, sortDays } from "../logic";
 import type { ChoresOverview } from "../types";
-import { ChoreActionButton } from "./ChoreActionButton";
 import { ChoreHomeRow } from "./ChoreHomeRow";
+import { ChorePostit } from "./ChorePostit";
 import styles from "./Chores.module.css";
 
 // Cuántas filas como mucho (el resto, en su página)
@@ -64,26 +64,15 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
         </div>
       ) : (
         <>
-          {note && noteChore ? (
-            <div className={styles.postit}>
-              <div className={styles.postitText}>
-                <p className={styles.postitLabel}>{isOverdue(note, today) ? t("row.overdue") : t("home.today")}</p>
-                <Link href={`${base}/dia/${note.id}`} className={styles.postitTitle}>
-                  {noteChore.title}
-                </Link>
-              </div>
-              <ChoreActionButton
-                look="check"
-                fields={{ householdId, dayId: note.id, intent: "complete" }}
-                label={t("row.complete", { title: noteChore.title })}
-              />
-            </div>
-          ) : null}
           {/* Sin tareas tuyas hoy: el post-it sale igual, con "Hoy te libras." */}
-          {freeToday ? (
-            <div className={styles.postit}>
-              <p className={styles.postitTitle}>{t("home.todayEmpty")}</p>
-            </div>
+          {(note && noteChore) || freeToday ? (
+            <ChorePostit
+              householdId={householdId}
+              note={note}
+              chore={noteChore ?? null}
+              isOverdue={note ? isOverdue(note, today) : false}
+              base={base}
+            />
           ) : null}
           {rest.length > 0 ? (
             <ul className={styles.homeList}>

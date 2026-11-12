@@ -1172,21 +1172,15 @@
       "rotation": "Taking turns: {names}",
       "free": "Up for grabs: whoever takes it"
     },
-    "summary": {
-      "today": "{count, plural, =0 {Nothing for you today} one {# chore for you today} other {# chores for you today}}",
-      "overdue": "{count, plural, one {# overdue} other {# overdue}}",
-      "toApprove": "{count, plural, one {# to approve} other {# to approve}}",
-      "allGood": "Nothing overdue. Nice!"
-    },
     "sections": {
       "overdue": "Overdue",
-      "toApprove": "To approve",
+      "toApprove": "Waiting for your OK",
       "waiting": "Waiting for approval",
-      "today": "Today, {date}",
+      "today": "Today",
       "todayEmpty": "Nothing to do today."
     },
     "upcoming": {
-      "title": "Next few days",
+      "title": "Coming up",
       "all": "All",
       "mine": "Mine",
       "empty": "Nothing in the next few days.",

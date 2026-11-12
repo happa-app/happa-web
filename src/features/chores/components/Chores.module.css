@@ -6,20 +6,6 @@
   gap: var(--space-3);
 }
 
-.sectionHead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2) var(--space-3);
-}
-
-.sectionTitle {
-  margin: 0;
-  font-size: var(--text-base);
-  font-weight: 700;
-}
-
 .card {
   display: flex;
   flex-direction: column;
@@ -46,41 +32,20 @@
   font-size: var(--text-sm);
 }
 
-/* ───── Resumen de hoy ───── */
-.summary {
-  flex-direction: row;
-  align-items: center;
-  gap: var(--space-4);
-}
-
-.summaryNumber {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-md);
-  background: var(--color-brand-soft);
-  color: var(--color-brand-strong);
-  font-size: var(--text-xl);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.summaryText {
+/* ───── Listas de días ───── */
+/* Sin caja: filas con una línea fina entre ellas (atrasadas, visto bueno, hoy y próximos días) */
+.dayList {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.summaryTitle {
   margin: 0;
-  font-weight: 700;
+  padding: 0;
+  list-style: none;
 }
 
-/* ───── Listas de días ───── */
+.dayList > li + li {
+  border-top: 1px solid var(--color-border);
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -101,11 +66,7 @@
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-2);
-}
-
-.rowMine {
-  background: linear-gradient(90deg, var(--color-brand-soft), transparent 60%);
+  padding: var(--space-2) 0;
 }
 
 .rowBody {
@@ -347,8 +308,7 @@ button.check:hover:not(:disabled) .checkCircle {
   gap: 2px;
   padding: 3px;
   border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
 }
 
 .toggleOption,
@@ -366,8 +326,8 @@ button.check:hover:not(:disabled) .checkCircle {
 }
 
 .toggleOptionActive {
-  background: var(--color-brand-soft);
-  color: var(--color-brand-strong);
+  background: var(--color-fill);
+  color: var(--color-on-accent);
 }
 
 .toggleOption:focus-visible,
@@ -402,9 +362,9 @@ button.check:hover:not(:disabled) .checkCircle {
 
 .shareBar {
   position: relative;
-  height: 10px;
+  height: 4px;
   border-radius: 999px;
-  background: var(--color-bg);
+  background: var(--color-border);
   overflow: hidden;
 }
 
@@ -841,30 +801,11 @@ button.check:hover:not(:disabled) .checkCircle {
   right: 0;
 }
 
-/* Próximos días: una caja con un grupo por día */
+/* Próximos días: un grupo por día, sin caja */
 .groups {
   display: flex;
   flex-direction: column;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-}
-
-.groups > div + div {
-  border-top: 1px solid var(--color-border);
-}
-
-.groupList {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.groupList > li + li {
-  border-top: 1px solid var(--color-border);
+  gap: var(--space-3);
 }
 
 /* ───── Inicio ───── */
