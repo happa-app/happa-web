@@ -775,7 +775,6 @@
     },
     "settle": {
       "title": "Para quedar en paz",
-      "allEven": "Nadie debe nada a nadie.",
       "iPaid": "He pagado",
       "theyPaid": "Me ha pagado",
       "howMuchPaid": "¿Cuánto le has pagado a {name}?",
@@ -821,7 +820,6 @@
       "createdBy": "añadido por {name}",
       "pendingBanner": "Falta por confirmar: {names}. Hasta entonces no cuenta en los saldos.",
       "rejectedBanner": "Rechazado por {name}. Quien lo añadió puede corregirlo o borrarlo.",
-      "confirmedBanner": "Confirmado por todos. Ya cuenta en los saldos.",
       "confirm": "Confirmar gasto",
       "reject": "Rechazar",
       "rejectReason": "¿Qué está mal? (opcional)",

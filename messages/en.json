@@ -775,7 +775,6 @@
     },
     "settle": {
       "title": "To settle up",
-      "allEven": "Nobody owes anybody anything.",
       "iPaid": "I paid",
       "theyPaid": "They paid me",
       "howMuchPaid": "How much did you pay {name}?",
@@ -821,7 +820,6 @@
       "createdBy": "added by {name}",
       "pendingBanner": "Waiting for confirmation from: {names}. It doesn't count in the balances until then.",
       "rejectedBanner": "Rejected by {name}. Whoever added it can fix it or delete it.",
-      "confirmedBanner": "Confirmed by everyone. It counts in the balances.",
       "confirm": "Confirm expense",
       "reject": "Reject",
       "rejectReason": "What's wrong? (optional)",

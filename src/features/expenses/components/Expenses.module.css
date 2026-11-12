@@ -299,32 +299,28 @@
   font-weight: 800;
 }
 
-.bannerPending,
-.bannerRejected,
-.bannerConfirmed {
+/* Estado del gasto como etiqueta: pendiente en verde claro, rechazado en el aviso */
+.tagPending,
+.tagRejected {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+  align-self: flex-start;
   margin: 0;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
+  padding: 2px var(--space-3);
+  border-radius: 14px;
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.bannerPending {
+.tagPending {
+  background: var(--color-note);
+  color: var(--color-note-ink);
+}
+
+.tagRejected {
   background: var(--color-owe-soft);
   color: var(--color-owe);
-}
-
-.bannerRejected {
-  background: var(--color-error-soft);
-  color: var(--color-error);
-}
-
-.bannerConfirmed {
-  background: var(--color-success-soft);
-  color: var(--color-owed);
 }
 
 .reason {

@@ -60,11 +60,17 @@ export function BalanceList({ people, currentUserId }: { people: BalancePerson[]
           return (
             <li key={p.userId} className={styles.balanceRow}>
               <span className="visually-hidden">
-                {p.netCents > 0
-                  ? t("balance.owedSr", { name, amount: money })
-                  : p.netCents < 0
-                    ? t("balance.oweSr", { name, amount: money })
-                    : t("balance.evenSr", { name })}
+                {p.userId === currentUserId
+                  ? p.netCents > 0
+                    ? t("tile.owed", { amount: money })
+                    : p.netCents < 0
+                      ? t("tile.owe", { amount: money })
+                      : t("home.youEven")
+                  : p.netCents > 0
+                    ? t("balance.owedSr", { name, amount: money })
+                    : p.netCents < 0
+                      ? t("balance.oweSr", { name, amount: money })
+                      : t("balance.evenSr", { name })}
                 {!p.isCurrent ? `. ${t("balances.left")}` : ""}
               </span>
               <span className={`${styles.balanceName} ${p.isCurrent ? "" : styles.muted}`} aria-hidden="true">

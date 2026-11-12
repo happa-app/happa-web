@@ -1,5 +1,6 @@
-// "Te toca a ti": gastos y gastos fijos que esperan tu confirmación, pagos que dicen haberte hecho
-// y tus pagos que aún no te han confirmado.
+// Sección "Por confirmar" de Gastos: gastos y gastos fijos que esperan tu confirmación, pagos que dicen
+// haberte hecho y tus pagos que aún no te han confirmado. Su dato (`meta`) es el mismo número que el
+// aviso junto al saldo (`forMe`); tus pagos pendientes se listan, pero no cuentan en él.
 import { useLocale, useTranslations } from "next-intl";
 import { Section } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
@@ -27,11 +28,11 @@ export function PendingForMe({ householdId, currentUserId, expenses, payments, r
   const paymentsToMe = payments.filter((p) => p.status === "pending" && p.toUser === currentUserId);
   const myPendingPayments = payments.filter((p) => p.status === "pending" && p.fromUser === currentUserId);
   const recurringToConfirm = recurring.filter((r) => recurringWaitingForMe(r, currentUserId));
-  const { total } = pendingCounts(expenses, payments, recurring, currentUserId);
+  const { forMe, total } = pendingCounts(expenses, payments, recurring, currentUserId);
   if (total === 0) return null;
 
   return (
-    <Section title={t("pending.title")} meta={String(total)}>
+    <Section title={t("pending.title")} meta={String(forMe)}>
       <ul className={styles.list}>
         {toConfirm.map((e) => {
           const { shareCents } = myEffect(e, currentUserId);
