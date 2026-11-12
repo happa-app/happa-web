@@ -4,32 +4,114 @@
   gap: var(--space-5);
 }
 
-.twoColumns {
-  display: grid;
-  /* minmax(0, …): sin esto, el selector de fecha del navegador ensancha la columna y se sale de la pantalla */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-3);
+/* El importe, lo primero y grande: sin caja, raya de 2 px abajo y "€" a la derecha.
+   La etiqueta del TextField sigue ahí para los lectores de pantalla, pero no se ve. */
+.amountBox {
+  position: relative;
 }
 
-.twoColumns input {
+.amountBox label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.amountBox input {
   width: 100%;
-  min-width: 0;
+  min-height: 3.5rem;
+  padding: 0 2rem 0 0;
+  border: 0;
+  border-bottom: 2px solid var(--color-rule);
+  border-radius: 0;
+  background: transparent;
+  font-size: 2.25rem;
+  font-weight: 800;
 }
 
+.amountBox input:focus {
+  border-color: var(--color-brand-strong);
+  box-shadow: none;
+}
+
+.amountBox input[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.euro {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: 3.5rem;
+  color: var(--color-text-muted);
+  font-size: 1.5rem;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* Una parte del formulario: raya arriba y etiqueta como la de Section */
 .fieldset {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  min-width: 0;
   margin: 0;
-  padding: var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  padding: var(--space-2) 0 0;
+  border: 0;
+  border-top: 2px solid var(--color-rule);
 }
 
 .legend {
-  padding: 0 var(--space-2);
+  float: left; /* así la leyenda no corta la raya del fieldset */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  color: var(--color-label);
+  font-size: 0.66rem;
   font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* Quién pagó (un pagador): una píldora por persona, con un radio de verdad oculto dentro */
+.payerPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill,
+.pillActive {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1.5px solid var(--color-text);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pill {
+  background: transparent;
+  color: var(--color-text);
+}
+
+.pillActive {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.pill:focus-within,
+.pillActive:focus-within {
+  box-shadow: var(--focus-ring);
 }
 
 .select {
@@ -69,14 +151,21 @@
   border-radius: var(--radius-sm);
 }
 
-/* Reparto: tres opciones como pestañas */
-.segmented {
+/* Reparto: cápsula con borde y la opción activa rellena */
+.segmented,
+.segmentedTwo {
   display: grid;
+  overflow: hidden;
+  border: 1.5px solid var(--color-text);
+  border-radius: 999px;
+}
+
+.segmented {
   grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  padding: 4px;
-  border-radius: var(--radius-md);
-  background: var(--color-bg);
+}
+
+.segmentedTwo {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .segment,
@@ -84,9 +173,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 var(--space-2);
-  border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   font-weight: 600;
   text-align: center;
@@ -94,18 +182,17 @@
 }
 
 .segment {
-  color: var(--color-text-muted);
+  color: var(--color-text);
 }
 
 .segmentActive {
-  background: var(--color-surface);
-  color: var(--color-brand-strong);
-  box-shadow: 0 1px 2px rgb(18 57 63 / 12%);
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
 .segment:focus-within,
 .segmentActive:focus-within {
-  box-shadow: var(--focus-ring);
+  box-shadow: inset var(--focus-ring);
 }
 
 .people {
@@ -216,16 +303,6 @@
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   font-weight: 600;
-}
-
-/* Dos opciones como pestañas (reparto de un gasto fijo) */
-.segmentedTwo {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 4px;
-  padding: 4px;
-  border-radius: var(--radius-md);
-  background: var(--color-bg);
 }
 
 /* Un grupo desactivado (cuándo se cobra, si ya hay cargos) */

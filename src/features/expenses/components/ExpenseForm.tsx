@@ -162,6 +162,26 @@ export function ExpenseForm({ householdId, currentUserId, people, today, expense
         </fieldset>
       ) : null}
 
+      {/* El importe, lo primero y grande */}
+      <div className={styles.amountBox}>
+      <TextField
+        label={t("form.amount")}
+        name="amount"
+        value={amount}
+        inputMode="decimal"
+        placeholder="0,00"
+        autoComplete="off"
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          touch("amount");
+          setAmount(moneyText(e.target.value));
+        }}
+        error={fieldError("amount")}
+      />
+        <span className={styles.euro} aria-hidden="true">
+          €
+        </span>
+      </div>
+
       <TextField
         label={t("form.description")}
         name="description"
@@ -176,33 +196,18 @@ export function ExpenseForm({ householdId, currentUserId, people, today, expense
         error={fieldError("description")}
       />
 
-      <div className={styles.twoColumns}>
-        <TextField
-          label={t("form.amount")}
-          name="amount"
-          value={amount}
-          inputMode="decimal"
-          placeholder="0,00"
-          autoComplete="off"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            touch("amount");
-            setAmount(moneyText(e.target.value));
-          }}
-          error={fieldError("amount")}
-        />
-        <TextField
-          label={t("form.date")}
-          name="spentOn"
-          type="date"
-          value={spentOn}
-          max={today}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            touch("spentOn");
-            setSpentOn(e.target.value);
-          }}
-          error={fieldError("spentOn")}
-        />
-      </div>
+      <TextField
+        label={t("form.date")}
+        name="spentOn"
+        type="date"
+        value={spentOn}
+        max={today}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          touch("spentOn");
+          setSpentOn(e.target.value);
+        }}
+        error={fieldError("spentOn")}
+      />
 
       {/* ¿Quién pagó? */}
       <fieldset className={styles.fieldset}>
@@ -245,21 +250,25 @@ export function ExpenseForm({ householdId, currentUserId, people, today, expense
           </>
         ) : (
           <>
-            <select
-              className={styles.select}
-              value={payer}
-              aria-label={t("form.paidBy")}
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                touch("payers");
-                setPayer(e.target.value);
-              }}
-            >
+            {/* Radios con aspecto de píldora; su name solo sirve al navegador, lo que se envía sale del campo "payers" */}
+            <div className={styles.payerPills} role="radiogroup" aria-label={t("form.paidBy")}>
               {people.map((p) => (
-                <option key={p.userId} value={p.userId}>
+                <label key={p.userId} className={payer === p.userId ? styles.pillActive : styles.pill}>
+                  <input
+                    type="radio"
+                    name="payerChoice"
+                    value={p.userId}
+                    checked={payer === p.userId}
+                    onChange={() => {
+                      touch("payers");
+                      setPayer(p.userId);
+                    }}
+                    className="visually-hidden"
+                  />
                   {nameOf(p.userId)}
-                </option>
+                </label>
               ))}
-            </select>
+            </div>
             <button
               type="button"
               className={styles.linkButton}

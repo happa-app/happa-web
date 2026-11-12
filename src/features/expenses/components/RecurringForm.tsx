@@ -123,6 +123,26 @@ export function RecurringForm({ householdId, currentUserId, people, today, recur
 
       {state.formError ? <Alert tone="error">{t(`errors.${state.formError}`)}</Alert> : null}
 
+      {/* El importe de cada cargo, lo primero y grande */}
+      <div className={styles.amountBox}>
+      <TextField
+        label={t("recurring.form.amount")}
+        name="amount"
+        value={amount}
+        inputMode="decimal"
+        placeholder="0,00"
+        autoComplete="off"
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          touch("amount");
+          setAmount(moneyText(e.target.value));
+        }}
+        error={fieldError("amount")}
+      />
+        <span className={styles.euro} aria-hidden="true">
+          €
+        </span>
+      </div>
+
       <TextField
         label={t("form.description")}
         name="description"
@@ -137,35 +157,20 @@ export function RecurringForm({ householdId, currentUserId, people, today, recur
         error={fieldError("description")}
       />
 
-      <div className={styles.twoColumns}>
-        <TextField
-          label={t("recurring.form.amount")}
-          name="amount"
-          value={amount}
-          inputMode="decimal"
-          placeholder="0,00"
-          autoComplete="off"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            touch("amount");
-            setAmount(moneyText(e.target.value));
-          }}
-          error={fieldError("amount")}
-        />
-        <TextField
-          label={t("recurring.form.startsOn")}
-          name="startsOn"
-          type="date"
-          value={startsOn}
-          min={scheduleLocked ? undefined : addDays(today, RECURRING_START_MIN_DAYS)}
-          max={scheduleLocked ? undefined : addDays(today, RECURRING_START_MAX_DAYS)}
-          readOnly={scheduleLocked}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            touch("startsOn");
-            setStartsOn(e.target.value);
-          }}
-          error={fieldError("startsOn")}
-        />
-      </div>
+      <TextField
+        label={t("recurring.form.startsOn")}
+        name="startsOn"
+        type="date"
+        value={startsOn}
+        min={scheduleLocked ? undefined : addDays(today, RECURRING_START_MIN_DAYS)}
+        max={scheduleLocked ? undefined : addDays(today, RECURRING_START_MAX_DAYS)}
+        readOnly={scheduleLocked}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          touch("startsOn");
+          setStartsOn(e.target.value);
+        }}
+        error={fieldError("startsOn")}
+      />
 
       {/* ¿Cada cuánto? */}
       <fieldset className={styles.fieldset} disabled={scheduleLocked}>
@@ -195,21 +200,25 @@ export function RecurringForm({ householdId, currentUserId, people, today, recur
       {/* ¿Quién lo paga? */}
       <fieldset className={styles.fieldset}>
         <legend className={styles.legend}>{t("recurring.form.paidBy")}</legend>
-        <select
-          className={styles.select}
-          value={paidBy}
-          aria-label={t("recurring.form.paidBy")}
-          onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-            touch("paidBy");
-            setPaidBy(e.target.value);
-          }}
-        >
+        {/* Radios con aspecto de píldora; el valor que se envía sigue saliendo del campo oculto "paidBy" */}
+        <div className={styles.payerPills} role="radiogroup" aria-label={t("recurring.form.paidBy")}>
           {people.map((p) => (
-            <option key={p.userId} value={p.userId}>
+            <label key={p.userId} className={paidBy === p.userId ? styles.pillActive : styles.pill}>
+              <input
+                type="radio"
+                name="payerChoice"
+                value={p.userId}
+                checked={paidBy === p.userId}
+                onChange={() => {
+                  touch("paidBy");
+                  setPaidBy(p.userId);
+                }}
+                className="visually-hidden"
+              />
               {nameOf(p.userId)}
-            </option>
+            </label>
           ))}
-        </select>
+        </div>
         {fieldError("paidBy") ? <p className={styles.error}>{fieldError("paidBy")}</p> : null}
       </fieldset>
 
