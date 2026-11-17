@@ -96,7 +96,8 @@ const termsEs: LegalDocument = {
           </p>
           <p>
             4.2. Si tiene 16 o 17 años, puede usar HAPPA por sí mismo. Le recomendamos que lo comente con su padre, madre
-            o tutor. Al registrarse, declara que tiene la edad necesaria.
+            o tutor. Al registrarse, declara que tiene la edad necesaria. Si en el futuro se ofrecen funciones de pago,
+            estarán reservadas a personas mayores de 18 años o requerirán la autorización de su padre, madre o tutor.
           </p>
           <p>
             4.3. Los datos que facilite deben ser ciertos y estar actualizados. Cada cuenta es personal: solo la puede
@@ -182,7 +183,7 @@ const termsEs: LegalDocument = {
       body: (
         <>
           <p>
-            7.1. <strong>Tareas.</strong> Una tarea cuenta como hecha cuando se marca. Cualquier adulto del hogar puede
+            7.1. <strong>Tareas.</strong> Una tarea cuenta como hecha cuando se marca. Cualquier persona del hogar puede
             indicar que no está hecha, y entonces vuelve a quedar pendiente.
           </p>
           <p>
@@ -476,7 +477,9 @@ const termsEn: LegalDocument = {
           </p>
           <p>
             4.2. If you are 16 or 17, you can use HAPPA on your own. We recommend that you talk about it with your parent
-            or guardian. When you sign up, you declare that you meet the age requirement.
+            or guardian. When you sign up, you declare that you meet the age requirement. If paid features are offered in
+            the future, they will be reserved for people aged 18 or over or will require the permission of your parent or
+            guardian.
           </p>
           <p>
             4.3. The information you provide must be true and up to date. Each account is personal: only the person who
@@ -562,7 +565,7 @@ const termsEn: LegalDocument = {
       body: (
         <>
           <p>
-            7.1. <strong>Chores.</strong> A chore counts as done when it is ticked. Any adult in the home can say it has
+            7.1. <strong>Chores.</strong> A chore counts as done when it is ticked. Anyone in the home can say it has
             not been done, and it goes back to pending.
           </p>
           <p>

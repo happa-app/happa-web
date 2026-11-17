@@ -85,6 +85,11 @@ const privacyEs: LegalDocument = {
               consulta, el hogar desde el que escribe, su idioma y el modelo de dispositivo o navegador.
             </li>
           </ul>
+          <p>
+            Los datos de la cuenta (correo electrónico y contraseña, o su cuenta de Google), el nombre y la declaración
+            de edad son necesarios para crear su cuenta y usar HAPPA: si no los facilita, no podrá registrarse. La foto
+            de perfil y el código postal del hogar son opcionales.
+          </p>
           <h3>2.2. Datos que se generan al usar HAPPA</h3>
           <ul>
             <li>
@@ -111,8 +116,9 @@ const privacyEs: LegalDocument = {
           </ul>
           <h3>2.3. Datos de otras personas</h3>
           <p>
-            Si usted apunta información que afecta a otras personas del hogar (por ejemplo, un gasto compartido o una
-            tarea asignada), esa información también es un dato suyo. Úsela solo para organizar el hogar.
+            Si usted introduce datos personales de otras personas del hogar o de terceros en gastos, tareas, listas o
+            mensajes (por ejemplo, el teléfono o la cuenta bancaria del casero), garantiza que puede compartirlos en
+            ese ámbito doméstico y se compromete a usarlos solo para organizar el hogar.
           </p>
         </>
       ),
@@ -257,9 +263,9 @@ const privacyEs: LegalDocument = {
       body: (
         <p>
           Los datos se alojan en la Unión Europea. Algunos proveedores (Supabase, Vercel, Resend y Cloudflare) son
-          empresas de Estados Unidos o tienen allí parte de su servicio. Cuando sus datos salen de la Unión Europea, se
-          hace con las garantías que exige el RGPD: el Marco de Privacidad de Datos UE-EE. UU. o las cláusulas
-          contractuales tipo aprobadas por la Comisión Europea.
+          empresas de Estados Unidos o tienen allí parte de su servicio. Cuando sus datos se transfieren fuera del Espacio
+          Económico Europeo, se hace al amparo del Marco de Privacidad de Datos UE-EE. UU. (respecto de los
+          proveedores adheridos a él) o mediante las cláusulas contractuales tipo aprobadas por la Comisión Europea.
         </p>
       ),
     },
@@ -270,18 +276,26 @@ const privacyEs: LegalDocument = {
         <Table
           head={["Datos", "Plazo"]}
           rows={[
-            ["Cuenta, perfil y lo que apunta en sus hogares", "Mientras tenga la cuenta."],
+            [
+              "Cuenta, perfil y lo que apunta en sus hogares",
+              "Mientras tenga la cuenta. Lo que comparte en un hogar se conserva mientras el hogar exista (ver «Hogares sin nadie»).",
+            ],
             [
               "Al borrar la cuenta",
               <>
                 Borramos al momento su correo, contraseña, foto, avisos, suscripciones de avisos al móvil y lista
                 personal. Usted sale de sus hogares y su perfil pasa a llamarse «Usuario eliminado». Lo que compartió en
-                los hogares (mensajes, gastos, pagos, tareas...) se mantiene seudonimizado con ese nombre, porque forma
-                parte de las cuentas y del historial del resto (interés legítimo, apartado 3).{" "}
+                los hogares (mensajes, gastos, pagos, tareas...) se mantiene seudonimizado con ese nombre mientras el
+                hogar exista, porque forma parte de las cuentas y del historial del resto (interés legítimo, apartado 3).{" "}
                 <strong>Importante:</strong> el texto de sus mensajes no se modifica, así que si escribió en ellos datos
-                personales (un teléfono, un número de cuenta, un nombre completo...), seguirán ahí. Puede pedirnos en{" "}
-                <Mail to={PRIVACY_EMAIL} /> que borremos mensajes concretos, antes o después de borrar la cuenta.
+                personales (un teléfono, un número de cuenta, un nombre completo...), seguirán ahí. Si nos pide en{" "}
+                <Mail to={PRIVACY_EMAIL} /> que borremos mensajes concretos, antes o después de borrar la cuenta, los
+                borraremos.
               </>,
+            ],
+            [
+              "Hogares sin nadie",
+              "Cuando sale de un hogar la última persona adulta, el hogar se archiva y deja de aparecer en la app. Pasados 30 días se borra por completo, con todo lo que contiene (chat, gastos, pagos, tareas, horarios, lista de la compra...). Si entre quienes vivieron en él quedan saldos pendientes, se borra cuando se salden y, como máximo, a los 5 años (el plazo para reclamar deudas entre particulares, art. 1964.2 del Código Civil).",
             ],
             [
               "Avisos al móvil pendientes de enviar",
@@ -342,7 +356,7 @@ const privacyEs: LegalDocument = {
             <li>
               <strong>Supresión:</strong> borrar sus datos. Puede borrar su cuenta en cualquier momento desde Perfil →
               Borrar mi cuenta, aunque tenga saldos pendientes en algún hogar. También puede pedirnos que borremos
-              mensajes concretos.
+              mensajes concretos, y los borraremos.
             </li>
             <li>
               <strong>Oposición y limitación:</strong> oponerse a un tratamiento o pedir que limitemos el uso de sus
@@ -360,6 +374,12 @@ const privacyEs: LegalDocument = {
             un mes. Si considera que no hemos atendido correctamente su solicitud, puede presentar una reclamación ante
             la Agencia Española de Protección de Datos (<a href={AEPD}>www.aepd.es</a>) o ante la autoridad de
             protección de datos del país de la Unión Europea en el que resida.
+          </p>
+          <p>
+            <strong>Personas fallecidas.</strong> Las personas vinculadas a un usuario fallecido por razones familiares
+            o de hecho, sus herederos y quien él hubiera designado pueden pedirnos el acceso a sus datos y contenidos o
+            su supresión, como prevén los artículos 3 y 96 de la LOPDGDD, salvo que el fallecido lo hubiera prohibido
+            expresamente. Escriba a <Mail to={PRIVACY_EMAIL} />.
           </p>
         </>
       ),
@@ -473,6 +493,11 @@ const privacyEn: LegalDocument = {
               enquiry, the home you are writing from, your language and your device or browser model.
             </li>
           </ul>
+          <p>
+            The account data (email address and password, or your Google account), your name and your age statement
+            are needed to create your account and use HAPPA: if you do not provide them, you cannot sign up. Your
+            profile photo and the home’s postcode are optional.
+          </p>
           <h3>2.2. Data generated when you use HAPPA</h3>
           <ul>
             <li>
@@ -499,8 +524,9 @@ const privacyEn: LegalDocument = {
           </ul>
           <h3>2.3. Data about other people</h3>
           <p>
-            If you record information that concerns other people in the home (for example, a shared expense or an
-            assigned chore), that information is also their data. Use it only to organise the home.
+            If you enter personal data of other people in the home or of third parties in expenses, chores, lists or
+            messages (for example, the landlord’s phone number or bank account), you guarantee that you may share it in
+            that household setting and you undertake to use it only to organise the home.
           </p>
         </>
       ),
@@ -646,9 +672,9 @@ const privacyEn: LegalDocument = {
       body: (
         <p>
           The data is hosted in the European Union. Some providers (Supabase, Vercel, Resend and Cloudflare) are US
-          companies or run part of their service there. When your data leaves the European Union, it does so with the
-          safeguards required by the GDPR: the EU-US Data Privacy Framework or the standard contractual clauses approved
-          by the European Commission.
+          companies or run part of their service there. When your data is transferred outside the European Economic Area,
+          this is done under the EU-US Data Privacy Framework (for the providers certified under it) or through the
+          standard contractual clauses approved by the European Commission.
         </p>
       ),
     },
@@ -659,18 +685,26 @@ const privacyEn: LegalDocument = {
         <Table
           head={["Data", "Period"]}
           rows={[
-            ["Account, profile and what you record in your homes", "While you have an account."],
+            [
+              "Account, profile and what you record in your homes",
+              "While you have an account. What you share in a home is kept while the home exists (see “Empty homes”).",
+            ],
             [
               "When you delete your account",
               <>
                 We immediately delete your email, password, photo, notifications, phone notification subscriptions and
                 personal list. You leave your homes and your profile is renamed “Deleted user”. What you shared in the
-                homes (messages, expenses, payments, chores...) is kept pseudonymised under that name, because it is
-                part of everyone else’s accounts and history (legitimate interest, section 3).{" "}
+                homes (messages, expenses, payments, chores...) is kept pseudonymised under that name while the home
+                exists, because it is part of everyone else’s accounts and history (legitimate interest, section 3).{" "}
                 <strong>Important:</strong> the text of your messages is not changed, so if you wrote personal data in
-                them (a phone number, a bank account number, a full name...), it will still be there. You can ask us at{" "}
-                <Mail to={PRIVACY_EMAIL} /> to delete specific messages, before or after deleting your account.
+                them (a phone number, a bank account number, a full name...), it will still be there. If you ask us at{" "}
+                <Mail to={PRIVACY_EMAIL} /> to delete specific messages, before or after deleting your account, we will
+                delete them.
               </>,
+            ],
+            [
+              "Empty homes",
+              "When the last adult leaves a home, the home is archived and no longer appears in the app. After 30 days it is deleted completely, with everything in it (chat, expenses, payments, chores, schedules, shopping list...). If there are outstanding balances between the people who lived there, it is deleted once they are settled and, at the latest, after 5 years (the time limit for claiming debts between individuals, Art. 1964.2 of the Spanish Civil Code).",
             ],
             [
               "Phone notifications waiting to be sent",
@@ -731,7 +765,7 @@ const privacyEn: LegalDocument = {
             <li>
               <strong>Erasure:</strong> delete your data. You can delete your account at any time from Profile → Delete
               my account, even if you have outstanding balances in a home. You can also ask us to delete specific
-              messages.
+              messages, and we will delete them.
             </li>
             <li>
               <strong>Objection and restriction:</strong> object to a processing activity or ask us to restrict the use
@@ -749,6 +783,12 @@ const privacyEn: LegalDocument = {
             most. If you think we have not handled your request properly, you can lodge a complaint with the Spanish
             Data Protection Agency (<a href={AEPD}>www.aepd.es</a>) or with the data protection authority of the EU
             country where you live.
+          </p>
+          <p>
+            <strong>Deceased users.</strong> People linked to a deceased user by family or de facto ties, their heirs
+            and anyone the user designated may ask us for access to, or deletion of, their data and content, as
+            provided in Articles 3 and 96 of the LOPDGDD, unless the deceased expressly prohibited it. Write to{" "}
+            <Mail to={PRIVACY_EMAIL} />.
           </p>
         </>
       ),
