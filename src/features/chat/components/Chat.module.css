@@ -1,14 +1,5 @@
 /* Chat del hogar */
 
-.notice {
-  margin: 0;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  background: var(--color-owe-soft);
-  color: var(--color-text);
-  font-size: var(--text-sm);
-}
-
 .chat {
   display: flex;
   flex-direction: column;

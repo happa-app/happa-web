@@ -12,7 +12,6 @@ import type {
   ExpensesOverview,
   ExpenseStatus,
   Frequency,
-  LeftDebt,
   Payment,
   RecurringExpense,
   RecurringSplitMethod,
@@ -250,14 +249,6 @@ export async function getExpensesContext(householdId: string): Promise<ExpensesC
   if (error || !data || data.length === 0) return null;
   const row = data[0];
   return { name: row.name, timezone: row.timezone, isCurrent: row.is_current, isAdmin: row.is_admin };
-}
-
-// Hogares que dejaste donde aún tienes saldo pendiente (para avisar en Inicio)
-export async function getMyLeftDebts(): Promise<LeftDebt[]> {
-  const supabase = await createClient();
-  const { data, error } = await supabase.rpc("my_triqui_debts");
-  if (error) throw error;
-  return (data ?? []).map((d) => ({ householdId: d.household_id, name: d.name, netCents: Number(d.net_cents) }));
 }
 
 // Un gasto con los saldos (para los nombres). null si no existe o no puedes verlo.

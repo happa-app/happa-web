@@ -8,6 +8,8 @@
 --   · carla@happa.test  → miembro del piso (tiene un gasto pendiente de confirmar); usuaria "de antes":
 --                          nunca se le preguntó por la privacidad
 --   · dani@happa.test   → sin hogar (para probar crear un hogar o unirse con el código)
+--   · fran@happa.test   → vivió en el piso y se fue debiendo 12,50 € a Ana: solo ve «Cuentas pendientes»
+--                          (Inicio → Cuentas pendientes; Ana la ve en la pestaña Chat del piso)
 --   · eva@happa.test    → como si hubiera entrado con Google: nombre de Google y sin términos aceptados, así
 --                          que al entrar va a "Antes de empezar" (/bienvenida). Tiene contraseña solo para
 --                          poder probarlo en local sin configurar Google
@@ -41,7 +43,8 @@ from (values
   ('00000000-0000-4000-8000-00000000000b'::uuid, 'bruno@happa.test', 'Bruno',
    '{"choices": {"marketing": false, "version": "v4"}}'::jsonb),
   ('00000000-0000-4000-8000-00000000000c'::uuid, 'carla@happa.test', 'Carla', '{}'::jsonb),
-  ('00000000-0000-4000-8000-00000000000d'::uuid, 'dani@happa.test',  'Dani', '{}'::jsonb)
+  ('00000000-0000-4000-8000-00000000000d'::uuid, 'dani@happa.test',  'Dani', '{}'::jsonb),
+  ('00000000-0000-4000-8000-00000000000f'::uuid, 'fran@happa.test',  'Fran', '{}'::jsonb)
 ) as u (id, email, name, choices);
 
 -- Eva: como llegan los datos de Google (full_name, sin "legal" ni "choices")
@@ -76,7 +79,7 @@ where email like '%@happa.test';
 -- authenticated, así que RLS se aplica igual que en la app. Los ids que hagan falta (el hogar, un gasto)
 -- se buscan antes, todavía como administrador.
 --
--- Ids: Ana …0a · Bruno …0b · Carla …0c
+-- Ids: Ana …0a · Bruno …0b · Carla …0c · Fran …0f
 
 -- ───────────── Ana crea el piso ─────────────
 do $$
@@ -249,6 +252,71 @@ begin
     array['00000000-0000-4000-8000-00000000000a', '00000000-0000-4000-8000-00000000000b',
           '00000000-0000-4000-8000-00000000000c']::uuid[]
   );
+  set constraints all immediate;
+  set constraints all deferred;
+  reset role;
+end $$;
+
+-- ───────────── Fran: entra, comparte una cena con Ana y se va debiendo (migración 29) ─────────────
+do $$
+declare
+  codigo text := (select invite_code from public.households where name = 'Piso de prueba');
+begin
+  perform set_config('request.jwt.claims', '{"sub": "00000000-0000-4000-8000-00000000000f", "role": "authenticated"}', true);
+  set local role authenticated;
+  perform public.join_household(codigo);
+  set constraints all immediate;
+  set constraints all deferred;
+  reset role;
+end $$;
+
+do $$
+declare
+  ana   constant uuid := '00000000-0000-4000-8000-00000000000a';
+  fran  constant uuid := '00000000-0000-4000-8000-00000000000f';
+  hogar uuid := (select id from public.households where name = 'Piso de prueba');
+begin
+  perform set_config('request.jwt.claims', json_build_object('sub', ana, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  -- 25 € a medias: Fran le debe 12,50 € a Ana
+  perform public.create_expense(
+    hogar, 'Cena de despedida', 2500, current_date - 3, 'equal',
+    jsonb_build_array(jsonb_build_object('user_id', ana, 'amount_cents', 2500)),
+    jsonb_build_array(jsonb_build_object('user_id', ana), jsonb_build_object('user_id', fran))
+  );
+  set constraints all immediate;
+  set constraints all deferred;
+  reset role;
+end $$;
+
+do $$
+declare
+  fran  constant uuid := '00000000-0000-4000-8000-00000000000f';
+  hogar uuid := (select id from public.households where name = 'Piso de prueba');
+  cena  public.expenses := (select e from public.expenses e where e.household_id = hogar and e.description = 'Cena de despedida');
+  cuentas uuid;
+begin
+  perform set_config('request.jwt.claims', json_build_object('sub', fran, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  perform public.confirm_expense(cena.id, cena.version);
+  perform public.leave_household(hogar);
+  -- Al irse con saldo se abre su conversación de «Cuentas pendientes»
+  cuentas := (select id from public.conversations where household_id = hogar and kind = 'debts' and departed_id = fran);
+  perform public.send_message(cuentas, 'Te lo paso el lunes, que cobro 🙏');
+  set constraints all immediate;
+  set constraints all deferred;
+  reset role;
+end $$;
+
+do $$
+declare
+  hogar   uuid := (select id from public.households where name = 'Piso de prueba');
+  cuentas uuid := (select id from public.conversations
+                   where household_id = hogar and kind = 'debts' and departed_id = '00000000-0000-4000-8000-00000000000f');
+begin
+  perform set_config('request.jwt.claims', '{"sub": "00000000-0000-4000-8000-00000000000a", "role": "authenticated"}', true);
+  set local role authenticated;
+  perform public.send_message(cuentas, 'Vale, sin prisa');
   set constraints all immediate;
   set constraints all deferred;
   reset role;

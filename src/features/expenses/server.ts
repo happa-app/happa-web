@@ -2,7 +2,6 @@
 // Nunca importes este archivo desde un componente con "use client".
 export {
   getExpense,
-  getMyLeftDebts,
   getMyExpensesSummary,
   getExpensesHome,
   getExpensesContext,

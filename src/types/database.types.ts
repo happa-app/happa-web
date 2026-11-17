@@ -427,18 +427,21 @@ export type Database = {
       conversations: {
         Row: {
           created_at: string
+          departed_id: string | null
           household_id: string | null
           id: string
           kind: Database["public"]["Enums"]["conversation_kind"]
         }
         Insert: {
           created_at?: string
+          departed_id?: string | null
           household_id?: string | null
           id?: string
           kind: Database["public"]["Enums"]["conversation_kind"]
         }
         Update: {
           created_at?: string
+          departed_id?: string | null
           household_id?: string | null
           id?: string
           kind?: Database["public"]["Enums"]["conversation_kind"]
@@ -2050,6 +2053,55 @@ export type Database = {
           roulette_chosen: number
         }[]
       }
+      debt_chat_parties: {
+        Args: { p_conversation: string }
+        Returns: {
+          avatar_path: string
+          display_name: string
+          is_departed: boolean
+          net_cents: number
+          user_id: string
+        }[]
+      }
+      debt_chat_payments: {
+        Args: { p_conversation: string }
+        Returns: {
+          amount_cents: number
+          can_answer: boolean
+          can_cancel: boolean
+          from_user: string
+          id: string
+          settled_on: string
+          to_user: string
+        }[]
+      }
+      get_debt_chat: {
+        Args: { p_conversation: string }
+        Returns: {
+          departed_id: string
+          departed_name: string
+          household_id: string
+          household_name: string
+          timezone: string
+        }[]
+      }
+      my_debt_chats: {
+        Args: { p_household?: string }
+        Returns: {
+          conversation_id: string
+          departed_avatar: string
+          departed_id: string
+          departed_name: string
+          departed_net_cents: number
+          household_id: string
+          household_name: string
+          is_mine: boolean
+          last_at: string
+          last_body: string
+          my_net_cents: number
+          unread: number
+        }[]
+      }
       get_chat: {
         Args: { p_household: string }
         Returns: {
@@ -2505,7 +2557,7 @@ export type Database = {
       chore_assignment: "fixed" | "rotation" | "free"
       chore_frequency: "once" | "daily" | "weekly" | "monthly"
       chore_status: "pending" | "review" | "done"
-      conversation_kind: "tenants" | "landlord" | "listing"
+      conversation_kind: "tenants" | "landlord" | "listing" | "debts"
       expense_source: "manual" | "shopping" | "recurring" | "landlord"
       expense_split_method: "equal" | "shares" | "exact"
       household_kind: "shared_flat" | "student_flat" | "couple" | "family"
@@ -2661,7 +2713,7 @@ export const Constants = {
       chore_assignment: ["fixed", "rotation", "free"],
       chore_frequency: ["once", "daily", "weekly", "monthly"],
       chore_status: ["pending", "review", "done"],
-      conversation_kind: ["tenants", "landlord", "listing"],
+      conversation_kind: ["tenants", "landlord", "listing", "debts"],
       expense_source: ["manual", "shopping", "recurring", "landlord"],
       expense_split_method: ["equal", "shares", "exact"],
       household_kind: ["shared_flat", "student_flat", "couple", "family"],

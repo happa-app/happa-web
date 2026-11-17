@@ -890,11 +890,6 @@
       "scheduleLocked": "Ya hay cargos apuntados: no se puede cambiar cuándo se cobra"
     },
     "leftBanner": "Ya no vives en este hogar. Puedes ver tu saldo, confirmar y apuntar pagos hasta quedar en paz.",
-    "leftDebts": {
-      "title": "Cuentas pendientes en hogares que dejaste",
-      "owe": "Debes {amount}",
-      "owed": "Te deben {amount}"
-    },
     "fromShopping": {
       "title": "Pasar la compra a gastos",
       "subtitle": "Elige qué entra, apunta lo que costó y se reparte como cualquier gasto.",
@@ -1342,7 +1337,6 @@
     "placeholder": "Escribe un mensaje",
     "send": "Enviar",
     "save": "Guardar el cambio",
-    "leftNotice": "Ya no vives en este hogar. Sigues en el chat hasta que saldes tus gastos pendientes.",
     "poll": {
       "open": "Crear una votación",
       "newTitle": "Nueva votación",
@@ -1384,6 +1378,41 @@
       "pollAdultsOnly": "Las votaciones las crean los adultos que viven en el hogar",
       "pollCannotVote": "No puedes votar en esta votación",
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
+    },
+    "debts": {
+      "title": "Cuentas pendientes",
+      "titleWith": "Cuentas pendientes con {name}",
+      "subtitleMine": "{household} · ya no vives aquí",
+      "subtitleOther": "{name} ya no vive aquí",
+      "backHome": "Inicio",
+      "backChat": "Chat",
+      "iOwe": "Debes <strong>{amount}</strong> a {name}",
+      "owesMe": "Te debe <strong>{amount}</strong>",
+      "owesMeNamed": "{name} te debe <strong>{amount}</strong>",
+      "waiting": "Esperando a {name}",
+      "waitingAmount": "Le has pagado {amount}: esperando a {name}",
+      "saysPaid": "Dice que te ha pagado",
+      "saysPaidAmount": "Dice que te ha pagado {amount}",
+      "iPaid": "Le he pagado",
+      "theyPaid": "Me ha pagado",
+      "received": "Me ha llegado",
+      "notReceived": "No",
+      "cancelPayment": "Cancelar",
+      "howMuchPaid": "¿Cuánto le has pagado a {name}?",
+      "howMuchReceived": "¿Cuánto te ha pagado {name}?",
+      "save": "Apuntar pago",
+      "closeForm": "Cancelar",
+      "nothing": "Ahora mismo no hay nada pendiente entre vosotros.",
+      "listLabel": "Cuentas pendientes",
+      "rowOwesMe": "<strong>{name}</strong> te debe {amount}",
+      "rowIOwe": "Debes {amount} a <strong>{name}</strong>",
+      "rowSubUnread": "Cuentas pendientes · {count, plural, one {# mensaje nuevo} other {# mensajes nuevos}}",
+      "homeIOwe": "Cuentas pendientes · debes {amount}",
+      "homeOwesMe": "Cuentas pendientes · te deben {amount}",
+      "unread": "{count, plural, one {# mensaje sin leer} other {# mensajes sin leer}}",
+      "saysPaidNamed": "{name} dice que te ha pagado",
+      "saysPaidNamedAmount": "{name} dice que te ha pagado {amount}",
+      "someone": "alguien"
     }
   },
   "Notifications": {

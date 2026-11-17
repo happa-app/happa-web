@@ -1,0 +1,254 @@
+/* «Cuentas pendientes»: la franja de arriba de la conversación y las filas de la pestaña Chat y de Inicio.
+   Sin cajas: rayas de 2 px (las mismas de las secciones) arriba y abajo, y una línea fina entre filas. */
+.strip {
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid var(--color-rule);
+  border-bottom: 2px solid var(--color-rule);
+}
+
+.line {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+}
+
+.line + .line {
+  border-top: 1px solid var(--color-border);
+}
+
+.lineMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.text {
+  min-width: 0;
+  margin: 0;
+  font-size: var(--text-base);
+}
+
+.amount {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.amountOwe {
+  color: var(--color-owe);
+}
+
+.sub {
+  display: block;
+  margin-top: 1px;
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}
+
+/* Botones pequeños (dentro de la franja) */
+.actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* "Me ha llegado" / "No": uno encima del otro */
+.actionsStack {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Cada botón va en su formulario: que los dos midan lo mismo que el más ancho */
+.actionsStack > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn,
+.btnSecondary,
+.btnTiny,
+.btnTinySecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn,
+.btnSecondary {
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.btnTiny,
+.btnTinySecondary {
+  min-height: 30px;
+  padding: 0 var(--space-3);
+  font-size: 0.75rem;
+}
+
+.btn,
+.btnTiny {
+  background: var(--color-fill);
+  color: var(--color-on-accent);
+}
+
+.btn:hover:not(:disabled),
+.btnTiny:hover:not(:disabled) {
+  background: var(--color-fill-strong);
+}
+
+.btnSecondary,
+.btnTinySecondary {
+  background: transparent;
+  color: var(--color-text);
+  box-shadow: inset 0 0 0 1.5px var(--color-text);
+}
+
+.btnSecondary:hover:not(:disabled),
+.btnTinySecondary:hover:not(:disabled) {
+  background: var(--color-chip-hover);
+}
+
+.btn:disabled,
+.btnSecondary:disabled,
+.btnTiny:disabled,
+.btnTinySecondary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.btn:focus-visible,
+.btnSecondary:focus-visible,
+.btnTiny:focus-visible,
+.btnTinySecondary:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* El formulario del pago: importe grande, como en Gastos, y los botones */
+.payForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.payLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.money {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  border-bottom: 2px solid var(--color-rule);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.money:focus-within {
+  border-bottom-color: var(--color-brand-strong);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  box-shadow: var(--focus-ring);
+}
+
+/* Un pago pendiente más (si hay varios entre los mismos dos) */
+.extra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.moneyInput {
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-1) 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.moneyInput:focus {
+  outline: none;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: 0.8125rem;
+}
+
+.nothing {
+  margin: 0;
+  padding: var(--space-3) 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* Filas que llevan a cada conversación (pestaña Chat e Inicio) */
+.rowLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: var(--space-2) 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.rowLink:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--focus-ring);
+}
+
+.rowLink + .rowLink {
+  border-top: 1px solid var(--color-border);
+}
+
+.rowEnd {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.badge {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--color-fill);
+  color: var(--color-on-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: inline-grid;
+  place-items: center;
+}
+
+.chevron {
+  color: var(--color-text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+}

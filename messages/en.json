@@ -890,11 +890,6 @@
       "scheduleLocked": "Charges have already been added: the schedule can't change"
     },
     "leftBanner": "You no longer live in this household. You can see your balance, confirm and record payments until you're square.",
-    "leftDebts": {
-      "title": "Pending balances in households you left",
-      "owe": "You owe {amount}",
-      "owed": "You are owed {amount}"
-    },
     "fromShopping": {
       "title": "Turn shopping into an expense",
       "subtitle": "Choose what's included, enter what it cost and it's split like any other expense.",
@@ -1342,7 +1337,6 @@
     "placeholder": "Write a message",
     "send": "Send",
     "save": "Save the change",
-    "leftNotice": "You no longer live in this household. You stay in the chat until you settle what you owe.",
     "poll": {
       "open": "Create a poll",
       "newTitle": "New poll",
@@ -1384,6 +1378,41 @@
       "pollAdultsOnly": "Polls are created by the adults who live in the household",
       "pollCannotVote": "You can't vote in this poll",
       "generic": "Something went wrong. Please try again"
+    },
+    "debts": {
+      "title": "Outstanding balances",
+      "titleWith": "Outstanding balances with {name}",
+      "subtitleMine": "{household} · you no longer live here",
+      "subtitleOther": "{name} no longer lives here",
+      "backHome": "Home",
+      "backChat": "Chat",
+      "iOwe": "You owe {name} <strong>{amount}</strong>",
+      "owesMe": "Owes you <strong>{amount}</strong>",
+      "owesMeNamed": "{name} owes you <strong>{amount}</strong>",
+      "waiting": "Waiting for {name}",
+      "waitingAmount": "You paid {amount}: waiting for {name}",
+      "saysPaid": "Says they've paid you",
+      "saysPaidAmount": "Says they've paid you {amount}",
+      "iPaid": "I've paid",
+      "theyPaid": "They've paid me",
+      "received": "Got it",
+      "notReceived": "No",
+      "cancelPayment": "Cancel",
+      "howMuchPaid": "How much did you pay {name}?",
+      "howMuchReceived": "How much did {name} pay you?",
+      "save": "Record payment",
+      "closeForm": "Cancel",
+      "nothing": "There's nothing outstanding between you right now.",
+      "listLabel": "Outstanding balances",
+      "rowOwesMe": "<strong>{name}</strong> owes you {amount}",
+      "rowIOwe": "You owe <strong>{name}</strong> {amount}",
+      "rowSubUnread": "Outstanding balances · {count, plural, one {# new message} other {# new messages}}",
+      "homeIOwe": "Outstanding balances · you owe {amount}",
+      "homeOwesMe": "Outstanding balances · you're owed {amount}",
+      "unread": "{count, plural, one {# unread message} other {# unread messages}}",
+      "saysPaidNamed": "{name} says they've paid you",
+      "saysPaidNamedAmount": "{name} says they've paid you {amount}",
+      "someone": "someone"
     }
   },
   "Notifications": {
