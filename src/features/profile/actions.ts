@@ -307,46 +307,27 @@ async function finishDeletion(
   locale: Locale,
   stop: (key: ProfileErrorKey) => Promise<ProfileFormState>,
 ): Promise<ProfileFormState> {
-  // 2. Que no debas dinero ni tengas nada a medias (antes de tocar la foto; la base de datos lo vuelve
-  //    a mirar al borrar). Primero se apuntan los gastos fijos que ya tocaban, como en la página.
-  const { data: memberships } = await confirmed
-    .from("household_members")
-    .select("household_id")
-    .eq("user_id", userId)
-    .is("left_at", null)
-    .in("role", ["admin", "member"]);
-  for (const m of memberships ?? []) {
-    const { error: syncError } = await confirmed.rpc("sync_recurring_expenses", { p_household: m.household_id });
-    if (syncError) console.error("[perfil] no se pudieron poner al día los gastos fijos:", syncError);
-  }
-  const { data: balances, error: balancesError } = await confirmed.rpc("my_pending_balances");
-  if (balancesError) {
-    console.error("[perfil] no se pudieron leer los saldos:", balancesError);
-    return stop("generic");
-  }
-  if ((balances ?? []).some((b) => Number(b.net_cents) < 0)) return stop("owesMoney");
-  if ((balances ?? []).some((b) => Number(b.pending) > 0)) return stop("pendingMoney");
+  // Las deudas y lo que esté sin confirmar ya no impiden borrar la cuenta (migración 27): la página solo avisa.
+  // Los gastos fijos que tocaban los apunta la base de datos al sacarte de cada hogar (depart_member).
 
-  // 3. Tu foto (desde SQL no se puede borrar: se hace aquí, antes)
+  // 2. Tu foto (desde SQL no se puede borrar: se hace aquí, antes)
   const { error: photoError } = await supabase.from("profiles").update({ avatar_path: null }).eq("id", userId);
   if (photoError || !(await removeAvatarFiles(supabase, userId))) {
     if (photoError) console.error("[perfil] no se pudo quitar la foto antes de borrar:", photoError);
     return stop("generic");
   }
 
-  // 4. La cuenta
+  // 3. La cuenta
   const { error } = await confirmed.rpc("delete_my_account");
   if (error) {
     const message = error.message ?? "";
-    if (message.includes("You owe money")) return stop("owesMoney");
-    if (message.includes("Pending money")) return stop("pendingMoney");
     if (message.includes("Minor accounts")) return stop("minor");
     if (message.includes("Recent password required")) return stop("googleNotConfirmed");
     console.error("[perfil] no se pudo borrar la cuenta:", error);
     return stop("generic");
   }
 
-  // 5. Fuera la sesión de este navegador (la cuenta ya no existe)
+  // 4. Fuera la sesión de este navegador (la cuenta ya no existe)
   await supabase.auth.signOut({ scope: "local" });
   return redirect({ href: { pathname: "/login", query: { cuenta: "borrada" } }, locale });
 }
