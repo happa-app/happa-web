@@ -103,7 +103,8 @@ export async function signedInWithGoogleRecently(supabase: Awaited<ReturnType<ty
   return amr.some((a) => a.method === "oauth" && now - (a.timestamp ?? 0) < GOOGLE_CONFIRM_MINUTES * 60);
 }
 
-// Perfil → Privacidad: tus dos decisiones (comunicaciones de HAPPA y cesión a colaboradores).
+// Perfil → Privacidad: tus decisiones opcionales (hoy, solo recibir novedades de HAPPA). Las filas antiguas de
+// empresas colaboradoras (migración 25) se ignoran: no están en PRIVACY_PURPOSES.
 // Lo que nunca decidiste sale como "no" (así son los usuarios registrados antes de existir la opción).
 export async function getMyPrivacyChoices(): Promise<MyPrivacyChoices> {
   const supabase = await createClient();

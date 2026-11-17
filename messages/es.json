@@ -220,11 +220,8 @@
       "newPassword": "Contraseña nueva",
       "repeatPassword": "Repite la contraseña",
       "acceptLegal": "He leído y acepto los <terms>términos de uso</terms> y la <privacy>política de privacidad</privacy>",
-      "isAdult": "Confirmo que tengo 18 años o más",
-      "marketing": "Quiero recibir por correo novedades y ventajas de HAPPA",
-      "partners": "Quiero recibir ofertas para mi hogar de empresas colaboradoras",
-      "partnersMore": "Qué se comparte",
-      "partnersDetail": "Para que te envíen sus ofertas, les pasaríamos tu nombre, tu correo, tu idioma, tu código postal y el tipo y tamaño de tu hogar. Solo a empresas de servicios para el hogar, mudanzas, mobiliario, seguros, servicios financieros o de gestión de alquiler y suministros (luz, gas o internet). Nunca tu dirección, tus mensajes ni tus gastos. Puedes quitarlo cuando quieras en Perfil → Privacidad."
+      "isOldEnough": "Confirmo que tengo 16 años o más",
+      "marketing": "Quiero recibir por correo novedades y ventajas de HAPPA"
     },
     "errors": {
       "displayNameRequired": "Escribe tu nombre",
@@ -237,7 +234,7 @@
       "passwordMismatch": "Las dos contraseñas no coinciden",
       "samePassword": "Esa ya es tu contraseña; elige otra distinta",
       "mustAcceptLegal": "Necesitas aceptar los términos y la privacidad",
-      "mustBeAdult": "Para crear una cuenta tienes que ser mayor de edad",
+      "mustBeOldEnough": "Para crear una cuenta tienes que tener 16 años o más",
       "invalidCredentials": "Correo o contraseña incorrectos",
       "emailNotConfirmed": "Aún no has confirmado tu correo. Revisa tu bandeja de entrada",
       "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
@@ -267,13 +264,13 @@
     "seeWeekOf": "Ver semana del horario"
   },
   "Legal": {
+    "notice": "Aviso legal",
     "terms": "Términos de uso",
     "privacy": "Política de privacidad",
-    "draftNotice": "Este documento está en preparación y se publicará antes del lanzamiento.",
+    "cookies": "Política de cookies",
     "back": "Volver",
     "meta": "Versión {version} · Última actualización: {updated}",
-    "summaryTitle": "En pocas palabras",
-    "summaryNote": "Este resumen te ayuda a entenderlo, pero lo que vale es el texto completo.",
+    "summaryNote": "Este resumen le ayuda a entenderlo, pero lo que vale es el texto completo.",
     "contents": "Índice",
     "linksLabel": "Textos legales",
     "basicInfo": {
@@ -285,7 +282,7 @@
       },
       "purpose": {
         "label": "Finalidad",
-        "value": "Darte el servicio de HAPPA. Si lo eliges arriba: enviarte novedades de HAPPA y ceder tus datos a empresas colaboradoras."
+        "value": "Darte el servicio de HAPPA y, si lo eliges arriba, enviarte novedades de HAPPA."
       },
       "basis": {
         "label": "Legitimación",
@@ -293,7 +290,7 @@
       },
       "recipients": {
         "label": "Destinatarios",
-        "value": "Proveedores que nos dan el servicio (alojamiento, correo). Empresas colaboradoras, solo si lo aceptas."
+        "value": "Proveedores que nos dan el servicio (alojamiento, correo). No vendemos ni cedemos tus datos a otras empresas."
       },
       "rights": {
         "label": "Derechos",
@@ -680,11 +677,11 @@
     },
     "privacy": {
       "title": "Privacidad",
-      "subtitle": "Dos opciones que solo se activan si tú quieres. Puedes cambiarlas cuando quieras.",
+      "subtitle": "Una opción que solo se activa si tú quieres. Puedes cambiarla cuando quieras.",
       "changedAt": "Último cambio: {date}",
       "neverDecided": "Aún no lo has decidido (cuenta como no).",
       "error": "No se ha podido guardar. Inténtalo de nuevo.",
-      "minor": "Las cuentas de menor no pueden recibir novedades ni compartir datos con empresas colaboradoras.",
+      "minor": "Las cuentas de menor no pueden recibir novedades.",
       "rightsTitle": "Tus datos",
       "rightsText": "Para pedir una copia de tus datos, corregirlos o ejercer cualquier otro derecho, escríbenos a <email></email> desde el correo de tu cuenta.",
       "policyLink": "Leer la política de privacidad",

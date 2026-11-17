@@ -32,14 +32,14 @@ select
   '{"provider": "email", "providers": ["email"]}',
   jsonb_build_object(
     'display_name', u.name, 'locale', 'es', 'timezone', 'Europe/Madrid',
-    'legal', jsonb_build_object('terms', 'v1-2026-10-08', 'privacy', 'v1-2026-10-25b')
+    'legal', jsonb_build_object('terms', 'v3-2026-11-17', 'privacy', 'v3-2026-11-17')
   ) || u.choices,
   now(), now(), '', '', '', ''
 from (values
   ('00000000-0000-4000-8000-00000000000a'::uuid, 'ana@happa.test',   'Ana',
-   '{"choices": {"marketing": true, "partners": true, "version": "v3"}}'::jsonb),
+   '{"choices": {"marketing": true, "version": "v4"}}'::jsonb),
   ('00000000-0000-4000-8000-00000000000b'::uuid, 'bruno@happa.test', 'Bruno',
-   '{"choices": {"marketing": false, "partners": false, "version": "v3"}}'::jsonb),
+   '{"choices": {"marketing": false, "version": "v4"}}'::jsonb),
   ('00000000-0000-4000-8000-00000000000c'::uuid, 'carla@happa.test', 'Carla', '{}'::jsonb),
   ('00000000-0000-4000-8000-00000000000d'::uuid, 'dani@happa.test',  'Dani', '{}'::jsonb)
 ) as u (id, email, name, choices);

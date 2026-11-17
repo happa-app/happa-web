@@ -220,11 +220,8 @@
       "newPassword": "New password",
       "repeatPassword": "Repeat the password",
       "acceptLegal": "I have read and accept the <terms>terms of use</terms> and the <privacy>privacy policy</privacy>",
-      "isAdult": "I confirm I am 18 or older",
-      "marketing": "I want to receive HAPPA news and perks by email",
-      "partners": "I want to receive offers for my home from partner companies",
-      "partnersMore": "What is shared",
-      "partnersDetail": "So they can send you their offers, we would pass on your name, your email, your language, your postal code and the type and size of your household. Only to companies in home services, removals, furniture, insurance, financial or rental management services and utilities (electricity, gas or internet). Never your address, your messages or your expenses. You can turn it off at any time in Profile → Privacy."
+      "isOldEnough": "I confirm I am 16 or older",
+      "marketing": "I want to receive HAPPA news and perks by email"
     },
     "errors": {
       "displayNameRequired": "Enter your name",
@@ -237,7 +234,7 @@
       "passwordMismatch": "The passwords don't match",
       "samePassword": "That's already your password; choose a different one",
       "mustAcceptLegal": "You need to accept the terms and the privacy policy",
-      "mustBeAdult": "You must be an adult to create an account",
+      "mustBeOldEnough": "You must be 16 or older to create an account",
       "invalidCredentials": "Wrong email or password",
       "emailNotConfirmed": "You haven't confirmed your email yet. Check your inbox",
       "rateLimited": "Too many attempts. Wait a few minutes and try again",
@@ -267,12 +264,12 @@
     "seeWeekOf": "See week of the schedule"
   },
   "Legal": {
+    "notice": "Legal notice",
     "terms": "Terms of use",
     "privacy": "Privacy policy",
-    "draftNotice": "This document is being prepared and will be published before launch.",
+    "cookies": "Cookie policy",
     "back": "Back",
     "meta": "Version {version} · Last updated: {updated}",
-    "summaryTitle": "In a nutshell",
     "summaryNote": "This summary helps you understand it, but the full text is what applies.",
     "contents": "Contents",
     "linksLabel": "Legal",
@@ -285,7 +282,7 @@
       },
       "purpose": {
         "label": "Purpose",
-        "value": "Providing the HAPPA service. If you choose so above: sending you HAPPA news and sharing your data with partner companies."
+        "value": "Providing the HAPPA service and, if you choose it above, sending you HAPPA news."
       },
       "basis": {
         "label": "Legal basis",
@@ -293,7 +290,7 @@
       },
       "recipients": {
         "label": "Recipients",
-        "value": "Providers that help us run the service (hosting, email). Partner companies, only if you accept it."
+        "value": "Providers that give us the service (hosting, email). We do not sell or share your data with other companies."
       },
       "rights": {
         "label": "Rights",
@@ -680,11 +677,11 @@
     },
     "privacy": {
       "title": "Privacy",
-      "subtitle": "Two options that are only on if you want them. You can change them at any time.",
+      "subtitle": "One option that is only turned on if you want it. You can change it whenever you like.",
       "changedAt": "Last changed: {date}",
       "neverDecided": "You haven't decided yet (counts as no).",
       "error": "It couldn't be saved. Please try again.",
-      "minor": "Minor accounts can't receive news or share data with partner companies.",
+      "minor": "Minor accounts cannot receive news.",
       "rightsTitle": "Your data",
       "rightsText": "To ask for a copy of your data, correct it or exercise any other right, write to us at <email></email> from your account's email.",
       "policyLink": "Read the privacy policy",

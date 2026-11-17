@@ -16,7 +16,7 @@ export const signupSchema = z.object({
   email: z.email("emailInvalid"),
   password: z.string().min(8, "passwordTooShort").max(72, "passwordTooLong"),
   acceptLegal: z.literal(true, "mustAcceptLegal"),
-  isAdult: z.literal(true, "mustBeAdult"),
+  isOldEnough: z.literal(true, "mustBeOldEnough"),
 });
 
 // Recuperar la contraseña: el correo al que mandar el enlace
@@ -37,7 +37,7 @@ export type LoginInput = z.infer<typeof loginSchema>;
 export const completeSignupSchema = z.object({
   displayName: z.string().trim().min(1, "displayNameRequired").max(60, "displayNameTooLong"),
   acceptLegal: z.literal(true, "mustAcceptLegal"),
-  isAdult: z.literal(true, "mustBeAdult"),
+  isOldEnough: z.literal(true, "mustBeOldEnough"),
 });
 
 export type SignupInput = z.infer<typeof signupSchema>;

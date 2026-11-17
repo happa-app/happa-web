@@ -143,7 +143,7 @@ export async function removeAvatar(): Promise<{ ok: boolean }> {
 }
 
 // ───────────── Privacidad ─────────────
-// Activar o desactivar una de las dos opciones de Perfil → Privacidad. La base de datos añade una fila nueva
+// Activar o desactivar una opción de Perfil → Privacidad. La base de datos añade una fila nueva
 // con la fecha (nunca cambia las anteriores: son la prueba de lo que aceptaste y cuándo) y rechaza menores.
 export async function savePrivacyChoice(purpose: string, granted: boolean): Promise<{ ok: boolean; changedAt?: string }> {
   if (!(PRIVACY_PURPOSES as readonly string[]).includes(purpose) || typeof granted !== "boolean") return { ok: false };

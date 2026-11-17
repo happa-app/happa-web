@@ -1,5 +1,5 @@
-// Página /perfil/privacidad: tus dos decisiones opcionales (comunicaciones de HAPPA y cesión a empresas
-// colaboradoras) y cómo ejercer tus derechos sobre tus datos.
+// Página /perfil/privacidad: tus decisiones opcionales (hoy, solo recibir novedades de HAPPA) y cómo ejercer tus
+// derechos sobre tus datos.
 import { getLocale, getTranslations } from "next-intl/server";
 import { PRIVACY_EMAIL } from "@/features/legal/owner";
 import { PrivacyChoices } from "@/features/profile";

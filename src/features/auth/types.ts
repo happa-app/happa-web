@@ -11,7 +11,7 @@ export const AUTH_ERROR_KEYS = [
   "passwordMismatch",
   "samePassword",
   "mustAcceptLegal",
-  "mustBeAdult",
+  "mustBeOldEnough",
   "invalidCredentials",
   "emailNotConfirmed",
   "rateLimited",

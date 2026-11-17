@@ -1884,10 +1884,9 @@ export type Database = {
         Args: {
           p_choices: string
           p_display_name: string
-          p_is_adult: boolean
+          p_is_old_enough: boolean
           p_locale: string
           p_marketing: boolean
-          p_partners: boolean
           p_privacy: string
           p_terms: string
         }
