@@ -282,11 +282,11 @@
       },
       "purpose": {
         "label": "Purpose",
-        "value": "Providing the HAPPA service and, if you choose it above, sending you HAPPA news."
+        "value": "Providing the HAPPA service, keeping it secure, understanding in aggregate how the website is used and, if you choose it above, sending you HAPPA news."
       },
       "basis": {
         "label": "Legal basis",
-        "value": "The contract (the terms of use) and, for the optional parts, your consent."
+        "value": "The contract (the terms of use), our legitimate interest in security and in improving the service and, for the optional parts, your consent."
       },
       "recipients": {
         "label": "Recipients",

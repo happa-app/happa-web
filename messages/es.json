@@ -282,11 +282,11 @@
       },
       "purpose": {
         "label": "Finalidad",
-        "value": "Darte el servicio de HAPPA y, si lo eliges arriba, enviarte novedades de HAPPA."
+        "value": "Darte el servicio de HAPPA, mantener la seguridad, conocer de forma agregada cómo se usa la web y, si lo eliges arriba, enviarte novedades de HAPPA."
       },
       "basis": {
         "label": "Legitimación",
-        "value": "El contrato (los términos de uso) y, para lo opcional, tu consentimiento."
+        "value": "El contrato (los términos de uso), nuestro interés legítimo en la seguridad y la mejora del servicio y, para lo opcional, tu consentimiento."
       },
       "recipients": {
         "label": "Destinatarios",

@@ -8,6 +8,10 @@
 //
 // Es un componente de cliente ("use client") porque beforeSend es una función, y las funciones no se pueden
 // pasar de un componente de servidor (el layout) a uno de cliente.
+//
+// ⚠️ No identifiques a nadie (userId, groupId) ni envíes eventos (track) con datos personales: el script de Vercel
+// guardaría esos datos en el localStorage del navegador, y entonces haría falta banner de cookies y cambiar la
+// política de cookies y la de privacidad. Tal como está, no guarda nada en el dispositivo (comprobado el 17/11/2026).
 import { Analytics as VercelAnalytics, type BeforeSendEvent } from "@vercel/analytics/next";
 
 const UUID = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi;
