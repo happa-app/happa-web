@@ -2,30 +2,23 @@
 --
 -- Reglas:
 --   · Ya no se ceden datos a empresas colaboradoras: la única decisión opcional de privacidad es recibir
---     novedades de HAPPA ('marketing'). Las filas antiguas de 'partners' se conservan como historial (prueba de
---     lo que cada persona decidió), pero quien lo tenía aceptado pasa a "no" con una fila nueva de origen
---     'system' (lo retiró HAPPA, no la persona). Si algún día vuelve a haber colaboradores, habrá que
---     preguntar de nuevo con un texto nuevo (ver las notas del PDF de los textos legales).
+--     novedades de HAPPA ('marketing'). La opción 'partners' desaparece del todo: se borran sus filas y la tabla
+--     deja de admitirla. No hace falta guardarlas como prueba: el registro estuvo siempre cerrado (solo hay
+--     cuentas del equipo y de prueba) y nunca se cedió ningún dato a nadie.
+--   · Si algún día vuelve a haber colaboradores, una migración nueva vuelve a admitir la opción y se pide el
+--     consentimiento desde cero, con un texto nuevo (ver las notas del PDF de los textos legales).
 --   · Se borra la lista para colaboradores (private.partners_optin, migración 19): ya no hay a quién dársela.
 --   · Edad mínima: 16 años (antes, mayoría de edad). La BD no guarda la edad: solo exige que se declare.
 
--- ═════════════ 1. Las decisiones que retira HAPPA ═════════════
-alter table public.privacy_choices drop constraint privacy_choices_source_check;
-alter table public.privacy_choices
-  add constraint privacy_choices_source_check check (source in ('signup', 'settings', 'system'));
-
--- Quien tiene 'partners' aceptado ahora mismo (su última decisión es "sí") pasa a "no"
-insert into public.privacy_choices (user_id, purpose, granted, text_version, source)
-select l.user_id, 'partners', false, 'v4', 'system'
-from (
-  select distinct on (c.user_id) c.user_id, c.granted
-  from public.privacy_choices c
-  where c.purpose = 'partners'
-  order by c.user_id, c.created_at desc, c.id desc
-) l
-where l.granted;
-
+-- ═════════════ 1. Fuera la opción de colaboradores ═════════════
+-- Primero la vista, que lee esas filas; luego las filas, y al final la regla de la tabla
 drop view if exists private.partners_optin;
+
+delete from public.privacy_choices where purpose = 'partners';
+
+alter table public.privacy_choices drop constraint privacy_choices_purpose_check;
+alter table public.privacy_choices
+  add constraint privacy_choices_purpose_check check (purpose in ('marketing'));
 
 -- ═════════════ 2. Al registrarse: solo la decisión de novedades ═════════════
 -- Igual que en la migración 22, pero sin 'partners'
