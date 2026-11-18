@@ -220,11 +220,8 @@
       "newPassword": "New password",
       "repeatPassword": "Repeat the password",
       "acceptLegal": "I have read and accept the <terms>terms of use</terms> and the <privacy>privacy policy</privacy>",
-      "isAdult": "I confirm I am 18 or older",
-      "marketing": "I want to receive HAPPA news and perks by email",
-      "partners": "I want to receive offers for my home from partner companies",
-      "partnersMore": "What is shared",
-      "partnersDetail": "So they can send you their offers, we would pass on your name, your email, your language, your postal code and the type and size of your household. Only to companies in home services, removals, furniture, insurance, financial or rental management services and utilities (electricity, gas or internet). Never your address, your messages or your expenses. You can turn it off at any time in Profile → Privacy."
+      "isOldEnough": "I confirm I am 16 or older",
+      "marketing": "I want to receive HAPPA news and perks by email"
     },
     "errors": {
       "displayNameRequired": "Enter your name",
@@ -237,7 +234,7 @@
       "passwordMismatch": "The passwords don't match",
       "samePassword": "That's already your password; choose a different one",
       "mustAcceptLegal": "You need to accept the terms and the privacy policy",
-      "mustBeAdult": "You must be an adult to create an account",
+      "mustBeOldEnough": "You must be 16 or older to create an account",
       "invalidCredentials": "Wrong email or password",
       "emailNotConfirmed": "You haven't confirmed your email yet. Check your inbox",
       "rateLimited": "Too many attempts. Wait a few minutes and try again",
@@ -267,12 +264,12 @@
     "seeWeekOf": "See week of the schedule"
   },
   "Legal": {
+    "notice": "Legal notice",
     "terms": "Terms of use",
     "privacy": "Privacy policy",
-    "draftNotice": "This document is being prepared and will be published before launch.",
+    "cookies": "Cookie policy",
     "back": "Back",
     "meta": "Version {version} · Last updated: {updated}",
-    "summaryTitle": "In a nutshell",
     "summaryNote": "This summary helps you understand it, but the full text is what applies.",
     "contents": "Contents",
     "linksLabel": "Legal",
@@ -285,15 +282,15 @@
       },
       "purpose": {
         "label": "Purpose",
-        "value": "Providing the HAPPA service. If you choose so above: sending you HAPPA news and sharing your data with partner companies."
+        "value": "Providing the HAPPA service, keeping it secure, understanding in aggregate how the website is used and, if you choose it above, sending you HAPPA news."
       },
       "basis": {
         "label": "Legal basis",
-        "value": "The contract (the terms of use) and, for the optional parts, your consent."
+        "value": "The contract (the terms of use), our legitimate interest in security and in improving the service and, for the optional parts, your consent."
       },
       "recipients": {
         "label": "Recipients",
-        "value": "Providers that help us run the service (hosting, email). Partner companies, only if you accept it."
+        "value": "Providers that give us the service (hosting, email). We do not sell or share your data with other companies."
       },
       "rights": {
         "label": "Rights",
@@ -637,10 +634,10 @@
         "stays": "Your messages and expenses stay, under the name «Usuario eliminado», so everyone else's balances still add up.",
         "final": "It can't be undone."
       },
-      "oweTitle": "First, pay what you owe",
-      "oweText": "You can't delete your account while you owe money. Pay it and record it in Expenses:",
-      "pendingTitle": "First, settle what's pending",
-      "pendingText": "You have expenses or payments waiting for confirmation. Confirm or reject them in Expenses (or ask others to):",
+      "oweTitle": "You owe money",
+      "oweText": "You can delete your account, but what you owe will stay recorded in these households under «Usuario eliminado» and your housemates will still see it:",
+      "pendingTitle": "You have things waiting for confirmation",
+      "pendingText": "If you delete your account, your housemates or a household admin will be able to resolve them. It's better to confirm or reject them first in Expenses:",
       "pendingCount": "{count, plural, one {# pending} other {# pending}}",
       "owedTitle": "People owe you money",
       "owedText": "If you delete your account, you won't be able to receive it:",
@@ -670,8 +667,6 @@
       "samePassword": "The new one must be different from the current one",
       "passwordWeak": "That password is too weak; try a longer one",
       "confirmRequired": "Tick the box to confirm",
-      "owesMoney": "You owe money in a household: pay it before deleting your account",
-      "pendingMoney": "You have expenses or payments waiting for confirmation: confirm them before deleting your account",
       "minor": "Minor accounts can't be deleted from here",
       "rateLimited": "Too many attempts. Wait a few minutes and try again",
       "captchaFailed": "We couldn't check that you're not a robot. Wait a moment and try again.",
@@ -680,11 +675,11 @@
     },
     "privacy": {
       "title": "Privacy",
-      "subtitle": "Two options that are only on if you want them. You can change them at any time.",
+      "subtitle": "One option that is only turned on if you want it. You can change it whenever you like.",
       "changedAt": "Last changed: {date}",
       "neverDecided": "You haven't decided yet (counts as no).",
       "error": "It couldn't be saved. Please try again.",
-      "minor": "Minor accounts can't receive news or share data with partner companies.",
+      "minor": "Minor accounts cannot receive news.",
       "rightsTitle": "Your data",
       "rightsText": "To ask for a copy of your data, correct it or exercise any other right, write to us at <email></email> from your account's email.",
       "policyLink": "Read the privacy policy",
@@ -895,11 +890,6 @@
       "scheduleLocked": "Charges have already been added: the schedule can't change"
     },
     "leftBanner": "You no longer live in this household. You can see your balance, confirm and record payments until you're square.",
-    "leftDebts": {
-      "title": "Pending balances in households you left",
-      "owe": "You owe {amount}",
-      "owed": "You are owed {amount}"
-    },
     "fromShopping": {
       "title": "Turn shopping into an expense",
       "subtitle": "Choose what's included, enter what it cost and it's split like any other expense.",
@@ -1347,7 +1337,6 @@
     "placeholder": "Write a message",
     "send": "Send",
     "save": "Save the change",
-    "leftNotice": "You no longer live in this household. You stay in the chat until you settle what you owe.",
     "poll": {
       "open": "Create a poll",
       "newTitle": "New poll",
@@ -1389,6 +1378,41 @@
       "pollAdultsOnly": "Polls are created by the adults who live in the household",
       "pollCannotVote": "You can't vote in this poll",
       "generic": "Something went wrong. Please try again"
+    },
+    "debts": {
+      "title": "Outstanding balances",
+      "titleWith": "Outstanding balances with {name}",
+      "subtitleMine": "{household} · you no longer live here",
+      "subtitleOther": "{name} no longer lives here",
+      "backHome": "Home",
+      "backChat": "Chat",
+      "iOwe": "You owe {name} <strong>{amount}</strong>",
+      "owesMe": "Owes you <strong>{amount}</strong>",
+      "owesMeNamed": "{name} owes you <strong>{amount}</strong>",
+      "waiting": "Waiting for {name}",
+      "waitingAmount": "You paid {amount}: waiting for {name}",
+      "saysPaid": "Says they've paid you",
+      "saysPaidAmount": "Says they've paid you {amount}",
+      "iPaid": "I've paid",
+      "theyPaid": "They've paid me",
+      "received": "Got it",
+      "notReceived": "No",
+      "cancelPayment": "Cancel",
+      "howMuchPaid": "How much did you pay {name}?",
+      "howMuchReceived": "How much did {name} pay you?",
+      "save": "Record payment",
+      "closeForm": "Cancel",
+      "nothing": "There's nothing outstanding between you right now.",
+      "listLabel": "Outstanding balances",
+      "rowOwesMe": "<strong>{name}</strong> owes you {amount}",
+      "rowIOwe": "You owe <strong>{name}</strong> {amount}",
+      "rowSubUnread": "Outstanding balances · {count, plural, one {# new message} other {# new messages}}",
+      "homeIOwe": "Outstanding balances · you owe {amount}",
+      "homeOwesMe": "Outstanding balances · you're owed {amount}",
+      "unread": "{count, plural, one {# unread message} other {# unread messages}}",
+      "saysPaidNamed": "{name} says they've paid you",
+      "saysPaidNamedAmount": "{name} says they've paid you {amount}",
+      "someone": "someone"
     }
   },
   "Notifications": {

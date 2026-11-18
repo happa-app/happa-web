@@ -108,8 +108,6 @@ export function ChatRoom({ info, people, me, initialMessages, initialHasMore, in
 
   return (
     <>
-      {info.isResident ? null : <p className={styles.notice}>{t("leftNotice")}</p>}
-
       <section className={styles.chat} aria-label={t("title")}>
         {chat.hasMore ? (
           <button type="button" className={styles.olderButton} onClick={loadOlder} disabled={chat.loadingOlder}>

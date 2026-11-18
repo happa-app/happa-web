@@ -220,11 +220,8 @@
       "newPassword": "Contraseña nueva",
       "repeatPassword": "Repite la contraseña",
       "acceptLegal": "He leído y acepto los <terms>términos de uso</terms> y la <privacy>política de privacidad</privacy>",
-      "isAdult": "Confirmo que tengo 18 años o más",
-      "marketing": "Quiero recibir por correo novedades y ventajas de HAPPA",
-      "partners": "Quiero recibir ofertas para mi hogar de empresas colaboradoras",
-      "partnersMore": "Qué se comparte",
-      "partnersDetail": "Para que te envíen sus ofertas, les pasaríamos tu nombre, tu correo, tu idioma, tu código postal y el tipo y tamaño de tu hogar. Solo a empresas de servicios para el hogar, mudanzas, mobiliario, seguros, servicios financieros o de gestión de alquiler y suministros (luz, gas o internet). Nunca tu dirección, tus mensajes ni tus gastos. Puedes quitarlo cuando quieras en Perfil → Privacidad."
+      "isOldEnough": "Confirmo que tengo 16 años o más",
+      "marketing": "Quiero recibir por correo novedades y ventajas de HAPPA"
     },
     "errors": {
       "displayNameRequired": "Escribe tu nombre",
@@ -237,7 +234,7 @@
       "passwordMismatch": "Las dos contraseñas no coinciden",
       "samePassword": "Esa ya es tu contraseña; elige otra distinta",
       "mustAcceptLegal": "Necesitas aceptar los términos y la privacidad",
-      "mustBeAdult": "Para crear una cuenta tienes que ser mayor de edad",
+      "mustBeOldEnough": "Para crear una cuenta tienes que tener 16 años o más",
       "invalidCredentials": "Correo o contraseña incorrectos",
       "emailNotConfirmed": "Aún no has confirmado tu correo. Revisa tu bandeja de entrada",
       "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
@@ -267,13 +264,13 @@
     "seeWeekOf": "Ver semana del horario"
   },
   "Legal": {
+    "notice": "Aviso legal",
     "terms": "Términos de uso",
     "privacy": "Política de privacidad",
-    "draftNotice": "Este documento está en preparación y se publicará antes del lanzamiento.",
+    "cookies": "Política de cookies",
     "back": "Volver",
     "meta": "Versión {version} · Última actualización: {updated}",
-    "summaryTitle": "En pocas palabras",
-    "summaryNote": "Este resumen te ayuda a entenderlo, pero lo que vale es el texto completo.",
+    "summaryNote": "Este resumen le ayuda a entenderlo, pero lo que vale es el texto completo.",
     "contents": "Índice",
     "linksLabel": "Textos legales",
     "basicInfo": {
@@ -285,15 +282,15 @@
       },
       "purpose": {
         "label": "Finalidad",
-        "value": "Darte el servicio de HAPPA. Si lo eliges arriba: enviarte novedades de HAPPA y ceder tus datos a empresas colaboradoras."
+        "value": "Darte el servicio de HAPPA, mantener la seguridad, conocer de forma agregada cómo se usa la web y, si lo eliges arriba, enviarte novedades de HAPPA."
       },
       "basis": {
         "label": "Legitimación",
-        "value": "El contrato (los términos de uso) y, para lo opcional, tu consentimiento."
+        "value": "El contrato (los términos de uso), nuestro interés legítimo en la seguridad y la mejora del servicio y, para lo opcional, tu consentimiento."
       },
       "recipients": {
         "label": "Destinatarios",
-        "value": "Proveedores que nos dan el servicio (alojamiento, correo). Empresas colaboradoras, solo si lo aceptas."
+        "value": "Proveedores que nos dan el servicio (alojamiento, correo). No vendemos ni cedemos tus datos a otras empresas."
       },
       "rights": {
         "label": "Derechos",
@@ -637,10 +634,10 @@
         "stays": "Tus mensajes y tus gastos se quedan, con el nombre «Usuario eliminado», para que a los demás les sigan cuadrando las cuentas.",
         "final": "No se puede deshacer."
       },
-      "oweTitle": "Antes, paga lo que debes",
-      "oweText": "No puedes borrar tu cuenta mientras debas dinero. Págalo y apúntalo en Gastos:",
-      "pendingTitle": "Antes, confirma lo que tienes a medias",
-      "pendingText": "Tienes gastos o pagos sin confirmar. Confírmalos o recházalos en Gastos (o pide que lo hagan):",
+      "oweTitle": "Debes dinero",
+      "oweText": "Puedes borrar la cuenta, pero lo que debes seguirá apuntado en estos hogares a nombre de «Usuario eliminado» y tus compañeros lo seguirán viendo:",
+      "pendingTitle": "Tienes cosas sin confirmar",
+      "pendingText": "Si borras la cuenta, tus compañeros o un admin del hogar podrán resolverlas. Mejor confírmalas o recházalas antes en Gastos:",
       "pendingCount": "{count, plural, one {# sin confirmar} other {# sin confirmar}}",
       "owedTitle": "Te deben dinero",
       "owedText": "Si borras la cuenta, ya no podrás recibirlo:",
@@ -670,8 +667,6 @@
       "samePassword": "La nueva tiene que ser distinta de la actual",
       "passwordWeak": "Esa contraseña es demasiado débil; prueba con otra más larga",
       "confirmRequired": "Marca la casilla para confirmar",
-      "owesMoney": "Debes dinero en algún hogar: págalo antes de borrar tu cuenta",
-      "pendingMoney": "Tienes gastos o pagos sin confirmar: confírmalos antes de borrar tu cuenta",
       "minor": "Las cuentas de menores no se pueden borrar desde aquí",
       "rateLimited": "Demasiados intentos. Espera unos minutos y vuelve a probar",
       "captchaFailed": "No hemos podido comprobar que no eres un robot. Espera un momento y vuelve a intentarlo.",
@@ -680,11 +675,11 @@
     },
     "privacy": {
       "title": "Privacidad",
-      "subtitle": "Dos opciones que solo se activan si tú quieres. Puedes cambiarlas cuando quieras.",
+      "subtitle": "Una opción que solo se activa si tú quieres. Puedes cambiarla cuando quieras.",
       "changedAt": "Último cambio: {date}",
       "neverDecided": "Aún no lo has decidido (cuenta como no).",
       "error": "No se ha podido guardar. Inténtalo de nuevo.",
-      "minor": "Las cuentas de menor no pueden recibir novedades ni compartir datos con empresas colaboradoras.",
+      "minor": "Las cuentas de menor no pueden recibir novedades.",
       "rightsTitle": "Tus datos",
       "rightsText": "Para pedir una copia de tus datos, corregirlos o ejercer cualquier otro derecho, escríbenos a <email></email> desde el correo de tu cuenta.",
       "policyLink": "Leer la política de privacidad",
@@ -895,11 +890,6 @@
       "scheduleLocked": "Ya hay cargos apuntados: no se puede cambiar cuándo se cobra"
     },
     "leftBanner": "Ya no vives en este hogar. Puedes ver tu saldo, confirmar y apuntar pagos hasta quedar en paz.",
-    "leftDebts": {
-      "title": "Cuentas pendientes en hogares que dejaste",
-      "owe": "Debes {amount}",
-      "owed": "Te deben {amount}"
-    },
     "fromShopping": {
       "title": "Pasar la compra a gastos",
       "subtitle": "Elige qué entra, apunta lo que costó y se reparte como cualquier gasto.",
@@ -1347,7 +1337,6 @@
     "placeholder": "Escribe un mensaje",
     "send": "Enviar",
     "save": "Guardar el cambio",
-    "leftNotice": "Ya no vives en este hogar. Sigues en el chat hasta que saldes tus gastos pendientes.",
     "poll": {
       "open": "Crear una votación",
       "newTitle": "Nueva votación",
@@ -1389,6 +1378,41 @@
       "pollAdultsOnly": "Las votaciones las crean los adultos que viven en el hogar",
       "pollCannotVote": "No puedes votar en esta votación",
       "generic": "Algo ha ido mal. Inténtalo de nuevo"
+    },
+    "debts": {
+      "title": "Cuentas pendientes",
+      "titleWith": "Cuentas pendientes con {name}",
+      "subtitleMine": "{household} · ya no vives aquí",
+      "subtitleOther": "{name} ya no vive aquí",
+      "backHome": "Inicio",
+      "backChat": "Chat",
+      "iOwe": "Debes <strong>{amount}</strong> a {name}",
+      "owesMe": "Te debe <strong>{amount}</strong>",
+      "owesMeNamed": "{name} te debe <strong>{amount}</strong>",
+      "waiting": "Esperando a {name}",
+      "waitingAmount": "Le has pagado {amount}: esperando a {name}",
+      "saysPaid": "Dice que te ha pagado",
+      "saysPaidAmount": "Dice que te ha pagado {amount}",
+      "iPaid": "Le he pagado",
+      "theyPaid": "Me ha pagado",
+      "received": "Me ha llegado",
+      "notReceived": "No",
+      "cancelPayment": "Cancelar",
+      "howMuchPaid": "¿Cuánto le has pagado a {name}?",
+      "howMuchReceived": "¿Cuánto te ha pagado {name}?",
+      "save": "Apuntar pago",
+      "closeForm": "Cancelar",
+      "nothing": "Ahora mismo no hay nada pendiente entre vosotros.",
+      "listLabel": "Cuentas pendientes",
+      "rowOwesMe": "<strong>{name}</strong> te debe {amount}",
+      "rowIOwe": "Debes {amount} a <strong>{name}</strong>",
+      "rowSubUnread": "Cuentas pendientes · {count, plural, one {# mensaje nuevo} other {# mensajes nuevos}}",
+      "homeIOwe": "Cuentas pendientes · debes {amount}",
+      "homeOwesMe": "Cuentas pendientes · te deben {amount}",
+      "unread": "{count, plural, one {# mensaje sin leer} other {# mensajes sin leer}}",
+      "saysPaidNamed": "{name} dice que te ha pagado",
+      "saysPaidNamedAmount": "{name} dice que te ha pagado {amount}",
+      "someone": "alguien"
     }
   },
   "Notifications": {

@@ -26,14 +26,14 @@ export type ChatPoll = {
 // Lo que ponía un mensaje antes de un cambio
 export type MessageVersion = { body: string; writtenAt: string; replacedAt: string };
 
-// Alguien del chat. isMember: sigue en el chat (vive en el hogar, o se fue con saldo pendiente).
+// Alguien del chat. isMember: sigue en el chat (vive en el hogar o, en «Cuentas pendientes», tiene saldo).
 export type ChatPerson = { userId: string; name: string; isMember: boolean; avatarUrl: string | null };
 
 export type ChatInfo = {
   conversationId: string;
   householdName: string;
   timezone: string;
-  // false = se fue del hogar y sigue en el chat por tener saldo pendiente
+  // false = no es el chat del hogar en el que vives (en «Cuentas pendientes»): sin votaciones
   isResident: boolean;
   // Eres menor en este hogar (no creas votaciones y solo votas en las que lo permiten)
   isMinor: boolean;

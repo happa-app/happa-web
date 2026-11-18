@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Geist } from "next/font/google";
 import type { ReactNode } from "react";
+import { Analytics } from "@/components/analytics/Analytics";
 import { ServiceWorker } from "@/components/pwa/ServiceWorker";
 import { routing } from "@/i18n/routing";
 import { APP_BACKGROUND, APP_BACKGROUND_DARK } from "@/lib/brand";
@@ -50,6 +51,7 @@ export default async function LocaleLayout({ children }: { children: ReactNode }
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         <ServiceWorker />
+        <Analytics />
       </body>
     </html>
   );

@@ -160,6 +160,16 @@ export async function paymentAction(_prevState: ExpensesActionState, formData: F
   }
 
   if (result.error) return { status: "error", error: toExpensesErrorKey(result.error) };
+
+  // Desde «Cuentas pendientes» (migración 29): de vuelta a la conversación. Si ya se ha cerrado (el saldo llegó a
+  // cero), al chat del hogar si vives en él, o a Inicio si no.
+  const debtChat = id(formData, "debtChat");
+  if (debtChat) {
+    const { error: closed } = await supabase.rpc("get_debt_chat", { p_conversation: debtChat });
+    if (!closed) return redirect({ href: `/cuentas-pendientes/${debtChat}`, locale });
+    const { data: resident } = await supabase.rpc("is_household_member", { hid: householdId });
+    return redirect({ href: resident ? `/hogar/${householdId}/chat` : "/inicio", locale });
+  }
   return redirect({ href: `/hogar/${householdId}/gastos`, locale });
 }
 

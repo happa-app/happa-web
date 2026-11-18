@@ -3,9 +3,9 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ListIcon } from "@/components/brand/Icons";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Card } from "@/components/ui/Card";
+import { DebtChatList } from "@/features/chat";
+import { getMyDebtChats } from "@/features/chat/server";
 import { HouseholdList } from "@/features/households";
-import { LeftDebts } from "@/features/expenses";
-import { getMyLeftDebts } from "@/features/expenses/server";
 import { getMyHouseholds } from "@/features/households/server";
 import { Link, redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
@@ -24,12 +24,15 @@ export default async function HomePage() {
     return redirect({ href: "/login", locale: await getLocale() });
   }
 
-  const [{ data: profile }, households, leftDebts] = await Promise.all([
+  const [{ data: profile }, households, debtChats] = await Promise.all([
     supabase.from("profiles").select("display_name").eq("id", userId).single(),
     getMyHouseholds(userId),
-    // Hogares que dejaste con saldo pendiente en gastos
-    getMyLeftDebts(),
+    // «Cuentas pendientes» (migración 29)
+    getMyDebtChats(),
   ]);
+  // Aquí solo las de hogares en los que ya no vives: las de tus hogares salen en su pestaña Chat
+  const myHouseholds = new Set(households.map((h) => h.id));
+  const leftDebtChats = debtChats.filter((c) => !myHouseholds.has(c.householdId));
 
   return (
     <>
@@ -46,7 +49,7 @@ export default async function HomePage() {
         </Card>
       )}
 
-      <LeftDebts debts={leftDebts} />
+      <DebtChatList items={leftDebtChats} variant="home" />
 
       <Link href="/compra" className={styles.tile}>
         <span className={styles.tileIcon}>

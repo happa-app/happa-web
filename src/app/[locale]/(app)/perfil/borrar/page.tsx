@@ -1,4 +1,4 @@
-// Página /perfil/borrar: qué pasa si borras tu cuenta y, si no debes dinero, el formulario para hacerlo.
+// Página /perfil/borrar: qué pasa si borras tu cuenta, avisos sobre tus saldos y el formulario para hacerlo.
 // Si entras con Google, se confirma volviendo a entrar con Google: la vuelta es a esta misma página
 // (y ?google=error si algo falló).
 import { getLocale, getTranslations } from "next-intl/server";

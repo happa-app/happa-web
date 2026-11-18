@@ -102,19 +102,11 @@ export function SignupForm({ next }: Props) {
         />
 
         <CheckboxField name="acceptLegal" label={legalLabel} error={error("acceptLegal")} />
-        <CheckboxField name="isAdult" label={t("fields.isAdult")} error={error("isAdult")} />
+        <CheckboxField name="isOldEnough" label={t("fields.isOldEnough")} error={error("isOldEnough")} />
 
-        {/* Opcionales y desmarcadas, cada una por su lado (el RGPD pide poder aceptar cada cosa por separado).
-            Primero la más fácil de aceptar; frases cortas que dicen lo que gana la persona, y el detalle de qué
-            se comparte a un clic, antes de aceptar (información por capas). Se cambian luego en Perfil → Privacidad. */}
+        {/* Opcional y desmarcada (el RGPD no deja dar el consentimiento ya marcado). Se cambia luego en
+            Perfil → Privacidad. */}
         <CheckboxField name="marketing" label={t("fields.marketing")} />
-        <div>
-          <CheckboxField name="partners" label={t("fields.partners")} />
-          <details className={styles.more}>
-            <summary>{t("fields.partnersMore")}</summary>
-            <p>{t("fields.partnersDetail")}</p>
-          </details>
-        </div>
 
         <Captcha resetKey={state} />
 
