@@ -16,7 +16,7 @@ export function ThemePicker() {
     <fieldset className={styles.options}>
       <legend className="visually-hidden">{t("title")}</legend>
       {THEME_CHOICES.map((choice) => (
-        <label key={choice} className={chosen === choice ? styles.optionOn : styles.option}>
+        <label key={choice} className={styles.option}>
           <input
             type="radio"
             name="theme"
@@ -25,15 +25,11 @@ export function ThemePicker() {
             checked={chosen === choice}
             onChange={() => saveThemeChoice(choice)}
           />
+          <span className={styles.optionDot} aria-hidden="true" />
           <span className={styles.optionName}>
             {t(`choices.${choice}`)}
             {choice === "system" ? <span className={styles.optionHint}>{t("systemHint")}</span> : null}
           </span>
-          {chosen === choice ? (
-            <span className={styles.optionCheck} aria-hidden="true">
-              ✓
-            </span>
-          ) : null}
         </label>
       ))}
     </fieldset>
