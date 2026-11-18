@@ -1,33 +1,17 @@
 /* Pantallas de horarios */
 
-.section {
+/* Agrupa las franjas de un mismo día dentro de una sección */
+.dayGroup {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-}
-
-.sectionTitle {
-  font-size: var(--text-base);
-  font-weight: 700;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  gap: var(--space-1);
 }
 
 .empty {
   margin: 0;
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  padding: var(--space-2) 0;
   color: var(--color-text-muted);
-  text-align: center;
+  font-size: var(--text-sm);
 }
 
 .muted,
@@ -104,11 +88,9 @@
 .dayTabs {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 4px;
-  padding: 4px;
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  border: 1.5px solid var(--color-text);
+  border-radius: 999px;
 }
 
 .dayTab,
@@ -121,9 +103,8 @@
   min-height: 48px;
   padding: 0;
   border: 0;
-  border-radius: var(--radius-sm);
   background: none;
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font: inherit;
   font-size: var(--text-sm);
   font-weight: 700;
@@ -131,14 +112,19 @@
 }
 
 .dayTabActive {
-  background: var(--color-fill);
-  color: var(--color-on-accent);
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
-.dayTab:focus-visible,
+.dayTab:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: -4px;
+}
+
+/* Sobre el relleno de la opción activa el anillo va con el color del fondo */
 .dayTabActive:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
+  outline: 2px solid var(--color-bg);
+  outline-offset: -4px;
 }
 
 .dayNumber {
@@ -158,18 +144,14 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
   list-style: none;
-  overflow: hidden;
 }
 
 .dayList > li {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) 0;
 }
 
 .dayList > li + li {
@@ -274,11 +256,7 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
   list-style: none;
-  overflow: hidden;
 }
 
 .list > li {
@@ -286,8 +264,8 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-2) var(--space-3);
-  min-height: 56px;
-  padding: var(--space-3) var(--space-4);
+  min-height: 44px;
+  padding: var(--space-2) 0;
 }
 
 .list > li + li {
@@ -323,7 +301,6 @@
 
 .dayHeading {
   margin: 0;
-  padding: var(--space-2) var(--space-4) 0;
   color: var(--color-text-muted);
   font-size: var(--text-sm);
   font-weight: 700;
@@ -396,20 +373,37 @@
   gap: var(--space-5);
 }
 
+/* Una parte del formulario: raya arriba y etiqueta como la de Section */
 .fieldset {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  min-width: 0;
   margin: 0;
-  padding: var(--space-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  padding: var(--space-2) 0 0;
+  border: 0;
+  border-top: 2px solid var(--color-rule);
 }
 
 .legendTitle {
-  padding: 0 var(--space-2);
+  float: left; /* así la leyenda no corta la raya del fieldset */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  color: var(--color-label);
+  font-size: 0.66rem;
   font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* Formulario de copiar horario, dentro de su Section */
+.copyForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .dayPicker {
@@ -463,10 +457,9 @@
 .segmented {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  padding: 4px;
-  border-radius: var(--radius-md);
-  background: var(--color-bg);
+  overflow: hidden;
+  border: 1.5px solid var(--color-text);
+  border-radius: 999px;
 }
 
 .segmentOption,
@@ -475,27 +468,30 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 var(--space-2);
-  border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   font-weight: 600;
   cursor: pointer;
 }
 
 .segmentOption {
-  color: var(--color-text-muted);
+  color: var(--color-text);
 }
 
 .segmentOptionActive {
-  background: var(--color-surface);
-  color: var(--color-brand-strong);
-  box-shadow: 0 1px 2px rgb(18 57 63 / 12%);
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
-.segmentOption:focus-within,
+.segmentOption:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: -4px;
+}
+
 .segmentOptionActive:focus-within {
-  box-shadow: var(--focus-ring);
+  outline: 2px solid var(--color-bg);
+  outline-offset: -4px;
 }
 
 .select {
@@ -518,58 +514,6 @@
   margin: 0;
   color: var(--color-error);
   font-size: var(--text-sm);
-}
-
-/* ───── Tarjeta en la página del hogar ───── */
-.tile {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
-  color: inherit;
-  text-decoration: none;
-  transition: transform 0.15s ease;
-}
-
-.tile:hover {
-  transform: translateY(-1px);
-}
-
-.tile:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
-.tileIcon {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: var(--color-brand-soft);
-  color: var(--color-brand-strong);
-}
-
-.tileText {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.tileTitle {
-  font-weight: 700;
-}
-
-.tileChevron {
-  flex-shrink: 0;
-  font-size: var(--text-xl);
-  color: var(--color-text-muted);
 }
 
 /* ───── Inicio ───── */

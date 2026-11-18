@@ -1,5 +1,6 @@
 // El horario de una persona, por días: cada franja con su hora, qué es, y editar o borrar.
 import { useTranslations } from "next-intl";
+import { Section } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
 import { formatTime } from "../format";
 import { blocksOf } from "../time";
@@ -19,13 +20,12 @@ export function BlockList({ householdId, personId, blocks }: Props) {
   const days = WEEKDAYS.filter((d) => blocks.some((b) => b.weekday === d));
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{t("editor.list")}</h2>
+    <Section title={t("editor.list")}>
       {days.length === 0 ? (
         <p className={styles.empty}>{t("editor.empty")}</p>
       ) : (
         days.map((d) => (
-          <div key={d} className={styles.section}>
+          <div key={d} className={styles.dayGroup}>
             <h3 className={styles.dayHeading}>{t(`weekdays.${d}`)}</h3>
             <ul className={styles.list}>
               {blocksOf(personId, blocks, d).map((b) => {
@@ -55,6 +55,6 @@ export function BlockList({ householdId, personId, blocks }: Props) {
           </div>
         ))
       )}
-    </section>
+    </Section>
   );
 }

@@ -3,6 +3,7 @@
 // y el detalle en texto). Las ausencias cubren el día entero.
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { Section } from "@/components/ui/Section";
 import { barPosition, BAR_END, BAR_START, formatDay, formatTime } from "../format";
 import { absenceOn, blocksOf, isoWeekday, toMinutes, weekDates } from "../time";
 import { SCHEDULE_KINDS, WEEKDAYS, type Absence, type ScheduleBlock, type SchedulePerson, type Weekday } from "../types";
@@ -31,8 +32,7 @@ export function DayView({ people, blocks, absences, today, nowMinutes, currentUs
   const nowLeft = barPosition(nowMinutes, nowMinutes + 1)?.left;
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{t("day.title")}</h2>
+    <Section title={t("day.title")}>
       <div className={styles.dayTabs} role="tablist" aria-label={t("day.title")}>
         {WEEKDAYS.map((d) => (
           <button
@@ -112,6 +112,6 @@ export function DayView({ people, blocks, absences, today, nowMinutes, currentUs
           {t("day.awayLegend")}
         </li>
       </ul>
-    </section>
+    </Section>
   );
 }
