@@ -9,7 +9,7 @@ import type { LegalDocument } from "./types";
 
 const noticeEs: LegalDocument = {
   version: "1",
-  updated: "17 de noviembre de 2026",
+  updated: "18 de noviembre de 2026",
   summaryTitle: "",
   summary: [],
   sections: [
@@ -153,7 +153,7 @@ const noticeEs: LegalDocument = {
 
 const noticeEn: LegalDocument = {
   version: "1",
-  updated: "17 November 2026",
+  updated: "18 November 2026",
   summaryTitle: "",
   summary: [],
   sections: [

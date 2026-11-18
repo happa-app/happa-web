@@ -9,7 +9,7 @@ import type { LegalDocument } from "./types";
 
 const termsEs: LegalDocument = {
   version: "3",
-  updated: "17 de noviembre de 2026",
+  updated: "18 de noviembre de 2026",
   summaryTitle: "Lo esencial",
   summary: [
     <>HAPPA es una aplicación gratuita para organizar un hogar compartido: compra, gastos, tareas, horarios, chat y ruleta.</>,
@@ -108,8 +108,9 @@ const termsEs: LegalDocument = {
             con cuidado y no la comparta. Si cree que alguien ha accedido a su cuenta, cámbiela y avísenos.
           </p>
           <p>
-            4.5. Usted es responsable de lo que se haga desde su cuenta, salvo que ocurra sin culpa suya (por ejemplo,
-            por un fallo de seguridad nuestro).
+            4.5. Usted es responsable de custodiar sus credenciales de acceso y de toda la actividad que se realice desde
+            su cuenta. HAPPA no responderá de los accesos no autorizados a su cuenta, salvo que se deban a una
+            vulnerabilidad o a un fallo de seguridad imputable a nuestros sistemas.
           </p>
         </>
       ),
@@ -394,7 +395,7 @@ const termsEs: LegalDocument = {
 
 const termsEn: LegalDocument = {
   version: "3",
-  updated: "17 November 2026",
+  updated: "18 November 2026",
   summaryTitle: "Key points",
   summary: [
     <>HAPPA is a free app for organising a shared home: shopping, expenses, chores, schedules, chat and the wheel.</>,
@@ -490,8 +491,9 @@ const termsEn: LegalDocument = {
             safe and do not share it. If you think someone has accessed your account, change it and let us know.
           </p>
           <p>
-            4.5. You are responsible for what is done from your account, unless it happens through no fault of your own
-            (for example, because of a security failure on our side).
+            4.5. You are responsible for keeping your login credentials safe and for all activity carried out from your
+            account. HAPPA will not be liable for unauthorised access to your account, unless it is caused by a
+            vulnerability or security failure attributable to our systems.
           </p>
         </>
       ),

@@ -13,7 +13,7 @@ const AEPD = "https://www.aepd.es";
 
 const privacyEs: LegalDocument = {
   version: "3",
-  updated: "17 de noviembre de 2026",
+  updated: "18 de noviembre de 2026",
   summaryTitle: "Información básica sobre protección de datos",
   summary: [
     <>
@@ -421,7 +421,7 @@ const privacyEs: LegalDocument = {
 
 const privacyEn: LegalDocument = {
   version: "3",
-  updated: "17 November 2026",
+  updated: "18 November 2026",
   summaryTitle: "Basic information on data protection",
   summary: [
     <>

@@ -10,7 +10,7 @@ import type { LegalDocument } from "./types";
 
 const cookiesEs: LegalDocument = {
   version: "1",
-  updated: "17 de noviembre de 2026",
+  updated: "18 de noviembre de 2026",
   summaryTitle: "Lo esencial",
   summary: [
     <>HAPPA solo usa cookies técnicas, imprescindibles para que funcione.</>,
@@ -148,7 +148,7 @@ const cookiesEs: LegalDocument = {
 
 const cookiesEn: LegalDocument = {
   version: "1",
-  updated: "17 November 2026",
+  updated: "18 November 2026",
   summaryTitle: "Key points",
   summary: [
     <>HAPPA only uses technical cookies, which are essential for it to work.</>,
