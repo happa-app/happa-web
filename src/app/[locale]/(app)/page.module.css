@@ -17,9 +17,16 @@
 }
 
 /* Título de una parte de la página (más pequeño que el de la página) */
+/* Título de una sección suelta de página: el mismo aspecto que la etiqueta de <Section> (raya arriba + mayúsculas) */
 .sectionTitle {
-  font-size: var(--text-base);
+  margin: 0;
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--color-rule);
+  color: var(--color-label);
+  font-size: 0.66rem;
   font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
 }
 
 .actions {
