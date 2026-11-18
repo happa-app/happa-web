@@ -32,6 +32,7 @@
 }
 
 .amount {
+  color: var(--color-owed);
   font-size: 1.0625rem;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
@@ -48,7 +49,7 @@
   font-size: 0.8125rem;
 }
 
-/* Botones pequeños (dentro de la franja) */
+/* Botones pequeños (Button size="sm") dentro de la franja */
 .actions {
   flex-shrink: 0;
   display: flex;
@@ -67,74 +68,6 @@
 .actionsStack > form {
   display: flex;
   flex-direction: column;
-}
-
-.btn,
-.btnSecondary,
-.btnTiny,
-.btnTinySecondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 999px;
-  font: inherit;
-  font-weight: 700;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.btn,
-.btnSecondary {
-  min-height: 36px;
-  padding: 0 var(--space-4);
-  font-size: var(--text-sm);
-}
-
-.btnTiny,
-.btnTinySecondary {
-  min-height: 30px;
-  padding: 0 var(--space-3);
-  font-size: 0.75rem;
-}
-
-.btn,
-.btnTiny {
-  background: var(--color-fill);
-  color: var(--color-on-accent);
-}
-
-.btn:hover:not(:disabled),
-.btnTiny:hover:not(:disabled) {
-  background: var(--color-fill-strong);
-}
-
-.btnSecondary,
-.btnTinySecondary {
-  background: transparent;
-  color: var(--color-text);
-  box-shadow: inset 0 0 0 1.5px var(--color-text);
-}
-
-.btnSecondary:hover:not(:disabled),
-.btnTinySecondary:hover:not(:disabled) {
-  background: var(--color-chip-hover);
-}
-
-.btn:disabled,
-.btnSecondary:disabled,
-.btnTiny:disabled,
-.btnTinySecondary:disabled {
-  opacity: 0.6;
-  cursor: default;
-}
-
-.btn:focus-visible,
-.btnSecondary:focus-visible,
-.btnTiny:focus-visible,
-.btnTinySecondary:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
 }
 
 /* El formulario del pago: importe grande, como en Gastos, y los botones */
