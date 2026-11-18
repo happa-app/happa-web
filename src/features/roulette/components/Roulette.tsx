@@ -6,6 +6,7 @@ import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { Alert } from "@/components/ui/Alert";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
+import { Section } from "@/components/ui/Section";
 import { useRoulette } from "../hooks/useRoulette";
 import { MAX_PEOPLE, MIN_PEOPLE, type RoulettePerson, type RouletteSpin } from "../types";
 import { orderParticipants } from "../wheel";
@@ -151,8 +152,7 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
         <p className={styles.minorNote}>{t("minorNote")}</p>
       )}
 
-      <section className={styles.history}>
-        <h2 className={styles.historyTitle}>{t("history.title")}</h2>
+      <Section title={t("history.title")}>
         {spins.length === 0 ? (
           <p className={styles.empty}>{t("history.empty")}</p>
         ) : (
@@ -177,7 +177,7 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
             ))}
           </ul>
         )}
-      </section>
+      </Section>
     </div>
   );
 }
