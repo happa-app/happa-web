@@ -1,4 +1,4 @@
-// Marco común de las pantallas de acceso: logo arriba y la tarjeta del formulario.
+// Marco común de las pantallas de acceso: logo arriba y el formulario sobre el fondo.
 import type { ReactNode } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { Link } from "@/i18n/navigation";
@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <Link href="/" className={styles.logoLink}>
         <Logo />
       </Link>
-      <div className={styles.card}>{children}</div>
+      <div className={styles.content}>{children}</div>
     </main>
   );
 }

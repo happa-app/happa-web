@@ -11,7 +11,7 @@ type Props = {
 
 export function LegalDocumentView({ title, doc, labels }: Props) {
   return (
-    <article className={styles.card}>
+    <article className={styles.article}>
       <header className={styles.header}>
         <h1 className={styles.title}>{title}</h1>
         <p className={styles.meta}>{labels.meta}</p>
