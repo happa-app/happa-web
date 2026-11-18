@@ -418,21 +418,21 @@
   align-items: center;
   justify-content: center;
   min-height: 44px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-muted);
+  border: 1.5px solid var(--color-text);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
   font-weight: 700;
   cursor: pointer;
 }
 
 .dayCheckOn {
-  border-color: var(--color-brand-strong);
-  background: var(--color-brand-soft);
-  color: var(--color-brand-strong);
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
-.dayCheck:focus-within,
-.dayCheckOn:focus-within {
+.dayCheck:has(input:focus-visible),
+.dayCheckOn:has(input:focus-visible) {
   box-shadow: var(--focus-ring);
 }
 

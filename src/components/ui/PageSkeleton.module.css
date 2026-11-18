@@ -24,14 +24,30 @@
   margin-top: calc(-1 * var(--space-2));
 }
 
-.card {
-  height: 120px;
-  border-radius: var(--radius-lg);
+/* Franjas sin caja: una raya fina arriba y una barra gris de distinto ancho dentro */
+.card,
+.cardShort {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-rule);
+  border-radius: 0;
+  background: transparent;
 }
 
-.cardShort {
-  height: 72px;
-  border-radius: var(--radius-lg);
+.card::after,
+.cardShort::after {
+  content: "";
+  display: block;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  background: var(--color-border);
+}
+
+.card::after {
+  width: 85%;
+}
+
+.cardShort::after {
+  width: 50%;
 }
 
 @keyframes breathe {

@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  border: 1px solid var(--color-brand-strong);
+  border: 1.5px solid var(--color-brand-strong);
   border-radius: var(--radius-md);
   background: transparent;
   color: var(--color-brand-strong);

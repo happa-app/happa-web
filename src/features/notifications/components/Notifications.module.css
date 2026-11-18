@@ -50,18 +50,17 @@
   margin: 0;
   padding-top: var(--space-2);
   border-top: 2px solid var(--color-rule);
-  font-size: var(--text-sm);
+  font-size: 0.66rem;
   font-weight: 700;
   color: var(--color-label);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.09em;
 }
 
 .empty {
   margin: 0;
-  padding: var(--space-8) 0;
   color: var(--color-text-muted);
-  text-align: center;
+  font-size: var(--text-sm);
 }
 
 .list {

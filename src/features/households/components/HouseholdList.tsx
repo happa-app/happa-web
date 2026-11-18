@@ -1,4 +1,4 @@
-// Lista "Mis casas": una tarjeta por hogar que lleva a su página.
+// Lista "Mis casas": una fila por hogar (sin caja) que lleva a su página.
 import { useTranslations } from "next-intl";
 import { Avatar } from "@/components/ui/Avatar";
 import { Link } from "@/i18n/navigation";

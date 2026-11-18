@@ -30,15 +30,15 @@
 .kinds {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 4px;
-  padding: 4px;
-  border-radius: var(--radius-md);
-  background: var(--color-border);
+  overflow: hidden;
+  border: 1.5px solid var(--color-text);
+  border-radius: 999px;
 }
 
 @media (max-width: 340px) {
   .kinds {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-radius: var(--radius-lg);
   }
 }
 
@@ -47,9 +47,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 var(--space-1);
-  border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   font-weight: 600;
   text-align: center;
@@ -57,18 +56,22 @@
 }
 
 .kind {
-  color: var(--color-text-muted);
+  color: var(--color-text);
 }
 
 .kindActive {
-  background: var(--color-surface);
-  color: var(--color-brand-strong);
-  box-shadow: 0 1px 2px rgb(18 57 63 / 12%);
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
-.kind:focus-within,
+.kind:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: -4px;
+}
+
 .kindActive:focus-within {
-  box-shadow: var(--focus-ring);
+  outline: 2px solid var(--color-bg);
+  outline-offset: -4px;
 }
 
 .textarea {
@@ -119,8 +122,9 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-brand-strong);
   border-radius: var(--radius-md);
+  color: var(--color-brand-strong);
   font-weight: 600;
   text-decoration: none;
 }
