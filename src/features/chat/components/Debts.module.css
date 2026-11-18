@@ -10,7 +10,7 @@
 .line {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-5); /* entre la fila principal y las .extra: sin pisarse las zonas táctiles */
   padding: var(--space-3) 0;
 }
 
@@ -61,14 +61,8 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-}
-
-/* La zona táctil ampliada de Button size="sm" (-10px) haría que se pisaran los botones vecinos
-   (el de abajo del apilado y los de las filas .extra): aquí se queda en 2px por arriba y abajo,
-   que con huecos de 8px deja 4px libres entre una zona y otra. */
-.line button::before {
-  inset: -2px -4px;
+  /* 20px = 10 + 10 de las zonas táctiles ampliadas de Button size="sm": se tocan sin pisarse */
+  gap: var(--space-5);
 }
 
 /* Cada botón va en su formulario: que los dos midan lo mismo que el más ancho */
