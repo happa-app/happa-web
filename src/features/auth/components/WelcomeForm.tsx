@@ -70,17 +70,10 @@ export function WelcomeForm({ name, email, next }: Props) {
       />
 
       <CheckboxField name="acceptLegal" label={legalLabel} error={error("acceptLegal")} />
-      <CheckboxField name="isAdult" label={t("fields.isAdult")} error={error("isAdult")} />
+      <CheckboxField name="isOldEnough" label={t("fields.isOldEnough")} error={error("isOldEnough")} />
 
-      {/* Opcionales y desmarcadas, igual que en el registro (ver SignupForm) */}
+      {/* Opcional y desmarcada, igual que en el registro (ver SignupForm) */}
       <CheckboxField name="marketing" label={t("fields.marketing")} />
-      <div>
-        <CheckboxField name="partners" label={t("fields.partners")} />
-        <details className={styles.more}>
-          <summary>{t("fields.partnersMore")}</summary>
-          <p>{t("fields.partnersDetail")}</p>
-        </details>
-      </div>
 
       <Button type="submit" fullWidth disabled={isPending}>
         {isPending ? t("welcome.submitting") : t("welcome.submit")}

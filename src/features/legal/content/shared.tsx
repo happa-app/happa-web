@@ -1,4 +1,4 @@
-// Piezas comunes de los documentos legales (términos y privacidad).
+// Piezas comunes de los documentos legales (aviso legal, términos, privacidad y cookies).
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { LEGAL_OWNER } from "../owner";
@@ -6,8 +6,9 @@ import styles from "../components/LegalPage.module.css";
 
 export type Lang = "es" | "en";
 
+// El titular es una persona física: nombre y apellidos, NIF y domicilio (sin datos registrales)
 const PENDING: Record<keyof typeof LEGAL_OWNER, Record<Lang, string>> = {
-  name: { es: "nombre o razón social", en: "name or company name" },
+  name: { es: "nombre y apellidos", en: "full name" },
   taxId: { es: "NIF", en: "tax ID" },
   address: { es: "domicilio", en: "address" },
   registry: { es: "datos registrales", en: "registry details" },
@@ -24,10 +25,55 @@ export function Mail({ to }: { to: string }) {
   return <a href={`mailto:${to}`}>{to}</a>;
 }
 
+// Una tabla con cabecera. Va dentro de una caja con desplazamiento horizontal propio: en el móvil, si no cabe,
+// se desliza la tabla y no toda la página.
+export function Table({ head, rows }: { head: ReactNode[]; rows: ReactNode[][] }) {
+  return (
+    <div className={styles.tableWrap}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            {head.map((cell, i) => (
+              <th key={i} scope="col">
+                {cell}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={i}>
+              {row.map((cell, j) =>
+                // La primera columna es el nombre de la fila (ayuda a los lectores de pantalla)
+                j === 0 ? (
+                  <th key={j} scope="row">
+                    {cell}
+                  </th>
+                ) : (
+                  <td key={j}>{cell}</td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// Enlaces entre los documentos
+export function NoticeLink({ children }: { children: ReactNode }) {
+  return <Link href="/legal/aviso-legal">{children}</Link>;
+}
+
 export function TermsLink({ children }: { children: ReactNode }) {
   return <Link href="/legal/terminos">{children}</Link>;
 }
 
 export function PrivacyLink({ children }: { children: ReactNode }) {
   return <Link href="/legal/privacidad">{children}</Link>;
+}
+
+export function CookiesLink({ children }: { children: ReactNode }) {
+  return <Link href="/legal/cookies">{children}</Link>;
 }

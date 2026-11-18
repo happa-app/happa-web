@@ -54,9 +54,6 @@ export type Payment = {
 // Datos del hogar para gastos (también para quien se fue con saldo pendiente)
 export type ExpensesContext = { name: string; timezone: string; isCurrent: boolean; isAdmin: boolean };
 
-// Hogares que dejaste donde aún tienes saldo
-export type LeftDebt = { householdId: string; name: string; netCents: number };
-
 // Una transferencia sugerida para quedar en paz
 export type Transfer = { from: string; to: string; amountCents: number };
 

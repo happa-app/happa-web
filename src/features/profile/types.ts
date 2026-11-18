@@ -58,8 +58,6 @@ export const PROFILE_ERROR_KEYS = [
   "samePassword",
   "passwordWeak",
   "confirmRequired",
-  "owesMoney",
-  "pendingMoney",
   "minor",
   "rateLimited",
   "captchaFailed",

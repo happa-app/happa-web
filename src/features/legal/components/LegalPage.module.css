@@ -119,6 +119,44 @@
   padding-left: var(--space-5);
 }
 
+.section ol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+/* Tablas (finalidades, plazos, cookies...). Si no caben en el móvil, se desliza solo la tabla */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  overflow-wrap: normal;
+}
+
+.table th,
+.table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table thead th {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.table tbody th {
+  font-weight: 600;
+}
+
 /* Un dato del titular que aún falta */
 .pending {
   padding: 0 var(--space-1);

@@ -3,7 +3,6 @@
 export { ExpenseDetail } from "./components/ExpenseDetail";
 export { ExpenseForm } from "./components/ExpenseForm";
 export { ExpenseList } from "./components/ExpenseList";
-export { LeftDebts } from "./components/LeftDebts";
 export { BalanceList, MyBalance, PaymentList } from "./components/Overview";
 export { PendingForMe } from "./components/PendingForMe";
 export { RecurringForm } from "./components/RecurringForm";
@@ -20,6 +19,5 @@ export type {
   ExpensesContext,
   ExpensesHome as ExpensesHomeData,
   ExpensesOverview,
-  LeftDebt,
   RecurringExpense,
 } from "./types";

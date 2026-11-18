@@ -454,10 +454,3 @@
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
-
-/* "›" al final de una fila-enlace (hogares que dejaste) */
-.rowChevron {
-  flex-shrink: 0;
-  font-size: var(--text-xl);
-  color: var(--color-text-muted);
-}

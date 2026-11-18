@@ -1,10 +1,10 @@
-// Página /hogar/<id>/chat: el chat de inquilinos del hogar, en vivo.
-// Para quienes viven en el hogar (adultos y menores) y para quien se fue con saldo pendiente.
+// Página /hogar/<id>/chat: el chat de inquilinos del hogar, en vivo, para quienes viven en el hogar (adultos y
+// menores). Encima, las conversaciones de «Cuentas pendientes» con quien se fue del hogar (migración 29).
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { z } from "zod";
-import { ChatRoom } from "@/features/chat";
-import { getChatPage } from "@/features/chat/server";
+import { ChatRoom, DebtChatList } from "@/features/chat";
+import { getChatPage, getMyDebtChats } from "@/features/chat/server";
 import { Link, redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import styles from "../../../page.module.css";
@@ -25,18 +25,19 @@ export default async function ChatPage({ params }: Props) {
   }
 
   if (!z.uuid().safeParse(id).success) notFound();
-  const page = await getChatPage(id);
+  const [page, debtChats] = await Promise.all([getChatPage(id), getMyDebtChats(id)]);
   if (!page) notFound();
 
   return (
     <>
-      <Link href={page.info.isResident ? `/hogar/${id}` : "/inicio"} className={styles.back}>
+      <Link href={`/hogar/${id}`} className={styles.back}>
         ← {page.info.householdName}
       </Link>
       <section className={styles.intro}>
         <h1 className={styles.title}>{t("title")}</h1>
         <p className={styles.subtitle}>{t("subtitle", { name: page.info.householdName })}</p>
       </section>
+      <DebtChatList items={debtChats} variant="household" />
       <ChatRoom
         info={page.info}
         people={page.people}

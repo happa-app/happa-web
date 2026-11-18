@@ -1,49 +1,42 @@
-// Páginas legales (/legal/terminos y /legal/privacidad): el logo y el documento en tu idioma.
-// Si un documento aún no tiene texto, enseña que está en preparación.
+// Páginas legales (/legal/aviso-legal, /legal/terminos, /legal/privacidad y /legal/cookies): el logo y el
+// documento en tu idioma.
 import { getLocale, getTranslations } from "next-intl/server";
 import { Logo } from "@/components/brand/Logo";
 import { Link } from "@/i18n/navigation";
+import { COOKIES } from "../content/cookies";
+import { NOTICE } from "../content/notice";
 import { PRIVACY } from "../content/privacy";
+import type { Lang } from "../content/shared";
 import { TERMS } from "../content/terms";
-import type { LegalDocument } from "../content/types";
+import type { LegalDocument, LegalDocumentKey } from "../content/types";
 import { LegalDocumentView } from "./LegalDocumentView";
 import styles from "./LegalPage.module.css";
 
-type Props = {
-  document: "terms" | "privacy";
+const DOCUMENTS: Record<LegalDocumentKey, Record<Lang, LegalDocument>> = {
+  notice: NOTICE,
+  terms: TERMS,
+  privacy: PRIVACY,
+  cookies: COOKIES,
 };
 
-function documentFor(document: Props["document"], locale: string): LegalDocument | null {
-  const lang = locale === "en" ? "en" : "es";
-  return document === "terms" ? TERMS[lang] : PRIVACY[lang];
-}
-
-export async function LegalPage({ document }: Props) {
+export async function LegalPage({ document }: { document: LegalDocumentKey }) {
   const t = await getTranslations("Legal");
-  const doc = documentFor(document, await getLocale());
+  const doc = DOCUMENTS[document][(await getLocale()) === "en" ? "en" : "es"];
 
   return (
     <main className={styles.page}>
       <Link href="/" className={styles.logoLink}>
         <Logo />
       </Link>
-      {doc ? (
-        <LegalDocumentView
-          title={t(document)}
-          doc={doc}
-          labels={{
-            meta: t("meta", { version: doc.version, updated: doc.updated }),
-            summaryTitle: t("summaryTitle"),
-            summaryNote: t("summaryNote"),
-            contents: t("contents"),
-          }}
-        />
-      ) : (
-        <article className={styles.card}>
-          <h1 className={styles.title}>{t(document)}</h1>
-          <p>{t("draftNotice")}</p>
-        </article>
-      )}
+      <LegalDocumentView
+        title={t(document)}
+        doc={doc}
+        labels={{
+          meta: t("meta", { version: doc.version, updated: doc.updated }),
+          summaryNote: t("summaryNote"),
+          contents: t("contents"),
+        }}
+      />
     </main>
   );
 }

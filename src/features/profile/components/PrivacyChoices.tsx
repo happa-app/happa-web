@@ -1,7 +1,7 @@
 "use client";
-// Perfil → Privacidad: los dos interruptores (novedades de HAPPA y ofertas de empresas colaboradoras), cada uno
-// por su lado. Cambian al momento; si no se puede guardar, vuelven a como estaban y se avisa.
-// El texto de cada uno (y el detalle de qué se comparte) es el mismo de las casillas del registro (Auth.fields):
+// Perfil → Privacidad: un interruptor por cada decisión opcional (hoy, solo recibir novedades de HAPPA). Cambian al
+// momento; si no se puede guardar, vuelven a como estaban y se avisa.
+// El texto de cada uno es el mismo de las casillas del registro (Auth.fields):
 // es el que tiene versión (PRIVACY_CHOICES_VERSION) y el que se guarda como aceptado.
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
@@ -61,12 +61,6 @@ export function PrivacyChoices({ initial, isMinor }: Props) {
                 <label htmlFor={id} className={styles.privacyTitle}>
                   {tFields(purpose)}
                 </label>
-                {purpose === "partners" ? (
-                  <details className={styles.privacyMore}>
-                    <summary>{tFields("partnersMore")}</summary>
-                    <p>{tFields("partnersDetail")}</p>
-                  </details>
-                ) : null}
                 <p className={styles.privacyDate}>
                   {choice.changedAt ? t("changedAt", { date: date(choice.changedAt) }) : t("neverDecided")}
                 </p>

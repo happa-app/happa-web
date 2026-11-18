@@ -395,30 +395,6 @@
   color: var(--color-text-muted);
 }
 
-/* "Qué se comparte": plegado, en pequeño */
-.privacyMore {
-  font-size: 0.8125rem;
-  color: var(--color-text-muted);
-}
-
-.privacyMore summary {
-  width: fit-content;
-  color: var(--color-brand-strong);
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.privacyMore summary:focus-visible {
-  outline: none;
-  border-radius: 4px;
-  box-shadow: var(--focus-ring);
-}
-
-.privacyMore p {
-  margin-top: var(--space-1);
-  line-height: 1.45;
-}
-
 .privacyDate {
   font-size: 0.75rem;
   color: var(--color-text-muted);

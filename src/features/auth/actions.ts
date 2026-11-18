@@ -83,7 +83,7 @@ export async function signUp(
     email: values.email,
     password: text(formData, "password"),
     acceptLegal: formData.get("acceptLegal") === "on",
-    isAdult: formData.get("isAdult") === "on",
+    isOldEnough: formData.get("isOldEnough") === "on",
   });
   if (!parsed.success) {
     return { status: "error", fieldErrors: z.flattenError(parsed.error).fieldErrors, values };
@@ -98,15 +98,14 @@ export async function signUp(
     options: {
       captchaToken: captchaToken(formData),
       emailRedirectTo: `${await siteOrigin()}/auth/confirm?next=${encodeURIComponent(nextPath)}`,
-      // Las migraciones 4 y 19 leen estos datos al crear el perfil: guardan los términos y la privacidad
-      // aceptados y las dos decisiones opcionales (marcadas o no), con la versión de su texto.
+      // Las migraciones 4, 19 y 25 leen estos datos al crear el perfil: guardan los términos y la privacidad
+      // aceptados y la decisión de recibir novedades (marcada o no), con la versión de su texto.
       data: {
         display_name: displayName,
         locale,
         legal: LEGAL_VERSIONS,
         choices: {
           marketing: formData.get("marketing") === "on",
-          partners: formData.get("partners") === "on",
           version: PRIVACY_CHOICES_VERSION,
         },
       },
@@ -220,7 +219,7 @@ export async function completeSignup(_prevState: AuthFormState, formData: FormDa
   const parsed = completeSignupSchema.safeParse({
     displayName: values.displayName,
     acceptLegal: formData.get("acceptLegal") === "on",
-    isAdult: formData.get("isAdult") === "on",
+    isOldEnough: formData.get("isOldEnough") === "on",
   });
   if (!parsed.success) {
     return { status: "error", fieldErrors: z.flattenError(parsed.error).fieldErrors, values };
@@ -232,9 +231,8 @@ export async function completeSignup(_prevState: AuthFormState, formData: FormDa
     p_locale: locale,
     p_terms: LEGAL_VERSIONS.terms,
     p_privacy: LEGAL_VERSIONS.privacy,
-    p_is_adult: parsed.data.isAdult,
+    p_is_old_enough: parsed.data.isOldEnough,
     p_marketing: formData.get("marketing") === "on",
-    p_partners: formData.get("partners") === "on",
     p_choices: PRIVACY_CHOICES_VERSION,
   });
   if (error) {

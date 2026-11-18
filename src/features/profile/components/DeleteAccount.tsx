@@ -1,4 +1,4 @@
-// Borrar la cuenta: qué pasa, si debes dinero (entonces no se puede) o te deben, y el formulario.
+// Borrar la cuenta: qué pasa, avisos si debes dinero, tienes algo sin confirmar o te deben, y el formulario.
 import { useLocale, useTranslations } from "next-intl";
 import { Alert } from "@/components/ui/Alert";
 import { Card } from "@/components/ui/Card";
@@ -33,8 +33,8 @@ export function DeleteAccount({ isMinor, balances, account, googleFailed = false
   const owe = balances.filter((b) => b.netCents < 0);
   const owed = balances.filter((b) => b.netCents > 0);
   const pending = balances.filter((b) => b.pending > 0);
-  // Con deudas o con algo sin confirmar no se puede borrar
-  const blocked = owe.length > 0 || pending.length > 0;
+  // Deber dinero o tener algo sin confirmar no impide borrar la cuenta (migración 27; Términos 11.1): se avisa
+  // antes del formulario, y lo que quede se resuelve sin ti («Usuario eliminado», o lo confirma un admin).
   const list = (items: PendingBalance[], what: (b: PendingBalance) => string, className: string) => (
     <ul className={styles.balances}>
       {items.map((b) => (
@@ -61,30 +61,26 @@ export function DeleteAccount({ isMinor, balances, account, googleFailed = false
       </Card>
 
       {owe.length > 0 ? (
-        <Card title={t("oweTitle")}>
+        <Alert tone="error" title={t("oweTitle")}>
           <p>{t("oweText")}</p>
           {list(owe, money, styles.owe)}
-        </Card>
+        </Alert>
       ) : null}
       {pending.length > 0 ? (
-        <Card title={t("pendingTitle")}>
+        <Alert tone="error" title={t("pendingTitle")}>
           <p>{t("pendingText")}</p>
           {list(pending, (b) => t("pendingCount", { count: b.pending }), styles.owe)}
-        </Card>
+        </Alert>
       ) : null}
-      {blocked ? null : (
-        <>
-          {owed.length > 0 ? (
-            <Alert tone="error" title={t("owedTitle")}>
-              <p>{t("owedText")}</p>
-              {list(owed, money, styles.owed)}
-            </Alert>
-          ) : null}
-          <Card title={t("formTitle")}>
-            <DeleteAccountForm account={account} googleFailed={googleFailed} />
-          </Card>
-        </>
-      )}
+      {owed.length > 0 ? (
+        <Alert tone="error" title={t("owedTitle")}>
+          <p>{t("owedText")}</p>
+          {list(owed, money, styles.owed)}
+        </Alert>
+      ) : null}
+      <Card title={t("formTitle")}>
+        <DeleteAccountForm account={account} googleFailed={googleFailed} />
+      </Card>
     </>
   );
 }
