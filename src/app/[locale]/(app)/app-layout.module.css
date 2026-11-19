@@ -9,6 +9,11 @@
   max-width: 640px;
   margin: 0 auto;
   padding: var(--space-5) var(--space-4) calc(var(--space-10) + var(--bottom-nav-offset));
+  /* Columna que ocupa al menos toda la pantalla: así <main> puede estirarse hasta la barra de abajo
+     (lo usa el chat para que la caja de escribir quede abajo aunque haya pocos mensajes) */
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 .header {
@@ -37,6 +42,8 @@
 }
 
 .main {
+  /* Ocupa todo el alto que sobra en .shell */
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
