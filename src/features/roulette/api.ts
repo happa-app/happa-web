@@ -1,15 +1,16 @@
 // Acceso a la ruleta. Recibe el cliente de Supabase, así vale en el servidor (primera carga) y en el
-// navegador (girar y en vivo). Quién puede qué lo decide la base de datos (migraciones 16 y 17).
+// navegador (girar y en vivo). Quién puede qué lo decide la base de datos (migraciones 16, 17 y 30).
 import type { AppSupabaseClient } from "@/lib/supabase/types";
 import { HISTORY_SIZE, type RouletteSpin } from "./types";
 
-const SPIN_FIELDS = "id, spun_by, chosen_id, created_at, roulette_participants(user_id)";
+const SPIN_FIELDS = "id, spun_by, chosen_id, created_at, title, roulette_participants(user_id)";
 
 export type SpinRow = {
   id: string;
   spun_by: string | null;
   chosen_id: string | null;
   created_at: string;
+  title?: string | null;
   roulette_participants?: { user_id: string }[];
 };
 
@@ -19,6 +20,7 @@ export function toSpin(row: SpinRow, participants?: string[]): RouletteSpin {
     spunBy: row.spun_by,
     chosenId: row.chosen_id,
     createdAt: row.created_at,
+    title: row.title ?? null,
     participants: participants ?? (row.roulette_participants ?? []).map((p) => p.user_id),
   };
 }
@@ -42,15 +44,17 @@ export async function fetchSpin(supabase: AppSupabaseClient, spinId: string): Pr
   return data ? toSpin(data as unknown as SpinRow) : null;
 }
 
-// Girar: la base de datos elige y devuelve el giro
+// Girar: la base de datos elige y devuelve el giro. title vacío = sin título.
 export async function spinRoulette(
   supabase: AppSupabaseClient,
   householdId: string,
   participants: string[],
+  title?: string,
 ): Promise<{ spin: RouletteSpin | null; error: { message?: string } | null }> {
   const { data, error } = await supabase.rpc("spin_roulette", {
     p_household: householdId,
     p_participants: participants,
+    p_title: title?.trim() || undefined,
   });
   if (error || !data) return { spin: null, error: error ?? { message: "No spin" } };
   return { spin: toSpin(data as unknown as SpinRow, participants), error: null };

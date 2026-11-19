@@ -1,6 +1,7 @@
 // Detalle de un gasto: quién pagó, cuánto le toca a cada uno, quién lo ha confirmado y qué puedes hacer.
 import { useLocale, useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Section } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
 import { formatDay, participantsOf, waitingForMe } from "../format";
 import { formatMoney } from "../money";
@@ -45,27 +46,24 @@ export function ExpenseDetail({ householdId, expense: e, names, currentUserId, i
               ? t("detail.fromShopping", { name: byName(e.createdBy) })
               : t("detail.createdBy", { name: byName(e.createdBy) })}
         </p>
+        {/* Estado como etiqueta; confirmado no lleva. Debajo, la explicación */}
         {e.status === "pending" ? (
-          <p className={styles.bannerPending}>{t("detail.pendingBanner", { names: inList(missing) })}</p>
+          <>
+            <p className={styles.tagPending}>{t("status.pending", { done: e.confirmedBy.length, total: people.length })}</p>
+            <p className={styles.hint}>{t("detail.pendingBanner", { names: inList(missing) })}</p>
+          </>
         ) : e.status === "rejected" ? (
-          <p className={styles.bannerRejected}>
-            {t("detail.rejectedBanner", { name: byName(e.rejectedBy) })}
-            {e.rejectedReason ? <span className={styles.reason}>“{e.rejectedReason}”</span> : null}
-          </p>
-        ) : (
-          <p className={styles.bannerConfirmed}>{t("detail.confirmedBanner")}</p>
-        )}
+          <>
+            <p className={styles.tagRejected}>{t("status.rejected")}</p>
+            <p className={styles.hint}>
+              {t("detail.rejectedBanner", { name: byName(e.rejectedBy) })}
+              {e.rejectedReason ? <span className={styles.reason}> “{e.rejectedReason}”</span> : null}
+            </p>
+          </>
+        ) : null}
       </section>
 
-      {waitingForMe(e, currentUserId) ? (
-        <div className={styles.buttonRow}>
-          <ActionButton kind="expense" variant="primary" fields={{ ...fields, intent: "confirm" }} label={t("detail.confirm")} />
-          <RejectForm householdId={householdId} targetId={e.id} version={e.version} />
-        </div>
-      ) : null}
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>{e.payers.length === 1 ? t("detail.paidOne") : t("detail.paidMany")}</h2>
+      <Section title={e.payers.length === 1 ? t("detail.paidOne") : t("detail.paidMany")}>
         <ul className={styles.list}>
           {e.payers.map((p) => (
             <li key={p.userId} className={styles.row}>
@@ -76,12 +74,9 @@ export function ExpenseDetail({ householdId, expense: e, names, currentUserId, i
             </li>
           ))}
         </ul>
-      </section>
+      </Section>
 
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>
-          {t("detail.split")} · {t(`methods.${e.splitMethod}`)}
-        </h2>
+      <Section title={`${t("detail.split")} · ${t(`methods.${e.splitMethod}`)}`}>
         <ul className={styles.list}>
           {e.shares.map((s) => (
             <li key={s.userId} className={styles.row}>
@@ -95,11 +90,10 @@ export function ExpenseDetail({ householdId, expense: e, names, currentUserId, i
             </li>
           ))}
         </ul>
-      </section>
+      </Section>
 
       {e.items.length > 0 ? (
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>{t("detail.items", { count: e.items.length })}</h2>
+        <Section title={t("detail.items", { count: e.items.length })}>
           <ul className={styles.list}>
             {e.items.map((item, index) => (
               <li key={index} className={styles.row}>
@@ -110,11 +104,10 @@ export function ExpenseDetail({ householdId, expense: e, names, currentUserId, i
               </li>
             ))}
           </ul>
-        </section>
+        </Section>
       ) : null}
 
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>{t("detail.confirmations")}</h2>
+      <Section title={t("detail.confirmations")}>
         <ul className={styles.list}>
           {people.map((id) => (
             <li key={id} className={styles.row}>
@@ -142,10 +135,23 @@ export function ExpenseDetail({ householdId, expense: e, names, currentUserId, i
             ) : null}
           </p>
         ) : null}
-      </section>
+      </Section>
 
-      {canEdit || (isAdmin && e.status === "pending") ? (
+      {/* Acciones abajo: la principal rellena y las demás con borde */}
+      {waitingForMe(e, currentUserId) || canEdit || (isAdmin && e.status === "pending") ? (
         <div className={styles.manage}>
+          {waitingForMe(e, currentUserId) ? (
+            <ActionButton
+              kind="expense"
+              variant="primary"
+              fields={{ ...fields, intent: "confirm" }}
+              label={t("detail.confirm")}
+              fullWidth
+            />
+          ) : null}
+          {waitingForMe(e, currentUserId) ? (
+            <RejectForm householdId={householdId} targetId={e.id} version={e.version} />
+          ) : null}
           {canEdit ? (
             <ButtonLink href={`/hogar/${householdId}/gastos/${e.id}/editar`} variant="secondary" fullWidth>
               {t("detail.edit")}

@@ -2,7 +2,7 @@
 // Son las mismas reglas que comprueba la base de datos (migración 12): aquí solo sirven para enseñar
 // los botones que tocan.
 import { addDays, mondayOf } from "./dates";
-import type { Chore, ChoreDay, ChorePerson, ChoresSummary } from "./types";
+import type { Chore, ChoreDay, ChorePerson } from "./types";
 
 // Atrasada: pendiente y su día ya pasó (sigue siendo de quien le tocaba)
 export function isOverdue(day: ChoreDay, today: string): boolean {
@@ -45,23 +45,6 @@ export function sortDays(days: ChoreDay[], me: string, titles: Map<string, strin
       rank(a) - rank(b) ||
       (titles.get(a.choreId) ?? "").localeCompare(titles.get(b.choreId) ?? ""),
   );
-}
-
-// Lo que se enseña en la tarjeta del hogar
-export function summarize(
-  days: Pick<ChoreDay, "assigneeId" | "status" | "dueOn">[],
-  me: string,
-  today: string,
-  isAdult: boolean,
-  choreCount: number,
-): ChoresSummary {
-  const mine = days.filter((d) => d.assigneeId === me && d.status === "pending");
-  return {
-    choreCount,
-    myToday: mine.filter((d) => d.dueOn === today).length,
-    myOverdue: mine.filter((d) => d.dueOn < today).length,
-    toApprove: isAdult ? days.filter((d) => d.status === "review").length : 0,
-  };
 }
 
 export type ShareRow = { person: ChorePerson; count: number; points: number; done: number };

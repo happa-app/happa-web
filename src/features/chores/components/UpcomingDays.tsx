@@ -2,6 +2,7 @@
 // Los próximos días (de mañana a dentro de una semana), día a día. Se puede ver todo o solo lo tuyo.
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { sectionStyles } from "@/components/ui/Section";
 import { addDays } from "../dates";
 import { formatDay } from "../format";
 import type { Chore, ChoreDay } from "../types";
@@ -37,9 +38,9 @@ export function UpcomingDays({ householdId, days, chores, names, me, isAdult, to
     .filter((g) => g.rows.length > 0);
 
   return (
-    <section className={styles.section}>
-      <div className={styles.sectionHead}>
-        <h2 className={styles.sectionTitle}>{t("upcoming.title")}</h2>
+    <section className={sectionStyles.section}>
+      <div className={sectionStyles.head}>
+        <h2 className={sectionStyles.title}>{t("upcoming.title")}</h2>
         <div className={styles.toggle} role="group" aria-label={t("upcoming.title")}>
           <button
             type="button"
@@ -68,7 +69,7 @@ export function UpcomingDays({ householdId, days, chores, names, me, isAdult, to
               <h3 className={styles.dayHeading}>
                 {g.date === addDays(today, 1) ? t("tomorrow") : formatDay(g.date, locale)}
               </h3>
-              <ul className={styles.groupList}>
+              <ul className={styles.dayList}>
                 {g.rows.map(({ day, chore }) => (
                   <ChoreDayRow
                     key={day.id}

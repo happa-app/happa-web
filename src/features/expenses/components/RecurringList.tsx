@@ -2,7 +2,7 @@
 // puede hacer cada uno (confirmar, rechazar, pausar, editar, borrar).
 import { useLocale, useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { formatDay, recurringParticipants, recurringShareOf, recurringWaitingForMe } from "../format";
+import { formatDay, recurringParticipants, recurringState, recurringShareOf, recurringWaitingForMe } from "../format";
 import { formatMoney } from "../money";
 import type { RecurringExpense } from "../types";
 import { ActionButton } from "./ActionButton";
@@ -50,6 +50,7 @@ export function RecurringList({
         const missing = people.filter((id) => !r.confirmedBy.includes(id));
         const gone = r.shares.map((s) => s.userId).filter((id) => !currentIds.has(id));
         const payerGone = !currentIds.has(r.paidBy);
+        const state = recurringState(r, currentIds);
         // Lo que te toca en cada cargo (no se enseña si no se va a cobrar: en pausa o sin quien pague)
         const myShare = r.active && !payerGone ? recurringShareOf(r, currentUserId, currentIds) : 0;
         // Quien lo creó lo puede editar o borrar solo mientras no se haya confirmado nunca; luego, solo un admin
@@ -67,29 +68,31 @@ export function RecurringList({
 
         return (
           <li key={r.id} className={styles.pendingItem}>
-            <p className={styles.transfer}>
-              <span>{r.description}</span>
-              <strong>{formatMoney(r.amountCents, locale)}</strong>
-            </p>
-            <p className={styles.rowMeta}>
-              {t("recurring.schedule", { frequency: r.frequency, interval: r.interval })} ·{" "}
-              {r.paidBy === currentUserId ? t("recurring.paidByYou") : t("recurring.paidBy", { name: realName(r.paidBy) })}
-            </p>
-            <p className={styles.rowMeta}>
-              {t("recurring.among", { names: shareNames.join(", ") })}
-              {myShare > 0 ? ` · ${t("recurring.yourShare", { amount: formatMoney(myShare, locale) })}` : null}
-            </p>
+            <div className={styles.row}>
+              <span className={styles.rowMain}>
+                <span className={styles.rowTitle}>{r.description}</span>
+                <span className={styles.rowMeta}>
+                  {t("recurring.schedule", { frequency: r.frequency, interval: r.interval })} ·{" "}
+                  {r.paidBy === currentUserId ? t("recurring.paidByYou") : t("recurring.paidBy", { name: realName(r.paidBy) })}
+                </span>
+                <span className={styles.rowMeta}>
+                  {t("recurring.among", { names: shareNames.join(", ") })}
+                  {myShare > 0 ? ` · ${t("recurring.yourShare", { amount: formatMoney(myShare, locale) })}` : null}
+                </span>
+              </span>
+              <span className={styles.rowAmount}>{formatMoney(r.amountCents, locale)}</span>
+            </div>
 
-            {payerGone ? (
-              <p className={styles.bannerRejected}>{t("recurring.payerGone", { name: realName(r.paidBy) })}</p>
-            ) : r.status === "pending" ? (
+            {state === "payerGone" ? (
+              <p className={styles.tagRejected}>{t("recurring.payerGone", { name: realName(r.paidBy) })}</p>
+            ) : state === "pending" ? (
               <p className={styles.chipPending}>{t("recurring.waitingFor", { names: inList(missing) })}</p>
-            ) : r.status === "rejected" ? (
-              <p className={styles.bannerRejected}>
+            ) : state === "rejected" ? (
+              <p className={styles.tagRejected}>
                 {t("recurring.rejectedBy", { name: byName(r.rejectedBy) })}
                 {r.rejectedReason ? <span className={styles.reason}>“{r.rejectedReason}”</span> : null}
               </p>
-            ) : !r.active ? (
+            ) : state === "paused" ? (
               <p className={styles.chipRejected}>{t("recurring.paused")}</p>
             ) : (
               <p className={styles.chipConfirmed}>
@@ -108,36 +111,39 @@ export function RecurringList({
             {isCurrent && recurringWaitingForMe(r, currentUserId) ? (
               <div className={styles.buttonRow}>
                 <ActionButton
+                  size="sm"
                   kind="recurring"
                   variant="primary"
                   fields={{ ...fields, intent: "confirm" }}
                   label={t("recurring.confirm")}
                 />
-                <RejectForm householdId={householdId} targetId={r.id} version={r.version} kind="recurring" />
+                <RejectForm householdId={householdId} targetId={r.id} version={r.version} kind="recurring" size="sm" />
               </div>
             ) : null}
 
             {canEdit || canPause ? (
               <div className={styles.buttonRow}>
                 {canEdit ? (
-                  <ButtonLink href={`/hogar/${householdId}/gastos/fijos/${r.id}/editar`} variant="secondary">
+                  <ButtonLink href={`/hogar/${householdId}/gastos/fijos/${r.id}/editar`} variant="secondary" size="sm">
                     {t("recurring.edit")}
                   </ButtonLink>
                 ) : null}
                 {canPause ? (
                   r.active ? (
                     <ActionButton
+                  size="sm"
                       kind="recurring"
                       fields={{ ...fields, intent: "pause" }}
                       label={t("recurring.pause")}
                       confirmText={t("recurring.pauseConfirm", { description: r.description })}
                     />
                   ) : (
-                    <ActionButton kind="recurring" fields={{ ...fields, intent: "resume" }} label={t("recurring.resume")} />
+                    <ActionButton kind="recurring" size="sm" fields={{ ...fields, intent: "resume" }} label={t("recurring.resume")} />
                   )
                 ) : null}
                 {canEdit ? (
                   <ActionButton
+                  size="sm"
                     kind="recurring"
                     fields={{ ...fields, intent: "delete" }}
                     label={t("recurring.delete")}

@@ -1,6 +1,6 @@
 // Utilidades para enseñar datos de gastos (sin acceso a la base de datos: valen en servidor y navegador).
 import { splitAmount } from "./split";
-import type { BalancePerson, Expense, RecurringExpense } from "./types";
+import type { BalancePerson, Expense, Payment, RecurringExpense } from "./types";
 
 // "2 oct" / "Oct 2". Las fechas de gastos y pagos son días sin hora: se leen en UTC para que no cambien de día.
 export function formatDay(isoDate: string, locale: string): string {
@@ -47,6 +47,18 @@ export function recurringWaitingForMe(r: RecurringExpense, userId: string): bool
   return r.status === "pending" && recurringParticipants(r).includes(userId) && !r.confirmedBy.includes(userId);
 }
 
+// En qué punto está un gasto fijo, para decidir qué enseñar en su fila. Solo "confirmed" (confirmado, activo y con
+// pagador en el hogar) tiene un próximo cargo que enseñar; el resto muestra su estado.
+export type RecurringState = "payerGone" | "pending" | "rejected" | "paused" | "confirmed";
+
+export function recurringState(r: RecurringExpense, currentIds: Set<string>): RecurringState {
+  if (!currentIds.has(r.paidBy)) return "payerGone";
+  if (r.status === "pending") return "pending";
+  if (r.status === "rejected") return "rejected";
+  if (!r.active) return "paused";
+  return "confirmed";
+}
+
 // Lo que te toca en cada cargo, contando solo a quienes siguen en el hogar (si se indica quiénes son)
 export function recurringShareOf(r: RecurringExpense, userId: string, currentIds?: Set<string>): number {
   const shares = currentIds ? r.shares.filter((s) => currentIds.has(s.userId)) : r.shares;
@@ -58,4 +70,20 @@ export function recurringShareOf(r: RecurringExpense, userId: string, currentIds
     shares.map((s) => ({ userId: s.userId, weight: s.weight ?? 1 })),
   );
   return amounts[index] ?? 0;
+}
+
+// Lo que espera cosas de ti: `forMe` (confirmar un gasto, un fijo o un pago que te hicieron) y `total`,
+// que suma además tus pagos aún sin confirmar. Es lo que sale en "Por confirmar" y en el aviso del saldo.
+export function pendingCounts(
+  expenses: Expense[],
+  payments: Payment[],
+  recurring: RecurringExpense[],
+  userId: string,
+): { forMe: number; total: number } {
+  const forMe =
+    expenses.filter((e) => waitingForMe(e, userId)).length +
+    recurring.filter((r) => recurringWaitingForMe(r, userId)).length +
+    payments.filter((p) => p.status === "pending" && p.toUser === userId).length;
+  const mine = payments.filter((p) => p.status === "pending" && p.fromUser === userId).length;
+  return { forMe, total: forMe + mine };
 }

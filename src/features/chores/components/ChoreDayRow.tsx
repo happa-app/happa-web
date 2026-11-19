@@ -28,7 +28,6 @@ export function ChoreDayRow({ householdId, day, chore, names, me, isAdult, today
   const nameOf = (userId: string | null) =>
     userId === null ? t("free") : userId === me ? t("youCap") : (names[userId] ?? t("someone"));
   const fields = { householdId, dayId: day.id };
-  const isMine = day.assigneeId === me;
   const done = day.status === "done";
 
   const who =
@@ -72,7 +71,7 @@ export function ChoreDayRow({ householdId, day, chore, names, me, isAdult, today
   }
 
   return (
-    <li className={isMine && !done ? `${styles.row} ${styles.rowMine}` : styles.row}>
+    <li className={styles.row}>
       {canComplete(day, me, isAdult) ? (
         <ChoreActionButton
           look="check"

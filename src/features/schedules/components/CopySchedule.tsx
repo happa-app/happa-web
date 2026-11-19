@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useActionState, useState, type ChangeEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import { Section } from "@/components/ui/Section";
 import { scheduleAction } from "../actions";
 import { initialScheduleActionState, type OtherSchedule } from "../types";
 import styles from "./Schedules.module.css";
@@ -22,11 +23,10 @@ export function CopySchedule({ householdId, personId, others }: Props) {
 
   if (others.length === 0) return null;
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{t("editor.copyTitle")}</h2>
+    <Section title={t("editor.copyTitle")}>
       <form
         action={formAction}
-        className={styles.fieldset}
+        className={styles.copyForm}
         onSubmit={(event: { preventDefault(): void }) => {
           if (!window.confirm(t("editor.copyConfirm", { name: fromName }))) event.preventDefault();
         }}
@@ -58,6 +58,6 @@ export function CopySchedule({ householdId, personId, others }: Props) {
           </p>
         ) : null}
       </form>
-    </section>
+    </Section>
   );
 }

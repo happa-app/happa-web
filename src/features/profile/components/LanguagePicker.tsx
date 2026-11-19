@@ -39,7 +39,7 @@ export function LanguagePicker({ current }: { current: Locale }) {
       <fieldset className={styles.options} disabled={pending}>
         <legend className="visually-hidden">{t("title")}</legend>
         {routing.locales.map((locale) => (
-          <label key={locale} className={chosen === locale ? styles.optionOn : styles.option}>
+          <label key={locale} className={styles.option}>
             <input
               type="radio"
               name="language"
@@ -48,14 +48,10 @@ export function LanguagePicker({ current }: { current: Locale }) {
               checked={chosen === locale}
               onChange={() => choose(locale)}
             />
+            <span className={styles.optionDot} aria-hidden="true" />
             <span lang={locale} className={styles.optionName}>
               {LANGUAGE_NAMES[locale]}
             </span>
-            {chosen === locale ? (
-              <span className={styles.optionCheck} aria-hidden="true">
-                ✓
-              </span>
-            ) : null}
           </label>
         ))}
       </fieldset>

@@ -1,5 +1,6 @@
 // Ausencias que siguen en pie (de hoy en adelante): quién, qué días y la nota. Quien puede, las edita o borra.
 import { useLocale, useTranslations } from "next-intl";
+import { Section } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
 import { formatDay } from "../format";
 import type { Absence, SchedulePerson } from "../types";
@@ -18,8 +19,7 @@ export function AbsenceList({ householdId, people, absences, currentUserId }: Pr
   const locale = useLocale();
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{t("absences.title")}</h2>
+    <Section title={t("absences.title")}>
       {absences.length === 0 ? (
         <p className={styles.empty}>{t("absences.empty")}</p>
       ) : (
@@ -59,6 +59,6 @@ export function AbsenceList({ householdId, people, absences, currentUserId }: Pr
             })}
         </ul>
       )}
-    </section>
+    </Section>
   );
 }

@@ -1,5 +1,6 @@
 // "Ahora": quién está en casa y quién fuera en este momento, según los horarios y ausencias apuntados.
 import { useLocale, useTranslations } from "next-intl";
+import { Section, sectionStyles } from "@/components/ui/Section";
 import { formatDay, formatTime } from "../format";
 import { fromMinutes, presenceAt } from "../time";
 import type { Absence, ScheduleBlock, SchedulePerson, Weekday } from "../types";
@@ -25,9 +26,8 @@ export function NowCard({ people, blocks, absences, now, currentUserId }: Props)
   const out = rows.filter((r) => r.presence.state !== "home");
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{t("now.title", { time: formatTime(fromMinutes(now.minutes)) })}</h2>
-      <div className={styles.card}>
+    <Section title={t("now.title", { time: formatTime(fromMinutes(now.minutes)) })}>
+      <div className={sectionStyles.card}>
         <div className={styles.nowGroups}>
           <div className={styles.nowGroup}>
             <p className={styles.nowLabel}>
@@ -80,6 +80,6 @@ export function NowCard({ people, blocks, absences, now, currentUserId }: Props)
         </div>
         <p className={styles.hint}>{t("now.note")}</p>
       </div>
-    </section>
+    </Section>
   );
 }

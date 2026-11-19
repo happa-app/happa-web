@@ -11,14 +11,10 @@
   text-decoration: none;
 }
 
-.card {
+.article {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  padding: var(--space-6) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
@@ -43,9 +39,8 @@
 
 /* En pocas palabras */
 .summary {
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-md);
-  background: var(--color-brand-soft);
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--color-rule);
 }
 
 .summaryTitle,

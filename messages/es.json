@@ -510,7 +510,9 @@
       "awayUntil": "fuera hasta el {date}",
       "minor": "menor",
       "spin": "Girar la ruleta",
-      "spinning": "Girando…"
+      "spinning": "Girando…",
+      "titleLabel": "¿Qué toca? (opcional)",
+      "titlePlaceholder": "Bajar la basura"
     },
     "minorNote": "Solo un adulto puede girar la ruleta. Si te incluye, aquí verás si te ha tocado.",
     "history": {
@@ -525,7 +527,8 @@
       "notResident": "Alguien de la lista ya no vive aquí. Recarga la página",
       "onlyAdults": "Solo un adulto puede girar la ruleta",
       "tooManySpins": "Demasiados giros seguidos. Espera un minuto",
-      "generic": "Algo ha fallado. Inténtalo de nuevo"
+      "generic": "Algo ha fallado. Inténtalo de nuevo",
+      "titleTooLong": "Como mucho 80 letras"
     },
     "idle": "La ruleta elige al azar entre los que entran: todos tienen las mismas posibilidades."
   },
@@ -692,10 +695,8 @@
     "back": "Ir a mis casas"
   },
   "Shopping": {
-    "title": "Lista de la compra",
-    "householdSubtitle": "La ve todo el hogar y se actualiza al momento.",
+    "title": "Compra",
     "personalTitle": "Mi lista personal",
-    "personalSubtitle": "Solo la ves tú. Si necesitas algo de casa, pídelo y aparecerá en la lista común.",
     "personalTeaser": "Tus cosas, y lo que quieras pedir a casa",
     "home": {
       "title": "Compra",
@@ -709,15 +710,17 @@
       "namePlaceholder": "Añadir producto…",
       "quantity": "Cantidad",
       "quantityPlaceholder": "1",
-      "submit": "Añadir a la lista"
+      "submit": "Añadir"
     },
     "pending": "Por comprar",
-    "bought": "{count, plural, one {Comprado (#)} other {Comprados (#)}}",
+    "bought": "Comprado",
+    "pendingCount": "{count} por comprar",
+    "onlyYou": "Solo la ves tú",
     "clearBought": "Borrar comprados",
     "clearBoughtConfirm": "¿Quitar de la lista los productos comprados?",
-    "empty": "La lista está vacía. Añade lo que haga falta.",
-    "requestedBy": "Pedido por {name}",
-    "you": "ti",
+    "empty": "No falta nada.",
+    "requestedBy": "Lo pidió {name}",
+    "requestedByYou": "Lo pediste tú",
     "someone": "alguien",
     "markBought": "Marcar {name} como comprado",
     "markPending": "Volver a poner {name} por comprar",
@@ -731,7 +734,7 @@
       "quantityInvalid": "La cantidad tiene que ser un número del 1 al 99",
       "generic": "No se ha podido guardar. Revisa la conexión e inténtalo de nuevo"
     },
-    "toExpenses": "Pasar a gastos"
+    "toExpenses": "Pasar lo comprado a un gasto"
   },
   "Expenses": {
     "title": "Gastos",
@@ -743,10 +746,9 @@
     "someone": "alguien",
     "cancel": "Cancelar",
     "balance": {
-      "title": "Tu saldo",
-      "owed": "Te deben",
-      "owe": "Debes",
-      "even": "Estás en paz"
+      "owedSr": "{name}: le deben {amount}",
+      "oweSr": "{name}: debe {amount}",
+      "evenSr": "{name}: está en paz"
     },
     "tile": {
       "owed": "Te deben {amount}",
@@ -755,7 +757,7 @@
       "toConfirm": "{count, plural, one {# por confirmar} other {# por confirmar}}"
     },
     "pending": {
-      "title": "Te toca a ti",
+      "title": "Por confirmar",
       "expense": "{name} ha añadido «{description}»",
       "expenseMeta": "Total {amount} · a ti te tocan {share}",
       "confirm": "Confirmar",
@@ -771,7 +773,6 @@
     },
     "settle": {
       "title": "Para quedar en paz",
-      "allEven": "Nadie debe nada a nadie.",
       "iPaid": "He pagado",
       "theyPaid": "Me ha pagado",
       "howMuchPaid": "¿Cuánto le has pagado a {name}?",
@@ -781,7 +782,7 @@
       "waiting": "Hay un pago esperando confirmación."
     },
     "balances": {
-      "title": "Saldos",
+      "title": "Cómo va el piso",
       "left": "Ya no vive aquí"
     },
     "expenses": {
@@ -800,8 +801,7 @@
       "sourceRecurring": "Fijo"
     },
     "payments": {
-      "title": "Pagos",
-      "line": "{from} → {to}"
+      "paid": "{from} pagó a {to}"
     },
     "status": {
       "pending": "Pendiente · {done}/{total}",
@@ -818,7 +818,6 @@
       "createdBy": "añadido por {name}",
       "pendingBanner": "Falta por confirmar: {names}. Hasta entonces no cuenta en los saldos.",
       "rejectedBanner": "Rechazado por {name}. Quien lo añadió puede corregirlo o borrarlo.",
-      "confirmedBanner": "Confirmado por todos. Ya cuenta en los saldos.",
       "confirm": "Confirmar gasto",
       "reject": "Rechazar",
       "rejectReason": "¿Qué está mal? (opcional)",
@@ -853,11 +852,11 @@
       "descriptionPlaceholder": "Compra del súper",
       "amount": "Importe (€)",
       "date": "Fecha",
-      "paidBy": "¿Quién pagó?",
+      "paidBy": "Quién pagó",
       "manyPayers": "Pagaron varios",
       "onePayer": "Pagó una sola persona",
       "paidAmountOf": "Cuánto pagó {name}",
-      "split": "¿Cómo se reparte?",
+      "split": "Entre quién",
       "partsOf": "Partes de {name}",
       "amountOf": "Importe de {name}",
       "left": "Faltan {amount} por repartir",
@@ -901,12 +900,13 @@
       "link": "{count, plural, one {¿Es la compra? Pasa a gastos el producto comprado} other {¿Es la compra? Pasa a gastos los # productos comprados}}"
     },
     "recurring": {
+      "sectionTitle": "Fijos",
+      "seeAll": "ver todos",
+      "seeAllAria": "Ver todos los gastos fijos",
       "title": "Gastos fijos",
       "subtitle": "Suscripciones, internet, luz… Se confirman una vez y después se apuntan solos cada vez que toca.",
       "add": "Nuevo gasto fijo",
       "empty": "Aún no hay gastos fijos. Apunta las suscripciones y facturas que se repiten y se añadirán solas.",
-      "tileEmpty": "Suscripciones y facturas que se apuntan solas",
-      "tileActive": "{count, plural, =0 {Ninguno activo} one {# activo} other {# activos}}",
       "schedule": "{frequency, select, weekly {{interval, plural, one {Semanal} other {Cada # semanas}}} monthly {{interval, plural, one {Mensual} =3 {Trimestral} =6 {Semestral} other {Cada # meses}}} yearly {{interval, plural, one {Anual} other {Cada # años}}} other {}}",
       "scheduleOption": "{frequency, select, weekly {{interval, plural, one {Cada semana} other {Cada # semanas}}} monthly {{interval, plural, one {Cada mes} =3 {Cada 3 meses (trimestral)} =6 {Cada 6 meses (semestral)} other {Cada # meses}}} yearly {{interval, plural, one {Cada año} other {Cada # años}}} other {}}",
       "everyText": "{frequency, select, weekly {{interval, plural, one {cada semana} other {cada # semanas}}} monthly {{interval, plural, one {cada mes} other {cada # meses}}} yearly {{interval, plural, one {cada año} other {cada # años}}} other {}}",
@@ -917,6 +917,11 @@
       "waitingFor": "Falta que confirme: {names}",
       "rejectedBy": "Rechazado por {name}. Quien lo creó puede corregirlo o borrarlo.",
       "paused": "En pausa",
+      "tileState": {
+        "pending": "Falta que confirmen",
+        "rejected": "Rechazado",
+        "payerGone": "Parado"
+      },
       "payerGone": "Parado: {name} ya no vive aquí. Un admin tiene que cambiar quién lo paga.",
       "next": "Próximo cargo: {date}",
       "firstCharge": "Primer cargo: {date}.",
@@ -944,8 +949,8 @@
         "frequency": "¿Cada cuánto?",
         "startsOnHint": "El primer cargo puede ser de hasta 3 meses atrás: se apuntarán los cargos que ya tocaban.",
         "scheduleLocked": "Ya se han apuntado cargos, así que no se puede cambiar cuándo se cobra. Si hace falta, borra este gasto fijo y crea otro.",
-        "paidBy": "¿Quién lo paga?",
-        "split": "¿Entre quiénes se reparte?",
+        "paidBy": "Quién paga",
+        "split": "Entre quién",
         "perCharge": "Lo que le toca a cada uno en cada cargo.",
         "willConfirm": "Se pedirá confirmación una vez a: {names}. Después se apuntará solo {every}.",
         "onlyYou": "Solo participas tú: quedará confirmado al guardar y se apuntará solo {every}.",
@@ -959,6 +964,7 @@
     "leftChat": "Escribir al hogar en el chat",
     "home": {
       "youEven": "Estás en paz",
+      "noRecurring": "Añade los que se pagan solos (internet, luz…)",
       "owesYou": "{name} te debe {amount}",
       "youOwe": "Le debes {amount} a {name}"
     }
@@ -1165,17 +1171,11 @@
       "rotation": "Por turnos: {names}",
       "free": "Libre: quien la coja"
     },
-    "summary": {
-      "today": "{count, plural, =0 {Hoy no te toca nada} one {Hoy te toca # tarea} other {Hoy te tocan # tareas}}",
-      "overdue": "{count, plural, one {# atrasada} other {# atrasadas}}",
-      "toApprove": "{count, plural, one {# por dar el visto bueno} other {# por dar el visto bueno}}",
-      "allGood": "Nada atrasado. ¡Bien!"
-    },
     "sections": {
       "overdue": "Atrasadas",
-      "toApprove": "Por dar el visto bueno",
+      "toApprove": "Esperan tu visto bueno",
       "waiting": "Esperando el visto bueno",
-      "today": "Hoy, {date}",
+      "today": "Hoy",
       "todayEmpty": "Hoy no hay nada que hacer."
     },
     "upcoming": {
@@ -1186,7 +1186,7 @@
       "emptyMine": "No te toca nada en los próximos días."
     },
     "share": {
-      "title": "Reparto de esta semana",
+      "title": "Reparto de la semana",
       "numbers": "{count, plural, one {# tarea} other {# tareas}} · {points, plural, one {# punto} other {# puntos}} · {done, plural, =0 {ninguna hecha} one {# hecha} other {# hechas}}",
       "hint": "Puntos según el esfuerzo: ligera 1, normal 2, pesada 3. De lunes a domingo."
     },
@@ -1436,7 +1436,8 @@
       "chore_to_approve": "{actor} ha hecho «{title}». Dale el visto bueno.",
       "chore_approved": "{actor} ha dado el visto bueno a «{title}».",
       "message": "{actor}: {body}",
-      "roulette_chosen": "{actor} ha girado la ruleta y te ha tocado a ti."
+      "roulette_chosen": "{actor} ha girado la ruleta y te ha tocado a ti.",
+      "roulette_chosen_titled": "{actor} ha girado la ruleta para «{title}» y te ha tocado a ti."
     },
     "categories": {
       "expenses": "Gastos y pagos",

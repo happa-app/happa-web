@@ -2,7 +2,7 @@
 // La semana entera, las ausencias y editar el horario están en su página.
 import { useLocale, useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { HomeSection, homeStyles } from "@/components/ui/HomeSection";
+import { Section, sectionStyles } from "@/components/ui/Section";
 import { formatDay, formatTime } from "../format";
 import { DAY_END, DAY_START, dayPresence, presenceAt } from "../time";
 import type { Absence, ScheduleBlock, SchedulePerson, Weekday } from "../types";
@@ -44,14 +44,12 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
   const nowInWindow = now.minutes >= DAY_START && now.minutes < DAY_END;
 
   return (
-    <HomeSection
+    <Section
       title={t("home.title")}
       meta={t("home.count", { home, total: people.length })}
-      href={base}
-      linkLabel={tHome("seeWeek")}
-      linkAriaLabel={tHome("seeWeekOf")}
+      link={{ href: base, label: tHome("seeWeek"), ariaLabel: tHome("seeWeekOf") }}
     >
-      <div className={homeStyles.card}>
+      <div className={sectionStyles.card}>
         {hasAnything ? (
           <>
             <div className={styles.dayBars} aria-hidden="true">
@@ -89,12 +87,12 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
             </div>
             <ul className="visually-hidden">
               {rows.map(({ person, presence }) => (
-                <li key={person.userId} className={homeStyles.row}>
+                <li key={person.userId} className={sectionStyles.row}>
                   <span className={styles.homePerson}>
                     <span className={presence.state === "home" ? styles.dotHome : styles.dotOut} aria-hidden="true" />
-                    <span className={homeStyles.rowMain}>
-                      <span className={homeStyles.rowTitle}>{person.userId === currentUserId ? t("youCap") : person.name}</span>
-                      <span className={homeStyles.rowMeta}>
+                    <span className={sectionStyles.rowMain}>
+                      <span className={sectionStyles.rowTitle}>{person.userId === currentUserId ? t("youCap") : person.name}</span>
+                      <span className={sectionStyles.rowMeta}>
                         {presence.state === "home"
                           ? presence.next
                             ? `${t("home.atHome")} · ${t("now.leaves", { time: formatTime(presence.next.startsAt), what: what(presence.next) })}`
@@ -111,12 +109,12 @@ export function SchedulesHome({ householdId, people, blocks, absences, now, curr
             </ul>
           </>
         ) : (
-          <p className={homeStyles.muted}>{t("home.empty")}</p>
+          <p className={sectionStyles.muted}>{t("home.empty")}</p>
         )}
         <ButtonLink href={`${base}/editar`} fullWidth>
           {t("home.mine")}
         </ButtonLink>
       </div>
-    </HomeSection>
+    </Section>
   );
 }

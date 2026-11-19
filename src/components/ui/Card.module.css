@@ -1,14 +1,21 @@
+/* Sin caja: agrupa con el aspecto de Section. Con título lleva raya arriba y la etiqueta en mayúsculas. */
 .card {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+}
+
+.card:has(> .title) {
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 2px solid var(--color-rule);
 }
 
 .title {
-  font-size: var(--text-lg);
+  margin: 0;
+  color: var(--color-label);
+  font-size: 0.66rem;
   font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
 }

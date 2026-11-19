@@ -16,9 +16,10 @@ type Props = {
   // Si se indica, pide confirmación antes de enviar
   confirmText?: string;
   fullWidth?: boolean;
+  size?: "md" | "sm";
 };
 
-export function ActionButton({ kind, fields, label, variant = "secondary", confirmText, fullWidth = false }: Props) {
+export function ActionButton({ kind, fields, label, variant = "secondary", confirmText, fullWidth = false, size = "md" }: Props) {
   const t = useTranslations("Expenses");
   const locale = useLocale();
   const [state, formAction, isPending] = useActionState(
@@ -38,7 +39,7 @@ export function ActionButton({ kind, fields, label, variant = "secondary", confi
       {Object.entries(fields).map(([name, value]) => (
         <input key={name} type="hidden" name={name} value={value} />
       ))}
-      <Button type="submit" variant={variant} disabled={isPending} fullWidth={fullWidth}>
+      <Button type="submit" variant={variant} size={size} disabled={isPending} fullWidth={fullWidth}>
         {label}
       </Button>
       {state.error ? (

@@ -510,7 +510,9 @@
       "awayUntil": "away until {date}",
       "minor": "minor",
       "spin": "Spin the wheel",
-      "spinning": "Spinning…"
+      "spinning": "Spinning…",
+      "titleLabel": "What's it for? (optional)",
+      "titlePlaceholder": "Taking out the trash"
     },
     "minorNote": "Only an adult can spin the wheel. If they include you, you'll see here whether it's you.",
     "history": {
@@ -525,7 +527,8 @@
       "notResident": "Someone on the list no longer lives here. Reload the page",
       "onlyAdults": "Only an adult can spin the wheel",
       "tooManySpins": "Too many spins in a row. Wait a minute",
-      "generic": "Something went wrong. Please try again"
+      "generic": "Something went wrong. Please try again",
+      "titleTooLong": "80 characters max"
     },
     "idle": "The wheel picks at random among those who are in: everyone has the same chance."
   },
@@ -692,10 +695,8 @@
     "back": "Go to my homes"
   },
   "Shopping": {
-    "title": "Shopping list",
-    "householdSubtitle": "Everyone in the home sees it, and it updates instantly.",
+    "title": "Shopping",
     "personalTitle": "My personal list",
-    "personalSubtitle": "Only you can see it. If you need something for home, request it and it'll appear on the shared list.",
     "personalTeaser": "Your things, and what you want to ask home for",
     "home": {
       "title": "Shopping",
@@ -709,15 +710,17 @@
       "namePlaceholder": "Add an item…",
       "quantity": "Quantity",
       "quantityPlaceholder": "1",
-      "submit": "Add to list"
+      "submit": "Add"
     },
     "pending": "To buy",
-    "bought": "{count, plural, one {Bought (#)} other {Bought (#)}}",
+    "bought": "Bought",
+    "pendingCount": "{count} to buy",
+    "onlyYou": "Only you can see it",
     "clearBought": "Clear bought",
     "clearBoughtConfirm": "Remove the bought items from the list?",
-    "empty": "The list is empty. Add whatever is needed.",
+    "empty": "Nothing missing.",
     "requestedBy": "Requested by {name}",
-    "you": "you",
+    "requestedByYou": "You requested it",
     "someone": "someone",
     "markBought": "Mark {name} as bought",
     "markPending": "Put {name} back on the list",
@@ -731,7 +734,7 @@
       "quantityInvalid": "Quantity must be a number from 1 to 99",
       "generic": "Couldn't save. Check your connection and try again"
     },
-    "toExpenses": "Turn into expense"
+    "toExpenses": "Turn what's bought into an expense"
   },
   "Expenses": {
     "title": "Expenses",
@@ -743,10 +746,9 @@
     "someone": "someone",
     "cancel": "Cancel",
     "balance": {
-      "title": "Your balance",
-      "owed": "You are owed",
-      "owe": "You owe",
-      "even": "You're all square"
+      "owedSr": "{name}: is owed {amount}",
+      "oweSr": "{name}: owes {amount}",
+      "evenSr": "{name}: is all square"
     },
     "tile": {
       "owed": "You are owed {amount}",
@@ -755,7 +757,7 @@
       "toConfirm": "{count, plural, one {# to confirm} other {# to confirm}}"
     },
     "pending": {
-      "title": "Waiting for you",
+      "title": "To confirm",
       "expense": "{name} added “{description}”",
       "expenseMeta": "Total {amount} · your share {share}",
       "confirm": "Confirm",
@@ -771,7 +773,6 @@
     },
     "settle": {
       "title": "To settle up",
-      "allEven": "Nobody owes anybody anything.",
       "iPaid": "I paid",
       "theyPaid": "They paid me",
       "howMuchPaid": "How much did you pay {name}?",
@@ -781,7 +782,7 @@
       "waiting": "A payment is waiting to be confirmed."
     },
     "balances": {
-      "title": "Balances",
+      "title": "How the house is doing",
       "left": "No longer lives here"
     },
     "expenses": {
@@ -800,8 +801,7 @@
       "sourceRecurring": "Recurring"
     },
     "payments": {
-      "title": "Payments",
-      "line": "{from} → {to}"
+      "paid": "{from} paid {to}"
     },
     "status": {
       "pending": "Pending · {done}/{total}",
@@ -818,7 +818,6 @@
       "createdBy": "added by {name}",
       "pendingBanner": "Waiting for confirmation from: {names}. It doesn't count in the balances until then.",
       "rejectedBanner": "Rejected by {name}. Whoever added it can fix it or delete it.",
-      "confirmedBanner": "Confirmed by everyone. It counts in the balances.",
       "confirm": "Confirm expense",
       "reject": "Reject",
       "rejectReason": "What's wrong? (optional)",
@@ -853,11 +852,11 @@
       "descriptionPlaceholder": "Groceries",
       "amount": "Amount (€)",
       "date": "Date",
-      "paidBy": "Who paid?",
+      "paidBy": "Who paid",
       "manyPayers": "Several people paid",
       "onePayer": "One person paid",
       "paidAmountOf": "How much {name} paid",
-      "split": "How is it split?",
+      "split": "Split between",
       "partsOf": "Shares for {name}",
       "amountOf": "Amount for {name}",
       "left": "{amount} left to split",
@@ -901,12 +900,13 @@
       "link": "{count, plural, one {Was it the shopping? Turn the bought item into an expense} other {Was it the shopping? Turn the # bought items into an expense}}"
     },
     "recurring": {
+      "sectionTitle": "Recurring",
+      "seeAll": "see all",
+      "seeAllAria": "See all recurring expenses",
       "title": "Recurring expenses",
       "subtitle": "Subscriptions, internet, electricity… Confirmed once, then added automatically whenever they're due.",
       "add": "New recurring expense",
       "empty": "No recurring expenses yet. Add the subscriptions and bills that repeat and they'll be added automatically.",
-      "tileEmpty": "Subscriptions and bills that add themselves",
-      "tileActive": "{count, plural, =0 {None active} one {# active} other {# active}}",
       "schedule": "{frequency, select, weekly {{interval, plural, one {Weekly} other {Every # weeks}}} monthly {{interval, plural, one {Monthly} =3 {Quarterly} =6 {Every 6 months} other {Every # months}}} yearly {{interval, plural, one {Yearly} other {Every # years}}} other {}}",
       "scheduleOption": "{frequency, select, weekly {{interval, plural, one {Every week} other {Every # weeks}}} monthly {{interval, plural, one {Every month} =3 {Every 3 months (quarterly)} =6 {Every 6 months} other {Every # months}}} yearly {{interval, plural, one {Every year} other {Every # years}}} other {}}",
       "everyText": "{frequency, select, weekly {{interval, plural, one {every week} other {every # weeks}}} monthly {{interval, plural, one {every month} other {every # months}}} yearly {{interval, plural, one {every year} other {every # years}}} other {}}",
@@ -917,6 +917,11 @@
       "waitingFor": "Waiting for: {names}",
       "rejectedBy": "Rejected by {name}. Whoever created it can fix it or delete it.",
       "paused": "Paused",
+      "tileState": {
+        "pending": "Waiting for confirmations",
+        "rejected": "Rejected",
+        "payerGone": "Stopped"
+      },
       "payerGone": "Stopped: {name} no longer lives here. An admin has to change who pays it.",
       "next": "Next charge: {date}",
       "firstCharge": "First charge: {date}.",
@@ -944,8 +949,8 @@
         "frequency": "How often?",
         "startsOnHint": "The first charge can be up to 3 months ago: the charges already due will be added.",
         "scheduleLocked": "Charges have already been added, so the schedule can't change. If you need to, delete this recurring expense and create a new one.",
-        "paidBy": "Who pays it?",
-        "split": "Who is it split between?",
+        "paidBy": "Who pays",
+        "split": "Split between",
         "perCharge": "Each person's share of every charge.",
         "willConfirm": "These people will be asked to confirm once: {names}. After that it will be added {every}.",
         "onlyYou": "Only you are involved: it will be confirmed when you save and added {every}.",
@@ -959,6 +964,7 @@
     "leftChat": "Message the household in the chat",
     "home": {
       "youEven": "You're square",
+      "noRecurring": "Add the ones that repeat (internet, power…)",
       "owesYou": "{name} owes you {amount}",
       "youOwe": "You owe {name} {amount}"
     }
@@ -1165,21 +1171,15 @@
       "rotation": "Taking turns: {names}",
       "free": "Up for grabs: whoever takes it"
     },
-    "summary": {
-      "today": "{count, plural, =0 {Nothing for you today} one {# chore for you today} other {# chores for you today}}",
-      "overdue": "{count, plural, one {# overdue} other {# overdue}}",
-      "toApprove": "{count, plural, one {# to approve} other {# to approve}}",
-      "allGood": "Nothing overdue. Nice!"
-    },
     "sections": {
       "overdue": "Overdue",
-      "toApprove": "To approve",
+      "toApprove": "Waiting for your OK",
       "waiting": "Waiting for approval",
-      "today": "Today, {date}",
+      "today": "Today",
       "todayEmpty": "Nothing to do today."
     },
     "upcoming": {
-      "title": "Next few days",
+      "title": "Coming up",
       "all": "All",
       "mine": "Mine",
       "empty": "Nothing in the next few days.",
@@ -1436,7 +1436,8 @@
       "chore_to_approve": "{actor} did “{title}”. Please approve it.",
       "chore_approved": "{actor} approved “{title}”.",
       "message": "{actor}: {body}",
-      "roulette_chosen": "{actor} spun the wheel and it landed on you."
+      "roulette_chosen": "{actor} spun the wheel and it landed on you.",
+      "roulette_chosen_titled": "{actor} spun the wheel for “{title}” and it landed on you."
     },
     "categories": {
       "expenses": "Expenses and payments",

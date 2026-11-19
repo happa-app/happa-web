@@ -30,8 +30,7 @@ export function ExpenseList({ householdId, currentUserId, expenses, names }: Pro
   }
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{t("expenses.title")}</h2>
+    <>
       {expenses.length === 0 ? (
         <p className={styles.empty}>{t("expenses.empty")}</p>
       ) : (
@@ -72,6 +71,6 @@ export function ExpenseList({ householdId, currentUserId, expenses, names }: Pro
           })}
         </ul>
       )}
-    </section>
+    </>
   );
 }

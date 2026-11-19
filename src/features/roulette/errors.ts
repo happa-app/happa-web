@@ -8,6 +8,7 @@ export function toRouletteErrorKey(error: { message?: string }): RouletteErrorKe
   if (message.includes("does not live here")) return "notResident";
   if (message.includes("Only adults")) return "onlyAdults";
   if (message.includes("Too many spins")) return "tooManySpins";
+  if (message.includes("Title is too long")) return "titleTooLong";
   console.error("[ruleta] error sin traducir:", error);
   return "generic";
 }

@@ -8,6 +8,7 @@
 // Los pagos van por la misma acción que en Gastos (paymentAction), que vuelve aquí (campo debtChat).
 import { useLocale, useTranslations } from "next-intl";
 import { type ReactNode, useActionState, useState } from "react";
+import { Button } from "@/components/ui/Button";
 import { paymentAction } from "@/features/expenses/actions";
 import { centsToInput, formatMoney } from "@/features/expenses/money";
 import { initialExpensesActionState } from "@/features/expenses/types";
@@ -103,12 +104,12 @@ function Line({ line, name, showName, conversationId, householdId, today }: Line
   const actions = (p: DebtPayment) =>
     p.canAnswer ? (
       <div className={styles.actionsStack}>
-        <ActionForm className={styles.btnTiny} label={t("received")} hidden={hidden("confirm", { paymentId: p.id })} />
-        <ActionForm className={styles.btnTinySecondary} label={t("notReceived")} hidden={hidden("reject", { paymentId: p.id })} />
+        <ActionForm variant="primary" label={t("received")} hidden={hidden("confirm", { paymentId: p.id })} />
+        <ActionForm variant="secondary" label={t("notReceived")} hidden={hidden("reject", { paymentId: p.id })} />
       </div>
     ) : p.canCancel ? (
       <div className={styles.actions}>
-        <ActionForm className={styles.btnSecondary} label={t("cancelPayment")} hidden={hidden("cancel", { paymentId: p.id })} />
+        <ActionForm variant="secondary" label={t("cancelPayment")} hidden={hidden("cancel", { paymentId: p.id })} />
       </div>
     ) : null;
 
@@ -123,13 +124,14 @@ function Line({ line, name, showName, conversationId, householdId, today }: Line
           actions(first)
         ) : !paying ? (
           <div className={styles.actions}>
-            <button
+            <Button
               type="button"
-              className={line.direction === "iOwe" ? styles.btn : styles.btnSecondary}
+              size="sm"
+              variant={line.direction === "iOwe" ? "primary" : "secondary"}
               onClick={() => setPaying(true)}
             >
               {line.direction === "iOwe" ? t("iPaid") : t("theyPaid")}
-            </button>
+            </Button>
           </div>
         ) : null}
       </div>
@@ -154,15 +156,15 @@ function Line({ line, name, showName, conversationId, householdId, today }: Line
 }
 
 // Un botón que manda una acción de pago (confirmar, rechazar, retirar) y enseña el error si falla
-function ActionForm({ className, label, hidden }: { className: string; label: string; hidden: ReactNode }) {
+function ActionForm({ variant, label, hidden }: { variant: "primary" | "secondary"; label: string; hidden: ReactNode }) {
   const tErrors = useTranslations("Expenses.errors");
   const [state, formAction, isPending] = useActionState(paymentAction, initialExpensesActionState);
   return (
     <form action={formAction}>
       {hidden}
-      <button type="submit" className={className} disabled={isPending}>
+      <Button type="submit" size="sm" variant={variant} disabled={isPending}>
         {label}
-      </button>
+      </Button>
       {state.error ? (
         <p className={styles.error} role="alert">
           {tErrors(state.error)}
@@ -206,12 +208,12 @@ function PayForm({
         </span>
       </label>
       <div className={styles.actions}>
-        <button type="submit" className={styles.btn} disabled={isPending}>
+        <Button type="submit" size="sm" disabled={isPending}>
           {t("save")}
-        </button>
-        <button type="button" className={styles.btnSecondary} onClick={onClose}>
+        </Button>
+        <Button type="button" size="sm" variant="secondary" onClick={onClose}>
           {t("closeForm")}
-        </button>
+        </Button>
       </div>
       {state.error ? (
         <p className={styles.error} role="alert">

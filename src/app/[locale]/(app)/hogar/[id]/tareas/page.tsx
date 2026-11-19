@@ -6,10 +6,10 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import {
   addDays,
   ChoreDaySection,
+  ChorePostit,
   isOverdue,
+  pickNote,
   sortDays,
-  summarize,
-  TodaySummary,
   UpcomingDays,
   uuidSchema,
   WeekShare,
@@ -44,9 +44,18 @@ export default async function ChoresPage({ params }: Props) {
   const names = Object.fromEntries(people.map((p) => [p.userId, p.name]));
   const sorted = sortDays(days, userId, new Map(chores.map((c) => [c.id, c.title])));
   const section = { householdId: id, chores, names, me: userId, isAdult, today };
-  const todayLabel = new Intl.DateTimeFormat(locale, { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(
-    new Date(`${today}T00:00:00Z`),
+  // El post-it: lo tuyo atrasado y lo de hoy; la primera pendiente tuya (la atrasada antes)
+  const mine = sortDays(
+    days.filter((d) => d.assigneeId === userId && (isOverdue(d, today) || d.dueOn === today)),
+    userId,
+    new Map(chores.map((c) => [c.id, c.title])),
   );
+  const { note } = pickNote(mine, userId);
+  const noteChore = note ? (chores.find((c) => c.id === note.choreId) ?? null) : null;
+  // La tarea del post-it no se repite como fila
+  const rest = sorted.filter((d) => d.id !== note?.id);
+  const overdue = rest.filter((d) => isOverdue(d, today));
+  const toApprove = sorted.filter((d) => d.status === "review");
 
   return (
     <>
@@ -69,25 +78,27 @@ export default async function ChoresPage({ params }: Props) {
         </>
       ) : (
         <>
-          <TodaySummary summary={summarize(days, userId, today, isAdult, chores.length)} />
-
-          <ChoreDaySection
-            {...section}
-            title={t("sections.overdue")}
-            days={sorted.filter((d) => isOverdue(d, today))}
-            showDate
+          <ChorePostit
+            householdId={id}
+            note={note}
+            chore={noteChore}
+            isOverdue={note ? isOverdue(note, today) : false}
+            base={`/hogar/${id}/tareas`}
           />
+
+          <ChoreDaySection {...section} title={t("sections.overdue")} days={overdue} showDate showCount />
           <ChoreDaySection
             {...section}
             title={isAdult ? t("sections.toApprove") : t("sections.waiting")}
-            days={sorted.filter((d) => d.status === "review")}
+            days={toApprove}
             showDate
+            showCount
           />
           <ChoreDaySection
             {...section}
-            title={t("sections.today", { date: todayLabel })}
-            days={sorted.filter((d) => d.dueOn === today && d.status !== "review")}
-            emptyText={t("sections.todayEmpty")}
+            title={t("sections.today")}
+            days={rest.filter((d) => d.dueOn === today && d.status !== "review")}
+            emptyText={note?.dueOn === today ? undefined : t("sections.todayEmpty")}
           />
           <UpcomingDays
             {...section}
@@ -95,7 +106,7 @@ export default async function ChoresPage({ params }: Props) {
           />
           <WeekShare rows={weekShare(days, chores, people, today)} me={userId} />
 
-          <div className={styles.actions}>
+          <div className={styles.actionsTwo}>
             {isAdult ? (
               <ButtonLink href={`/hogar/${id}/tareas/nueva`} fullWidth>
                 {t("actions.new")}

@@ -4,6 +4,13 @@
   gap: var(--space-4);
 }
 
+/* Subtítulo de la cabecera ("3 por comprar"): vive aquí porque el número cambia en vivo.
+   Sube para quedar pegado al título de la página. */
+.subtitle {
+  margin-top: calc(-1 * var(--space-3));
+  color: var(--color-text-muted);
+}
+
 /* ───── Añadir ───── */
 .addForm {
   position: sticky;
@@ -17,7 +24,7 @@
 
 .nameInput,
 .quantityInput {
-  min-height: 48px;
+  min-height: 44px;
   min-width: 0;
   padding: 0 var(--space-4);
   border: 1px solid var(--color-border);
@@ -47,13 +54,14 @@
 
 .addButton {
   flex-shrink: 0;
-  width: 48px;
-  min-height: 48px;
+  width: 44px;
+  height: 44px;
   border: 0;
   border-radius: var(--radius-md);
   background: var(--color-fill);
   color: var(--color-on-accent);
   font-size: 1.75rem;
+  font-weight: 700;
   line-height: 1;
   cursor: pointer;
 }
@@ -79,48 +87,26 @@
 }
 
 .empty {
-  padding: var(--space-8) var(--space-4);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  color: var(--color-text-muted);
-  text-align: center;
-}
-
-/* ───── Listas ───── */
-.section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: 0 var(--space-1);
-}
-
-.sectionTitle {
-  font-size: var(--text-sm);
-  font-weight: 600;
+  margin: 0;
+  padding: var(--space-2) 0;
   color: var(--color-text-muted);
 }
 
+/* ───── Listas (filas planas, como en Inicio) ───── */
 .list {
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
   list-style: none;
 }
 
-.item + .item {
-  border-top: 1px solid var(--color-border);
+.item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.item:last-child {
+  border-bottom: 0;
 }
 
 .saving {
@@ -131,16 +117,31 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  min-height: 56px;
-  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  min-height: 44px;
+  padding: var(--space-2) 0;
+}
+
+/* Círculo de marcar: mismo aspecto que el de Tareas. El input real queda encima, invisible,
+   con zona táctil de 44 px. */
+.checkWrap {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
 }
 
 .check {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
   margin: 0;
-  accent-color: var(--color-brand-strong);
+  transform: translate(-50%, -50%);
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -148,8 +149,36 @@
   cursor: default;
 }
 
-.check:focus-visible {
-  outline: none;
+.checkCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--color-brand-strong);
+  border-radius: 50%;
+  color: transparent;
+  pointer-events: none;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.check:hover:not(:disabled):not(:checked) + .checkCircle {
+  background: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+}
+
+.check:checked + .checkCircle {
+  background: var(--color-fill);
+  color: var(--color-on-accent);
+}
+
+.check:disabled + .checkCircle {
+  opacity: 0.6;
+}
+
+.check:focus-visible + .checkCircle {
   box-shadow: var(--focus-ring);
 }
 
@@ -168,30 +197,26 @@
 
 .nameDone {
   color: var(--color-text-muted);
-  font-weight: 400;
   text-decoration: line-through;
 }
 
+.quantity {
+  margin-left: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
 .meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-2);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
 }
 
-.quantity {
-  padding: 0 var(--space-2);
-  border-radius: 999px;
-  background: var(--color-brand-soft);
-  color: var(--color-brand-strong);
-  font-weight: 600;
-}
-
 .remove {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  margin-right: calc(-1 * var(--space-2));
   border: 0;
   border-radius: 50%;
   background: transparent;
@@ -202,7 +227,6 @@
 }
 
 .remove:hover {
-  background: var(--color-bg);
   color: var(--color-error);
 }
 
@@ -233,51 +257,42 @@
   box-shadow: var(--focus-ring);
 }
 
+/* Compartir (lista personal): píldoras con borde; al elegir una se rellena */
 .shareTargets {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  padding: 0 var(--space-4) var(--space-3) calc(var(--space-4) + 24px + var(--space-3));
+  padding: 0 0 var(--space-3) calc(26px + var(--space-3));
 }
 
 .chip {
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-brand-strong);
+  border: 1.5px solid var(--color-brand-strong);
   border-radius: 999px;
-  background: var(--color-surface);
+  background: transparent;
   color: var(--color-brand-strong);
   font: inherit;
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.chip:hover {
-  background: var(--color-brand-soft);
+.chip:hover,
+.chip:active {
+  border-color: var(--color-fill);
+  background: var(--color-fill);
+  color: var(--color-on-accent);
 }
 
-/* Botones junto a "Comprados": pasar a gastos y borrar. Si no caben al lado del título,
-   bajan a la línea siguiente (a la derecha) en vez de aplastarlo. */
-.sectionHeader:has(.headerActions) {
-  flex-wrap: wrap;
+.chip:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
-.sectionHeader:has(.headerActions) .sectionTitle {
-  white-space: nowrap;
-}
-
-.headerActions {
+/* Botones de "Comprado": pasar a gasto y borrar */
+.boughtActions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: var(--space-1);
-  margin-left: auto;
-}
-
-a.textButton {
-  text-decoration: none;
-}
-
-a.textButton:hover {
-  text-decoration: underline;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
 }

@@ -250,7 +250,8 @@ begin
   perform public.spin_roulette(
     hogar,
     array['00000000-0000-4000-8000-00000000000a', '00000000-0000-4000-8000-00000000000b',
-          '00000000-0000-4000-8000-00000000000c']::uuid[]
+          '00000000-0000-4000-8000-00000000000c']::uuid[],
+    'Bajar la basura'
   );
   set constraints all immediate;
   set constraints all deferred;

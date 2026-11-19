@@ -12,10 +12,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-5) var(--space-4);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  padding: var(--space-2) 0;
 }
 
 .wheelBox {
@@ -75,14 +72,19 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  background: var(--color-brand-soft);
+  padding: var(--space-2) 0;
   text-align: center;
 }
 
-.resultMine {
-  background: var(--color-owe-soft);
+/* Qué toca, encima de a quién le ha tocado: etiqueta pequeña, como las de sección */
+.resultFor {
+  margin: var(--space-2) 0 0;
+  color: var(--color-label);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .resultTitle {
@@ -106,17 +108,18 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  gap: var(--space-4);
+  padding-top: var(--space-2);
+  border-top: 2px solid var(--color-rule);
 }
 
 .label {
   padding: 0;
-  font-size: var(--text-sm);
-  font-weight: 600;
+  color: var(--color-label);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
 }
 
 .error {
@@ -146,16 +149,17 @@
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
+  padding: var(--space-1) var(--space-4) var(--space-1) var(--space-1);
+  border: 1.5px solid var(--color-text);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
   cursor: pointer;
 }
 
 .personOn {
-  border-color: var(--color-brand-strong);
-  background: var(--color-brand-soft);
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
 .person:has(input:focus-visible),
@@ -180,7 +184,6 @@
 
 .personOn .personName::before {
   content: "✓ ";
-  color: var(--color-brand-strong);
 }
 
 .personAway {
@@ -188,34 +191,23 @@
   font-size: 0.75rem;
 }
 
+.personOn .personAway {
+  color: inherit;
+  opacity: 0.75;
+}
+
 .minorNote {
   margin: 0;
-  padding: var(--space-4) var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
   color: var(--color-text-muted);
+  font-size: var(--text-sm);
   text-align: center;
 }
 
 /* ───── Historial ───── */
-.history {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.historyTitle {
-  font-size: var(--text-lg);
-  font-weight: 700;
-}
-
 .empty {
   margin: 0;
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
   color: var(--color-text-muted);
-  text-align: center;
+  font-size: var(--text-sm);
 }
 
 .list {
@@ -223,11 +215,7 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-card);
   list-style: none;
-  overflow: hidden;
 }
 
 .list > li + li {
@@ -239,7 +227,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
+  min-height: 44px;
+  padding: var(--space-2) 0;
 }
 
 .rowMain {

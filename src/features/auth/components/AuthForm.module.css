@@ -44,14 +44,15 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-brand-strong);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  background: transparent;
+  color: var(--color-brand-strong);
   font-weight: 600;
   text-decoration: none;
 }
 
-/* "Continuar con Google": botón claro con el logo, como piden las normas de Google */
+/* "Continuar con Google": botón con borde y el logo, como piden las normas de Google */
 .googleButton {
   display: flex;
   align-items: center;
@@ -61,7 +62,7 @@
   min-height: 48px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  background: transparent;
   color: var(--color-text);
   font: inherit;
   font-weight: 600;

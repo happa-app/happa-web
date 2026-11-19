@@ -1,4 +1,5 @@
 // Una parte de la página de tareas (atrasadas, por dar el visto bueno, hoy...): título y sus filas.
+import { Section } from "@/components/ui/Section";
 import type { Chore, ChoreDay } from "../types";
 import { ChoreDayRow } from "./ChoreDayRow";
 import styles from "./Chores.module.css";
@@ -15,9 +16,11 @@ type Props = {
   // Si no hay nada: este texto (o, sin él, no se enseña la parte)
   emptyText?: string;
   showDate?: boolean;
+  // Enseñar cuántas hay detrás del título: "Atrasadas · 2"
+  showCount?: boolean;
 };
 
-export function ChoreDaySection({ title, householdId, days, chores, names, me, isAdult, today, emptyText, showDate }: Props) {
+export function ChoreDaySection({ title, householdId, days, chores, names, me, isAdult, today, emptyText, showDate, showCount = false }: Props) {
   const byId = new Map(chores.map((c) => [c.id, c]));
   const rows = days.flatMap((day) => {
     const chore = byId.get(day.choreId);
@@ -26,12 +29,11 @@ export function ChoreDaySection({ title, householdId, days, chores, names, me, i
   if (rows.length === 0 && !emptyText) return null;
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>{title}</h2>
+    <Section title={title} meta={showCount ? String(rows.length) : undefined}>
       {rows.length === 0 ? (
         <p className={styles.empty}>{emptyText}</p>
       ) : (
-        <ul className={styles.list}>
+        <ul className={styles.dayList}>
           {rows.map(({ day, chore }) => (
             <ChoreDayRow
               key={day.id}
@@ -47,6 +49,6 @@ export function ChoreDaySection({ title, householdId, days, chores, names, me, i
           ))}
         </ul>
       )}
-    </section>
+    </Section>
   );
 }
