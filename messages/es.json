@@ -510,7 +510,9 @@
       "awayUntil": "fuera hasta el {date}",
       "minor": "menor",
       "spin": "Girar la ruleta",
-      "spinning": "Girando…"
+      "spinning": "Girando…",
+      "titleLabel": "¿Qué toca? (opcional)",
+      "titlePlaceholder": "Bajar la basura"
     },
     "minorNote": "Solo un adulto puede girar la ruleta. Si te incluye, aquí verás si te ha tocado.",
     "history": {
@@ -525,7 +527,8 @@
       "notResident": "Alguien de la lista ya no vive aquí. Recarga la página",
       "onlyAdults": "Solo un adulto puede girar la ruleta",
       "tooManySpins": "Demasiados giros seguidos. Espera un minuto",
-      "generic": "Algo ha fallado. Inténtalo de nuevo"
+      "generic": "Algo ha fallado. Inténtalo de nuevo",
+      "titleTooLong": "Como mucho 80 letras"
     },
     "idle": "La ruleta elige al azar entre los que entran: todos tienen las mismas posibilidades."
   },
@@ -1433,7 +1436,8 @@
       "chore_to_approve": "{actor} ha hecho «{title}». Dale el visto bueno.",
       "chore_approved": "{actor} ha dado el visto bueno a «{title}».",
       "message": "{actor}: {body}",
-      "roulette_chosen": "{actor} ha girado la ruleta y te ha tocado a ti."
+      "roulette_chosen": "{actor} ha girado la ruleta y te ha tocado a ti.",
+      "roulette_chosen_titled": "{actor} ha girado la ruleta para «{title}» y te ha tocado a ti."
     },
     "categories": {
       "expenses": "Gastos y pagos",

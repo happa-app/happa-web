@@ -1,9 +1,11 @@
-// Tipos de la ruleta del marrón (migraciones 16 y 17)
+// Tipos de la ruleta del marrón (migraciones 16, 17 y 30)
 
 export const MIN_PEOPLE = 2;
 export const MAX_PEOPLE = 20;
 // Giros que se enseñan en el historial
 export const HISTORY_SIZE = 10;
+// Largo máximo de "qué toca" (migración 30)
+export const TITLE_MAX = 80;
 
 export type RoulettePerson = {
   userId: string;
@@ -19,6 +21,8 @@ export type RouletteSpin = {
   spunBy: string | null;
   chosenId: string | null;
   createdAt: string;
+  // Qué toca ("Bajar la basura"); opcional (migración 30)
+  title: string | null;
   // Quiénes entraban
   participants: string[];
 };
@@ -38,6 +42,7 @@ export const ROULETTE_ERROR_KEYS = [
   "notResident",
   "onlyAdults",
   "tooManySpins",
+  "titleTooLong",
   "generic",
 ] as const;
 export type RouletteErrorKey = (typeof ROULETTE_ERROR_KEYS)[number];

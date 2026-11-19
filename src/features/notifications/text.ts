@@ -55,7 +55,8 @@ export function notificationPhrase(
     case "message":
       return { key, values: { actor, body: d.body ?? "" } };
     case "roulette_chosen":
-      return { key, values: { actor } };
+      // Con "qué toca" (migración 30), el aviso lo dice
+      return d.title ? { key: "types.roulette_chosen_titled", values: { actor, title: d.title } } : { key, values: { actor } };
   }
 }
 

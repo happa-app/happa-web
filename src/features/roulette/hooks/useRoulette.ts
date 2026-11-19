@@ -147,12 +147,12 @@ export function useRoulette({
 
   // Girar. Devuelve false si no se pudo (el error queda en "error").
   const spin = useCallback(
-    async (participants: string[]): Promise<boolean> => {
+    async (participants: string[], title?: string): Promise<boolean> => {
       if (busy.current) return false;
       busy.current = true;
       setError(null);
       setPhase("asking");
-      const result = await spinRoulette(supabase, householdId, participants);
+      const result = await spinRoulette(supabase, householdId, participants, title);
       if (!result.spin) {
         busy.current = false;
         setPhase("idle");

@@ -7,8 +7,9 @@ import { Alert } from "@/components/ui/Alert";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
+import { TextField } from "@/components/ui/TextField";
 import { useRoulette } from "../hooks/useRoulette";
-import { MAX_PEOPLE, MIN_PEOPLE, type RoulettePerson, type RouletteSpin } from "../types";
+import { MAX_PEOPLE, MIN_PEOPLE, TITLE_MAX, type RoulettePerson, type RouletteSpin } from "../types";
 import { orderParticipants } from "../wheel";
 import { RouletteWheel } from "./RouletteWheel";
 import styles from "./Roulette.module.css";
@@ -44,6 +45,8 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
   // De partida entran todos menos quien está de ausencia hoy
   const [selected, setSelected] = useState(() => people.filter((p) => !p.awayUntil).map((p) => p.userId));
   const [formError, setFormError] = useState<"needTwo" | null>(null);
+  // Qué toca (opcional): se manda con el giro y se vacía cuando sale bien
+  const [title, setTitle] = useState("");
   const { spins, shown, rotation, phase, error, spin, showSelection, clearError } = useRoulette({
     householdId,
     initialSpins,
@@ -70,7 +73,7 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
     const smooth = !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     // Después de pintar el botón "Girando…" (si no, el navegador corta el desplazamiento suave)
     setTimeout(() => stageRef.current?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" }), 50);
-    await spin(orderParticipants(selected, order));
+    if (await spin(orderParticipants(selected, order), title)) setTitle("");
   }
 
   // Lo que se dice al acabar (también para lectores de pantalla)
@@ -78,6 +81,7 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
     phase === "done" && shown ? (
       <div className={shown.chosenId === me ? styles.resultMine : styles.result}>
         <Avatar name={nameOf(shown.chosenId)} imageUrl={photoOf(shown.chosenId)} />
+        {shown.title ? <p className={styles.resultFor}>{shown.title}</p> : null}
         <p className={styles.resultTitle}>
           {shown.chosenId === me ? t("result.you") : t("result.other", { name: nameOf(shown.chosenId) })}
         </p>
@@ -144,6 +148,16 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
             ) : null}
           </fieldset>
 
+          <TextField
+            label={t("form.titleLabel")}
+            name="title"
+            value={title}
+            maxLength={TITLE_MAX}
+            placeholder={t("form.titlePlaceholder")}
+            autoComplete="off"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+          />
+
           <Button type="submit" fullWidth disabled={busy}>
             {busy ? t("form.spinning") : t("form.spin")}
           </Button>
@@ -160,10 +174,12 @@ export function Roulette({ householdId, people, me, isAdult, timezone, initialSp
             {spins.map((s) => (
               <li key={s.id} className={styles.row}>
                 <span className={styles.rowMain}>
+                  {/* Con título, el título manda y quién giró pasa a la línea de abajo */}
                   <span className={styles.rowTitle}>
-                    {t("history.who", { mine: s.spunBy === me ? "true" : "false", who: nameOf(s.spunBy) })}
+                    {s.title ?? t("history.who", { mine: s.spunBy === me ? "true" : "false", who: nameOf(s.spunBy) })}
                   </span>
                   <span className={styles.rowMeta}>
+                    {s.title ? `${t("history.who", { mine: s.spunBy === me ? "true" : "false", who: nameOf(s.spunBy) })} · ` : null}
                     {t("history.meta", {
                       when: when(s.createdAt, timezone, locale, t("today")),
                       count: s.participants.length,

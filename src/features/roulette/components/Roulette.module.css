@@ -76,6 +76,17 @@
   text-align: center;
 }
 
+/* Qué toca, encima de a quién le ha tocado: etiqueta pequeña, como las de sección */
+.resultFor {
+  margin: var(--space-2) 0 0;
+  color: var(--color-label);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
 .resultTitle {
   margin: var(--space-2) 0 0;
   font-size: var(--text-xl);
