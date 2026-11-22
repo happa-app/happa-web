@@ -35,8 +35,10 @@ export type Chore = {
   effort: ChoreEffort;
   frequency: ChoreFrequency;
   interval: number;
-  // Solo en semanal (si no, vacío)
+  // Solo en semanal con días concretos (si no, vacío)
   weekdays: Weekday[];
+  // Semanal o mensual que se hace una vez, cualquier día de la semana o del mes (migración 31)
+  anytime: boolean;
   startsOn: string;
   assignment: ChoreAssignment;
   // Solo en "fija"
@@ -46,11 +48,13 @@ export type Chore = {
   requiresApproval: boolean;
 };
 
-// Un día en el que toca hacer una tarea
+// Una vez que toca hacer una tarea: un día (dueOn = dueBy) o un plazo de dueOn a dueBy (migración 31)
 export type ChoreDay = {
   id: string;
   choreId: string;
   dueOn: string;
+  // Fecha límite (en los días sueltos, la misma que dueOn)
+  dueBy: string;
   // null = libre
   assigneeId: string | null;
   status: ChoreStatus;

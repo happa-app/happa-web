@@ -13,9 +13,11 @@ export function schedulePhrase(repeat: ChoreRepeat, locale: string): Phrase {
     case "daily":
       return { key: "schedule.daily", values: { interval } };
     case "weekly":
+      if (repeat.anytime) return { key: "schedule.weeklyAnytime", values: { interval } };
       if (repeat.weekdays.length === 7 && interval === 1) return { key: "schedule.everyDay", values: {} };
       return { key: "schedule.weekly", values: { interval, days: weekdayList(repeat.weekdays, locale) } };
     case "monthly": {
+      if (repeat.anytime) return { key: "schedule.monthlyAnytime", values: { interval } };
       const day = Number(repeat.startsOn.slice(8, 10));
       return { key: day > 28 ? "schedule.monthlyLate" : "schedule.monthly", values: { interval, day } };
     }

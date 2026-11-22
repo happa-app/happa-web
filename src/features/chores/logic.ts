@@ -4,10 +4,7 @@
 import { addDays, mondayOf } from "./dates";
 import type { Chore, ChoreDay, ChorePerson } from "./types";
 
-// Atrasada: pendiente y su día ya pasó (sigue siendo de quien le tocaba)
-export function isOverdue(day: ChoreDay, today: string): boolean {
-  return day.status === "pending" && day.dueOn < today;
-}
+export { isOpenPeriod, isOverdue, isPeriod } from "./period";
 
 // "Hecha": un adulto puede marcar cualquiera (la hizo él); un menor, solo las suyas
 export function canComplete(day: ChoreDay, me: string, isAdult: boolean): boolean {

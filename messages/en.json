@@ -1164,7 +1164,9 @@
       "everyDay": "Every day",
       "weekly": "{interval, plural, one {Every week} other {Every # weeks}}: {days}",
       "monthly": "{interval, plural, one {Every month} other {Every # months}}, on day {day}",
-      "monthlyLate": "{interval, plural, one {Every month} other {Every # months}}, on day {day} (or the last day in shorter months)"
+      "monthlyLate": "{interval, plural, one {Every month} other {Every # months}}, on day {day} (or the last day in shorter months)",
+      "weeklyAnytime": "{interval, plural, one {Every week} other {Every # weeks}}, any day",
+      "monthlyAnytime": "{interval, plural, one {Every month} other {Every # months}}, any day"
     },
     "who": {
       "fixed": "Always: {name}",
@@ -1176,7 +1178,9 @@
       "toApprove": "Waiting for your OK",
       "waiting": "Waiting for approval",
       "today": "Today",
-      "todayEmpty": "Nothing to do today."
+      "todayEmpty": "Nothing to do today.",
+      "thisWeek": "This week",
+      "thisMonth": "This month"
     },
     "upcoming": {
       "title": "Coming up",
@@ -1200,7 +1204,8 @@
       "take": "I'll take it",
       "approve": "Approve",
       "reopen": "Not done",
-      "reopenConfirm": "Are you sure “{title}” isn't done? It will go back to to-do."
+      "reopenConfirm": "Are you sure “{title}” isn't done? It will go back to to-do.",
+      "until": "by {date}"
     },
     "actions": {
       "new": "New chore",
@@ -1251,7 +1256,11 @@
       "save": "Save changes",
       "create": "Add chore",
       "delete": "Delete chore",
-      "deleteConfirm": "Delete “{title}”? Days still to do are removed; anything already done stays in the history."
+      "deleteConfirm": "Delete “{title}”? Days still to do are removed; anything already done stays in the history.",
+      "whichDay": "Which day",
+      "daysFixed": "Set days",
+      "dayFixed": "A set day",
+      "anyDay": "Any day"
     },
     "day": {
       "who": "Whose turn",

@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/Button";
 import { TextField } from "@/components/ui/TextField";
 import { submitWithoutReset } from "@/utils/forms";
 import { saveChore } from "../actions";
-import { addDays, isoWeekday, isValidDate, nextDates } from "../dates";
+import { addDays, isoWeekday, isValidDate, nextDates, periodEnd } from "../dates";
+import { allowsAnytime } from "../period";
 import { schedulePhrase } from "../describe";
-import { formatDay } from "../format";
+import { formatDay, formatSpan } from "../format";
 import { MAX_NOTES, MAX_TITLE, START_MAX_AHEAD } from "../schemas";
 import {
   CHORE_ASSIGNMENTS,
@@ -74,6 +75,8 @@ export function ChoreForm({ householdId, timezone, today, people, me, chore }: P
   const [frequency, setFrequency] = useState<ChoreFrequency>(chore?.frequency ?? "weekly");
   const [interval, setIntervalCount] = useState(chore?.interval ?? 1);
   const [days, setDays] = useState<Weekday[]>(chore?.weekdays.length ? chore.weekdays : [isoWeekday(today)]);
+  // Semanal o mensual: días concretos (false) o una vez, cualquier día del periodo (true)
+  const [anytimeChoice, setAnytime] = useState(chore?.anytime ?? false);
   const [startsOn, setStartsOn] = useState(chore?.startsOn ?? today);
   const [assignment, setAssignment] = useState<ChoreAssignment>(chore?.assignment ?? "rotation");
   const [fixedPerson, setFixedPerson] = useState(
@@ -109,11 +112,19 @@ export function ChoreForm({ householdId, timezone, today, people, me, chore }: P
   }
 
   const peopleSent = assignment === "fixed" ? [fixedPerson] : assignment === "rotation" ? order : [];
-  const repeat = { frequency, interval: frequency === "once" ? 1 : interval, weekdays: days, startsOn };
-  const canPreview = isValidDate(startsOn) && (frequency !== "weekly" || days.length > 0);
+  // Lo elegido solo cuenta en semanal y mensual (si se cambia a diario, se olvida sin borrar la elección)
+  const anytime = anytimeChoice && allowsAnytime(frequency);
+  const repeat = { frequency, interval: frequency === "once" ? 1 : interval, weekdays: days, startsOn, anytime };
+  const canPreview = isValidDate(startsOn) && (frequency !== "weekly" || anytime || days.length > 0);
   const upcoming = canPreview ? nextDates(repeat, today, PREVIEW_COUNT) : [];
   const dayLabel = (date: string) =>
-    date === today ? t("today") : date === addDays(today, 1) ? t("tomorrow") : formatDay(date, locale);
+    anytime
+      ? formatSpan(date, periodEnd(repeat, date), locale)
+      : date === today
+        ? t("today")
+        : date === addDays(today, 1)
+          ? t("tomorrow")
+          : formatDay(date, locale);
   // Quién le tocaría cada vez (solo al crear: al editar, los turnos siguen por donde iban)
   const whoAt = (i: number) => {
     if (assignment === "fixed") return nameOf(fixedPerson);
@@ -134,7 +145,8 @@ export function ChoreForm({ householdId, timezone, today, people, me, chore }: P
       <input type="hidden" name="interval" value={frequency === "once" ? 1 : interval} />
       <input type="hidden" name="effort" value={effort} />
       <input type="hidden" name="assignment" value={assignment} />
-      {frequency === "weekly" ? days.map((d) => <input key={d} type="hidden" name="days" value={d} />) : null}
+      {frequency === "weekly" && !anytime ? days.map((d) => <input key={d} type="hidden" name="days" value={d} />) : null}
+      {anytime ? <input type="hidden" name="anytime" value="on" /> : null}
       {peopleSent.map((id) => (
         <input key={id} type="hidden" name="people" value={id} />
       ))}
@@ -193,7 +205,30 @@ export function ChoreForm({ householdId, timezone, today, people, me, chore }: P
           </div>
         )}
 
-        {frequency === "weekly" ? (
+        {allowsAnytime(frequency) ? (
+          <div className={styles.segmented} role="radiogroup" aria-label={t("form.whichDay")}>
+            {[false, true].map((value) => (
+              <label
+                key={String(value)}
+                className={anytime === value ? styles.segmentOptionActive : styles.segmentOption}
+              >
+                <input
+                  type="radio"
+                  name="anytimeChoice"
+                  checked={anytime === value}
+                  onChange={() => {
+                    touch("days");
+                    setAnytime(value);
+                  }}
+                  className="visually-hidden"
+                />
+                {value ? t("form.anyDay") : frequency === "weekly" ? t("form.daysFixed") : t("form.dayFixed")}
+              </label>
+            ))}
+          </div>
+        ) : null}
+
+        {frequency === "weekly" && !anytime ? (
           <div className={styles.section}>
             <p className={styles.selectLabel}>{t("form.days")}</p>
             <div className={styles.dayPicker}>

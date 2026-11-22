@@ -1,7 +1,7 @@
 // Detalle de un día de una tarea: a quién le toca, cómo va, qué ha pasado y lo que puedes hacer.
 import { useLocale, useTranslations } from "next-intl";
 import { schedulePhrase } from "../describe";
-import { formatDay, formatMoment } from "../format";
+import { formatDay, formatMoment, formatSpan } from "../format";
 import { canApprove, canComplete, canReassign, canReopen, canTake, isOverdue } from "../logic";
 import type { Chore, ChoreDay, ChorePerson } from "../types";
 import { ChoreActionButton } from "./ChoreActionButton";
@@ -56,7 +56,13 @@ export function ChoreDayDetail({ householdId, day, chore, people, me, isAdult, t
         </div>
         <div className={styles.fact}>
           <dt>{t("day.when")}</dt>
-          <dd>{day.dueOn === today ? `${t("todayCap")} (${formatDay(day.dueOn, locale)})` : formatDay(day.dueOn, locale)}</dd>
+          <dd>
+            {day.dueBy > day.dueOn
+              ? formatSpan(day.dueOn, day.dueBy, locale)
+              : day.dueOn === today
+                ? `${t("todayCap")} (${formatDay(day.dueOn, locale)})`
+                : formatDay(day.dueOn, locale)}
+          </dd>
         </div>
         <div className={styles.fact}>
           <dt>{t("day.status")}</dt>

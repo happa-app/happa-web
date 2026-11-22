@@ -122,6 +122,7 @@ export type Database = {
           created_at: string
           done_at: string | null
           done_by: string | null
+          due_by: string
           due_on: string
           household_id: string
           id: string
@@ -142,6 +143,7 @@ export type Database = {
           created_at?: string
           done_at?: string | null
           done_by?: string | null
+          due_by: string
           due_on: string
           household_id: string
           id?: string
@@ -162,6 +164,7 @@ export type Database = {
           created_at?: string
           done_at?: string | null
           done_by?: string | null
+          due_by?: string
           due_on?: string
           household_id?: string
           id?: string
@@ -258,6 +261,7 @@ export type Database = {
       chores: {
         Row: {
           active: boolean
+          anytime: boolean
           assignee_id: string | null
           assignment: Database["public"]["Enums"]["chore_assignment"]
           created_at: string
@@ -278,6 +282,7 @@ export type Database = {
         }
         Insert: {
           active?: boolean
+          anytime?: boolean
           assignee_id?: string | null
           assignment: Database["public"]["Enums"]["chore_assignment"]
           created_at?: string
@@ -298,6 +303,7 @@ export type Database = {
         }
         Update: {
           active?: boolean
+          anytime?: boolean
           assignee_id?: string | null
           assignment?: Database["public"]["Enums"]["chore_assignment"]
           created_at?: string
@@ -1819,6 +1825,7 @@ export type Database = {
       }
       chore_check: {
         Args: {
+          p_anytime: boolean
           p_assignment: Database["public"]["Enums"]["chore_assignment"]
           p_check_start: boolean
           p_frequency: Database["public"]["Enums"]["chore_frequency"]
@@ -1833,6 +1840,15 @@ export type Database = {
         Args: { p_day: string; p_household: string; p_user: string }
         Returns: boolean
       }
+      chore_is_absent_during: {
+        Args: {
+          p_from: string
+          p_household: string
+          p_until: string
+          p_user: string
+        }
+        Returns: boolean
+      }
       chore_occurrence_for_update: {
         Args: { p_occurrence: string }
         Returns: {
@@ -1843,6 +1859,7 @@ export type Database = {
           created_at: string
           done_at: string | null
           done_by: string | null
+          due_by: string
           due_on: string
           household_id: string
           id: string
@@ -1864,6 +1881,7 @@ export type Database = {
       }
       chore_occurs_on: {
         Args: {
+          p_anytime: boolean
           p_day: string
           p_frequency: Database["public"]["Enums"]["chore_frequency"]
           p_interval: number
@@ -1872,8 +1890,29 @@ export type Database = {
         }
         Returns: boolean
       }
+      chore_period_end: {
+        Args: {
+          p_anytime: boolean
+          p_day: string
+          p_frequency: Database["public"]["Enums"]["chore_frequency"]
+        }
+        Returns: string
+      }
+      chore_period_start: {
+        Args: {
+          p_anytime: boolean
+          p_day: string
+          p_frequency: Database["public"]["Enums"]["chore_frequency"]
+        }
+        Returns: string
+      }
       chore_pick_rotation: {
-        Args: { p_chore: string; p_day: string; p_household: string }
+        Args: {
+          p_chore: string
+          p_day: string
+          p_household: string
+          p_until: string
+        }
         Returns: Record<string, unknown>
       }
       chore_reset_from: {
@@ -1910,6 +1949,7 @@ export type Database = {
       copy_schedule: { Args: { p_from: string; p_to: string }; Returns: number }
       create_chore: {
         Args: {
+          p_anytime?: boolean
           p_assignment: Database["public"]["Enums"]["chore_assignment"]
           p_effort: number
           p_frequency: Database["public"]["Enums"]["chore_frequency"]
@@ -2498,6 +2538,7 @@ export type Database = {
       unhide_message: { Args: { p_message: string }; Returns: undefined }
       update_chore: {
         Args: {
+          p_anytime?: boolean
           p_assignment: Database["public"]["Enums"]["chore_assignment"]
           p_chore: string
           p_effort: number

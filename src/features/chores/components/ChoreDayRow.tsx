@@ -3,7 +3,7 @@ import { useLocale, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { formatDay } from "../format";
-import { canApprove, canComplete, canReopen, canTake, isOverdue } from "../logic";
+import { canApprove, canComplete, canReopen, canTake, isOverdue, isPeriod } from "../logic";
 import type { Chore, ChoreDay } from "../types";
 import { ChoreActionButton, CheckMark } from "./ChoreActionButton";
 import { EffortDots } from "./EffortDots";
@@ -99,7 +99,12 @@ export function ChoreDayRow({ householdId, day, chore, names, me, isAdult, today
         </div>
         <p className={styles.rowMeta}>
           {who}
-          {showDate ? <span>· {formatDay(day.dueOn, locale)}</span> : null}
+          {/* Un plazo enseña siempre hasta cuándo; un día suelto, su día si se pide */}
+          {isPeriod(day) ? (
+            <span>· {t("row.until", { date: formatDay(day.dueBy, locale) })}</span>
+          ) : showDate ? (
+            <span>· {formatDay(day.dueOn, locale)}</span>
+          ) : null}
           {status}
           {reopened}
         </p>

@@ -57,14 +57,32 @@ function monthsBetween(from: string, to: string): number {
   return (y2 - y1) * 12 + (m2 - m1);
 }
 
+// Último día del mes de esa fecha
+export function endOfMonth(isoDate: string): string {
+  const [y, m] = isoDate.split("-").map(Number);
+  return new Date(Date.UTC(y, m, 0)).toISOString().slice(0, 10);
+}
+
 export type ChoreRepeat = {
   frequency: ChoreFrequency;
   interval: number;
   weekdays: readonly Weekday[];
   startsOn: string;
+  // Una vez, cualquier día de la semana o del mes
+  anytime: boolean;
 };
 
-// ¿Toca ese día? Lo mismo que chore_occurs_on en la base de datos (migración 12).
+// Fecha límite de lo que toca ese día: el domingo o el último del mes si es "cualquier día"; si no, el mismo
+// día. Lo mismo que chore_period_end en la base de datos (migración 31).
+export function periodEnd(repeat: ChoreRepeat, day: string): string {
+  if (!repeat.anytime) return day;
+  if (repeat.frequency === "weekly") return addDays(mondayOf(day), 6);
+  if (repeat.frequency === "monthly") return endOfMonth(day);
+  return day;
+}
+
+// ¿Toca ese día? Lo mismo que chore_occurs_on en la base de datos (migraciones 12 y 31). Si es "cualquier
+// día", toca el primer día de cada plazo (el lunes o el día 1) o el primer día de la tarea.
 export function occursOn(repeat: ChoreRepeat, day: string): boolean {
   const { frequency, startsOn } = repeat;
   const interval = Math.max(1, repeat.interval);
@@ -74,13 +92,14 @@ export function occursOn(repeat: ChoreRepeat, day: string): boolean {
       return day === startsOn;
     case "daily":
       return daysBetween(startsOn, day) % interval === 0;
-    case "weekly":
-      return (
-        repeat.weekdays.includes(isoWeekday(day)) && (daysBetween(mondayOf(startsOn), mondayOf(day)) / 7) % interval === 0
-      );
+    case "weekly": {
+      const starts = repeat.anytime ? isoWeekday(day) === 1 || day === startsOn : repeat.weekdays.includes(isoWeekday(day));
+      return starts && (daysBetween(mondayOf(startsOn), mondayOf(day)) / 7) % interval === 0;
+    }
     case "monthly": {
       const months = monthsBetween(startsOn, day);
-      return months % interval === 0 && addMonths(startsOn, months) === day;
+      const starts = repeat.anytime ? day.endsWith("-01") || day === startsOn : addMonths(startsOn, months) === day;
+      return months % interval === 0 && starts;
     }
   }
 }

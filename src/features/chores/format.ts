@@ -14,6 +14,11 @@ export function formatDay(isoDate: string, locale: string): string {
   );
 }
 
+// Un día ("lun 30 nov") o un plazo ("lun 30 nov – dom 6 dic")
+export function formatSpan(dueOn: string, dueBy: string, locale: string): string {
+  return dueBy === dueOn ? formatDay(dueOn, locale) : `${formatDay(dueOn, locale)} – ${formatDay(dueBy, locale)}`;
+}
+
 // "2026-10-05" → "5 oct" (es) / "Oct 5" (en)
 export function formatShortDate(isoDate: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", timeZone: "UTC" }).format(utc(isoDate));

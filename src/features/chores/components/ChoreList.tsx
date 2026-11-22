@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { schedulePhrase } from "../describe";
-import { formatDay } from "../format";
+import { formatDay, formatSpan } from "../format";
 import type { Chore, ChoreDay } from "../types";
 import { EffortDots } from "./EffortDots";
 import styles from "./Chores.module.css";
@@ -39,11 +39,16 @@ export function ChoreList({ householdId, chores, days, names, me, isAdult, today
               ? t("who.rotation", { names: chore.rotation.map((r) => nameOf(r.userId)).join(" → ") })
               : t("who.free");
         const next = days
-          .filter((d) => d.choreId === chore.id && d.dueOn >= today && d.status === "pending")
+          .filter((d) => d.choreId === chore.id && d.dueBy >= today && d.status === "pending")
           .sort((a, b) => a.dueOn.localeCompare(b.dueOn))[0];
         const when = next
           ? t("manage.next", {
-              date: next.dueOn === today ? t("today") : formatDay(next.dueOn, locale),
+              date:
+                next.dueBy > next.dueOn
+                  ? formatSpan(next.dueOn, next.dueBy, locale)
+                  : next.dueOn === today
+                    ? t("today")
+                    : formatDay(next.dueOn, locale),
               name: nameOf(next.assigneeId),
             })
           : t("manage.noNext");
