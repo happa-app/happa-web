@@ -34,7 +34,7 @@ select
   '{"provider": "email", "providers": ["email"]}',
   jsonb_build_object(
     'display_name', u.name, 'locale', 'es', 'timezone', 'Europe/Madrid',
-    'legal', jsonb_build_object('terms', 'v3-2026-11-17', 'privacy', 'v3-2026-11-17')
+    'legal', jsonb_build_object('terms', 'v3-2026-11-17', 'privacy', 'v4-2026-11-22')
   ) || u.choices,
   now(), now(), '', '', '', ''
 from (values
@@ -325,5 +325,25 @@ begin
   perform public.send_message(cuentas, 'Vale, sin prisa');
   set constraints all immediate;
   set constraints all deferred;
+  reset role;
+end $$;
+
+-- ───────────── Corcho (migración 32): WiFi, un Bizum, una norma (Ana) y una nota (Bruno) ─────────────
+do $$
+declare
+  ana   constant uuid := '00000000-0000-4000-8000-00000000000a';
+  bruno constant uuid := '00000000-0000-4000-8000-00000000000b';
+  hogar uuid := (select id from public.households where name = 'Piso de prueba');
+begin
+  perform set_config('request.jwt.claims', json_build_object('sub', ana, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  perform public.set_household_wifi(hogar, 'Piso_Prueba', 'happa-wifi-2026', 'wpa');
+  perform public.add_household_payment(hogar, 'Casero', 'bizum', '600123456');
+  perform public.add_board_note(hogar, 'Nada de ruido después de las 00:00', true);
+  reset role;
+
+  perform set_config('request.jwt.claims', json_build_object('sub', bruno, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  perform public.add_board_note(hogar, 'El viernes viene el técnico de la caldera, entre 9 y 11');
   reset role;
 end $$;

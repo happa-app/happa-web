@@ -2,7 +2,7 @@
 // horarios, tareas) no se repite aquí, y los avisos están en la campana de arriba.
 // Aquí irá lo que no tiene sitio en la barra (eventos, votaciones, la caja de herramientas...).
 import { useTranslations } from "next-intl";
-import { GearIcon, HelpIcon, ListIcon, UserIcon } from "@/components/brand/Icons";
+import { GearIcon, HelpIcon, ListIcon, PinIcon, UserIcon } from "@/components/brand/Icons";
 import { MenuList, type MenuItem } from "./MenuList";
 
 type Props = {
@@ -14,7 +14,11 @@ export function MoreMenu({ household }: Props) {
   const t = useTranslations("More");
 
   const householdItems: MenuItem[] = household
-    ? [{ href: `/hogar/${household.id}/configuracion`, icon: <GearIcon />, title: t("settings"), description: t("settingsHint") }]
+    ? [
+        // Corcho (migración 32): WiFi, pagos y notas de la casa
+        { href: `/hogar/${household.id}/corcho`, icon: <PinIcon />, title: t("board"), description: t("boardHint") },
+        { href: `/hogar/${household.id}/configuracion`, icon: <GearIcon />, title: t("settings"), description: t("settingsHint") },
+      ]
     : [];
   const yourItems: MenuItem[] = [
     { href: "/perfil", icon: <UserIcon />, title: t("profile"), description: t("profileHint") },

@@ -12,8 +12,8 @@ import type { LegalDocument } from "./types";
 const AEPD = "https://www.aepd.es";
 
 const privacyEs: LegalDocument = {
-  version: "3",
-  updated: "18 de noviembre de 2026",
+  version: "4",
+  updated: "22 de noviembre de 2026",
   summaryTitle: "Información básica sobre protección de datos",
   summary: [
     <>
@@ -77,8 +77,9 @@ const privacyEs: LegalDocument = {
             </li>
             <li>
               <strong>Lo que se apunta en cada hogar:</strong> lista de la compra, gastos, gastos fijos y pagos, tareas,
-              horarios y ausencias, mensajes del chat, votaciones y votos, y tiradas de la ruleta. También su lista de
-              la compra personal.
+              horarios y ausencias, mensajes del chat, votaciones y votos, tiradas de la ruleta, y el corcho del hogar:
+              nombre y contraseña del WiFi, datos de pago (como un Bizum o un IBAN), que solo ven los adultos del
+              hogar, y notas. También su lista de la compra personal.
             </li>
             <li>
               <strong>Consultas:</strong> los mensajes que nos envía desde Ayuda y contacto o por correo, con el tipo de
@@ -420,8 +421,8 @@ const privacyEs: LegalDocument = {
 };
 
 const privacyEn: LegalDocument = {
-  version: "3",
-  updated: "18 November 2026",
+  version: "4",
+  updated: "22 November 2026",
   summaryTitle: "Basic information on data protection",
   summary: [
     <>
@@ -485,8 +486,9 @@ const privacyEn: LegalDocument = {
             </li>
             <li>
               <strong>What is recorded in each home:</strong> shopping list, expenses, fixed expenses and payments,
-              chores, schedules and absences, chat messages, polls and votes, and spins of the wheel. Also your personal
-              shopping list.
+              chores, schedules and absences, chat messages, polls and votes, spins of the wheel, and the home’s board:
+              Wi-Fi name and password, payment details (such as a Bizum number or an IBAN), which only the adults in the
+              home can see, and notes. Also your personal shopping list.
             </li>
             <li>
               <strong>Enquiries:</strong> the messages you send us from Help and contact or by email, with the type of

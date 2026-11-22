@@ -455,7 +455,9 @@
     "noHousehold": "Once you're in a home, its settings and the rest of its sections will be here.",
     "help": "HAPPA",
     "contact": "Help and contact",
-    "contactHint": "Bugs, questions or ideas"
+    "contactHint": "Bugs, questions or ideas",
+    "board": "Board",
+    "boardHint": "Wi-Fi, payments and house notes"
   },
   "Contact": {
     "title": "Help and contact",
@@ -1483,5 +1485,104 @@
   },
   "Captcha": {
     "checking": "Checking you're not a robot…"
+  },
+  "Board": {
+    "title": "Board",
+    "subtitle": "What you need to have at hand at home.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "wifi": {
+      "title": "Wi-Fi",
+      "edit": "Edit",
+      "add": "Add",
+      "editAria": "Edit the Wi-Fi",
+      "addAria": "Add the Wi-Fi",
+      "empty": "No Wi-Fi yet.",
+      "noPassword": "No password",
+      "showPassword": "Show the password",
+      "hidePassword": "Hide the password",
+      "copyAria": "Copy the Wi-Fi password",
+      "qr": "QR",
+      "qrAlt": "QR code to join {ssid}",
+      "qrHint": "Point your phone's camera at it to join {ssid}.",
+      "close": "Close"
+    },
+    "payments": {
+      "title": "Payments",
+      "add": "Add",
+      "addAria": "Add payment details",
+      "empty": "No payment details yet.",
+      "bizum": "Bizum",
+      "iban": "IBAN",
+      "copyAria": "Copy the {kind} for {label}",
+      "remove": "Remove",
+      "removeAria": "Remove {label}",
+      "removeConfirm": "Remove “{label}” from the board?"
+    },
+    "rules": {
+      "title": "House rules"
+    },
+    "notes": {
+      "title": "Notes",
+      "empty": "No notes.",
+      "add": "Pin a note",
+      "label": "Note",
+      "placeholder": "Write your note…",
+      "isRule": "It's a house rule (stays at the top)",
+      "save": "Pin it",
+      "saving": "Pinning…",
+      "cancel": "Cancel",
+      "pin": "Make it a rule",
+      "unpin": "Remove from rules",
+      "remove": "Remove",
+      "removeConfirm": "Remove this note?",
+      "you": "You",
+      "someone": "Someone"
+    },
+    "wifiForm": {
+      "title": "Home Wi-Fi",
+      "subtitle": "So people can join from the board: with the QR code or by copying the password.",
+      "ssid": "Network name",
+      "security": "Security",
+      "password": "Password",
+      "passwordHint": "If you haven't changed it, it's on the router's sticker.",
+      "securities": {
+        "wpa": "WPA/WPA2",
+        "wep": "WEP",
+        "nopass": "No password"
+      },
+      "save": "Save",
+      "saving": "Saving…",
+      "remove": "Remove the Wi-Fi",
+      "removeConfirm": "Remove the Wi-Fi from the board?"
+    },
+    "paymentForm": {
+      "title": "Add a payment",
+      "subtitle": "To copy it in one tap when it's time to pay.",
+      "label": "What it's for",
+      "labelPlaceholder": "Landlord, utilities…",
+      "kind": "How to pay",
+      "bizum": "Bizum number",
+      "iban": "IBAN",
+      "save": "Add",
+      "saving": "Adding…"
+    },
+    "errors": {
+      "ssidRequired": "Enter the network name.",
+      "ssidTooLong": "The network name can be up to 32 characters.",
+      "passwordInvalid": "That password doesn't work for this kind of network (WPA: 8 to 63 characters).",
+      "labelRequired": "Say what it's for.",
+      "labelTooLong": "Up to 40 characters.",
+      "ibanInvalid": "That IBAN isn't valid. Check it's complete and has no typos.",
+      "bizumInvalid": "Bizum needs a 9-digit Spanish mobile number (starting with 6 or 7).",
+      "tooManyPayments": "There are already 10 payment details. Remove one to add another.",
+      "bodyRequired": "Write something in the note.",
+      "bodyTooLong": "Notes can be up to 200 characters.",
+      "tooManyNotes": "The board is full (50 notes). Remove one to pin another.",
+      "onlyAdults": "Only the adults in the household can do this.",
+      "onlyOwn": "You can only remove your own notes.",
+      "notFound": "It's no longer on the board.",
+      "generic": "Couldn't save it. Please try again."
+    }
   }
 }

@@ -46,6 +46,7 @@
   --color-review-border: #5d9f9a;
   /* Compra: producto al pasar el ratón */
   --color-chip-hover: #ebe9e1;
+  --color-qr-bg: #ffffff;           /* fondo del QR del WiFi: blanco también en oscuro, para que lo lean las cámaras */
 
   /* Tipografía */
   /* Geist la carga el layout; si fallara, se usa la fuente del sistema */

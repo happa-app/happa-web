@@ -107,6 +107,21 @@ export function WheelIcon({ size = 22 }: Props) {
 }
 
 // Configuración: un engranaje
+// Chincheta (corcho del hogar)
+export function PinIcon({ size = 22 }: Props) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M9 3.5h6l-1 5 3 3.5H7l3-3.5-1-5Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M12 12v8.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function GearIcon({ size = 22 }: Props) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">

@@ -1,0 +1,388 @@
+/* Corcho del hogar (maqueta aprobada: secciones con raya; WiFi y Pagos lado a lado; notas como post-its) */
+
+/* ───── Arriba: WiFi | Pagos ───── */
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.single {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.wifi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.ssid {
+  margin: 0;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.password {
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill,
+.pillOn {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pillOn {
+  border-color: var(--color-fill);
+  background: var(--color-fill);
+  color: var(--color-on-accent);
+}
+
+.pill:focus-visible,
+.pillOn:focus-visible,
+.password:focus-visible,
+.copyLink:focus-visible,
+.linkButton:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--focus-ring);
+}
+
+.qrPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+/* El QR siempre en negro sobre blanco (también en oscuro): así lo leen todas las cámaras */
+.qr {
+  width: 180px;
+  height: 180px;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--color-qr-bg);
+}
+
+.qr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ───── Pagos ───── */
+.payments {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.payment {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.payment:last-child {
+  border-bottom: 0;
+}
+
+.paymentLabel {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.kind {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.paymentLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.number {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.copyLink,
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-brand-strong);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.linkButton {
+  text-decoration: underline;
+}
+
+.linkButton:disabled {
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+/* ───── Normas ───── */
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rule {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.ruleBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.ruleText {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.by {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* ───── Notas: post-its como el de Tareas ───── */
+.notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-3);
+  margin: 0;
+  padding: var(--space-1) 2px;
+  list-style: none;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 110px;
+  padding: var(--space-3);
+  border-radius: 3px;
+  background: var(--color-note);
+  color: var(--color-note-ink);
+  transform: rotate(-1deg);
+}
+
+.note:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.noteText {
+  flex: 1;
+  margin: 0;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.noteBy {
+  margin: 0;
+  font-size: var(--text-sm);
+  opacity: 0.8;
+}
+
+.noteActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Dentro del post-it, los enlaces en la tinta del post-it (el verde se perdería sobre el verde) */
+.note .linkButton {
+  color: var(--color-note-ink);
+}
+
+.actionForm {
+  display: inline-flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: var(--space-1);
+}
+
+.noteForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 96px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  resize: vertical;
+}
+
+.textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.formButtons {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* ───── Comunes ───── */
+.empty,
+.muted {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
+/* ───── Formularios de WiFi y pago ───── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.removeForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-5);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.fieldLabel {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.segmented {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  overflow: hidden;
+  border: 1.5px solid var(--color-text);
+  border-radius: 999px;
+}
+
+.segmentOption,
+.segmentOptionActive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+
+.segmentOption {
+  background: transparent;
+  color: var(--color-text);
+}
+
+.segmentOptionActive {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.segmentOption:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: -4px;
+}
+
+.segmentOptionActive:focus-within {
+  outline: 2px solid var(--color-bg);
+  outline-offset: -4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note,
+  .note:nth-child(even) {
+    transform: none;
+  }
+}

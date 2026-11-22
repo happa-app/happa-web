@@ -455,7 +455,9 @@
     "noHousehold": "Cuando estés en un hogar, aquí tendrás su configuración y el resto de sus secciones.",
     "help": "HAPPA",
     "contact": "Ayuda y contacto",
-    "contactHint": "Errores, dudas o ideas"
+    "contactHint": "Errores, dudas o ideas",
+    "board": "Corcho",
+    "boardHint": "WiFi, pagos y notas de la casa"
   },
   "Contact": {
     "title": "Ayuda y contacto",
@@ -1483,5 +1485,104 @@
   },
   "Captcha": {
     "checking": "Comprobando que no eres un robot…"
+  },
+  "Board": {
+    "title": "Corcho",
+    "subtitle": "Lo que hay que tener a mano en casa.",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "wifi": {
+      "title": "WiFi",
+      "edit": "Editar",
+      "add": "Añadir",
+      "editAria": "Editar el WiFi",
+      "addAria": "Añadir el WiFi",
+      "empty": "Aún no está el WiFi.",
+      "noPassword": "Sin contraseña",
+      "showPassword": "Ver la contraseña",
+      "hidePassword": "Ocultar la contraseña",
+      "copyAria": "Copiar la contraseña del WiFi",
+      "qr": "QR",
+      "qrAlt": "QR para conectarse a {ssid}",
+      "qrHint": "Apunta con la cámara del móvil para conectarte a {ssid}.",
+      "close": "Cerrar"
+    },
+    "payments": {
+      "title": "Pagos",
+      "add": "Añadir",
+      "addAria": "Añadir un dato de pago",
+      "empty": "Aún no hay datos de pago.",
+      "bizum": "Bizum",
+      "iban": "IBAN",
+      "copyAria": "Copiar el {kind} de {label}",
+      "remove": "Quitar",
+      "removeAria": "Quitar {label}",
+      "removeConfirm": "¿Quitar «{label}» del corcho?"
+    },
+    "rules": {
+      "title": "Normas"
+    },
+    "notes": {
+      "title": "Notas",
+      "empty": "No hay notas.",
+      "add": "Clavar una nota",
+      "label": "Nota",
+      "placeholder": "Escribe la nota…",
+      "isRule": "Es una norma (se queda fijada arriba)",
+      "save": "Clavar",
+      "saving": "Clavando…",
+      "cancel": "Cancelar",
+      "pin": "Fijar como norma",
+      "unpin": "Quitar de normas",
+      "remove": "Quitar",
+      "removeConfirm": "¿Quitar esta nota?",
+      "you": "Tú",
+      "someone": "Alguien"
+    },
+    "wifiForm": {
+      "title": "WiFi de la casa",
+      "subtitle": "Para conectarse desde el corcho: con el QR o copiando la contraseña.",
+      "ssid": "Nombre de la red",
+      "security": "Seguridad",
+      "password": "Contraseña",
+      "passwordHint": "Si no la habéis cambiado, viene en la pegatina del router.",
+      "securities": {
+        "wpa": "WPA/WPA2",
+        "wep": "WEP",
+        "nopass": "Sin contraseña"
+      },
+      "save": "Guardar",
+      "saving": "Guardando…",
+      "remove": "Quitar el WiFi",
+      "removeConfirm": "¿Quitar el WiFi del corcho?"
+    },
+    "paymentForm": {
+      "title": "Añadir un pago",
+      "subtitle": "Para copiarlo con un toque cuando toque pagar.",
+      "label": "Para qué es",
+      "labelPlaceholder": "Casero, luz y agua…",
+      "kind": "Cómo se paga",
+      "bizum": "Número de Bizum",
+      "iban": "IBAN",
+      "save": "Añadir",
+      "saving": "Añadiendo…"
+    },
+    "errors": {
+      "ssidRequired": "Escribe el nombre de la red.",
+      "ssidTooLong": "El nombre de la red tiene como mucho 32 caracteres.",
+      "passwordInvalid": "Esa contraseña no vale para este tipo de red (WPA: de 8 a 63 caracteres).",
+      "labelRequired": "Escribe para qué es.",
+      "labelTooLong": "Como mucho 40 caracteres.",
+      "ibanInvalid": "Ese IBAN no es válido. Revisa que esté completo y sin errores.",
+      "bizumInvalid": "Bizum va con un móvil español de 9 cifras (empieza por 6 o 7).",
+      "tooManyPayments": "Ya hay 10 datos de pago. Quita alguno para añadir otro.",
+      "bodyRequired": "Escribe algo en la nota.",
+      "bodyTooLong": "La nota tiene como mucho 200 caracteres.",
+      "tooManyNotes": "El corcho está lleno (50 notas). Quita alguna para clavar otra.",
+      "onlyAdults": "Esto solo lo pueden hacer los adultos del hogar.",
+      "onlyOwn": "Solo puedes quitar tus notas.",
+      "notFound": "Ya no está en el corcho.",
+      "generic": "No se ha podido guardar. Inténtalo de nuevo."
+    }
   }
 }

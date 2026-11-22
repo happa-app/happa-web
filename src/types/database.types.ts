@@ -113,6 +113,48 @@ export type Database = {
           },
         ]
       }
+      board_notes: {
+        Row: {
+          author_id: string | null
+          body: string
+          created_at: string
+          household_id: string
+          id: string
+          pinned: boolean
+        }
+        Insert: {
+          author_id?: string | null
+          body: string
+          created_at?: string
+          household_id: string
+          id?: string
+          pinned?: boolean
+        }
+        Update: {
+          author_id?: string | null
+          body?: string
+          created_at?: string
+          household_id?: string
+          id?: string
+          pinned?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "board_notes_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "board_notes_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chore_occurrences: {
         Row: {
           approved_at: string | null
@@ -753,6 +795,99 @@ export type Database = {
           {
             foreignKeyName: "household_members_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      household_payments: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          household_id: string
+          id: string
+          kind: Database["public"]["Enums"]["board_payment_kind"]
+          label: string
+          position: number
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          household_id: string
+          id?: string
+          kind: Database["public"]["Enums"]["board_payment_kind"]
+          label: string
+          position?: number
+          value: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          household_id?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["board_payment_kind"]
+          label?: string
+          position?: number
+          value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "household_payments_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "household_payments_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: false
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      household_wifi: {
+        Row: {
+          created_at: string
+          household_id: string
+          password: string
+          security: Database["public"]["Enums"]["board_wifi_security"]
+          ssid: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          household_id: string
+          password?: string
+          security: Database["public"]["Enums"]["board_wifi_security"]
+          ssid: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          household_id?: string
+          password?: string
+          security?: Database["public"]["Enums"]["board_wifi_security"]
+          ssid?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "household_wifi_household_id_fkey"
+            columns: ["household_id"]
+            isOneToOne: true
+            referencedRelation: "households"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "household_wifi_updated_by_fkey"
+            columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -1777,6 +1912,23 @@ export type Database = {
         Args: { p_document: string; p_version: string }
         Returns: undefined
       }
+      add_board_note: {
+        Args: {
+          p_body: string
+          p_household: string
+          p_pinned?: boolean
+        }
+        Returns: string
+      }
+      add_household_payment: {
+        Args: {
+          p_household: string
+          p_kind: Database["public"]["Enums"]["board_payment_kind"]
+          p_label: string
+          p_value: string
+        }
+        Returns: string
+      }
       add_schedule_blocks: {
         Args: {
           p_ends_at: string
@@ -1790,6 +1942,7 @@ export type Database = {
         Returns: number
       }
       approve_chore: { Args: { p_occurrence: string }; Returns: undefined }
+      board_iban_valid: { Args: { p_iban: string }; Returns: boolean }
       can_access_triqui: { Args: { hid: string }; Returns: boolean }
       can_have_avatar: { Args: never; Returns: boolean }
       can_see_avatar: { Args: { p_owner: string }; Returns: boolean }
@@ -2037,7 +2190,10 @@ export type Database = {
         Returns: string
       }
       delete_absence: { Args: { p_absence: string }; Returns: undefined }
+      delete_board_note: { Args: { p_note: string }; Returns: undefined }
       delete_chore: { Args: { p_chore: string }; Returns: undefined }
+      delete_household_payment: { Args: { p_payment: string }; Returns: undefined }
+      delete_household_wifi: { Args: { p_household: string }; Returns: undefined }
       delete_my_account: { Args: never; Returns: undefined }
       delete_expense: {
         Args: { p_expense: string; p_version: number }
@@ -2428,12 +2584,28 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      set_board_note_pinned: {
+        Args: {
+          p_note: string
+          p_pinned: boolean
+        }
+        Returns: undefined
+      }
       set_household_max_members: {
         Args: { p_household: string; p_max_members: number }
         Returns: undefined
       }
       set_household_postal_code: {
         Args: { p_household: string; p_postal_code: string }
+        Returns: undefined
+      }
+      set_household_wifi: {
+        Args: {
+          p_household: string
+          p_password: string
+          p_security: Database["public"]["Enums"]["board_wifi_security"]
+          p_ssid: string
+        }
         Returns: undefined
       }
       set_member_role: {
@@ -2599,6 +2771,8 @@ export type Database = {
     }
     Enums: {
       account_type: "resident" | "professional"
+      board_payment_kind: "bizum" | "iban"
+      board_wifi_security: "wpa" | "wep" | "nopass"
       chore_assignment: "fixed" | "rotation" | "free"
       chore_frequency: "once" | "daily" | "weekly" | "monthly"
       chore_status: "pending" | "review" | "done"
@@ -2755,6 +2929,8 @@ export const Constants = {
   public: {
     Enums: {
       account_type: ["resident", "professional"],
+      board_payment_kind: ["bizum", "iban"],
+      board_wifi_security: ["wpa", "wep", "nopass"],
       chore_assignment: ["fixed", "rotation", "free"],
       chore_frequency: ["once", "daily", "weekly", "monthly"],
       chore_status: ["pending", "review", "done"],
