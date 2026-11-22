@@ -2,6 +2,7 @@
 // aquí se valida antes para poder decir exactamente qué campo está mal.
 import { z } from "zod";
 import { addDays, isValidDate } from "./dates";
+import { allowsAnytime } from "./period";
 import {
   CHORE_ASSIGNMENTS,
   CHORE_FREQUENCIES,
@@ -28,6 +29,7 @@ const choreFormShape = z.object({
   frequency: z.string(),
   interval: z.string(),
   days: z.array(z.string()).max(7),
+  anytime: z.boolean(),
   startsOn: z.string(),
   assignment: z.string(),
   people: z.array(z.string()).max(50),
@@ -40,8 +42,10 @@ export type ChorePayload = {
   effort: ChoreEffort;
   frequency: ChoreFrequency;
   interval: number;
-  // Solo en semanal; si no, vacío
+  // Solo en semanal con días concretos; si no, vacío
   weekdays: Weekday[];
+  // Semanal o mensual, una vez, cualquier día del periodo (migración 31)
+  anytime: boolean;
   startsOn: string;
   assignment: ChoreAssignment;
   // En "fija", la persona; en "por turnos", el orden; en "libre", vacío
@@ -83,8 +87,9 @@ export function buildChore(input: unknown, today: string, keepStart?: string): B
     return { ok: false, fieldErrors, formError: "generic" };
   }
 
+  const anytime = v.anytime && allowsAnytime(frequency);
   let weekdays: Weekday[] = [];
-  if (frequency === "weekly") {
+  if (frequency === "weekly" && !anytime) {
     const unique = [...new Set(v.days)];
     weekdays = unique.filter((d) => /^[1-7]$/.test(d)).map((d) => Number(d) as Weekday);
     if (weekdays.length === 0 || weekdays.length !== unique.length) fieldErrors.days = "daysRequired";
@@ -116,6 +121,7 @@ export function buildChore(input: unknown, today: string, keepStart?: string): B
       frequency,
       interval,
       weekdays,
+      anytime,
       startsOn: v.startsOn,
       assignment,
       people,

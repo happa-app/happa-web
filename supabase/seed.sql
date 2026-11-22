@@ -165,6 +165,11 @@ begin
   perform public.create_chore(
     hogar, 'Limpiar el baño', 3, 'weekly', 1, array[6], (now() at time zone 'Europe/Madrid')::date, 'rotation', array[carla, ana]
   );
+  -- Cualquier día de la semana (migración 31): Ana esta semana, Bruno la que viene
+  perform public.create_chore(
+    hogar, 'Limpiar la nevera', 2, 'weekly', 1, null, (now() at time zone 'Europe/Madrid')::date, 'rotation', array[ana, bruno],
+    false, null, true
+  );
 
   perform public.send_message(chat, '¡Bienvenidos al piso! 🏠');
   -- Una votación (Bruno vota más abajo)

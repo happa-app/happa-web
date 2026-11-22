@@ -23,6 +23,7 @@ type ChoreRow = {
   frequency: ChoreFrequency;
   interval_count: number;
   weekdays: number[] | null;
+  anytime: boolean;
   starts_on: string;
   assignment: ChoreAssignment;
   assignee_id: string | null;
@@ -33,6 +34,7 @@ type DayRow = {
   id: string;
   chore_id: string;
   due_on: string;
+  due_by: string;
   assignee_id: string | null;
   status: ChoreStatus;
   done_by: string | null;
@@ -47,9 +49,9 @@ type MemberRow = { user_id: string; role: string; profiles: { display_name: stri
 
 const RESIDENT_ROLES = ["admin", "member", "minor"] as const;
 const CHORE_FIELDS =
-  "id, title, notes, effort, frequency, interval_count, weekdays, starts_on, assignment, assignee_id, requires_approval, chore_rotation(user_id, position, owed)";
+  "id, title, notes, effort, frequency, interval_count, weekdays, anytime, starts_on, assignment, assignee_id, requires_approval, chore_rotation(user_id, position, owed)";
 const DAY_FIELDS =
-  "id, chore_id, due_on, assignee_id, status, done_by, done_at, approved_by, approved_at, reopened_by, reopened_at, manual";
+  "id, chore_id, due_on, due_by, assignee_id, status, done_by, done_at, approved_by, approved_at, reopened_by, reopened_at, manual";
 // Días que se leen: la última semana y las dos que vienen (más lo pendiente de antes)
 const PAST_DAYS = 7;
 const AHEAD_DAYS = 13;
@@ -63,6 +65,7 @@ function toChore(row: ChoreRow): Chore {
     frequency: row.frequency,
     interval: row.interval_count,
     weekdays: (row.weekdays ?? []) as Weekday[],
+    anytime: row.anytime,
     startsOn: row.starts_on,
     assignment: row.assignment,
     assigneeId: row.assignee_id,
@@ -78,6 +81,7 @@ function toDay(row: DayRow): ChoreDay {
     id: row.id,
     choreId: row.chore_id,
     dueOn: row.due_on,
+    dueBy: row.due_by,
     assigneeId: row.assignee_id,
     status: row.status,
     doneBy: row.done_by,
@@ -124,13 +128,14 @@ export async function getChoresOverview(householdId: string, userId: string): Pr
   const from = addDays(today, -PAST_DAYS);
   const [chores, older, recent] = await Promise.all([
     supabase.from("chores").select(CHORE_FIELDS).eq("household_id", householdId).eq("active", true).order("created_at"),
-    // Lo de antes que sigue sin hacer (atrasado o esperando el visto bueno)
+    // Lo de antes que sigue sin hacer (atrasado o esperando el visto bueno) y los plazos que siguen abiertos
+    // (p. ej. el de este mes, aunque empezara hace más de una semana)
     supabase
       .from("chore_occurrences")
       .select(DAY_FIELDS)
       .eq("household_id", householdId)
       .lt("due_on", from)
-      .neq("status", "done")
+      .or(`status.neq.done,due_by.gte.${today}`)
       .order("due_on")
       .limit(200),
     supabase

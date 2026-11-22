@@ -1164,7 +1164,9 @@
       "everyDay": "Todos los días",
       "weekly": "{interval, plural, one {Cada semana} other {Cada # semanas}}: {days}",
       "monthly": "{interval, plural, one {Cada mes} other {Cada # meses}}, el día {day}",
-      "monthlyLate": "{interval, plural, one {Cada mes} other {Cada # meses}}, el día {day} (o el último, si el mes es más corto)"
+      "monthlyLate": "{interval, plural, one {Cada mes} other {Cada # meses}}, el día {day} (o el último, si el mes es más corto)",
+      "weeklyAnytime": "{interval, plural, one {Cada semana} other {Cada # semanas}}, cualquier día",
+      "monthlyAnytime": "{interval, plural, one {Cada mes} other {Cada # meses}}, cualquier día"
     },
     "who": {
       "fixed": "Siempre: {name}",
@@ -1176,7 +1178,9 @@
       "toApprove": "Esperan tu visto bueno",
       "waiting": "Esperando el visto bueno",
       "today": "Hoy",
-      "todayEmpty": "Hoy no hay nada que hacer."
+      "todayEmpty": "Hoy no hay nada que hacer.",
+      "thisWeek": "Esta semana",
+      "thisMonth": "Este mes"
     },
     "upcoming": {
       "title": "Próximos días",
@@ -1200,7 +1204,8 @@
       "take": "Me la quedo",
       "approve": "Dar el visto bueno",
       "reopen": "No está hecha",
-      "reopenConfirm": "¿Seguro que «{title}» no está hecha? Volverá a estar pendiente."
+      "reopenConfirm": "¿Seguro que «{title}» no está hecha? Volverá a estar pendiente.",
+      "until": "hasta el {date}"
     },
     "actions": {
       "new": "Nueva tarea",
@@ -1251,7 +1256,11 @@
       "save": "Guardar cambios",
       "create": "Crear tarea",
       "delete": "Borrar tarea",
-      "deleteConfirm": "¿Borrar «{title}»? Se quitan los días pendientes; lo ya hecho se queda en el historial."
+      "deleteConfirm": "¿Borrar «{title}»? Se quitan los días pendientes; lo ya hecho se queda en el historial.",
+      "whichDay": "Qué día",
+      "daysFixed": "Días concretos",
+      "dayFixed": "Un día fijo",
+      "anyDay": "Cualquier día"
     },
     "day": {
       "who": "Le toca",

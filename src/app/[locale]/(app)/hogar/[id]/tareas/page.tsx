@@ -1,5 +1,5 @@
-// Página /hogar/<id>/tareas: lo que te toca hoy, lo atrasado, lo que espera el visto bueno, los próximos
-// días y el reparto de la semana. Para quienes viven en el hogar (adultos y menores); el casero no la ve.
+// Página /hogar/<id>/tareas: lo que te toca hoy, lo atrasado, lo que espera el visto bueno, lo de esta semana
+// y este mes (cualquier día), los próximos días y el reparto de la semana. Para quienes viven en el hogar (adultos y menores); el casero no la ve.
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -7,7 +7,9 @@ import {
   addDays,
   ChoreDaySection,
   ChorePostit,
+  isOpenPeriod,
   isOverdue,
+  isPeriod,
   pickNote,
   sortDays,
   UpcomingDays,
@@ -44,18 +46,23 @@ export default async function ChoresPage({ params }: Props) {
   const names = Object.fromEntries(people.map((p) => [p.userId, p.name]));
   const sorted = sortDays(days, userId, new Map(chores.map((c) => [c.id, c.title])));
   const section = { householdId: id, chores, names, me: userId, isAdult, today };
-  // El post-it: lo tuyo atrasado y lo de hoy; la primera pendiente tuya (la atrasada antes)
-  const mine = sortDays(
-    days.filter((d) => d.assigneeId === userId && (isOverdue(d, today) || d.dueOn === today)),
-    userId,
-    new Map(chores.map((c) => [c.id, c.title])),
-  );
+  const titles = new Map(chores.map((c) => [c.id, c.title]));
+  const mineFirst = (list: typeof days) => sortDays(list.filter((d) => d.assigneeId === userId), userId, titles);
+  // El post-it: la primera pendiente tuya: lo atrasado, luego lo de hoy y luego lo de esta semana o este mes
+  const mine = [
+    ...mineFirst(days.filter((d) => isOverdue(d, today))),
+    ...mineFirst(days.filter((d) => d.dueOn === today && !isPeriod(d))),
+    ...mineFirst(days.filter((d) => isOpenPeriod(d, today))),
+  ];
   const { note } = pickNote(mine, userId);
   const noteChore = note ? (chores.find((c) => c.id === note.choreId) ?? null) : null;
   // La tarea del post-it no se repite como fila
   const rest = sorted.filter((d) => d.id !== note?.id);
   const overdue = rest.filter((d) => isOverdue(d, today));
   const toApprove = sorted.filter((d) => d.status === "review");
+  // Plazos en curso (cualquier día de la semana o del mes)
+  const frequencyOf = new Map(chores.map((c) => [c.id, c.frequency]));
+  const open = rest.filter((d) => isOpenPeriod(d, today) && d.status !== "review");
 
   return (
     <>
@@ -97,8 +104,18 @@ export default async function ChoresPage({ params }: Props) {
           <ChoreDaySection
             {...section}
             title={t("sections.today")}
-            days={rest.filter((d) => d.dueOn === today && d.status !== "review")}
-            emptyText={note?.dueOn === today ? undefined : t("sections.todayEmpty")}
+            days={rest.filter((d) => d.dueOn === today && !isPeriod(d) && d.status !== "review")}
+            emptyText={note?.dueOn === today && !isPeriod(note) ? undefined : t("sections.todayEmpty")}
+          />
+          <ChoreDaySection
+            {...section}
+            title={t("sections.thisWeek")}
+            days={open.filter((d) => frequencyOf.get(d.choreId) === "weekly")}
+          />
+          <ChoreDaySection
+            {...section}
+            title={t("sections.thisMonth")}
+            days={open.filter((d) => frequencyOf.get(d.choreId) === "monthly")}
           />
           <UpcomingDays
             {...section}

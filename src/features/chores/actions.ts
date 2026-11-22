@@ -49,6 +49,7 @@ export async function saveChore(_prev: ChoreFormState, formData: FormData): Prom
       frequency: text(formData, "frequency"),
       interval: text(formData, "interval") || "1",
       days: strings(formData, "days"),
+      anytime: text(formData, "anytime") === "on",
       startsOn: text(formData, "startsOn"),
       assignment: text(formData, "assignment"),
       people: strings(formData, "people"),
@@ -72,6 +73,7 @@ export async function saveChore(_prev: ChoreFormState, formData: FormData): Prom
     p_people: v.people,
     p_requires_approval: v.requiresApproval,
     p_notes: v.notes ?? undefined,
+    p_anytime: v.anytime,
   };
   const { error } = choreId
     ? await supabase.rpc("update_chore", { p_chore: choreId, ...fields })

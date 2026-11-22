@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { dayOffset, formatShortDate } from "../format";
-import { canApprove, canComplete, canReopen, canTake, isOverdue } from "../logic";
+import { canApprove, canComplete, canReopen, canTake, isOverdue, isPeriod } from "../logic";
 import type { Chore, ChoreDay } from "../types";
 import { ChoreActionButton } from "./ChoreActionButton";
 import styles from "./Chores.module.css";
@@ -32,10 +32,13 @@ export function ChoreHomeRow({ householdId, day, chore, names, me, isAdult, toda
     day.assigneeId === null ? t("free") : day.assigneeId === me ? t("youCap") : (names[day.assigneeId] ?? t("someone"));
   let who = name;
   if (overdue) {
+    // Desde que se pasó la fecha límite (en un día suelto, su día)
     who =
-      dayOffset(day.dueOn, today) === -1
+      dayOffset(day.dueBy, today) === -1
         ? t("home.sinceYesterday", { name })
-        : t("home.since", { name, date: formatShortDate(day.dueOn, locale) });
+        : t("home.since", { name, date: formatShortDate(day.dueBy, locale) });
+  } else if (isPeriod(day)) {
+    who = `${name} · ${t("row.until", { date: formatShortDate(day.dueBy, locale) })}`;
   }
 
   // Círculo decorativo (si se puede completar, el círculo es el botón)

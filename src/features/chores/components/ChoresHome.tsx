@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Section, sectionStyles } from "@/components/ui/Section";
 import { Link } from "@/i18n/navigation";
-import { isOverdue, pickNote, sortDays } from "../logic";
+import { isOpenPeriod, isOverdue, isPeriod, pickNote, sortDays } from "../logic";
 import type { ChoresOverview } from "../types";
 import { ChoreHomeRow } from "./ChoreHomeRow";
 import { ChorePostit } from "./ChorePostit";
@@ -35,7 +35,13 @@ export function ChoresHome({ householdId, overview, currentUserId: me }: Props) 
       titles,
     ),
     ...sortDays(
-      days.filter((d) => d.dueOn === today),
+      days.filter((d) => d.dueOn === today && !isPeriod(d)),
+      me,
+      titles,
+    ),
+    // Detrás, lo de esta semana y este mes (cualquier día)
+    ...sortDays(
+      days.filter((d) => isOpenPeriod(d, today)),
       me,
       titles,
     ),

@@ -1,7 +1,9 @@
 // El post-it con tu tarea (la primera pendiente, la atrasada antes) y su botón de "hecha".
 // Sin tarea ("note" a null): "Hoy te libras.". Lo usan Inicio y la página de Tareas.
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { formatDay } from "../format";
+import { isPeriod } from "../period";
 import type { Chore, ChoreDay } from "../types";
 import { ChoreActionButton } from "./ChoreActionButton";
 import styles from "./Chores.module.css";
@@ -17,6 +19,7 @@ type Props = {
 
 export function ChorePostit({ householdId, note, chore, isOverdue, base }: Props) {
   const t = useTranslations("Chores");
+  const locale = useLocale();
 
   if (!note || !chore) {
     return (
@@ -29,7 +32,13 @@ export function ChorePostit({ householdId, note, chore, isOverdue, base }: Props
   return (
     <div className={styles.postit}>
       <div className={styles.postitText}>
-        <p className={styles.postitLabel}>{isOverdue ? t("row.overdue") : t("home.today")}</p>
+        <p className={styles.postitLabel}>
+          {isOverdue
+            ? t("row.overdue")
+            : isPeriod(note)
+              ? t("row.until", { date: formatDay(note.dueBy, locale) })
+              : t("home.today")}
+        </p>
         <Link href={`${base}/dia/${note.id}`} className={styles.postitTitle}>
           {chore.title}
         </Link>
